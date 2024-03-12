@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="css\currency.css">
+</head>
+    <html>
+        <body class="Converter">
+            <nav class="nav">
+                <div class="nav_container">
+                    <img class="nav_logo" src="https://raw.githubusercontent.com/rotflores/imagenes/main/png%202.png">
+                    <label for="menu" class="nav_label">
+                        <img src="assets/menu.svg" class="nav_img">
+                    </label>
+                    <input type="checkbox" id="menu" class="nav_input">
+                    <div class="nav_menu">
+                        <a href="home.html" class="nav_item">Home</a>
+                        <a href="projects.html" class="nav_item place">Projects</a>
+                        <a href="about.html" class="nav_item">About</a>
+                    </div>
+                </div>
+            </nav>
+            <main class="converter">
+            <div class="box glow">
+                <h1 class="h1_currency"> Currency Converter</h1>
+                <div class="row">
+                    <div class="col">
+                        <select class="currency">
+                            <option>Select</option>
+                        </select>
+                        <input type="text" id="input_currency" placeholder="Enter number" name="">
+                    </div>
+                    <div class="col">
+                        <select class="currency">
+                            <option>Select</option>
+                        </select>
+                        <input type="text" id="output_currency" placeholder="Result" disabled="" name="">
+                    </div>
+                </div>
+                <button class="buttonConverter" onclick="convert()">Convert</button>
+            </div>
+        </main>
+        <script type="text/javascript" src="js\currency.js"></script>
+    </body>
+</html> 

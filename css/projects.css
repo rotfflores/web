@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&family=Titillium+Web:wght@200&display=swap');
+   body{
+       background-color: #000;
+       color: white;
+       font-family: 'Raleway', sans-serif;
+   }
+   .place {
+       font-weight: bold;
+   }
+/*movil*/
+   @media only screen and (max-width: 450px) {
+       /*nav*/
+       *{
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+       
+       body{
+           background-color: #000;
+           font-family: 'Raleway', sans-serif;
+           color: red;
+       }
+       .nav{
+           background: #060323;
+           height: 100px;
+           color: rgb(255, 0, 0);
+       }
+       .nav_container{
+           display: flex;
+           height: 100%;
+           width: 90%;
+           margin: 0 auto;
+           justify-content: space-between;
+           align-items: center;
+       }
+       .nav_logo{
+           font-size: 1.5em;
+           font-family: 900;
+           height: 75px;
+           width: 75px;
+           animation-name: flotarHome;
+           animation-duration: 2s;
+           animation-iteration-count: infinite;
+           animation-direction: alternate;
+           z-index: 12;
+       }
+       @keyframes flotarHome {
+       
+           0%{
+               transform: translateY(1%)
+           }
+           
+           100%{
+               transform: translateY(15%);
+           }
+       }
+       .nav_input:checked + .nav_menu{
+           background-color: #060323;
+       }
+       .nav_label, .nav_input{
+           display: none;    
+       }
+       .nav_menu{
+           display: grid;
+           grid-auto-flow: column;
+           gap: 3em;
+       }
+       .nav_item{
+           color: white;
+           text-decoration: none;
+           font-size: 50px;
+           --clippy: polygon(0 0, 0 0, 0 100%, 0% 100%);
+       }
+       .nav_item::after{
+           content: "";
+           display: block;
+           background: #1201fd;
+           width: 90%;
+           margin-top: 3px;
+           height: 3px;
+           clip-path: var(--clippy);
+           transition: clip-path .3s;
+       }
+       .nav_item:hover{
+           --clippy:polygon(0 0, 100% 0, 100% 100%, 0 100%);
+       }
+       
+       .nav_label{
+           display: block;
+           cursor: pointer;
+       }
+       .nav_menu {
+           position: fixed;
+           top: 75px;
+           height: 15opx;
+           bottom: 0;
+           background: #060323;
+           width: 100%;
+           left: 0;
+           display: flex;
+           justify-content: space-around;
+           flex-direction: column;
+           align-items: center;
+           z-index: 11;
+           clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);        ;
+           transition: clip-path 1s ease-in-out;
+           }
+       .nav_input:checked + .nav_menu{
+           clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);        ;
+       }
+       .nav_img {
+           height: 50px;
+           width: 50px;
+       }
+    }
+/*tablet*/
+   @media only screen and (min-width: 451px) and (max-width: 1024px){
+       /*nav*/
+       *{
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+       
+       .nav{
+           background: #060323;
+           height: 100px;
+           color: rgb(255, 0, 0);
+       }
+       .nav_container{
+           display: flex;
+           height: 100%;
+           width: 90%;
+           margin: 0 auto;
+           justify-content: space-between;
+           align-items: center;
+       }
+       .nav_logo{
+           font-size: 1.5em;
+           font-family: 900;
+           height: 75px;
+           width: 75px;
+           animation-name: flotarHome;
+           animation-duration: 2s;
+           animation-iteration-count: infinite;
+           animation-direction: alternate;
+           z-index: 12;
+       }
+       @keyframes flotarHome {
+       
+           0%{
+               transform: translateY(1%)
+           }
+           
+           100%{
+               transform: translateY(15%);
+           }
+       }
+       .nav_input:checked + .nav_menu{
+           background-color: #060323;
+       }
+       .nav_label, .nav_input{
+           display: none;
+       }
+       .nav_menu{
+           display: grid;
+           grid-auto-flow: column;
+           padding: 100px;
+           gap: 3em;
+       }
+       .nav_item{
+           color: white;
+           text-decoration: none;
+           margin-top: -100px;
+           font-size: 50px;
+           --clippy: polygon(0 0, 0 0, 0 100%, 0% 100%);
+       }
+       .nav_item::after{
+           content: "";
+           display: block;
+           background: #1201fd;
+           width: 90%;
+           margin-top: 3px;
+           height: 3px;
+           clip-path: var(--clippy);
+           transition: clip-path .3s;
+       }
+       .nav_item:hover{
+           --clippy:polygon(0 0, 100% 0, 100% 100%, 0 100%);
+       }
+       
+       .nav_label{
+           display: block;
+           cursor: pointer;
+       }
+       .nav_menu {
+           position: fixed;
+           top: 75px;
+           height: 100%;
+           bottom: 0;
+           background: #060323;
+           width: 100%;
+           left: 0;
+           display: flex;
+           justify-content: space-around;
+           flex-direction: column;
+           align-items: center;
+           z-index: 11;
+           clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);        ;
+           transition: clip-path 1s ease-in-out;
+           }
+       .nav_input:checked + .nav_menu{
+           clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);        ;
+       }
+       .nav_img {
+           height: 75px;
+           width: 75px;
+       }    
+    }
+/*escritorio*/
+   @media only screen and (min-width: 1025px) {
+       /*nav*/
+       *{
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+       }
+       
+       body{
+           background-color: #000;
+           font-family: 'Raleway', sans-serif;
+       }
+       .nav{
+           background: #060323;
+           height: 80px;
+           color: rgb(255, 0, 0);
+       }
+       .nav_container{
+           display: flex;
+           height: 100%;
+           width: 90%;
+           margin: 0 auto;
+           justify-content: space-between;
+           align-items: center;
+       }
+       .nav_logo{
+           font-size: 1.5em;
+           font-family: 900;
+           height: 60px;
+           width: 60px;
+           animation-name: flotarHome;
+           animation-duration: 2s;
+           animation-iteration-count: infinite;
+           animation-direction: alternate;
+       }
+       .nav_logo:hover{
+           animation-play-state: paused;
+       }
+       @keyframes flotarHome {
+       
+           0%{
+               transform: translateY(1%)
+           }
+       
+           100%{
+               transform: translateY(15%);
+           }
+           
+       }
+       .nav_input:checked + .nav_menu{
+           background-color: white;
+       }
+       .nav_label, .nav_input{
+           display: none;
+       }
+       .nav_menu{
+           display: grid;
+           grid-auto-flow: column;
+           gap: 3em;
+       }
+       .nav_item{
+           color: white;
+           text-decoration: none;
+           font-size: 15px;
+           --clippy: polygon(0 0, 0 0, 0 100%, 0% 100%);
+       }
+       .nav_item::after{
+           content: "";
+           display: block;
+           background: #ffffff;
+           width: 90%;
+           margin-top: 3px;
+           height: 3px;
+           clip-path: var(--clippy);
+           transition: clip-path .3s;
+       }
+       .nav_item:hover{
+           --clippy:polygon(0 0, 100% 0, 100% 100%, 0 100%);
+       }
+       
+    }
+       
