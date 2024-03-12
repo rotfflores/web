@@ -16,13 +16,34 @@
     nav {
         background-color: #060323;
         height: 80px;
+        width: 100%;
     }
 
     .box-nav {
         display: flex;
-        flex-direction: row;
+        height: 100%;
+        width: 90%;
+        margin: 0 auto;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .img-logo {
-        width: 100%;
+        width: 75px;
+    }
+
+    .nav-label, .nav-input {
+        display: none;
+    }
+
+    .nav-menu {
+        display: grid;
+        grid-auto-flow: column;
+        gap: 3em;
+    }
+
+    .nav-item {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 20px;
     }
