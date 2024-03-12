@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&family=Raleway:wght@100&family=Titillium+Web:wght@200&display=swap');
 
     body{
-        background-color: #000;
-        color: white;
+        background-color: #e7edff;
+        color: #e7edff;
         font-family: 'Raleway', sans-serif;
     }
 
@@ -46,4 +46,61 @@
         color: #ffffff;
         text-decoration: none;
         font-size: 20px;
+        --clippy: polygon(0 0, 0 0, 0 100%, 0% 100%);
+    }
+
+    .nav-item::after {
+        content: "";
+        display: block;
+        background: #ffffff;
+        width: 90%;
+        height: 3px;
+        clip-path: var(--clippy);
+        transition: clip-path 0.3s;
+    }
+
+    .nav-item:hover {
+        color: #d4dfff;
+        --clippy: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    /*mobile*/
+    @media screen and (max-width: 768px) {
+        .box-nav {
+            width: 95%;
+        }
+
+        .nav-label {
+            display: block;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #060323;
+            padding: 20px 0;
+            text-align: center;
+            clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);        ;
+            transition: clip-path 1s ease-in-out;
+        }
+
+        .nav-input:checked + .nav-menu{
+            clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);        ;
+    
+        }
+       
+
+        .nav-item {
+            display: block;
+            margin: 40px 0;
+            font-size: 30px;
+        }
+
     }
