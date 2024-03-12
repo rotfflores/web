@@ -29,7 +29,20 @@
     }
 
     .img-logo {
-        width: 75px;
+        width: 65px;
+        animation-name: float;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(-4%);
+        }
+        100% {
+            transform: translateY(7%);
+        }
     }
 
     .nav-label, .nav-input {
@@ -88,7 +101,7 @@
             padding: 20px 0;
             text-align: center;
             clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);        ;
-            transition: clip-path 1s ease-in-out;
+            transition: clip-path .7s ease-in-out;
         }
 
         .nav-input:checked + .nav-menu{
@@ -96,7 +109,6 @@
     
         }
        
-
         .nav-item {
             display: block;
             margin: 40px 0;
