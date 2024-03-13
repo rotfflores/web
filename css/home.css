@@ -89,7 +89,7 @@
         width: 80%;
         height: auto;
         margin: 50px auto 0;
-        overflow: hidden;    
+        overflow: hidden;
     }
 
     .box-slider ul {
@@ -120,6 +120,7 @@
 
     .box-slider img {
         width: 100%;
+        box-shadow: -5px 5px 21px 0px rgba(0,0,0,0.75);
     }
 
     @keyframes slide {
