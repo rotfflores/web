@@ -161,6 +161,7 @@
             text-align: center;
             clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);        ;
             transition: clip-path .7s ease-in-out;
+            z-index: 1;
         }
 
         .nav-input:checked + .nav-menu{
