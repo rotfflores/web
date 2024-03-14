@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
-    <link rel="stylesheet" href="css\projects.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/random-number.css">
 </head>
 <body>
     <nav>
@@ -21,7 +21,20 @@
             </div>
         </div>
     </nav>
-    <a href="poject-currency.html">Currency</a>
-    <a href="random-number.html">Guess number</a>
+
+    <main>
+        <div class="box-container">
+            <div class="texto">
+                <h1></h1>
+                <p class="parrafo"></p>
+            </div>
+            <input type="number" id = "intento" class="inputEnter" placeholder="Ingrese numero">
+            <div class="botones">
+                <button onclick="intentarAdivinar()"; class="botonIntentar">Intentar</button>
+                <button onclick="reinicarJuego()"; class="botonNuevoJuego" id="reinciar" disabled>Nuevo Juego</button>
+            </div>
+        </div>
+    </main>
+    <script src="js/random-number.js"></script>
 </body>
 </html>
