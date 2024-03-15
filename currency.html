@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" href="css\currency.css">
+</head>
+<body>
+    <nav>
+        <div class="box-nav">
+            <a href="home.html"><img class="img-logo" src="img\logo.png" alt="logo of my page"></a> 
+            <label for="menu" class="nav-label">
+                <img src="assets\menu.svg" class="img-nav">
+            </label>
+            <input type="checkbox" id="menu" class="nav-input">
+            <div class="nav-menu">
+                <a href="home.html" class="nav-item">Home</a>
+                <a href="projects.html" class="nav-item place">Projects</a>
+                <a href="about.html" class="nav-item">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="box-container">
+            <h1> Currency Converter</h1>
+            <select class="currency">
+                <option>Select</option>
+            </select>
+            <input type="text" id="input_currency" placeholder="Enter number" name="">
+        </div>
+        <div class="col">
+            <select class="currency">
+                <option>Select</option>
+            </select>
+            <input type="text" id="output_currency" placeholder="Result" disabled="" name="">
+        </div>
+        <div>
+            <button class="buttonConverter" onclick="convert()">Convert</button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="box-footer">
+            <p class="footer-text">Copyright © 2024 - ROTF</p>
+            <img src="img\logo.png" class="img-footer alt="logo of my page">
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="js\currency.js"></script>
+</body>
+</html> 
