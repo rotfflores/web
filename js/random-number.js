@@ -9,11 +9,22 @@ function generarNumero(){
     return Math.floor(Math.random()*100)+1;
 }
 
+function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
 function intentarAdivinar(){
     let inputUsuario = parseInt(document.getElementById("intento").value);
     if (inputUsuario == numeroSecreto){
         asignarTextos("p", `felicidades! has atinado al numero en ${intentos} ${(intentos == 1) ? "intento" : "intentos"}`);
         document.getElementById("reinciar").removeAttribute('disabled');
+        confetti({
+            angle: randomInRange(55, 125),
+            spread: randomInRange(50, 70),
+            particleCount: randomInRange(50, 100),
+            colors: ['e7edff', '060323', 'ffffff', 'd4dfff', '180da2'],
+            origin: { y: 0.6 }
+          });
     } else {
         if (inputUsuario > numeroSecreto) {
             asignarTextos("p", "intenta con un numero mas chico");
