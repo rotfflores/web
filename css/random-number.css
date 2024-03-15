@@ -104,11 +104,12 @@
         text-transform: uppercase;
         font-size: 35px;
         text-align: center;
+        padding: 10px 10px;
     }
 
     .parrafo {
         font-size: 25px;
-        margin: 7px 0;
+        padding: 10px 10px 15px;
         text-align: center;
     }
 
@@ -163,13 +164,13 @@
             background-color: #060323;
             padding: 20px 0;
             text-align: center;
-            clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);        ;
+            clip-path: polygon(100% 0, 100% 0, 100% 0, 100% 0);
             transition: clip-path .7s ease-in-out;
             z-index: 1;
         }
     
         .nav-input:checked + .nav-menu{
-            clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);        ;
+            clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
     
         }
        
@@ -188,5 +189,12 @@
     
         .nav-item:hover{
             --clippy:polygon(0 0, 00% 0, 70% 20%, 0 00%);
+        }
+
+        /*main*/
+
+        main, .box-container {
+            width: 90%;
+            margin: 75px auto;
         }
     }
