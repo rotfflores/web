@@ -87,6 +87,7 @@
     main {
         width: 80%;
         margin: 75px auto;
+        padding: 25px auto 5;
     }
 
     .box-container {
@@ -95,7 +96,7 @@
         align-items: center;
         box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3); 
         width: 60%;
-        margin: 10px auto;
+        margin: 50px auto;
         height: auto;
         border-radius: 10px;
     }
@@ -147,6 +148,22 @@
     .botones button:hover{
         background-color: #180da2;
         
+    }
+
+
+    /*footer*/
+    footer {
+        background-color: #060323;
+        color: #ffffff;
+        text-align: center;
+        padding: 15px 0;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .img-footer {
+        width: 50px;
+        margin: 10px 0 0 0;
     }
 
 
