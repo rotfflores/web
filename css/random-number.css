@@ -125,19 +125,27 @@
 
     }
 
+    .botones {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
     .botones button {
-        background-color: #180da2;
+        background-color: #060323;
         color: #e7edff;
         padding: 20px;
-        margin: 20px auto 50px;
+        margin: 20px auto;
         border: none;
         border-radius: 20px;
         cursor: pointer;
+        width: 40%;
+        text-align: center;
     }
 
 
     .botones button:hover{
-        background-color: #2d2bff;
+        background-color: #180da2;
         
     }
 
