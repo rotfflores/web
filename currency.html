@@ -26,19 +26,22 @@
     <main>
         <div class="box-container">
             <h1> Currency Converter</h1>
-            <select class="currency">
-                <option>Select</option>
-            </select>
-            <input type="text" id="input_currency" placeholder="Enter number" name="">
-        </div>
-        <div class="col">
-            <select class="currency">
-                <option>Select</option>
-            </select>
-            <input type="text" id="output_currency" placeholder="Result" disabled="" name="">
-        </div>
-        <div>
-            <button class="buttonConverter" onclick="convert()">Convert</button>
+            <div class="dates">
+                <div class="value">
+                    <select class="currency">
+                        <option>Select</option>
+                    </select>
+                    <input type="text" type="number" id="input_currency" placeholder="Enter number">        
+                </div>
+                <div class="result">
+                    <select class="currency">
+                        <option>Select</option>
+                    </select>
+                    <input type="text" id="output_currency" placeholder="Result" disabled="">
+                </div>
+            </div>
+                <button class="buttonConverter" onclick="convert()">Convert</button>
+            </div>
         </div>
     </main>
 

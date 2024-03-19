@@ -83,15 +83,69 @@
         font-weight: bold;
     }
 
+
+    /*main*/
+    main {
+        width: 80%;
+        margin: 25px auto;
+    }
+
+    .box-container {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin: 50px auto 70px;
+    }
+
+    .dates {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 40px auto 30px;
+    }
+
+    .dates select {
+        font-size: 20px;
+        padding: 10px;
+        background: #060323;
+        color: #e7edff;
+        border-radius: 10px;
+    }
+
+    .dates input {
+        font-size: 20px;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+    }
+
+    .buttonConverter {
+        background-color: #060323;
+        color: #e7edff;
+        padding: 10px 20px;
+        font-size: 20px;
+        border: none;
+        cursor: pointer;
+        margin: 20px 0;
+        border-radius: 10px;
+    }
+
+    .buttonConverter:hover {
+        background-color: #1201fd;
+    }
+
  /*footer*/
  footer {
     background-color: #060323;
     color: #ffffff;
     text-align: center;
     padding: 15px 0;
-    bottom: 0;
     width: 100%;
-    position: fixed;
+    height: auto;
+    bottom: 0;
+    position: absolute;
 }
 
 .img-footer {
