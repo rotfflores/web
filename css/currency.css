@@ -154,6 +154,7 @@
 }
 
 
+/* mobile */
 @media screen and (max-width: 880px) {
     .box-nav {
         width: 95%;

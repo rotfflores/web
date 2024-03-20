@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text encrypt</title>
+    <link rel="stylesheet" href="css\text-encryptor.css">
+</head>
+<body>
+    <nav>
+        <div class="box-nav">
+            <a href="home.html"><img class="img-logo" src="img\logo.png" alt="logo of my page"></a> 
+            <label for="menu" class="nav-label">
+                <img src="assets\menu.svg" class="img-nav">
+            </label>
+            <input type="checkbox" id="menu" class="nav-input">
+            <div class="nav-menu">
+                <a href="home.html" class="nav-item">Home</a>
+                <a href="projects.html" class="nav-item place">Projects</a>
+                <a href="about.html" class="nav-item">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="box-input">
+            <textarea  class="input-text" id="input-text" name="input-text" rows="10" cols="50" placeholder="Enter a text"></textarea>
+            <div class="box-button">
+                <button onclick="finalResult()" id="button-encrypt" class="button encrypt" >Encrypt</button>
+                <button onclick="finalResultDecrypt()" id="decrypt" class="button decrypt">Decrypt</button>
+            </div>
+        </div>
+
+        <div class="box-output" id="box-output">
+            <textarea class="output-text" id="output-text" name="output-text" rows="10" cols="50" disabled></textarea>
+            <div class="box-hiden" id="box-hiden">
+                <img class="img-muneco" src="img/dude.png">
+                <p class="hidden-text">No text found</p>
+            </div>
+            <div class="box-button-output">
+                <button onclick="copyToClipboard()" id="copy" class="button copy">Copy</button>
+                <button onclick="clearText() " id="clear" class="button clear">Clear</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="box-footer">
+            <p class="footer-text">Copyright © 2024 - ROTF</p>
+            <img src="img\logo.png" class="img-footer alt="logo of my page">
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="js/text-encryptor.js"></script>
+</body>
+</html> 
