@@ -124,8 +124,50 @@ nav {
 .btn-banner:hover {
     background-color: #1201fd;
 }
+/*projects*/
+.section-projects {
+    display: flex;
+    width: 90%;
+    margin: 20px auto;
+    justify-content: space-around;
+}
+
+.box-projects {
+    display: flex;
+    flex-direction: column;
+    width: 28%;
+    height: 200px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+.box-projects:hover {
+    transform: scale(1.05);
+}
 
 
+
+
+
+
+
+/*footer*/
+footer {
+    background-color: #060323;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+}
+
+.img-footer {
+    width: 50px;
+    margin: 10px 0 0 0;
+}
 
 
 /*mobile*/
@@ -177,4 +219,26 @@ nav {
     .nav-item:hover{
         --clippy:polygon(0 0, 00% 0, 70% 20%, 0 00%);
     }
+
+    /*banner*/
+
+    .banner {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .text-banner {
+        width: 100%;
+        text-align: center;
+    }
+
+    .text-banner h1 {
+        font-size: 40px;
+    }
+
+    .btn-banner {
+        width: 50%;
+        margin: 0 auto;
+    }
+
 }
