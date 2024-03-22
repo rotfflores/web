@@ -204,15 +204,15 @@ main {
 
 
 /*footer*/
- footer {
+footer {
     background-color: #060323;
     color: #ffffff;
     text-align: center;
     padding: 15px 0;
+    position: relative;
+    bottom: 0;
     width: 100%;
     height: auto;
-    position: absolute;
-    bottom: 0;
 }
 
 .img-footer {

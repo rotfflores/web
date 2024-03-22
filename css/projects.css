@@ -86,7 +86,11 @@ nav {
 .banner {
     display: flex;
     width: 90%;
-    margin: 10px auto;
+    margin: 30px auto;
+    background-color: #c7d3fe;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    background: linear-gradient(90deg, #e7edff 0%, #060323 100%);
 }
 
 .box-banner {
@@ -99,9 +103,13 @@ nav {
 
 .text-banner {
     width: 500px;
-    font-size: 30px;
+    font-size: 20px;
     line-height: 40px;
     gap: 20px;
+    background-color: #060323;
+    padding: 30px;
+    border-radius: 10px;
+    color: #e7edff;
 }
 
 .text-banner h1 {
@@ -110,9 +118,13 @@ nav {
     margin: 10px auto;
 }
 
+.text-banner-p span {
+    font-weight: bold;
+}
+
 .btn-banner {
-    background-color: #060323;
-    color: #ffffff;
+    background-color: #e7edff;
+    color: #060323;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -122,8 +134,13 @@ nav {
 }
 
 .btn-banner:hover {
-    background-color: #1201fd;
+    background-color: #b1c3ff;
 }
+
+.img-currency {
+    width: 400px;
+}
+
 /*projects*/
 .section-projects {
     display: flex;
@@ -159,6 +176,7 @@ footer {
     color: #ffffff;
     text-align: center;
     padding: 15px 0;
+    position: relative;
     bottom: 0;
     width: 100%;
     height: auto;
@@ -221,24 +239,25 @@ footer {
     }
 
     /*banner*/
-
-    .banner {
+    .box-banner {
         flex-direction: column;
-        gap: 20px;
     }
 
     .text-banner {
-        width: 100%;
         text-align: center;
+        width: 90%;
+        height: auto;
+        padding: 20px;
+        opacity: 0.9;
+        font-size: 20px;
+        
     }
 
-    .text-banner h1 {
-        font-size: 40px;
-    }
-
-    .btn-banner {
+    .box-img-currency {
         width: 50%;
-        margin: 0 auto;
     }
 
+    .img-currency {
+        width: 100%;
+    }
 }
