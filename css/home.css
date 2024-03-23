@@ -146,6 +146,8 @@ nav {
     margin: 30px auto 0;
     width: 100%;
     height: auto;
+    bottom: 0;
+    position: absolute;
 }
 
 .img-footer {
