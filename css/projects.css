@@ -137,7 +137,7 @@ nav {
     background-color: #b1c3ff;
 }
 
-.img-currency {
+.img-banner {
     width: 400px;
 }
 
@@ -153,22 +153,42 @@ nav {
     display: flex;
     flex-direction: column;
     width: 28%;
-    height: 200px;
+    height: auto;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
     transition: transform 0.3s;
+    margin: 10px;
 }
 
 .box-projects:hover {
     transform: scale(1.05);
 }
 
+.box-projects img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: 50% 50%;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 0 130px 0 rgba(0,0,0,0.38);
+}
 
+.project-h2 {
+    border-bottom: 1px solid #060323;
+    padding: 0.55em0 0.3em;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    margin: 10px;
+}
 
-
-
-
+.box-projects h2 {
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    margin: 10px;
+}
 
 /*footer*/
 footer {
@@ -186,6 +206,7 @@ footer {
     width: 50px;
     margin: 10px 0 0 0;
 }
+
 
 
 /*mobile*/
@@ -239,6 +260,10 @@ footer {
     }
 
     /*banner*/
+    .banner {
+        background: linear-gradient(360deg, #e7edff 0%, #060323 100%);
+    }
+
     .box-banner {
         flex-direction: column;
     }
@@ -250,7 +275,6 @@ footer {
         padding: 20px;
         opacity: 0.9;
         font-size: 20px;
-        
     }
 
     .box-img-currency {
