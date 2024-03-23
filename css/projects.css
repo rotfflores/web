@@ -154,11 +154,13 @@ nav {
     flex-direction: column;
     width: 28%;
     height: auto;
-    background-color: #ffffff;
+    background-color: #060323;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
     transition: transform 0.3s;
     margin: 10px;
+    color: #e7edff;
+    position: relative;
 }
 
 .box-projects:hover {
@@ -172,22 +174,56 @@ nav {
     object-position: 50% 50%;
     border-radius: 10px 10px 0 0;
     box-shadow: 0 0 130px 0 rgba(0,0,0,0.38);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
 }
 
 .project-h2 {
-    border-bottom: 1px solid #060323;
-    padding: 0.55em0 0.3em;
-    font-size: 20px;
-    text-align: center;
-    font-weight: bold;
-    margin: 10px;
+    padding: 0.55em 0 0.3em;
+    border-bottom: 1px solid #e7edff;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .box-projects h2 {
-    font-size: 20px;
     text-align: center;
     font-weight: bold;
+}
+
+.box-projects h3 {
+    text-align: center;
     margin: 10px;
+    font-size: 15px;
+}
+
+.box-projects p {
+    text-align: center;
+    margin: 20px;
+    font-size: 15px;
+}
+
+.box-projects a {
+    display: block;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #e7edff;
+    color: #060323;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 0 0 10px 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.box-projects a:hover {
+    background-color: #050076;
+    color: #e7edff;
+}
+
+.box-projects a:active {
+    background-color: #060323;
+    color: #e7edff;
 }
 
 /*footer*/
