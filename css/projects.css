@@ -144,9 +144,11 @@ nav {
 /*projects*/
 .section-projects {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 90%;
-    margin: 20px auto;
-    justify-content: space-around;
+    margin: 30px auto;
+    gap: 20px;
 }
 
 .box-projects {
