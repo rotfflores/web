@@ -90,7 +90,7 @@ nav {
     background-color: #c7d3fe;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
-    background: linear-gradient(90deg, #e7edff 0%, #060323 90%);
+    background: linear-gradient(90deg, #000000 40%, #ff79ab 100%);
 }
 
 .box-banner {
@@ -101,12 +101,24 @@ nav {
     padding: 20px;
 }
 
+.img-banner {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    object-fit: cover;
+    object-position: 50% 50%;
+    margin: 10px;
+    mask-image: linear-gradient(to top, black 70%, transparent 100%);
+}
+
+
 .text-banner {
     width: 500px;
     font-size: 20px;
     line-height: 40px;
     gap: 20px;
-    background-color: #060323;
+    background-color: #000000;
     padding: 30px;
     border-radius: 10px;
     color: #e7edff;
@@ -134,12 +146,10 @@ nav {
 }
 
 .btn-banner:hover {
-    background-color: #b1c3ff;
+    background-color: #ff79ab;
 }
 
-.img-banner {
-    width: 400px;
-}
+
 
 /*projects*/
 .section-projects {
