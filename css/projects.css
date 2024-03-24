@@ -90,7 +90,7 @@ nav {
     background-color: #c7d3fe;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
-    background: linear-gradient(90deg, #e7edff 0%, #060323 100%);
+    background: linear-gradient(90deg, #e7edff 0%, #060323 90%);
 }
 
 .box-banner {
@@ -175,6 +175,7 @@ nav {
     border-radius: 10px 10px 0 0;
     box-shadow: 0 0 130px 0 rgba(0,0,0,0.38);
     mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
+    box-sizing: border-box;
 }
 
 .headders {
@@ -185,24 +186,25 @@ nav {
     align-items: center;
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
 }
 
 .project-h2 {
-    padding: 0.55em 0 0.3em;
     border-bottom: 1px solid #e7edff;
     width: 90%;
     margin: 0 auto;
 }
 
 .box-projects h2 {
-    text-align: center;
+    text-align: center; 
     font-weight: bold;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
 }
 
 .box-projects h3 {
     text-align: center;
     margin: 10px;
-    font-size: 15px;
+    font-size: clamp(1rem, 1vw, 1.5rem);
 }
 
 .box-projects p {
@@ -218,7 +220,8 @@ nav {
     align-items: center;
     border-radius: 10px;
     text-align: center;
-    padding: 10px;
+    padding: 0 7px 25px 7px;
+    font-size: clamp(0.6rem, 1.1vw, 1.5rem);
 }
 
 .box-projects:hover p {
@@ -238,10 +241,15 @@ nav {
     position: absolute;
     bottom: 0;
     width: 100%;
+    display: none;
+}
+
+.box-projects:hover a {
+    display: block;
 }
 
 .box-projects a:hover {
-    background-color: #050076;
+    background-color: #04013d;
     color: #e7edff;
 }
 
@@ -341,7 +349,26 @@ footer {
         width: 50%;
     }
 
-    .img-currency {
+    .img-banner {
         width: 100%;
+    }
+
+    /*projects*/
+
+    .section-projects {
+        flex-direction: column;
+    }
+
+    .box-projects {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    .box-projects a {
+        display: block;
+    }
+
+    .box-projects:hover p {
+        display: none;
     }
 }
