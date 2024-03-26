@@ -109,7 +109,7 @@ nav {
     object-fit: cover;
     object-position: 50% 50%;
     margin: 10px;
-    mask-image: linear-gradient(to top, black 70%, transparent 100%);
+    mask-image: linear-gradient(to top, #000000 50%, rgba(0,0,0,0));
 }
 
 
@@ -130,7 +130,7 @@ nav {
     margin: 10px auto;
 }
 
-.text-banner-p span {
+.text-banner span {
     font-weight: bold;
 }
 
@@ -147,6 +147,7 @@ nav {
 
 .btn-banner:hover {
     background-color: #ff79ab;
+    color: #e7edff;
 }
 
 
@@ -341,7 +342,7 @@ footer {
 
     /*banner*/
     .banner {
-        background: linear-gradient(360deg, #e7edff 0%, #060323 100%);
+        background: linear-gradient(90deg, #000000 40%, #ff79ab 100%);
     }
 
     .box-banner {
