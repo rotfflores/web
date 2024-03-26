@@ -138,7 +138,7 @@ nav {
 
 
     /*footer*/
- footer {
+ .box-footer {
     background-color: #060323;
     color: #ffffff;
     text-align: center;
@@ -146,8 +146,8 @@ nav {
     margin: 30px auto 0;
     width: 100%;
     height: auto;
+    position: relative;
     bottom: 0;
-    position: absolute;
 }
 
 .img-footer {
