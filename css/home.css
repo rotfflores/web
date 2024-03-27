@@ -304,15 +304,18 @@ nav {
 
     .box-slider {
         width: auto;
+        height: auto;
+        margin: 50px auto 0; 
     }
 
     .slider {
         width: 100%;
-        height: 500px;
+        height: auto;
     }
 
     .slides { 
         width: 500%;
+        height: auto;
     }
 
     .slide {
@@ -325,17 +328,23 @@ nav {
     }
 
     .text-slide {
-        font-size: 20px;
+        font-size: 13px;
         width: 100%;
+        height: auto;
+    }
+
+    .btn-slide {
+        font-size: 13px;
+        padding: 5px 10px;
+        margin: 10px auto 0;
     }
 
     .navigation-manual {
         width: 100%;
-        margin-top: -40px;
     }
 
     .navigation-auto {
         width: 100%;
-        margin-top: 460px;
+        height: auto;
     }
 }
