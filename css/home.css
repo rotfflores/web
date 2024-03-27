@@ -233,6 +233,14 @@ nav {
     background-color: #e7edff;
 }
 
+/*about*/
+.box-about {
+    width: 80%;
+    height: auto;
+    margin: 20px auto;
+    text-align: center;
+}
+
     /*footer*/
  .box-footer {
     background-color: #060323;
