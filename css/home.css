@@ -341,10 +341,13 @@ nav {
 
     .navigation-manual {
         width: 100%;
+        height: auto;
+        margin-top: -25px;
     }
 
     .navigation-auto {
         width: 100%;
         height: auto;
+        margin-top: -25px;
     }
 }
