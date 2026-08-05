@@ -1,20 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="es">
 <head>
-    <title>Obed's projects</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css\index.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portafolio de Obed Flores, estudiante de Ingeniería en Computación y desarrollador web.">
+  <meta name="theme-color" content="#090816">
+  <title>Obed Flores — Desarrollador web</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site.css">
 </head>
-<html>
-    <body>
-        <div class="container">
-            <div class="box-img">
-                <div class="elements"><a href="home.html"><img class="img-logo" src="img\logo.png"></a></div>
-            </div>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Inicio de Obed Flores">
+      <img src="img/logo.png" alt="" width="42" height="42">
+      <span>OBED<span class="brand-dot">.</span></span>
+    </a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menú</button>
+    <nav id="site-nav" aria-label="Navegación principal">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#sobre-mi">Sobre mí</a>
+      <a class="nav-cta" href="https://github.com/rotfflores" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+  </header>
 
-            <div class="box-text">
-                <div class="text-element"><p class="subtitle">ROTF'S PROJECTS</h3></div>
-            </div>
+  <main id="contenido">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> Disponible para nuevos retos</p>
+        <h1 id="hero-title">Construyo experiencias web que <em>sí se sienten.</em></h1>
+        <p class="hero-text">Soy Obed Flores, estudiante de Ingeniería en Computación. Diseño y desarrollo sitios claros, útiles y pensados para las personas.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#proyectos">Explorar proyectos <span>↓</span></a>
+          <a class="button secondary" href="#sobre-mi">Conóceme</a>
         </div>
-    </body>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orb"><img src="img/logo.png" alt=""></div>
+        <p>HTML · CSS · JAVASCRIPT</p>
+      </div>
+    </section>
+
+    <section class="projects" id="proyectos" aria-labelledby="projects-title">
+      <div class="section-heading">
+        <div><p class="section-number">01 / TRABAJO</p><h2 id="projects-title">Proyectos seleccionados</h2></div>
+        <p>Una mezcla de interfaces, herramientas y experiencias construidas para aprender y resolver.</p>
+      </div>
+      <div class="project-grid">
+        <article class="project-card featured">
+          <a class="project-image" href="https://rotfflores.github.io/blackpink/" target="_blank" rel="noreferrer"><img src="img/banner.jpg" alt="Vista previa del sitio de Blackpink"></a>
+          <div class="project-content"><p class="project-meta">Sitio editorial · 2024</p><h3>Blackpink Fan Experience</h3><p>Un sitio visual dedicado al grupo, con perfiles, contenido y una identidad inspirada en su universo.</p><a href="https://rotfflores.github.io/blackpink/" target="_blank" rel="noreferrer">Ver proyecto <span>↗</span></a></div>
+        </article>
+        <article class="project-card">
+          <a class="project-image" href="currency.html"><img src="img/currency.jpg" alt="Vista previa del conversor de monedas"></a>
+          <div class="project-content"><p class="project-meta">Herramienta · JavaScript</p><h3>Conversor de monedas</h3><p>Conversión práctica entre divisas internacionales mediante datos de una API.</p><a href="currency.html">Probar herramienta <span>→</span></a></div>
+        </article>
+        <article class="project-card">
+          <a class="project-image" href="text-encryptor.html"><img src="img/encriptation.jpg" alt="Vista previa del encriptador de texto"></a>
+          <div class="project-content"><p class="project-meta">Utilidad · JavaScript</p><h3>Encriptador de texto</h3><p>Una interfaz sencilla para transformar y recuperar mensajes desde el navegador.</p><a href="text-encryptor.html">Probar herramienta <span>→</span></a></div>
+        </article>
+        <article class="project-card">
+          <a class="project-image" href="random-number.html"><img src="img/guess-number.jpg" alt="Vista previa del juego de adivinar el número"></a>
+          <div class="project-content"><p class="project-meta">Juego · JavaScript</p><h3>Adivina el número</h3><p>Un pequeño reto interactivo con pistas, intentos y números únicos.</p><a href="random-number.html">Jugar ahora <span>→</span></a></div>
+        </article>
+      </div>
+      <a class="text-link" href="projects.html">Ver todos los proyectos <span>→</span></a>
+    </section>
+
+    <section class="about" id="sobre-mi" aria-labelledby="about-title">
+      <div><p class="section-number">02 / PERFIL</p><h2 id="about-title">Curiosidad convertida en código.</h2></div>
+      <div class="about-copy"><p class="lead">Estudio Ingeniería en Computación en el Instituto Politécnico Nacional y disfruto transformar ideas en productos digitales funcionales.</p><p>Me motiva aprender nuevas tecnologías, resolver problemas y cuidar los detalles que hacen que una interfaz se sienta natural. Cada proyecto es una oportunidad para avanzar un poco más.</p><div class="skills" aria-label="Tecnologías"><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Diseño responsivo</span><span>APIs</span><span>Git</span></div></div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title"><p>¿TIENES UNA IDEA?</p><h2 id="cta-title">Hagamos algo memorable.</h2><a class="button primary" href="https://github.com/rotfflores" target="_blank" rel="noreferrer">Encuéntrame en GitHub ↗</a></section>
+  </main>
+  <footer><div><img src="img/logo.png" alt="" width="34" height="34"><strong>OBED.</strong></div><p>Diseñado y desarrollado con curiosidad.</p><p>© <span id="year">2026</span> Obed Flores</p></footer>
+  <script src="js/site.js"></script>
+</body>
 </html>
