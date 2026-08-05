@@ -1,4 +1,4 @@
-html{scrollbar-gutter:stable}.drawer{contain:layout paint}.scroll-progress{position:fixed;top:0;left:0;max-width:100%;width:var(--scroll-progress,0);height:2px;background:linear-gradient(90deg,var(--purple),var(--lime));box-shadow:0 0 12px var(--lime);z-index:90;pointer-events:none;transition:width .08s linear}
+.drawer{contain:layout paint}.scroll-progress{position:fixed;top:0;left:0;max-width:100%;width:var(--scroll-progress,0);height:2px;background:linear-gradient(90deg,var(--purple),var(--lime));box-shadow:0 0 12px var(--lime);z-index:90;pointer-events:none;transition:width .08s linear}
 .menu-toggle{position:fixed;top:17px;right:max(18px,calc((100vw - var(--max))/2 + 28px));z-index:35;transition:background .3s,box-shadow .3s,transform .3s,border-color .3s,top .3s}
 .has-scrolled .menu-toggle{top:16px;background:rgba(18,16,34,.78);border-color:rgba(184,255,74,.28);backdrop-filter:blur(14px);box-shadow:0 12px 35px rgba(0,0,0,.28);animation:menu-arrive .35s ease both}
 .has-scrolled .menu-toggle:hover{transform:translateY(-2px);border-color:var(--lime);box-shadow:0 12px 38px rgba(184,255,74,.12)}
