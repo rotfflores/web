@@ -6,7 +6,7 @@ let previousFocus;
 
 const enhancementStyles = document.createElement('link');
 enhancementStyles.rel = 'stylesheet';
-enhancementStyles.href = 'css/scroll-effects.css?v=13';
+enhancementStyles.href = 'css/scroll-effects.css?v=14';
 document.head.appendChild(enhancementStyles);
 
 const favicon = document.createElement('link');
@@ -60,6 +60,10 @@ function updateScrollEffects() {
     const goingDown = top > lastScrollY;
     document.body.classList.toggle('scrolling-down', goingDown);
     document.body.classList.toggle('scrolling-up', !goingDown);
+    document.querySelectorAll('.scroll-reveal:not(.visible)').forEach((item) => {
+      item.classList.toggle('reveal-from-up', !goingDown);
+      item.classList.toggle('reveal-from-down', goingDown);
+    });
     lastScrollY = top;
   }
   document.documentElement.style.setProperty('--hero-shift', `${Math.min(top * .08, 42)}px`);
