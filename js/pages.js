@@ -6,7 +6,7 @@ let previousFocus;
 
 const enhancementStyles = document.createElement('link');
 enhancementStyles.rel = 'stylesheet';
-enhancementStyles.href = 'css/scroll-effects.css?v=4';
+enhancementStyles.href = 'css/scroll-effects.css?v=5';
 document.head.appendChild(enhancementStyles);
 
 const progress = document.createElement('div');
