@@ -6,7 +6,7 @@ let previousFocus;
 
 const enhancementStyles = document.createElement('link');
 enhancementStyles.rel = 'stylesheet';
-enhancementStyles.href = 'css/scroll-effects.css?v=10';
+enhancementStyles.href = 'css/scroll-effects.css?v=11';
 document.head.appendChild(enhancementStyles);
 
 const favicon = document.createElement('link');
