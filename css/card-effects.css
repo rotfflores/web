@@ -5,10 +5,10 @@
 .invitation-card .card-preview:after{background:linear-gradient(110deg,transparent 38%,rgba(157,123,255,.15) 48%,transparent 58%)}
 @keyframes card-breathe{0%,100%{box-shadow:0 0 0 rgba(0,0,0,0)}50%{box-shadow:0 20px 55px rgba(157,123,255,.07)}}
 @keyframes preview-sheen{0%,42%{opacity:0;transform:translateX(-65%)}58%{opacity:1}76%,100%{opacity:0;transform:translateX(65%)}}
-body:after{content:"";position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at var(--cursor-x,50%) var(--cursor-y,50%),rgba(80,48,130,.2),transparent 38%),#07060f;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .38s ease,visibility 0s linear .38s}
-body.page-leaving:after{opacity:1;visibility:visible;transition:opacity .38s ease}
-body.page-leaving main,body.page-leaving footer{opacity:0;transform:scale(.992);transition:opacity .3s ease,transform .4s cubic-bezier(.22,.61,.36,1)}
+.page-transition{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at var(--cursor-x,50%) var(--cursor-y,50%),rgba(80,48,130,.2),transparent 38%),#07060f;opacity:0;visibility:hidden;pointer-events:none;transform:translateZ(0);transition:opacity .32s ease,visibility 0s linear .32s}
+.page-transition.active{opacity:1;visibility:visible;transition:opacity .32s ease}
+body.page-leaving main,body.page-leaving footer{opacity:.18;transform:scale(.992);transition:opacity .28s ease,transform .35s cubic-bezier(.22,.61,.36,1)}
 .choice-card.card-selected{transform:translateY(-4px) scale(.985)!important;filter:brightness(1.12);transition:transform .35s ease,filter .25s ease}
-body.page-arriving main,body.page-arriving footer{opacity:0;transform:translateY(10px)}
-body main,body footer{transition:opacity .45s ease,transform .55s cubic-bezier(.22,.61,.36,1)}
-@media(prefers-reduced-motion:reduce){.choice-card,.choice-card .card-preview:after{animation:none!important}body:after{display:none}}
+body.page-entering main,body.page-entering footer{animation:page-enter .52s cubic-bezier(.22,.61,.36,1) both}
+@keyframes page-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.choice-card,.choice-card .card-preview:after{animation:none!important}.page-transition{display:none}}

@@ -11,7 +11,7 @@ document.head.appendChild(enhancementStyles);
 
 const cardEffects = document.createElement('link');
 cardEffects.rel = 'stylesheet';
-cardEffects.href = 'css/card-effects.css?v=2';
+cardEffects.href = 'css/card-effects.css?v=3';
 document.head.appendChild(cardEffects);
 
 const favicon = document.createElement('link');
@@ -70,10 +70,21 @@ document.querySelectorAll('[data-year]').forEach((item) => { item.textContent = 
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (!reducedMotion) {
-  document.body.classList.add('page-arriving');
-  window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
-    document.body.classList.remove('page-arriving');
-  }));
+  const transitionLayer = document.createElement('div');
+  transitionLayer.className = 'page-transition';
+  transitionLayer.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(transitionLayer);
+
+  const playEntrance = () => {
+    document.body.classList.remove('page-leaving');
+    document.querySelectorAll('.card-selected').forEach((item) => item.classList.remove('card-selected'));
+    transitionLayer.classList.remove('active');
+    document.body.classList.remove('page-entering');
+    window.requestAnimationFrame(() => document.body.classList.add('page-entering'));
+    window.setTimeout(() => document.body.classList.remove('page-entering'), 560);
+  };
+  if (cardEffects.sheet) playEntrance(); else cardEffects.addEventListener('load', playEntrance, { once: true });
+  window.addEventListener('pageshow', playEntrance);
 
   document.querySelectorAll('a.choice-card[href]').forEach((card) => {
     card.addEventListener('click', (event) => {
@@ -84,7 +95,8 @@ if (!reducedMotion) {
       if (document.body.classList.contains('page-leaving')) return;
       card.classList.add('card-selected');
       document.body.classList.add('page-leaving');
-      window.setTimeout(() => { window.location.href = destination.href; }, 420);
+      transitionLayer.classList.add('active');
+      window.setTimeout(() => { window.location.assign(destination.href); }, 360);
     });
   });
 }
