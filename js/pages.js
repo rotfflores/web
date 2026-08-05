@@ -6,7 +6,7 @@ let previousFocus;
 
 const enhancementStyles = document.createElement('link');
 enhancementStyles.rel = 'stylesheet';
-enhancementStyles.href = 'css/scroll-effects.css?v=9';
+enhancementStyles.href = 'css/scroll-effects.css?v=10';
 document.head.appendChild(enhancementStyles);
 
 const favicon = document.createElement('link');
@@ -82,7 +82,16 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     item.style.setProperty('--reveal-delay', `${(index % 6) * 65}ms`);
   });
   const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-    entry.target.classList.toggle('visible', entry.isIntersecting);
-  }), { threshold: .12, rootMargin: '0px 0px -5% 0px' });
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      return;
+    }
+
+    const viewportHeight = window.innerHeight;
+    const fullyOutside = entry.boundingClientRect.bottom < -80
+      || entry.boundingClientRect.top > viewportHeight + 80;
+
+    if (fullyOutside) entry.target.classList.remove('visible');
+  }), { threshold: .08, rootMargin: '80px 0px 80px 0px' });
   items.forEach((item) => observer.observe(item));
 }
