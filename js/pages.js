@@ -6,7 +6,7 @@ let previousFocus;
 
 const enhancementStyles = document.createElement('link');
 enhancementStyles.rel = 'stylesheet';
-enhancementStyles.href = 'css/scroll-effects.css?v=6';
+enhancementStyles.href = 'css/scroll-effects.css?v=7';
 document.head.appendChild(enhancementStyles);
 
 const favicon = document.createElement('link');
@@ -24,12 +24,6 @@ const progress = document.createElement('div');
 progress.className = 'scroll-progress';
 progress.setAttribute('aria-hidden', 'true');
 document.body.prepend(progress);
-
-const directionIndicator = document.createElement('div');
-directionIndicator.className = 'scroll-direction';
-directionIndicator.setAttribute('aria-hidden', 'true');
-directionIndicator.innerHTML = '<span>↓</span><small>BAJANDO</small>';
-document.body.appendChild(directionIndicator);
 
 document.querySelectorAll('footer .code-brand').forEach((brand) => {
   brand.className = 'footer-logo';
@@ -56,7 +50,6 @@ document.querySelectorAll('[data-year]').forEach((item) => { item.textContent = 
 
 let ticking = false;
 let lastScrollY = window.scrollY;
-let directionTimer;
 function updateScrollEffects() {
   const top = window.scrollY;
   const available = document.documentElement.scrollHeight - window.innerHeight;
@@ -67,12 +60,6 @@ function updateScrollEffects() {
     const goingDown = top > lastScrollY;
     document.body.classList.toggle('scrolling-down', goingDown);
     document.body.classList.toggle('scrolling-up', !goingDown);
-    directionIndicator.innerHTML = goingDown
-      ? '<span>↓</span><small>BAJANDO</small>'
-      : '<span>↑</span><small>SUBIENDO</small>';
-    directionIndicator.classList.add('show');
-    window.clearTimeout(directionTimer);
-    directionTimer = window.setTimeout(() => directionIndicator.classList.remove('show'), 700);
     lastScrollY = top;
   }
   document.documentElement.style.setProperty('--hero-shift', `${Math.min(top * .08, 42)}px`);
