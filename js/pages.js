@@ -6,13 +6,30 @@ let previousFocus;
 
 const enhancementStyles = document.createElement('link');
 enhancementStyles.rel = 'stylesheet';
-enhancementStyles.href = 'css/scroll-effects.css?v=5';
+enhancementStyles.href = 'css/scroll-effects.css?v=6';
 document.head.appendChild(enhancementStyles);
+
+const favicon = document.createElement('link');
+favicon.rel = 'icon';
+favicon.type = 'image/png';
+favicon.href = 'img/logo.png?v=1';
+document.head.appendChild(favicon);
+
+const touchIcon = document.createElement('link');
+touchIcon.rel = 'apple-touch-icon';
+touchIcon.href = 'img/logo.png?v=1';
+document.head.appendChild(touchIcon);
 
 const progress = document.createElement('div');
 progress.className = 'scroll-progress';
 progress.setAttribute('aria-hidden', 'true');
 document.body.prepend(progress);
+
+const directionIndicator = document.createElement('div');
+directionIndicator.className = 'scroll-direction';
+directionIndicator.setAttribute('aria-hidden', 'true');
+directionIndicator.innerHTML = '<span>↓</span><small>BAJANDO</small>';
+document.body.appendChild(directionIndicator);
 
 document.querySelectorAll('footer .code-brand').forEach((brand) => {
   brand.className = 'footer-logo';
@@ -38,12 +55,26 @@ document.addEventListener('keydown', (event) => { if (event.key === 'Escape') se
 document.querySelectorAll('[data-year]').forEach((item) => { item.textContent = new Date().getFullYear(); });
 
 let ticking = false;
+let lastScrollY = window.scrollY;
+let directionTimer;
 function updateScrollEffects() {
   const top = window.scrollY;
   const available = document.documentElement.scrollHeight - window.innerHeight;
   const ratio = available > 0 ? Math.min(top / available, 1) : 0;
   document.documentElement.style.setProperty('--scroll-progress', `${ratio * 100}%`);
   document.body.classList.toggle('has-scrolled', top > 90);
+  if (Math.abs(top - lastScrollY) > 3) {
+    const goingDown = top > lastScrollY;
+    document.body.classList.toggle('scrolling-down', goingDown);
+    document.body.classList.toggle('scrolling-up', !goingDown);
+    directionIndicator.innerHTML = goingDown
+      ? '<span>↓</span><small>BAJANDO</small>'
+      : '<span>↑</span><small>SUBIENDO</small>';
+    directionIndicator.classList.add('show');
+    window.clearTimeout(directionTimer);
+    directionTimer = window.setTimeout(() => directionIndicator.classList.remove('show'), 700);
+    lastScrollY = top;
+  }
   document.documentElement.style.setProperty('--hero-shift', `${Math.min(top * .08, 42)}px`);
   ticking = false;
 }
