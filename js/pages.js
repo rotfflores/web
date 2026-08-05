@@ -11,7 +11,7 @@ document.head.appendChild(enhancementStyles);
 
 const cardEffects = document.createElement('link');
 cardEffects.rel = 'stylesheet';
-cardEffects.href = 'css/card-effects.css?v=1';
+cardEffects.href = 'css/card-effects.css?v=2';
 document.head.appendChild(cardEffects);
 
 const favicon = document.createElement('link');
@@ -68,6 +68,27 @@ scrim?.addEventListener('click', () => setMenu(false));
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
 document.querySelectorAll('[data-year]').forEach((item) => { item.textContent = new Date().getFullYear(); });
 
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reducedMotion) {
+  document.body.classList.add('page-arriving');
+  window.requestAnimationFrame(() => window.requestAnimationFrame(() => {
+    document.body.classList.remove('page-arriving');
+  }));
+
+  document.querySelectorAll('a.choice-card[href]').forEach((card) => {
+    card.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const destination = new URL(card.href, window.location.href);
+      if (destination.origin !== window.location.origin) return;
+      event.preventDefault();
+      if (document.body.classList.contains('page-leaving')) return;
+      card.classList.add('card-selected');
+      document.body.classList.add('page-leaving');
+      window.setTimeout(() => { window.location.href = destination.href; }, 420);
+    });
+  });
+}
+
 let ticking = false;
 let lastScrollY = window.scrollY;
 function updateScrollEffects() {
@@ -98,7 +119,7 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 updateScrollEffects();
 
-if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (!reducedMotion) {
   document.body.classList.add('reveal-ready');
   const items = document.querySelectorAll('.reveal, .type-grid article, .choice-grid > a, .features span, .process article, footer');
   items.forEach((item, index) => {
