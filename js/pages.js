@@ -4,6 +4,22 @@ const toggle = document.querySelector('.menu-toggle');
 const closeButton = document.querySelector('.close-menu');
 let previousFocus;
 
+const enhancementStyles = document.createElement('link');
+enhancementStyles.rel = 'stylesheet';
+enhancementStyles.href = 'css/scroll-effects.css';
+document.head.appendChild(enhancementStyles);
+
+const progress = document.createElement('div');
+progress.className = 'scroll-progress';
+progress.setAttribute('aria-hidden', 'true');
+document.body.prepend(progress);
+
+document.querySelectorAll('footer .code-brand').forEach((brand) => {
+  brand.className = 'footer-logo';
+  brand.setAttribute('aria-label', 'ROTF, inicio');
+  brand.innerHTML = '<img src="img/logo.png" alt="Logotipo de ROTF">';
+});
+
 function setMenu(open) {
   if (!drawer || !scrim || !toggle) return;
   if (open) previousFocus = document.activeElement;
@@ -21,9 +37,32 @@ scrim?.addEventListener('click', () => setMenu(false));
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
 document.querySelectorAll('[data-year]').forEach((item) => { item.textContent = new Date().getFullYear(); });
 
+let ticking = false;
+function updateScrollEffects() {
+  const top = window.scrollY;
+  const available = document.documentElement.scrollHeight - window.innerHeight;
+  const ratio = available > 0 ? Math.min(top / available, 1) : 0;
+  document.documentElement.style.setProperty('--scroll-progress', `${ratio * 100}%`);
+  document.body.classList.toggle('has-scrolled', top > 90);
+  document.documentElement.style.setProperty('--hero-shift', `${Math.min(top * .08, 42)}px`);
+  ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    window.requestAnimationFrame(updateScrollEffects);
+    ticking = true;
+  }
+}, { passive: true });
+updateScrollEffects();
+
 if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   document.body.classList.add('reveal-ready');
-  const items = document.querySelectorAll('.reveal');
+  const items = document.querySelectorAll('.reveal, .type-grid article, .choice-grid > a, .features span, .process article, footer');
+  items.forEach((item, index) => {
+    item.classList.add('scroll-reveal');
+    item.style.setProperty('--reveal-delay', `${(index % 6) * 65}ms`);
+  });
   const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
     if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
   }), { threshold: .12 });
