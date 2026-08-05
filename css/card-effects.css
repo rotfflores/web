@@ -1,0 +1,8 @@
+.choice-card{animation:card-breathe 6s ease-in-out infinite}
+.website-card{animation-delay:-3s}
+.choice-card .card-preview:after{content:"";position:absolute;inset:-35%;z-index:4;background:linear-gradient(110deg,transparent 38%,rgba(255,255,255,.1) 48%,transparent 58%);transform:translateX(-65%);animation:preview-sheen 6.5s ease-in-out infinite;pointer-events:none}
+.website-card .card-preview:after{background:linear-gradient(110deg,transparent 38%,rgba(184,255,74,.1) 48%,transparent 58%);animation-delay:-3.2s}
+.invitation-card .card-preview:after{background:linear-gradient(110deg,transparent 38%,rgba(157,123,255,.15) 48%,transparent 58%)}
+@keyframes card-breathe{0%,100%{box-shadow:0 0 0 rgba(0,0,0,0)}50%{box-shadow:0 20px 55px rgba(157,123,255,.07)}}
+@keyframes preview-sheen{0%,42%{opacity:0;transform:translateX(-65%)}58%{opacity:1}76%,100%{opacity:0;transform:translateX(65%)}}
+@media(prefers-reduced-motion:reduce){.choice-card,.choice-card .card-preview:after{animation:none!important}}

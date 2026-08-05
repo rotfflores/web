@@ -6,8 +6,13 @@ let previousFocus;
 
 const enhancementStyles = document.createElement('link');
 enhancementStyles.rel = 'stylesheet';
-enhancementStyles.href = 'css/scroll-effects.css?v=18';
+enhancementStyles.href = 'css/scroll-effects.css?v=19';
 document.head.appendChild(enhancementStyles);
+
+const cardEffects = document.createElement('link');
+cardEffects.rel = 'stylesheet';
+cardEffects.href = 'css/card-effects.css?v=1';
+document.head.appendChild(cardEffects);
 
 const favicon = document.createElement('link');
 favicon.rel = 'icon';
