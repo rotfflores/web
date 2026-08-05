@@ -6,7 +6,7 @@ let previousFocus;
 
 const enhancementStyles = document.createElement('link');
 enhancementStyles.rel = 'stylesheet';
-enhancementStyles.href = 'css/scroll-effects.css?v=16';
+enhancementStyles.href = 'css/scroll-effects.css?v=17';
 document.head.appendChild(enhancementStyles);
 
 const favicon = document.createElement('link');
@@ -29,6 +29,11 @@ const ambientGlow = document.createElement('div');
 ambientGlow.className = 'cursor-ambient';
 ambientGlow.setAttribute('aria-hidden', 'true');
 document.body.prepend(ambientGlow);
+
+const gridOverlay = document.createElement('div');
+gridOverlay.className = 'grid-overlay';
+gridOverlay.setAttribute('aria-hidden', 'true');
+document.body.prepend(gridOverlay);
 
 window.addEventListener('pointermove', (event) => {
   document.documentElement.style.setProperty('--cursor-x', `${event.clientX}px`);
