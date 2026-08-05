@@ -6,7 +6,7 @@ let previousFocus;
 
 const enhancementStyles = document.createElement('link');
 enhancementStyles.rel = 'stylesheet';
-enhancementStyles.href = 'css/scroll-effects.css?v=15';
+enhancementStyles.href = 'css/scroll-effects.css?v=16';
 document.head.appendChild(enhancementStyles);
 
 const favicon = document.createElement('link');
@@ -24,6 +24,16 @@ const progress = document.createElement('div');
 progress.className = 'scroll-progress';
 progress.setAttribute('aria-hidden', 'true');
 document.body.prepend(progress);
+
+const ambientGlow = document.createElement('div');
+ambientGlow.className = 'cursor-ambient';
+ambientGlow.setAttribute('aria-hidden', 'true');
+document.body.prepend(ambientGlow);
+
+window.addEventListener('pointermove', (event) => {
+  document.documentElement.style.setProperty('--cursor-x', `${event.clientX}px`);
+  document.documentElement.style.setProperty('--cursor-y', `${event.clientY}px`);
+}, { passive: true });
 
 document.querySelectorAll('footer .code-brand').forEach((brand) => {
   brand.className = 'footer-logo';
