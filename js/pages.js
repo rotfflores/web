@@ -69,6 +69,44 @@ document.addEventListener('keydown', (event) => { if (event.key === 'Escape') se
 document.querySelectorAll('[data-year]').forEach((item) => { item.textContent = new Date().getFullYear(); });
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const categoryTabs = [...document.querySelectorAll('.type-option[data-category]')];
+const samplePanels = [...document.querySelectorAll('.sample-panel[data-panel]')];
+function openInvitationCategory(tab, moveToPanel = false) {
+  const category = tab.dataset.category;
+  categoryTabs.forEach((item) => {
+    const selected = item === tab;
+    item.classList.toggle('active', selected);
+    item.setAttribute('aria-selected', String(selected));
+    item.setAttribute('aria-expanded', String(selected));
+    item.tabIndex = selected ? 0 : -1;
+  });
+  samplePanels.forEach((panel) => {
+    const selected = panel.dataset.panel === category;
+    panel.hidden = !selected;
+    panel.classList.toggle('active', selected);
+  });
+  const activePanel = samplePanels.find((panel) => panel.dataset.panel === category);
+  if (moveToPanel && activePanel && window.innerWidth <= 760) {
+    window.setTimeout(() => activePanel.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' }), 80);
+  }
+}
+
+categoryTabs.forEach((tab, index) => {
+  tab.addEventListener('click', () => openInvitationCategory(tab, true));
+  tab.addEventListener('keydown', (event) => {
+    if (!['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    let next = index;
+    if (event.key === 'Home') next = 0;
+    else if (event.key === 'End') next = categoryTabs.length - 1;
+    else if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % categoryTabs.length;
+    else next = (index - 1 + categoryTabs.length) % categoryTabs.length;
+    categoryTabs[next].focus();
+    openInvitationCategory(categoryTabs[next]);
+  });
+});
+
 if (!reducedMotion) {
   const transitionLayer = document.createElement('div');
   transitionLayer.className = 'page-transition';
@@ -133,7 +171,7 @@ updateScrollEffects();
 
 if (!reducedMotion) {
   document.body.classList.add('reveal-ready');
-  const items = document.querySelectorAll('.reveal, .type-grid article, .choice-grid > a, .features span, .process article, footer');
+  const items = document.querySelectorAll('.reveal, .type-grid article, .type-grid button, .choice-grid > a, .features span, .process article, footer');
   items.forEach((item, index) => {
     item.classList.add('scroll-reveal');
     item.style.setProperty('--reveal-delay', `${(index % 6) * 65}ms`);
