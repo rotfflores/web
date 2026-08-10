@@ -72,22 +72,25 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 
 const categoryTabs = [...document.querySelectorAll('.type-option[data-category]')];
 const samplePanels = [...document.querySelectorAll('.sample-panel[data-panel]')];
+const samplePanelsContainer = document.querySelector('.sample-panels');
 function openInvitationCategory(tab, moveToPanel = false) {
   const category = tab.dataset.category;
+  const activePanel = samplePanels.find((panel) => panel.dataset.panel === category);
+  const shouldClose = tab.classList.contains('active') && activePanel && !activePanel.hidden;
   categoryTabs.forEach((item) => {
-    const selected = item === tab;
+    const selected = !shouldClose && item === tab;
     item.classList.toggle('active', selected);
     item.setAttribute('aria-selected', String(selected));
     item.setAttribute('aria-expanded', String(selected));
-    item.tabIndex = selected ? 0 : -1;
+    item.tabIndex = item === tab ? 0 : -1;
   });
   samplePanels.forEach((panel) => {
-    const selected = panel.dataset.panel === category;
+    const selected = !shouldClose && panel.dataset.panel === category;
     panel.hidden = !selected;
     panel.classList.toggle('active', selected);
   });
-  const activePanel = samplePanels.find((panel) => panel.dataset.panel === category);
-  if (moveToPanel && activePanel && window.innerWidth <= 760) {
+  samplePanelsContainer?.classList.toggle('open', !shouldClose);
+  if (moveToPanel && activePanel && !shouldClose) {
     window.setTimeout(() => activePanel.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' }), 80);
   }
 }
