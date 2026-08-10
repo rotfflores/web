@@ -77,6 +77,7 @@ function openInvitationCategory(tab, moveToPanel = false) {
   const category = tab.dataset.category;
   const activePanel = samplePanels.find((panel) => panel.dataset.panel === category);
   const shouldClose = tab.classList.contains('active') && activePanel && !activePanel.hidden;
+  tab.insertAdjacentElement('afterend', samplePanelsContainer);
   categoryTabs.forEach((item) => {
     const selected = !shouldClose && item === tab;
     item.classList.toggle('active', selected);
@@ -174,7 +175,7 @@ updateScrollEffects();
 
 if (!reducedMotion) {
   document.body.classList.add('reveal-ready');
-  const items = document.querySelectorAll('.reveal, .type-grid article, .type-grid button, .choice-grid > a, .features span, .process article, footer');
+  const items = document.querySelectorAll('.reveal, .type-grid > article, .type-grid > button, .choice-grid > a, .features span, .process article, footer');
   items.forEach((item, index) => {
     item.classList.add('scroll-reveal');
     item.style.setProperty('--reveal-delay', `${(index % 6) * 65}ms`);
