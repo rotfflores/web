@@ -73,11 +73,51 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matc
 const categoryTabs = [...document.querySelectorAll('.type-option[data-category]')];
 const samplePanels = [...document.querySelectorAll('.sample-panel[data-panel]')];
 const samplePanelsContainer = document.querySelector('.sample-panels');
+let closeTimer;
+let swipeGuideTimer;
+
+function hideSwipeGuide() {
+  window.clearTimeout(swipeGuideTimer);
+  document.querySelector('.swipe-guide')?.remove();
+}
+
+function showSwipeGuide(panel) {
+  hideSwipeGuide();
+  if (!mobileCarouselQuery.matches || !panel.querySelector('.projects-gallery')) return;
+  const guide = document.createElement('div');
+  guide.className = 'swipe-guide';
+  guide.innerHTML = '<div><span aria-hidden="true">←</span><strong>Desliza para ver más</strong><span aria-hidden="true">→</span><small>También puedes subir y bajar</small></div>';
+  document.body.appendChild(guide);
+  const dismiss = () => hideSwipeGuide();
+  guide.addEventListener('pointerdown', dismiss, { once: true });
+  guide.addEventListener('touchstart', dismiss, { once: true, passive: true });
+  swipeGuideTimer = window.setTimeout(dismiss, 1800);
+}
+
 function openInvitationCategory(tab, moveToPanel = false) {
+  window.clearTimeout(closeTimer);
   const category = tab.dataset.category;
   const activePanel = samplePanels.find((panel) => panel.dataset.panel === category);
   const shouldClose = tab.classList.contains('active') && activePanel && !activePanel.hidden;
   tab.insertAdjacentElement('afterend', samplePanelsContainer);
+  if (shouldClose) {
+    hideSwipeGuide();
+    tab.classList.add('closing');
+    samplePanelsContainer.classList.add('closing');
+    activePanel.classList.add('closing');
+    tab.setAttribute('aria-selected', 'false');
+    tab.setAttribute('aria-expanded', 'false');
+    closeTimer = window.setTimeout(() => {
+      tab.classList.remove('active', 'closing');
+      activePanel.classList.remove('active', 'closing');
+      activePanel.hidden = true;
+      samplePanelsContainer.classList.remove('open', 'closing');
+    }, reducedMotion ? 0 : 420);
+    return;
+  }
+  samplePanelsContainer.classList.remove('closing');
+  samplePanels.forEach((panel) => panel.classList.remove('closing'));
+  categoryTabs.forEach((item) => item.classList.remove('closing'));
   categoryTabs.forEach((item) => {
     const selected = !shouldClose && item === tab;
     item.classList.toggle('active', selected);
@@ -95,6 +135,7 @@ function openInvitationCategory(tab, moveToPanel = false) {
     const activeGallery = activePanel.querySelector('.projects-gallery');
     if (mobileCarouselQuery.matches) centerProjectGallery(activeGallery);
     else window.requestAnimationFrame(() => centerProjectGallery(activeGallery));
+    window.setTimeout(() => showSwipeGuide(activePanel), reducedMotion ? 0 : 380);
   }
   if (moveToPanel && activePanel && !shouldClose) {
     if (mobileCarouselQuery.matches) tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
