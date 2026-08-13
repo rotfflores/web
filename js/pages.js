@@ -97,7 +97,7 @@ function openInvitationCategory(tab, moveToPanel = false) {
     else window.requestAnimationFrame(() => centerProjectGallery(activeGallery));
   }
   if (moveToPanel && activePanel && !shouldClose) {
-    if (mobileCarouselQuery.matches) activePanel.scrollIntoView({ behavior: 'auto', block: 'start' });
+    if (mobileCarouselQuery.matches) tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
     else window.setTimeout(() => activePanel.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' }), 80);
   }
 }
