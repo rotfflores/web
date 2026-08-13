@@ -92,10 +92,13 @@ function openInvitationCategory(tab, moveToPanel = false) {
   });
   samplePanelsContainer?.classList.toggle('open', !shouldClose);
   if (activePanel && !shouldClose) {
-    window.requestAnimationFrame(() => centerProjectGallery(activePanel.querySelector('.projects-gallery')));
+    const activeGallery = activePanel.querySelector('.projects-gallery');
+    if (mobileCarouselQuery.matches) centerProjectGallery(activeGallery);
+    else window.requestAnimationFrame(() => centerProjectGallery(activeGallery));
   }
   if (moveToPanel && activePanel && !shouldClose) {
-    window.setTimeout(() => activePanel.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' }), 80);
+    if (mobileCarouselQuery.matches) activePanel.scrollIntoView({ behavior: 'auto', block: 'start' });
+    else window.setTimeout(() => activePanel.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' }), 80);
   }
 }
 
@@ -123,7 +126,8 @@ function centerProjectGallery(gallery) {
   if (!firstOriginal || !gallery.clientWidth) return;
   gallery.style.scrollSnapType = 'none';
   gallery.scrollLeft = firstOriginal.offsetLeft - (gallery.clientWidth - firstOriginal.offsetWidth) / 2;
-  window.requestAnimationFrame(() => { gallery.style.scrollSnapType = ''; });
+  gallery.getBoundingClientRect();
+  gallery.style.scrollSnapType = '';
 }
 
 function configureProjectCarousels() {
