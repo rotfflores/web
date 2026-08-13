@@ -77,6 +77,7 @@ function openInvitationCategory(tab, moveToPanel = false) {
   const category = tab.dataset.category;
   const activePanel = samplePanels.find((panel) => panel.dataset.panel === category);
   const shouldClose = tab.classList.contains('active') && activePanel && !activePanel.hidden;
+  tab.insertAdjacentElement('afterend', samplePanelsContainer);
   categoryTabs.forEach((item) => {
     const selected = !shouldClose && item === tab;
     item.classList.toggle('active', selected);
