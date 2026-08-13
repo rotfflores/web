@@ -77,7 +77,6 @@ function openInvitationCategory(tab, moveToPanel = false) {
   const category = tab.dataset.category;
   const activePanel = samplePanels.find((panel) => panel.dataset.panel === category);
   const shouldClose = tab.classList.contains('active') && activePanel && !activePanel.hidden;
-  tab.insertAdjacentElement('afterend', samplePanelsContainer);
   categoryTabs.forEach((item) => {
     const selected = !shouldClose && item === tab;
     item.classList.toggle('active', selected);
@@ -122,11 +121,13 @@ const projectGalleries = document.querySelectorAll('.sample-panel .projects-gall
 
 function centerProjectGallery(gallery) {
   if (!gallery) return;
-  gallery.scrollLeft = 0;
+  if (typeof gallery.resetCarousel === 'function') gallery.resetCarousel();
+  else gallery.scrollLeft = 0;
 }
 
 function configureProjectCarousels() {
   projectGalleries.forEach((gallery) => {
+    gallery.destroyCarousel?.();
     gallery.querySelectorAll('[data-carousel-clone]').forEach((clone) => clone.remove());
     gallery.scrollLeft = 0;
     if (!mobileCarouselQuery.matches) {
@@ -134,6 +135,93 @@ function configureProjectCarousels() {
       return;
     }
     gallery.removeAttribute('tabindex');
+    const originals = [...gallery.children];
+    if (originals.length < 2) return;
+
+    const track = document.createElement('div');
+    track.className = 'carousel-track';
+    originals.forEach((card) => track.appendChild(card));
+    const before = originals.at(-1).cloneNode(true);
+    const after = originals[0].cloneNode(true);
+    before.dataset.carouselClone = 'before';
+    after.dataset.carouselClone = 'after';
+    [before, after].forEach((clone) => {
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('a,button,[tabindex]').forEach((item) => { item.tabIndex = -1; });
+    });
+    track.prepend(before);
+    track.append(after);
+    gallery.appendChild(track);
+
+    let index = 1;
+    let startX = 0;
+    let startY = 0;
+    let deltaX = 0;
+    let horizontal = false;
+    let deciding = false;
+    const slideWidth = () => gallery.clientWidth;
+    const place = (animate = false, offset = 0) => {
+      track.style.transition = animate ? 'transform .28s cubic-bezier(.22,.61,.36,1)' : 'none';
+      track.style.transform = `translate3d(${(-index * slideWidth()) + offset}px,0,0)`;
+    };
+    const reset = () => { index = 1; place(false); };
+    const onTouchStart = (event) => {
+      if (event.touches.length !== 1) return;
+      startX = event.touches[0].clientX;
+      startY = event.touches[0].clientY;
+      deltaX = 0;
+      horizontal = false;
+      deciding = true;
+      track.style.transition = 'none';
+    };
+    const onTouchMove = (event) => {
+      if (!deciding || event.touches.length !== 1) return;
+      const dx = event.touches[0].clientX - startX;
+      const dy = event.touches[0].clientY - startY;
+      if (!horizontal && Math.abs(dx) < 7 && Math.abs(dy) < 7) return;
+      if (!horizontal && Math.abs(dy) >= Math.abs(dx)) {
+        deciding = false;
+        return;
+      }
+      horizontal = true;
+      deltaX = dx;
+      event.preventDefault();
+      place(false, deltaX);
+    };
+    const onTouchEnd = () => {
+      if (!horizontal) return;
+      if (Math.abs(deltaX) > Math.min(70, slideWidth() * .18)) index += deltaX < 0 ? 1 : -1;
+      place(true);
+      deciding = false;
+      horizontal = false;
+    };
+    const onTransitionEnd = () => {
+      if (index === 0) { index = originals.length; place(false); }
+      else if (index === originals.length + 1) { index = 1; place(false); }
+    };
+    const onResize = () => place(false);
+    gallery.addEventListener('touchstart', onTouchStart, { passive: true });
+    gallery.addEventListener('touchmove', onTouchMove, { passive: false });
+    gallery.addEventListener('touchend', onTouchEnd, { passive: true });
+    gallery.addEventListener('touchcancel', onTouchEnd, { passive: true });
+    track.addEventListener('transitionend', onTransitionEnd);
+    window.addEventListener('resize', onResize);
+    gallery.resetCarousel = reset;
+    gallery.destroyCarousel = () => {
+      gallery.removeEventListener('touchstart', onTouchStart);
+      gallery.removeEventListener('touchmove', onTouchMove);
+      gallery.removeEventListener('touchend', onTouchEnd);
+      gallery.removeEventListener('touchcancel', onTouchEnd);
+      track.removeEventListener('transitionend', onTransitionEnd);
+      window.removeEventListener('resize', onResize);
+      [...track.children].forEach((card) => {
+        if (!card.hasAttribute('data-carousel-clone')) gallery.appendChild(card);
+      });
+      track.remove();
+      delete gallery.resetCarousel;
+      delete gallery.destroyCarousel;
+    };
+    reset();
   });
 }
 
