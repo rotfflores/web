@@ -75,23 +75,33 @@ const samplePanels = [...document.querySelectorAll('.sample-panel[data-panel]')]
 const samplePanelsContainer = document.querySelector('.sample-panels');
 let closeTimer;
 let swipeGuideTimer;
+let swipeGuideRemoveTimer;
+let swipeGuideShown = false;
 
-function hideSwipeGuide() {
+function hideSwipeGuide(immediate = false) {
   window.clearTimeout(swipeGuideTimer);
-  document.querySelector('.swipe-guide')?.remove();
+  window.clearTimeout(swipeGuideRemoveTimer);
+  const guide = document.querySelector('.swipe-guide');
+  if (!guide) return;
+  if (immediate || reducedMotion) {
+    guide.remove();
+    return;
+  }
+  guide.classList.add('leaving');
+  swipeGuideRemoveTimer = window.setTimeout(() => guide.remove(), 320);
 }
 
 function showSwipeGuide(panel) {
-  hideSwipeGuide();
-  if (!mobileCarouselQuery.matches || !panel.querySelector('.projects-gallery')) return;
+  if (swipeGuideShown || !mobileCarouselQuery.matches || !panel.querySelector('.projects-gallery')) return;
+  swipeGuideShown = true;
   const guide = document.createElement('div');
   guide.className = 'swipe-guide';
-  guide.innerHTML = '<div><span aria-hidden="true">←</span><strong>Desliza para ver más</strong><span aria-hidden="true">→</span><small>También puedes subir y bajar</small></div>';
+  guide.innerHTML = '<div><span class="swipe-hand" aria-hidden="true">☝️</span><strong>Desliza para ver más</strong><small>Mueve el dedo hacia ambos lados</small></div>';
   document.body.appendChild(guide);
   const dismiss = () => hideSwipeGuide();
   guide.addEventListener('pointerdown', dismiss, { once: true });
   guide.addEventListener('touchstart', dismiss, { once: true, passive: true });
-  swipeGuideTimer = window.setTimeout(dismiss, 1800);
+  swipeGuideTimer = window.setTimeout(dismiss, 2100);
 }
 
 function openInvitationCategory(tab, moveToPanel = false) {
