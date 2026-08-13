@@ -162,6 +162,11 @@ function configureProjectCarousels() {
     [before, after].forEach((clone) => {
       clone.setAttribute('aria-hidden', 'true');
       clone.querySelectorAll('a,button,[tabindex]').forEach((item) => { item.tabIndex = -1; });
+      clone.querySelectorAll('img').forEach((image) => {
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        image.fetchPriority = 'low';
+      });
     });
     gallery.prepend(before);
     gallery.append(after);
