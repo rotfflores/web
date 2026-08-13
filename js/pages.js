@@ -114,6 +114,7 @@ categoryTabs.forEach((tab, index) => {
   });
 });
 
+const mobileCarouselQuery = window.matchMedia('(max-width: 760px)');
 const projectGalleries = document.querySelectorAll('.sample-panel .projects-gallery');
 
 function centerProjectGallery(gallery) {
@@ -127,9 +128,11 @@ function centerProjectGallery(gallery) {
 
 function configureProjectCarousels() {
   projectGalleries.forEach((gallery) => {
-    const clones = gallery.querySelectorAll('[data-carousel-clone]');
+    gallery.querySelectorAll('[data-carousel-clone]').forEach((clone) => clone.remove());
+    gallery.scrollLeft = 0;
+    if (!mobileCarouselQuery.matches) return;
     const originals = [...gallery.children].filter((item) => !item.hasAttribute('data-carousel-clone'));
-    if (originals.length < 2 || clones.length) return;
+    if (originals.length < 2) return;
     originals.forEach((item) => {
       const clone = item.cloneNode(true);
       clone.setAttribute('data-carousel-clone', 'after');
@@ -147,6 +150,7 @@ function configureProjectCarousels() {
 projectGalleries.forEach((gallery) => {
   let loopTimer;
   gallery.addEventListener('scroll', () => {
+    if (!mobileCarouselQuery.matches) return;
     window.clearTimeout(loopTimer);
     loopTimer = window.setTimeout(() => {
       const firstAfter = gallery.querySelector('[data-carousel-clone="after"]');
@@ -164,60 +168,12 @@ projectGalleries.forEach((gallery) => {
         gallery.scrollLeft += correction;
         window.requestAnimationFrame(() => { gallery.style.scrollSnapType = ''; });
       }
-    }, 120);
+    }, 180);
   }, { passive: true });
-
-  let dragStartX = 0;
-  let dragStartY = 0;
-  let dragStartScroll = 0;
-  let dragged = false;
-  let gestureRejected = false;
-  gallery.addEventListener('pointerdown', (event) => {
-    if (event.pointerType === 'mouse' && event.button !== 0) return;
-    dragStartX = event.clientX;
-    dragStartY = event.clientY;
-    dragStartScroll = gallery.scrollLeft;
-    dragged = false;
-    gestureRejected = false;
-  });
-  gallery.addEventListener('pointermove', (event) => {
-    if (gestureRejected) return;
-    const distanceX = event.clientX - dragStartX;
-    const distanceY = event.clientY - dragStartY;
-    if (!gallery.classList.contains('is-dragging')) {
-      if (Math.max(Math.abs(distanceX), Math.abs(distanceY)) < 5) return;
-      if (event.pointerType !== 'mouse' && Math.abs(distanceY) >= Math.abs(distanceX)) {
-        gestureRejected = true;
-        return;
-      }
-      gallery.classList.add('is-dragging');
-      gallery.setPointerCapture(event.pointerId);
-    }
-    if (Math.abs(distanceX) > 4) dragged = true;
-    gallery.scrollLeft = dragStartScroll - distanceX;
-    if (event.cancelable) event.preventDefault();
-  });
-  const stopDragging = () => {
-    gallery.classList.remove('is-dragging');
-    gestureRejected = false;
-  };
-  gallery.addEventListener('pointerup', stopDragging);
-  gallery.addEventListener('pointercancel', stopDragging);
-  gallery.addEventListener('click', (event) => {
-    if (!dragged) return;
-    event.preventDefault();
-    event.stopPropagation();
-    dragged = false;
-  }, true);
 });
 
 configureProjectCarousels();
-window.addEventListener('resize', () => {
-  window.clearTimeout(window.projectCarouselResizeTimer);
-  window.projectCarouselResizeTimer = window.setTimeout(() => {
-    projectGalleries.forEach(centerProjectGallery);
-  }, 160);
-});
+mobileCarouselQuery.addEventListener?.('change', configureProjectCarousels);
 
 if (!reducedMotion) {
   const transitionLayer = document.createElement('div');
