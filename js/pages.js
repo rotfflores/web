@@ -168,23 +168,39 @@ projectGalleries.forEach((gallery) => {
   }, { passive: true });
 
   let dragStartX = 0;
+  let dragStartY = 0;
   let dragStartScroll = 0;
   let dragged = false;
+  let gestureRejected = false;
   gallery.addEventListener('pointerdown', (event) => {
-    if (event.pointerType !== 'mouse' || event.button !== 0) return;
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
     dragStartX = event.clientX;
+    dragStartY = event.clientY;
     dragStartScroll = gallery.scrollLeft;
     dragged = false;
-    gallery.classList.add('is-dragging');
-    gallery.setPointerCapture(event.pointerId);
+    gestureRejected = false;
   });
   gallery.addEventListener('pointermove', (event) => {
-    if (!gallery.classList.contains('is-dragging')) return;
-    const distance = event.clientX - dragStartX;
-    if (Math.abs(distance) > 4) dragged = true;
-    gallery.scrollLeft = dragStartScroll - distance;
+    if (gestureRejected) return;
+    const distanceX = event.clientX - dragStartX;
+    const distanceY = event.clientY - dragStartY;
+    if (!gallery.classList.contains('is-dragging')) {
+      if (Math.max(Math.abs(distanceX), Math.abs(distanceY)) < 5) return;
+      if (event.pointerType !== 'mouse' && Math.abs(distanceY) >= Math.abs(distanceX)) {
+        gestureRejected = true;
+        return;
+      }
+      gallery.classList.add('is-dragging');
+      gallery.setPointerCapture(event.pointerId);
+    }
+    if (Math.abs(distanceX) > 4) dragged = true;
+    gallery.scrollLeft = dragStartScroll - distanceX;
+    if (event.cancelable) event.preventDefault();
   });
-  const stopDragging = () => gallery.classList.remove('is-dragging');
+  const stopDragging = () => {
+    gallery.classList.remove('is-dragging');
+    gestureRejected = false;
+  };
   gallery.addEventListener('pointerup', stopDragging);
   gallery.addEventListener('pointercancel', stopDragging);
   gallery.addEventListener('click', (event) => {
