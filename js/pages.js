@@ -122,15 +122,61 @@ const projectGalleries = document.querySelectorAll('.sample-panel .projects-gall
 
 function centerProjectGallery(gallery) {
   if (!gallery) return;
-  gallery.scrollLeft = 0;
+  const firstOriginal = gallery.querySelector('.showcase-project:not([data-carousel-clone])');
+  if (!firstOriginal || !gallery.clientWidth) return;
+  gallery.scrollLeft = firstOriginal.offsetLeft - gallery.offsetLeft - parseFloat(getComputedStyle(gallery).paddingLeft || 0);
+}
+
+function correctCarouselLoop(gallery) {
+  if (!mobileCarouselQuery.matches || !gallery.clientWidth) return;
+  const cards = [...gallery.querySelectorAll('.showcase-project')];
+  const originals = cards.filter((card) => !card.hasAttribute('data-carousel-clone'));
+  if (originals.length < 2) return;
+  const viewportCenter = gallery.scrollLeft + gallery.clientWidth / 2;
+  const nearest = cards.reduce((best, card) => {
+    const center = card.offsetLeft - gallery.offsetLeft + card.offsetWidth / 2;
+    return !best || Math.abs(center - viewportCenter) < best.distance ? { card, distance: Math.abs(center - viewportCenter) } : best;
+  }, null)?.card;
+  if (!nearest?.hasAttribute('data-carousel-clone')) return;
+  const target = nearest.dataset.carouselClone === 'before' ? originals.at(-1) : originals[0];
+  gallery.style.scrollBehavior = 'auto';
+  gallery.scrollLeft = target.offsetLeft - gallery.offsetLeft - parseFloat(getComputedStyle(gallery).paddingLeft || 0);
+  gallery.style.scrollBehavior = '';
 }
 
 function configureProjectCarousels() {
   projectGalleries.forEach((gallery) => {
     gallery.querySelectorAll('[data-carousel-clone]').forEach((clone) => clone.remove());
     gallery.scrollLeft = 0;
+    if (!mobileCarouselQuery.matches) {
+      gallery.tabIndex = 0;
+      return;
+    }
+    gallery.removeAttribute('tabindex');
+    const originals = [...gallery.querySelectorAll(':scope > .showcase-project')];
+    if (originals.length < 2) return;
+    const before = originals.at(-1).cloneNode(true);
+    const after = originals[0].cloneNode(true);
+    before.dataset.carouselClone = 'before';
+    after.dataset.carouselClone = 'after';
+    [before, after].forEach((clone) => {
+      clone.setAttribute('aria-hidden', 'true');
+      clone.querySelectorAll('a,button,[tabindex]').forEach((item) => { item.tabIndex = -1; });
+    });
+    gallery.prepend(before);
+    gallery.append(after);
   });
 }
+
+projectGalleries.forEach((gallery) => {
+  let settleTimer;
+  const settle = () => correctCarouselLoop(gallery);
+  if ('onscrollend' in gallery) gallery.addEventListener('scrollend', settle, { passive: true });
+  else gallery.addEventListener('scroll', () => {
+    window.clearTimeout(settleTimer);
+    settleTimer = window.setTimeout(settle, 180);
+  }, { passive: true });
+});
 
 configureProjectCarousels();
 mobileCarouselQuery.addEventListener?.('change', configureProjectCarousels);
