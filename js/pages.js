@@ -122,59 +122,15 @@ const projectGalleries = document.querySelectorAll('.sample-panel .projects-gall
 
 function centerProjectGallery(gallery) {
   if (!gallery) return;
-  const firstOriginal = gallery.querySelector('.showcase-project:not([data-carousel-clone])');
-  if (!firstOriginal || !gallery.clientWidth) return;
-  gallery.style.scrollSnapType = 'none';
-  gallery.scrollLeft = firstOriginal.offsetLeft - (gallery.clientWidth - firstOriginal.offsetWidth) / 2;
-  gallery.getBoundingClientRect();
-  gallery.style.scrollSnapType = '';
+  gallery.scrollLeft = 0;
 }
 
 function configureProjectCarousels() {
   projectGalleries.forEach((gallery) => {
     gallery.querySelectorAll('[data-carousel-clone]').forEach((clone) => clone.remove());
     gallery.scrollLeft = 0;
-    if (!mobileCarouselQuery.matches) return;
-    const originals = [...gallery.children].filter((item) => !item.hasAttribute('data-carousel-clone'));
-    if (originals.length < 2) return;
-    originals.forEach((item) => {
-      const clone = item.cloneNode(true);
-      clone.setAttribute('data-carousel-clone', 'after');
-      gallery.appendChild(clone);
-    });
-    [...originals].reverse().forEach((item) => {
-      const clone = item.cloneNode(true);
-      clone.setAttribute('data-carousel-clone', 'before');
-      gallery.prepend(clone);
-    });
-    window.requestAnimationFrame(() => centerProjectGallery(gallery));
   });
 }
-
-projectGalleries.forEach((gallery) => {
-  let loopTimer;
-  gallery.addEventListener('scroll', () => {
-    if (!mobileCarouselQuery.matches) return;
-    window.clearTimeout(loopTimer);
-    loopTimer = window.setTimeout(() => {
-      const firstAfter = gallery.querySelector('[data-carousel-clone="after"]');
-      const firstOriginal = gallery.querySelector('.showcase-project:not([data-carousel-clone])');
-      const secondOriginal = firstOriginal?.nextElementSibling;
-      if (!firstAfter || !firstOriginal || !secondOriginal) return;
-      const cycleWidth = firstAfter.offsetLeft - firstOriginal.offsetLeft;
-      const step = secondOriginal.offsetLeft - firstOriginal.offsetLeft;
-      const origin = firstOriginal.offsetLeft - (gallery.clientWidth - firstOriginal.offsetWidth) / 2;
-      let correction = 0;
-      if (gallery.scrollLeft < origin - step / 2) correction = cycleWidth;
-      else if (gallery.scrollLeft >= origin + cycleWidth - step / 2) correction = -cycleWidth;
-      if (correction) {
-        gallery.style.scrollSnapType = 'none';
-        gallery.scrollLeft += correction;
-        window.requestAnimationFrame(() => { gallery.style.scrollSnapType = ''; });
-      }
-    }, 180);
-  }, { passive: true });
-});
 
 configureProjectCarousels();
 mobileCarouselQuery.addEventListener?.('change', configureProjectCarousels);
