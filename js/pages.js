@@ -96,7 +96,7 @@ function showSwipeGuide(panel) {
   swipeGuideShown = true;
   const guide = document.createElement('div');
   guide.className = 'swipe-guide';
-  guide.innerHTML = '<div><span class="swipe-hand" aria-hidden="true">☝️</span><strong>Desliza para ver más</strong><small>Mueve el dedo hacia ambos lados</small></div>';
+  guide.innerHTML = '<div><span class="swipe-hand" aria-hidden="true"><svg viewBox="0 0 64 64" focusable="false"><path d="M25 29V12a5 5 0 0 1 10 0v14-7a5 5 0 0 1 10 0v10-5a5 5 0 0 1 10 0v15c0 13-8 21-21 21h-2c-8 0-13-4-17-10L7 38a5 5 0 0 1 8-6l10 9V29Z"/><path class="swipe-accent" d="M8 17h9M47 8h9"/></svg></span><strong>Arrastra o desliza</strong><small>Mueve hacia ambos lados para ver más</small></div>';
   document.body.appendChild(guide);
   const dismiss = () => hideSwipeGuide();
   guide.addEventListener('pointerdown', dismiss, { once: true });
@@ -186,7 +186,7 @@ function configureProjectCarousels() {
       gallery.tabIndex = 0;
       return;
     }
-    gallery.removeAttribute('tabindex');
+    gallery.tabIndex = 0;
     const originals = [...gallery.children];
     if (originals.length < 2) return;
 
@@ -211,6 +211,8 @@ function configureProjectCarousels() {
     let deltaX = 0;
     let horizontal = false;
     let deciding = false;
+    let mouseDragging = false;
+    let suppressClick = false;
     const slideWidth = () => gallery.clientWidth;
     const place = (animate = false, offset = 0) => {
       track.style.transition = animate ? 'transform .28s cubic-bezier(.22,.61,.36,1)' : 'none';
@@ -247,6 +249,44 @@ function configureProjectCarousels() {
       deciding = false;
       horizontal = false;
     };
+    const onPointerDown = (event) => {
+      if (event.pointerType !== 'mouse' || event.button !== 0) return;
+      startX = event.clientX;
+      deltaX = 0;
+      mouseDragging = true;
+      suppressClick = false;
+      gallery.classList.add('is-dragging');
+      gallery.setPointerCapture?.(event.pointerId);
+      track.style.transition = 'none';
+    };
+    const onPointerMove = (event) => {
+      if (!mouseDragging || event.pointerType !== 'mouse') return;
+      deltaX = event.clientX - startX;
+      if (Math.abs(deltaX) < 5) return;
+      suppressClick = true;
+      event.preventDefault();
+      place(false, deltaX);
+    };
+    const onPointerEnd = (event) => {
+      if (!mouseDragging || event.pointerType !== 'mouse') return;
+      if (Math.abs(deltaX) > Math.min(70, slideWidth() * .18)) index += deltaX < 0 ? 1 : -1;
+      place(true);
+      mouseDragging = false;
+      gallery.classList.remove('is-dragging');
+      gallery.releasePointerCapture?.(event.pointerId);
+      window.setTimeout(() => { suppressClick = false; }, 0);
+    };
+    const onClickCapture = (event) => {
+      if (!suppressClick) return;
+      event.preventDefault();
+      event.stopPropagation();
+    };
+    const onKeyDown = (event) => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      index += event.key === 'ArrowRight' ? 1 : -1;
+      place(true);
+    };
     const onTransitionEnd = () => {
       if (index === 0) { index = originals.length; place(false); }
       else if (index === originals.length + 1) { index = 1; place(false); }
@@ -256,6 +296,12 @@ function configureProjectCarousels() {
     gallery.addEventListener('touchmove', onTouchMove, { passive: false });
     gallery.addEventListener('touchend', onTouchEnd, { passive: true });
     gallery.addEventListener('touchcancel', onTouchEnd, { passive: true });
+    gallery.addEventListener('pointerdown', onPointerDown);
+    gallery.addEventListener('pointermove', onPointerMove);
+    gallery.addEventListener('pointerup', onPointerEnd);
+    gallery.addEventListener('pointercancel', onPointerEnd);
+    gallery.addEventListener('click', onClickCapture, true);
+    gallery.addEventListener('keydown', onKeyDown);
     track.addEventListener('transitionend', onTransitionEnd);
     window.addEventListener('resize', onResize);
     gallery.resetCarousel = reset;
@@ -264,6 +310,12 @@ function configureProjectCarousels() {
       gallery.removeEventListener('touchmove', onTouchMove);
       gallery.removeEventListener('touchend', onTouchEnd);
       gallery.removeEventListener('touchcancel', onTouchEnd);
+      gallery.removeEventListener('pointerdown', onPointerDown);
+      gallery.removeEventListener('pointermove', onPointerMove);
+      gallery.removeEventListener('pointerup', onPointerEnd);
+      gallery.removeEventListener('pointercancel', onPointerEnd);
+      gallery.removeEventListener('click', onClickCapture, true);
+      gallery.removeEventListener('keydown', onKeyDown);
       track.removeEventListener('transitionend', onTransitionEnd);
       window.removeEventListener('resize', onResize);
       [...track.children].forEach((card) => {
