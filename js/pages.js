@@ -92,7 +92,8 @@ function hideSwipeGuide(immediate = false) {
 }
 
 function showSwipeGuide(panel) {
-  if (swipeGuideShown || !mobileCarouselQuery.matches || !panel.querySelector('.projects-gallery')) return;
+  const gallery = panel.querySelector('.projects-gallery');
+  if (swipeGuideShown || !mobileCarouselQuery.matches || !gallery || gallery.querySelectorAll('.showcase-project').length < 2) return;
   swipeGuideShown = true;
   const guide = document.createElement('div');
   guide.className = 'swipe-guide';
