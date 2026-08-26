@@ -6,7 +6,7 @@ let previousFocus;
 
 const enhancementStyles = document.createElement('link');
 enhancementStyles.rel = 'stylesheet';
-enhancementStyles.href = 'css/scroll-effects.css?v=19';
+enhancementStyles.href = 'css/scroll-effects.css?v=20';
 document.head.appendChild(enhancementStyles);
 
 const cardEffects = document.createElement('link');
@@ -30,25 +30,30 @@ progress.className = 'scroll-progress';
 progress.setAttribute('aria-hidden', 'true');
 document.body.prepend(progress);
 
-const ambientGlow = document.createElement('div');
-ambientGlow.className = 'cursor-ambient';
-ambientGlow.setAttribute('aria-hidden', 'true');
-document.body.prepend(ambientGlow);
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+if (finePointer) {
+  const ambientGlow = document.createElement('div');
+  ambientGlow.className = 'cursor-ambient';
+  ambientGlow.setAttribute('aria-hidden', 'true');
+  document.body.prepend(ambientGlow);
+}
 
 const gridOverlay = document.createElement('div');
 gridOverlay.className = 'grid-overlay';
 gridOverlay.setAttribute('aria-hidden', 'true');
 document.body.prepend(gridOverlay);
 
-window.addEventListener('pointermove', (event) => {
-  document.documentElement.style.setProperty('--cursor-x', `${event.clientX}px`);
-  document.documentElement.style.setProperty('--cursor-y', `${event.clientY}px`);
-}, { passive: true });
+if (finePointer) {
+  window.addEventListener('pointermove', (event) => {
+    document.documentElement.style.setProperty('--cursor-x', `${event.clientX}px`);
+    document.documentElement.style.setProperty('--cursor-y', `${event.clientY}px`);
+  }, { passive: true });
+}
 
 document.querySelectorAll('footer .code-brand').forEach((brand) => {
   brand.className = 'footer-logo';
   brand.setAttribute('aria-label', 'ROTF, inicio');
-  brand.innerHTML = '<img src="img/logo.png" alt="Logotipo de ROTF">';
+  brand.innerHTML = '<img src="img/logo-mobile.webp" alt="Logotipo de ROTF" width="512" height="512">';
 });
 
 function setMenu(open) {
@@ -113,6 +118,7 @@ function openInvitationCategory(tab, moveToPanel = false) {
   tab.insertAdjacentElement('afterend', samplePanelsContainer);
   if (shouldClose) {
     hideSwipeGuide();
+    activePanel.querySelector('.projects-gallery')?.destroyCarousel?.();
     tab.classList.add('closing');
     samplePanelsContainer.classList.add('closing');
     activePanel.classList.add('closing');
@@ -144,7 +150,10 @@ function openInvitationCategory(tab, moveToPanel = false) {
   samplePanelsContainer?.classList.toggle('open', !shouldClose);
   if (activePanel && !shouldClose) {
     const activeGallery = activePanel.querySelector('.projects-gallery');
-    if (mobileCarouselQuery.matches) centerProjectGallery(activeGallery);
+    if (mobileCarouselQuery.matches) {
+      configureProjectCarousels(activeGallery);
+      centerProjectGallery(activeGallery);
+    }
     else window.requestAnimationFrame(() => centerProjectGallery(activeGallery));
     window.setTimeout(() => showSwipeGuide(activePanel), reducedMotion ? 0 : 380);
   }
@@ -178,35 +187,19 @@ function centerProjectGallery(gallery) {
   else gallery.scrollLeft = 0;
 }
 
-function configureProjectCarousels() {
-  projectGalleries.forEach((gallery) => {
-    gallery.destroyCarousel?.();
-    gallery.querySelectorAll('[data-carousel-clone]').forEach((clone) => clone.remove());
+function configureProjectCarousel(gallery) {
     gallery.scrollLeft = 0;
-    if (!mobileCarouselQuery.matches) {
-      gallery.tabIndex = 0;
-      return;
-    }
     gallery.tabIndex = 0;
+    if (!mobileCarouselQuery.matches) return;
     const originals = [...gallery.children];
     if (originals.length < 2) return;
 
     const track = document.createElement('div');
     track.className = 'carousel-track';
     originals.forEach((card) => track.appendChild(card));
-    const before = originals.at(-1).cloneNode(true);
-    const after = originals[0].cloneNode(true);
-    before.dataset.carouselClone = 'before';
-    after.dataset.carouselClone = 'after';
-    [before, after].forEach((clone) => {
-      clone.setAttribute('aria-hidden', 'true');
-      clone.querySelectorAll('a,button,[tabindex]').forEach((item) => { item.tabIndex = -1; });
-    });
-    track.prepend(before);
-    track.append(after);
     gallery.appendChild(track);
 
-    let index = 1;
+    let index = 0;
     let startX = 0;
     let startY = 0;
     let deltaX = 0;
@@ -219,7 +212,11 @@ function configureProjectCarousels() {
       track.style.transition = animate ? 'transform .28s cubic-bezier(.22,.61,.36,1)' : 'none';
       track.style.transform = `translate3d(${(-index * slideWidth()) + offset}px,0,0)`;
     };
-    const reset = () => { index = 1; place(false); };
+    const reset = () => { index = 0; place(false); };
+    const move = (direction) => {
+      index = Math.max(0, Math.min(originals.length - 1, index + direction));
+      place(true);
+    };
     const onTouchStart = (event) => {
       if (event.touches.length !== 1) return;
       startX = event.touches[0].clientX;
@@ -245,8 +242,8 @@ function configureProjectCarousels() {
     };
     const onTouchEnd = () => {
       if (!horizontal) return;
-      if (Math.abs(deltaX) > Math.min(70, slideWidth() * .18)) index += deltaX < 0 ? 1 : -1;
-      place(true);
+      if (Math.abs(deltaX) > Math.min(70, slideWidth() * .18)) move(deltaX < 0 ? 1 : -1);
+      else place(true);
       deciding = false;
       horizontal = false;
     };
@@ -270,8 +267,8 @@ function configureProjectCarousels() {
     };
     const onPointerEnd = (event) => {
       if (!mouseDragging || event.pointerType !== 'mouse') return;
-      if (Math.abs(deltaX) > Math.min(70, slideWidth() * .18)) index += deltaX < 0 ? 1 : -1;
-      place(true);
+      if (Math.abs(deltaX) > Math.min(70, slideWidth() * .18)) move(deltaX < 0 ? 1 : -1);
+      else place(true);
       mouseDragging = false;
       gallery.classList.remove('is-dragging');
       gallery.releasePointerCapture?.(event.pointerId);
@@ -285,12 +282,7 @@ function configureProjectCarousels() {
     const onKeyDown = (event) => {
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
       event.preventDefault();
-      index += event.key === 'ArrowRight' ? 1 : -1;
-      place(true);
-    };
-    const onTransitionEnd = () => {
-      if (index === 0) { index = originals.length; place(false); }
-      else if (index === originals.length + 1) { index = 1; place(false); }
+      move(event.key === 'ArrowRight' ? 1 : -1);
     };
     const onResize = () => place(false);
     gallery.addEventListener('touchstart', onTouchStart, { passive: true });
@@ -303,7 +295,6 @@ function configureProjectCarousels() {
     gallery.addEventListener('pointercancel', onPointerEnd);
     gallery.addEventListener('click', onClickCapture, true);
     gallery.addEventListener('keydown', onKeyDown);
-    track.addEventListener('transitionend', onTransitionEnd);
     window.addEventListener('resize', onResize);
     gallery.resetCarousel = reset;
     gallery.destroyCarousel = () => {
@@ -317,21 +308,22 @@ function configureProjectCarousels() {
       gallery.removeEventListener('pointercancel', onPointerEnd);
       gallery.removeEventListener('click', onClickCapture, true);
       gallery.removeEventListener('keydown', onKeyDown);
-      track.removeEventListener('transitionend', onTransitionEnd);
       window.removeEventListener('resize', onResize);
-      [...track.children].forEach((card) => {
-        if (!card.hasAttribute('data-carousel-clone')) gallery.appendChild(card);
-      });
+      [...track.children].forEach((card) => gallery.appendChild(card));
       track.remove();
       delete gallery.resetCarousel;
       delete gallery.destroyCarousel;
     };
     reset();
-  });
+}
+
+function configureProjectCarousels(activeGallery = document.querySelector('.sample-panel.active .projects-gallery')) {
+  projectGalleries.forEach((gallery) => gallery.destroyCarousel?.());
+  if (activeGallery) configureProjectCarousel(activeGallery);
 }
 
 configureProjectCarousels();
-mobileCarouselQuery.addEventListener?.('change', configureProjectCarousels);
+mobileCarouselQuery.addEventListener?.('change', () => configureProjectCarousels());
 
 if (!reducedMotion) {
   const transitionLayer = document.createElement('div');
