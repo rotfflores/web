@@ -21,7 +21,7 @@
 
 .real-invitation-preview > img.featured-invitation-preview {
   z-index: 1;
-  object-fit: contain;
+  object-fit: cover;
   opacity: 1;
   transform: none;
   animation-name: featured-preview-cycle;

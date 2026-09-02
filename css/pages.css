@@ -97,6 +97,14 @@ svg.icon-arrow-up,svg.icon-arrow-right{display:block;overflow:visible}svg.icon-a
 @keyframes connector-flow-vertical{to{background-position:0 -200%}}
 
 /* Ajustes finos del selector y contraste claro */
+.studio-home .invitation-card{position:relative}
+.studio-home .invitation-card>small{position:absolute;top:1.35rem;left:2.5rem;z-index:6;margin:0;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.8)}
+.studio-home .invitation-card .card-preview{margin-top:-2.5rem}
+@media(max-width:760px){.studio-home .invitation-card>small{top:1.15rem;left:1.6rem}.studio-home .invitation-card .card-preview{margin-top:-1.6rem}}
+.studio-home .website-card{position:relative}
+.studio-home .website-card>small{position:absolute;top:1.35rem;left:2.5rem;z-index:6;margin:0;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.8)}
+.studio-home .website-card .card-preview{width:calc(100% + 5rem);margin-left:-2.5rem;margin-top:-2.5rem}
+@media(max-width:760px){.studio-home .website-card>small{top:1.15rem;left:1.6rem}.studio-home .website-card .card-preview{width:calc(100% + 3.2rem);margin-left:-1.6rem;margin-top:-1.6rem}}
 .theme-toggle{height:38px;align-items:center}.theme-toggle .theme-icon{flex:0 0 14px;width:14px;height:14px;font-size:0!important;line-height:0;border:2px solid currentColor;border-radius:50%;box-shadow:0 0 8px currentColor;align-self:center;transform:none}.theme-toggle .theme-icon:before{content:"";display:block;width:4px;height:4px;border-radius:50%;background:currentColor;margin:auto}.theme-toggle .theme-label{display:inline-flex;align-items:center;height:14px;line-height:14px;margin:0}:root[data-theme="light"] .studio-hero:before{opacity:.46}:root[data-theme="light"] .studio-universe-canvas{opacity:.72}:root[data-theme="light"] .studio-home .bottom-cta .cta-button b{background:#fff;color:#6e47bd;box-shadow:0 0 0 1px rgba(255,255,255,.5),0 0 18px rgba(110,71,189,.35)}
 
 /* Correcciones de continuidad e indicador activo */
@@ -124,6 +132,10 @@ svg.icon-arrow-up,svg.icon-arrow-right{display:block;overflow:visible}svg.icon-a
 .feature-core{display:none!important}.feature-orbit:before{inset:0;width:auto;height:auto;transform:none;border:0;background:radial-gradient(circle at 50% 48%,rgba(157,123,255,.16),transparent 26%),radial-gradient(circle at 20% 25%,rgba(184,255,74,.08),transparent 18%),radial-gradient(circle,#fff 0 1px,transparent 1.8px);background-size:auto,auto,73px 73px;opacity:.75;animation:constellation-bg 24s linear infinite}.feature-orbit:after{inset:8% 4%;width:auto;height:auto;transform:none;border:0;border-radius:35%;background:radial-gradient(ellipse at 50% 50%,transparent 35%,rgba(157,123,255,.06) 54%,transparent 72%);animation:constellation-breathe 7s ease-in-out infinite}.constellation-lines{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;filter:drop-shadow(0 0 5px rgba(157,123,255,.3))}.orbit-tags{z-index:3}.orbit-tags span{min-width:125px;white-space:normal}.orbit-tags span:before{content:"";display:inline-block;width:5px;height:5px;margin-right:.55rem;border-radius:50%;vertical-align:middle;background:var(--lime);box-shadow:0 0 8px var(--lime)}:root[data-theme="light"] .feature-orbit:before{background:radial-gradient(circle at 50% 48%,rgba(110,71,189,.13),transparent 27%),radial-gradient(circle at 20% 25%,rgba(0,0,0,.05),transparent 18%),radial-gradient(circle,#120e18 0 1px,transparent 1.8px);background-size:auto,auto,73px 73px}:root[data-theme="light"] .constellation-lines{filter:drop-shadow(0 0 4px rgba(110,71,189,.25))}:root[data-theme="light"] .orbit-tags span:before{background:#6e47bd;box-shadow:0 0 8px rgba(110,71,189,.65)}
 @keyframes constellation-bg{to{background-position:0 0,0 0,73px 73px}}@keyframes constellation-breathe{50%{transform:scale(1.06);opacity:.65}}
 @media(max-width:600px){.feature-orbit:before{background-size:auto,auto,58px 58px}.orbit-tags span{min-width:105px}}
+
+/* La vista destacada ocupa todo el ancho interno de la tarjeta. */
+.studio-home .invitation-card .card-preview{width:calc(100% + 5rem);margin-left:-2.5rem}
+@media(max-width:760px){.studio-home .invitation-card .card-preview{width:calc(100% + 3.2rem);margin-left:-1.6rem}}
 @media(prefers-reduced-motion:reduce){.feature-orbit:before,.feature-orbit:after{animation:none!important}.constellation-lines{display:none}.feature-orbit{padding-top:40px}}
 
 /* Órbitas alrededor de un centro invisible */

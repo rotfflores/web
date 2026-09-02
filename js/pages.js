@@ -160,8 +160,8 @@ function createStudioUniverse() {
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
     const isHome = document.body.classList.contains('studio-home');
     const count = isHome
-      ? Math.min(260, Math.max(170, Math.round((width * height) / 24000)))
-      : Math.min(150, Math.max(85, Math.round((width * height) / 32000)));
+      ? Math.min(150, Math.max(90, Math.round((width * height) / 42000)))
+      : Math.min(110, Math.max(65, Math.round((width * height) / 48000)));
     particles = Array.from({ length: count }, (_, index) => ({
       x: Math.random() * width,
       y: Math.random() * height,
