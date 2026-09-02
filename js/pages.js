@@ -1,3 +1,28 @@
+document.body.classList.add('studio-shell');
+document.querySelector('.topbar')?.classList.add('studio-topbar');
+document.querySelectorAll('.code-brand').forEach((brand) => {
+  brand.innerHTML = '<span>&lt;</span>rotf studio<span>&gt;</span>';
+  brand.setAttribute('aria-label', 'ROTF Studio, inicio');
+});
+document.querySelectorAll('.drawer nav small').forEach((number) => number.remove());
+const drawerMessage = document.querySelector('.drawer > p');
+if (drawerMessage) drawerMessage.innerHTML = '&lt;rotf studio&gt;<br>Experiencias digitales hechas a tu medida.';
+document.title = document.title.replace(/\bROTF\b(?! Studio)/g, 'ROTF Studio');
+document.querySelectorAll('footer p').forEach((item) => {
+  item.innerHTML = item.innerHTML.replace(/\bROTF\b(?! Studio)/g, 'ROTF Studio');
+});
+
+const pageTopbar = document.querySelector('.topbar');
+if (pageTopbar && !pageTopbar.querySelector('.theme-toggle')) {
+  const pageThemeToggle = document.createElement('button');
+  pageThemeToggle.className = 'theme-toggle';
+  pageThemeToggle.type = 'button';
+  pageThemeToggle.setAttribute('aria-label', 'Activar modo claro');
+  pageThemeToggle.setAttribute('aria-pressed', 'false');
+  pageThemeToggle.innerHTML = '<span class="theme-icon" aria-hidden="true">☼</span><span class="theme-label">Claro</span>';
+  pageTopbar.insertBefore(pageThemeToggle, pageTopbar.querySelector('.menu-toggle'));
+}
+
 const drawer = document.querySelector('.drawer');
 const scrim = document.querySelector('.scrim');
 const toggle = document.querySelector('.menu-toggle');
@@ -72,6 +97,318 @@ closeButton?.addEventListener('click', () => setMenu(false));
 scrim?.addEventListener('click', () => setMenu(false));
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
 document.querySelectorAll('[data-year]').forEach((item) => { item.textContent = new Date().getFullYear(); });
+
+const themeToggle = document.querySelector('.theme-toggle');
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+function applyTheme(theme, persist = false) {
+  const light = theme === 'light';
+  if (light) document.documentElement.dataset.theme = 'light';
+  else delete document.documentElement.dataset.theme;
+  themeToggle?.setAttribute('aria-pressed', String(light));
+  themeToggle?.setAttribute('aria-label', light ? 'Activar modo oscuro' : 'Activar modo claro');
+  const icon = themeToggle?.querySelector('.theme-icon');
+  const label = themeToggle?.querySelector('.theme-label');
+  if (icon) icon.textContent = light ? '☾' : '☼';
+  if (label) label.textContent = light ? 'Oscuro' : 'Claro';
+  themeMeta?.setAttribute('content', light ? '#f4f2ec' : '#08090a');
+  if (persist) {
+    try { localStorage.setItem('rotf-theme', light ? 'light' : 'dark'); } catch (error) { /* Storage may be unavailable. */ }
+  }
+}
+
+let initialTheme = document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+try { if (localStorage.getItem('rotf-theme') === 'light') initialTheme = 'light'; } catch (error) { /* Storage may be unavailable. */ }
+applyTheme(initialTheme);
+themeToggle?.addEventListener('click', () => {
+  applyTheme(document.documentElement.dataset.theme === 'light' ? 'dark' : 'light', true);
+});
+
+function createStudioUniverse() {
+  const main = document.querySelector('main');
+  const start = document.querySelector('.studio-intro') || main?.firstElementChild;
+  const end = document.querySelector('.bottom-cta') || main?.lastElementChild;
+  if (!main || !start || !end) return;
+
+  const canvas = document.createElement('canvas');
+  canvas.className = 'studio-universe-canvas';
+  canvas.setAttribute('aria-hidden', 'true');
+  main.insertBefore(canvas, start);
+  const context = canvas.getContext('2d');
+  if (!context) return;
+
+  let width = 0;
+  let height = 0;
+  let ratio = 1;
+  let particles = [];
+  let frame = 0;
+  let visible = true;
+  let pointerX = -10000;
+  let pointerY = -10000;
+
+  const darkColors = ['157,123,255', '184,255,74', '255,255,255'];
+  const lightColors = ['5,5,5', '76,45,132', '5,5,5'];
+  const rebuild = () => {
+    width = window.innerWidth;
+    const top = start.offsetTop;
+    height = Math.max(700, end.offsetTop + end.offsetHeight - top);
+    ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.style.top = `${top}px`;
+    canvas.style.height = `${height}px`;
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    const isHome = document.body.classList.contains('studio-home');
+    const count = isHome
+      ? Math.min(260, Math.max(170, Math.round((width * height) / 24000)))
+      : Math.min(150, Math.max(85, Math.round((width * height) / 32000)));
+    particles = Array.from({ length: count }, (_, index) => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: .55 + Math.random() * 1.35,
+      vx: (Math.random() - .5) * .09,
+      vy: -.035 - Math.random() * .075,
+      phase: Math.random() * Math.PI * 2,
+      palette: index % darkColors.length
+    }));
+  };
+
+  const draw = (time) => {
+    if (!visible || document.hidden) { frame = window.requestAnimationFrame(draw); return; }
+    context.clearRect(0, 0, width, height);
+    particles.forEach((particle, index) => {
+      particle.x += particle.vx;
+      particle.y += particle.vy;
+      const pointerDistance = Math.hypot(particle.x - pointerX, particle.y - pointerY);
+      if (pointerDistance < 180) {
+        particle.x += (particle.x - pointerX) * .0007;
+        particle.y += (particle.y - pointerY) * .0007;
+      }
+      if (particle.y < -8) particle.y = height + 8;
+      if (particle.x < -8) particle.x = width + 8;
+      if (particle.x > width + 8) particle.x = -8;
+      const pulse = .35 + (Math.sin(time * .0018 + particle.phase) + 1) * .28;
+      const particleColor = document.documentElement.dataset.theme === 'light'
+        ? lightColors[particle.palette]
+        : darkColors[particle.palette];
+      context.beginPath();
+      context.fillStyle = `rgba(${particleColor},${pulse})`;
+      context.shadowColor = `rgba(${particleColor},.55)`;
+      context.shadowBlur = particle.r * 7;
+      context.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
+      context.fill();
+      context.shadowBlur = 0;
+      for (let next = index + 1; next < Math.min(particles.length, index + 18); next += 1) {
+        const other = particles[next];
+        const dx = particle.x - other.x;
+        const dy = particle.y - other.y;
+        const distance = Math.hypot(dx, dy);
+        if (distance < 125) {
+          context.beginPath();
+          const lineColor = document.documentElement.dataset.theme === 'light' ? '52,31,86' : '157,123,255';
+          context.strokeStyle = `rgba(${lineColor},${(1 - distance / 125) * .1})`;
+          context.lineWidth = .7;
+          context.moveTo(particle.x, particle.y);
+          context.lineTo(other.x, other.y);
+          context.stroke();
+        }
+      }
+    });
+    frame = window.requestAnimationFrame(draw);
+  };
+
+  const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { rootMargin: '250px' });
+  observer.observe(canvas);
+  rebuild();
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) frame = window.requestAnimationFrame(draw);
+  window.addEventListener('resize', rebuild, { passive: true });
+  window.addEventListener('pointermove', (event) => {
+    pointerX = event.clientX;
+    pointerY = event.clientY + window.scrollY - start.offsetTop;
+  }, { passive: true });
+
+  const finePointerOnly = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  document.querySelectorAll('.studio-project, .studio-home .choice-card, .project-card, .contact-card, .type-grid article').forEach((card) => {
+    card.classList.add('cosmic-card');
+    if (!finePointerOnly) return;
+    card.addEventListener('pointermove', (event) => {
+      const bounds = card.getBoundingClientRect();
+      const x = (event.clientX - bounds.left) / bounds.width - .5;
+      const y = (event.clientY - bounds.top) / bounds.height - .5;
+      card.style.setProperty('--tilt-x', `${y * -4}deg`);
+      card.style.setProperty('--tilt-y', `${x * 5}deg`);
+      card.style.setProperty('--glow-x', `${(x + .5) * 100}%`);
+      card.style.setProperty('--glow-y', `${(y + .5) * 100}%`);
+    });
+    card.addEventListener('pointerleave', () => {
+      card.style.setProperty('--tilt-x', '0deg');
+      card.style.setProperty('--tilt-y', '0deg');
+    });
+  });
+}
+
+createStudioUniverse();
+
+function createFeatureGalaxy() {
+  const stage = document.querySelector('.feature-orbit');
+  const track = stage?.querySelector('.orbit-tags');
+  const tags = track ? [...track.children] : [];
+  if (!stage || tags.length === 0) return;
+
+  const lines = document.createElement('canvas');
+  lines.className = 'constellation-lines';
+  lines.setAttribute('aria-hidden', 'true');
+  stage.prepend(lines);
+  const lineContext = lines.getContext('2d');
+  const prefersLessMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let offset = 0;
+  let targetOffset = 0;
+  let sphereTilt = .2;
+  let targetSphereTilt = .2;
+  let dragCandidate = false;
+  let dragging = false;
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let previousX = 0;
+  let previousY = 0;
+  let visible = true;
+  let lastTime = performance.now();
+  let points = [];
+  let dust = [];
+  let lineRatio = 1;
+
+  const resizeLines = () => {
+    lineRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+    lines.width = Math.round(stage.clientWidth * lineRatio);
+    lines.height = Math.round(stage.clientHeight * lineRatio);
+    lineContext?.setTransform(lineRatio, 0, 0, lineRatio, 0, 0);
+    dust = Array.from({ length: stage.clientWidth < 620 ? 42 : 70 }, () => ({
+      x: Math.random() * stage.clientWidth,
+      y: Math.random() * stage.clientHeight,
+      size: .45 + Math.random() * 1.25,
+      phase: Math.random() * Math.PI * 2,
+      tone: Math.random() > .55 ? 'purple' : 'white'
+    }));
+  };
+
+  const placeTags = (time = performance.now()) => {
+    const compact = stage.clientWidth < 620;
+    const radiusX = compact ? 118 : 350;
+    const radiusY = compact ? 150 : 190;
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+    const tilt = sphereTilt;
+    points = [];
+    tags.forEach((tag, index) => {
+      const sphereY = 1 - 2 * ((index + .5) / tags.length);
+      const latitudeRadius = Math.sqrt(1 - sphereY * sphereY);
+      const longitude = index * goldenAngle + offset;
+      const sphereX = Math.cos(longitude) * latitudeRadius;
+      const sphereZ = Math.sin(longitude) * latitudeRadius;
+      const rotatedY = sphereY * Math.cos(tilt) - sphereZ * Math.sin(tilt);
+      const rotatedZ = sphereY * Math.sin(tilt) + sphereZ * Math.cos(tilt);
+      const x = sphereX * radiusX;
+      const y = rotatedY * radiusY;
+      const depth = (rotatedZ + 1) / 2;
+      const scale = .72 + depth * .38;
+      const z = -110 + depth * 220;
+      tag.style.setProperty('--orbit-x', `${x}px`);
+      tag.style.setProperty('--orbit-y', `${y}px`);
+      tag.style.setProperty('--orbit-z', `${z}px`);
+      tag.style.setProperty('--orbit-scale', scale.toFixed(3));
+      tag.style.setProperty('--orbit-opacity', (.5 + depth * .5).toFixed(3));
+      tag.style.setProperty('--orbit-blur', `${((1 - depth) * 1.15).toFixed(2)}px`);
+      tag.style.setProperty('--orbit-brightness', (.8 + depth * .3).toFixed(3));
+      tag.style.setProperty('--orbit-tilt', `${(sphereX * -7).toFixed(2)}deg`);
+      tag.style.zIndex = String(10 + Math.round(depth * 20));
+      points.push({ x: stage.clientWidth / 2 + x, y: stage.clientHeight / 2 + y });
+    });
+
+    if (!lineContext) return;
+    lineContext.clearRect(0, 0, stage.clientWidth, stage.clientHeight);
+    const light = document.documentElement.dataset.theme === 'light';
+    dust.forEach((particle) => {
+      const opacity = .18 + (Math.sin(time * .002 + particle.phase) + 1) * .22;
+      const purple = particle.tone === 'purple';
+      lineContext.beginPath();
+      lineContext.fillStyle = light
+        ? (purple ? `rgba(76,45,132,${opacity})` : `rgba(5,5,5,${opacity})`)
+        : (purple ? `rgba(157,123,255,${opacity})` : `rgba(255,255,255,${opacity})`);
+      lineContext.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+      lineContext.fill();
+    });
+    points.forEach((point, index) => {
+      const links = [index + 1, index + 3];
+      links.forEach((linkIndex) => {
+        const target = points[linkIndex];
+        if (!target) return;
+        const gradient = lineContext.createLinearGradient(point.x, point.y, target.x, target.y);
+        gradient.addColorStop(0, light ? 'rgba(15,10,24,.2)' : 'rgba(157,123,255,.2)');
+        gradient.addColorStop(.5, light ? 'rgba(110,71,189,.48)' : 'rgba(184,255,74,.35)');
+        gradient.addColorStop(1, light ? 'rgba(15,10,24,.2)' : 'rgba(157,123,255,.2)');
+        lineContext.beginPath();
+        lineContext.strokeStyle = gradient;
+        lineContext.lineWidth = 1;
+        lineContext.moveTo(point.x, point.y);
+        lineContext.lineTo(target.x, target.y);
+        lineContext.stroke();
+      });
+    });
+  };
+
+  const animate = (time) => {
+    const elapsed = Math.min(40, time - lastTime);
+    lastTime = time;
+    if (visible && !document.hidden && !dragging) targetOffset += elapsed * .00014;
+    offset += (targetOffset - offset) * .075;
+    sphereTilt += (targetSphereTilt - sphereTilt) * .075;
+    if (visible && !document.hidden) placeTags(time);
+    window.requestAnimationFrame(animate);
+  };
+
+  const startDrag = (event) => {
+    dragCandidate = true;
+    dragging = false;
+    dragStartX = event.clientX;
+    dragStartY = event.clientY;
+    previousX = event.clientX;
+    previousY = event.clientY;
+  };
+  const moveDrag = (event) => {
+    if (!dragCandidate && !dragging) return;
+    if (!dragging && Math.hypot(event.clientX - dragStartX, event.clientY - dragStartY) < 10) return;
+    if (!dragging) {
+      dragging = true;
+      stage.classList.add('is-dragging');
+      stage.setPointerCapture?.(event.pointerId);
+    }
+    const deltaX = event.clientX - previousX;
+    const deltaY = event.clientY - previousY;
+    previousX = event.clientX;
+    previousY = event.clientY;
+    targetOffset += deltaX * .011;
+    targetSphereTilt = Math.max(-1.05, Math.min(1.05, targetSphereTilt + deltaY * .006));
+    event.preventDefault();
+  };
+  const endDrag = (event) => {
+    dragCandidate = false;
+    if (!dragging) return;
+    dragging = false;
+    stage.classList.remove('is-dragging');
+    stage.releasePointerCapture?.(event.pointerId);
+  };
+
+  stage.addEventListener('pointerdown', startDrag);
+  stage.addEventListener('pointermove', moveDrag);
+  stage.addEventListener('pointerup', endDrag);
+  stage.addEventListener('pointercancel', endDrag);
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { rootMargin: '180px' }).observe(stage);
+  new ResizeObserver(() => { resizeLines(); placeTags(); }).observe(stage);
+  resizeLines();
+  placeTags();
+  if (!prefersLessMotion) window.requestAnimationFrame(animate);
+}
+
+createFeatureGalaxy();
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -359,6 +696,16 @@ if (!reducedMotion) {
 
 let ticking = false;
 let lastScrollY = window.scrollY;
+let navigationFadeTimer;
+
+function wakeFloatingNavigation() {
+  document.body.classList.add('nav-controls-active');
+  window.clearTimeout(navigationFadeTimer);
+  navigationFadeTimer = window.setTimeout(() => {
+    document.body.classList.remove('nav-controls-active');
+  }, 1100);
+}
+
 function updateScrollEffects() {
   const top = window.scrollY;
   const available = document.documentElement.scrollHeight - window.innerHeight;
@@ -380,6 +727,7 @@ function updateScrollEffects() {
 }
 
 window.addEventListener('scroll', () => {
+  wakeFloatingNavigation();
   if (!ticking) {
     window.requestAnimationFrame(updateScrollEffects);
     ticking = true;
@@ -389,7 +737,8 @@ updateScrollEffects();
 
 if (!reducedMotion) {
   document.body.classList.add('reveal-ready');
-  const items = document.querySelectorAll('.reveal, .type-grid > article, .type-grid > button, .choice-grid > a, .features span, .process article, footer');
+  const items = [...document.querySelectorAll('.reveal, .type-grid > article, .type-grid > button, .choice-grid > a, .features span, .process article, footer')]
+    .filter((item) => !item.closest('.orbit-tags'));
   items.forEach((item, index) => {
     item.classList.add('scroll-reveal');
     item.style.setProperty('--reveal-delay', `${(index % 6) * 65}ms`);
