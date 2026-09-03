@@ -166,7 +166,7 @@ svg.icon-arrow-up,svg.icon-arrow-right{display:block;overflow:visible}svg.icon-a
 .studio-shell .menu-toggle,.studio-shell .theme-toggle{transition:opacity .45s ease,filter .45s ease,background .3s,box-shadow .3s,transform .3s,border-color .3s}.studio-shell.has-scrolled:not(.nav-controls-active) .menu-toggle,.studio-shell.has-scrolled:not(.nav-controls-active) .theme-toggle{opacity:.28;filter:saturate(.45) brightness(.82)}.studio-shell.nav-controls-active .menu-toggle,.studio-shell.nav-controls-active .theme-toggle,.studio-shell .menu-toggle:hover,.studio-shell .menu-toggle:focus-visible,.studio-shell .theme-toggle:hover,.studio-shell .theme-toggle:focus-visible{opacity:1;filter:none}
 
 /* El universo conserva su apariencia con un lienzo limitado al área visible. */
-.studio-universe-canvas{position:absolute!important;inset:0 auto auto 0!important;width:100%!important;height:100%!important;min-height:100%;contain:strict}
+.studio-universe-canvas{position:fixed!important;inset:0 auto auto 0!important;width:100%!important;height:100vh!important;height:100svh!important;min-height:0;contain:strict;will-change:transform}
 
 /* Evita el pico inicial de GPU: cada sección reanuda sus animaciones al acercarse. */
 .motion-paused,.motion-paused *,.motion-paused:before,.motion-paused:after,.motion-paused *:before,.motion-paused *:after{animation-play-state:paused!important}
@@ -186,3 +186,27 @@ svg.icon-arrow-up,svg.icon-arrow-right{display:block;overflow:visible}svg.icon-a
 .studio-home:before{background:radial-gradient(circle at 18% 18%,rgba(157,123,255,.14),transparent 30%),radial-gradient(circle at 82% 82%,rgba(184,255,74,.07),transparent 28%);background-size:130% 130%,120% 120%;animation:site-atmosphere 14s ease-in-out infinite alternate}
 @keyframes site-atmosphere{from{background-position:0% 0%,100% 100%}to{background-position:100% 24%,0% 76%}}
 @media(prefers-reduced-motion:reduce){.studio-home:before{animation:none}}
+
+/* La barra conserva el mismo aspecto sin provocar layout en cada scroll. */
+.scroll-progress{width:100%!important;transform:scaleX(var(--scroll-progress-scale,0));transform-origin:left center;transition:transform .08s linear!important;will-change:transform}
+
+/* El selector de tema permanece en el encabezado inicial; el menú continúa flotante. */
+.studio-shell .topbar .theme-toggle{position:absolute!important;top:17px!important;right:max(122px,calc((100vw - var(--max))/2 + 132px))!important}
+@media(max-width:760px){.studio-shell .topbar .theme-toggle{top:12px!important;right:112px!important}}
+
+/* Las tarjetas de servicios conservan su animación, sin reflejo ligado al cursor. */
+.studio-home .choice-grid>a:after{display:none}
+
+/* El brillo ya vive dentro de cada partícula; evita filtrar y mover el lienzo completo. */
+.studio-universe-canvas{filter:none!important;animation:none!important;will-change:auto}
+
+/* "Así trabajamos" conserva su ambientación y recorrido, sin capas de estrellas. */
+.studio-home .studio-process:before,.studio-home .studio-process .cosmos-stars{display:none!important}
+.studio-home .studio-process .cosmos-stars{display:block!important;background:radial-gradient(circle at 14% 28%,rgba(184,255,74,.75) 0 1.5px,transparent 3px),radial-gradient(circle at 82% 22%,rgba(255,255,255,.72) 0 1px,transparent 2.5px),radial-gradient(circle at 74% 72%,rgba(157,123,255,.7) 0 1.5px,transparent 3px),radial-gradient(circle at 28% 84%,rgba(255,255,255,.55) 0 1px,transparent 2.5px);background-size:100% 100%;animation:process-particles 12s ease-in-out infinite alternate;opacity:.7}
+@keyframes process-particles{from{transform:translate3d(-4px,2px,0)}to{transform:translate3d(5px,-4px,0)}}
+@media(prefers-reduced-motion:reduce){.studio-home .studio-process .cosmos-stars{animation:none}}
+.studio-process .orbit-path article:not(:last-child):after{top:33px}
+@media(max-width:900px){.studio-process .orbit-path article:not(:last-child):after{top:34px;bottom:0;height:auto}}
+@media(max-width:900px){.studio-process .orbit-path article:not(:first-child):before{content:"";display:block;position:absolute;z-index:0;top:0;left:50%;width:2px;height:34px;background:linear-gradient(180deg,var(--purple),var(--lime));box-shadow:0 0 12px rgba(157,123,255,.48)}}
+@media(max-width:900px){.studio-process>.orbit-path:before{content:"";display:block;position:absolute;z-index:0;top:34px;bottom:34px;left:50%;width:2px;background:linear-gradient(180deg,var(--purple),var(--lime),var(--purple));background-size:100% 200%;box-shadow:0 0 12px rgba(157,123,255,.48);animation:connector-flow-vertical 3.6s linear infinite}.studio-process .orbit-path article:not(:last-child):after,.studio-process .orbit-path article:not(:first-child):before{display:none}.studio-process .orbit-path article{z-index:1}.studio-process .orbit-path .step-node{z-index:3}}
+@media(max-width:900px){.studio-process>.orbit-path:before{top:var(--process-line-start,34px);height:var(--process-line-height,0px);bottom:auto}.studio-process .orbit-path article:not(:last-child):after,.studio-process .orbit-path article:not(:first-child):before{display:none!important}}

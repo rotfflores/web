@@ -56,10 +56,17 @@ progress.setAttribute('aria-hidden', 'true');
 document.body.prepend(progress);
 
 const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+let ambientGlow = null;
+let lastPointerX = window.innerWidth / 2;
+let lastPointerY = window.innerHeight * .3;
 if (finePointer) {
-  const ambientGlow = document.createElement('div');
+  ambientGlow = document.createElement('div');
   ambientGlow.className = 'cursor-ambient';
   ambientGlow.setAttribute('aria-hidden', 'true');
+  ambientGlow.style.left = '0';
+  ambientGlow.style.top = '0';
+  ambientGlow.style.transition = 'none';
+  ambientGlow.style.willChange = 'transform';
   document.body.prepend(ambientGlow);
 }
 
@@ -69,9 +76,15 @@ gridOverlay.setAttribute('aria-hidden', 'true');
 document.body.prepend(gridOverlay);
 
 if (finePointer) {
+  let pointerFrame = 0;
   window.addEventListener('pointermove', (event) => {
-    document.documentElement.style.setProperty('--cursor-x', `${event.clientX}px`);
-    document.documentElement.style.setProperty('--cursor-y', `${event.clientY}px`);
+    lastPointerX = event.clientX;
+    lastPointerY = event.clientY;
+    if (pointerFrame) return;
+    pointerFrame = window.requestAnimationFrame(() => {
+      pointerFrame = 0;
+      ambientGlow.style.transform = `translate3d(${lastPointerX}px,${lastPointerY}px,0) translate(-50%,-50%)`;
+    });
   }, { passive: true });
 }
 
@@ -98,6 +111,28 @@ const afterFirstPaint = (callback) => {
   if (document.readyState === 'complete') run();
   else window.addEventListener('load', run, { once: true });
 };
+
+const animationScheduler = (() => {
+  const tasks = new Set();
+  let scheduledFrame = 0;
+  const tick = (time) => {
+    tasks.forEach((task) => task(time));
+    scheduledFrame = tasks.size ? window.requestAnimationFrame(tick) : 0;
+  };
+  return {
+    add(task) {
+      tasks.add(task);
+      if (!scheduledFrame) scheduledFrame = window.requestAnimationFrame(tick);
+    },
+    delete(task) {
+      tasks.delete(task);
+      if (!tasks.size && scheduledFrame) {
+        window.cancelAnimationFrame(scheduledFrame);
+        scheduledFrame = 0;
+      }
+    }
+  };
+})();
 
 function setMenu(open) {
   if (!drawer || !scrim || !toggle) return;
@@ -157,8 +192,13 @@ function createStudioUniverse() {
 
   let width = 0;
   let height = 0;
+  let viewportHeight = 0;
+  let mainTop = 0;
+  let particleFreeStart = -1;
+  let particleFreeEnd = -1;
   let ratio = 1;
   let particles = [];
+  const particleSprites = new Map();
   let frame = 0;
   let visible = true;
   let pointerX = -10000;
@@ -166,22 +206,63 @@ function createStudioUniverse() {
   let lastDraw = 0;
   const compactMotion = window.matchMedia('(max-width: 760px), (pointer: coarse)').matches;
   const frameInterval = compactMotion ? 1000 / 30 : 1000 / 60;
+  const updateProcessLine = () => {
+    const path = main.querySelector('.studio-process .orbit-path');
+    const nodes = path?.querySelectorAll('.step-node');
+    if (!path || !nodes || nodes.length < 4) return;
+    const pathTop = path.getBoundingClientRect().top;
+    const first = nodes[0].getBoundingClientRect();
+    const fourth = nodes[3].getBoundingClientRect();
+    const start = first.top + first.height / 2 - pathTop;
+    const end = fourth.top + fourth.height / 2 - pathTop;
+    path.style.setProperty('--process-line-start', `${start}px`);
+    path.style.setProperty('--process-line-height', `${Math.max(0, end - start)}px`);
+  };
 
   const darkColors = ['157,123,255', '184,255,74', '255,255,255'];
   const lightColors = ['5,5,5', '76,45,132', '5,5,5'];
+
+  const getParticleSprite = (color, radius) => {
+    const roundedRadius = Math.round(radius * 4) / 4;
+    const key = `${color}-${roundedRadius}`;
+    if (particleSprites.has(key)) return particleSprites.get(key);
+    const glow = roundedRadius * 7;
+    const size = Math.ceil((roundedRadius + glow) * 2 + 4);
+    const sprite = document.createElement('canvas');
+    sprite.width = size;
+    sprite.height = size;
+    const spriteContext = sprite.getContext('2d');
+    const center = size / 2;
+    spriteContext.shadowColor = `rgba(${color},.55)`;
+    spriteContext.shadowBlur = glow;
+    spriteContext.fillStyle = `rgb(${color})`;
+    spriteContext.beginPath();
+    spriteContext.arc(center, center, roundedRadius, 0, Math.PI * 2);
+    spriteContext.fill();
+    particleSprites.set(key, sprite);
+    return sprite;
+  };
+
   const rebuild = () => {
     width = window.innerWidth;
     height = Math.max(window.innerHeight, main.scrollHeight);
+    viewportHeight = window.innerHeight;
+    mainTop = main.getBoundingClientRect().top + window.scrollY;
+    const particleFreeSection = main.querySelector('.studio-process');
+    particleFreeStart = particleFreeSection ? particleFreeSection.offsetTop : -1;
+    particleFreeEnd = particleFreeSection ? particleFreeStart + particleFreeSection.offsetHeight : -1;
     ratio = Math.min(window.devicePixelRatio || 1, compactMotion ? 1 : 1.25);
     canvas.style.top = '0';
-    canvas.style.height = `${height}px`;
+    canvas.style.height = `${viewportHeight}px`;
     canvas.width = Math.round(width * ratio);
-    canvas.height = Math.round(height * ratio);
+    canvas.height = Math.round(viewportHeight * ratio);
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
     const isHome = document.body.classList.contains('studio-home');
     const count = isHome
       ? Math.min(compactMotion ? 82 : 120, Math.max(62, Math.round((width * height) / 11500)))
       : Math.min(compactMotion ? 72 : 100, Math.max(55, Math.round((width * height) / 13500)));
+    const hero = main.querySelector(':scope > section:first-child');
+    const heroEnd = hero ? hero.offsetTop + hero.offsetHeight : window.innerHeight;
     particles = Array.from({ length: count }, (_, index) => ({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -190,16 +271,22 @@ function createStudioUniverse() {
       vy: -.035 - Math.random() * .075,
       phase: Math.random() * Math.PI * 2,
       palette: index % darkColors.length
-    }));
+    })).filter((particle) => particle.y <= heroEnd || Math.random() > .22);
   };
 
   const draw = (time) => {
-    if (!visible || document.hidden) { frame = 0; return; }
-    if (time - lastDraw < frameInterval) { frame = window.requestAnimationFrame(draw); return; }
+    if (!visible || document.hidden) {
+      animationScheduler.delete(draw);
+      frame = 0;
+      return;
+    }
+    if (time - lastDraw < frameInterval) return;
     lastDraw = time;
-    context.clearRect(0, 0, width, height);
+    context.clearRect(0, 0, width, viewportHeight);
     const lightTheme = document.documentElement.dataset.theme === 'light';
     const lineColor = lightTheme ? '52,31,86' : '157,123,255';
+    const viewportStart = window.scrollY - mainTop;
+    const viewportEnd = viewportStart + viewportHeight;
     particles.forEach((particle, index) => {
       particle.x += particle.vx;
       particle.y += particle.vy;
@@ -212,19 +299,20 @@ function createStudioUniverse() {
       if (particle.y < -8) particle.y = height + 8;
       if (particle.x < -8) particle.x = width + 8;
       if (particle.x > width + 8) particle.x = -8;
+      if (particle.y < viewportStart - 140 || particle.y > viewportEnd + 140 ||
+          (particle.y >= particleFreeStart && particle.y <= particleFreeEnd)) return;
       const pulse = .35 + (Math.sin(time * .0018 + particle.phase) + 1) * .28;
       const particleColor = lightTheme
         ? lightColors[particle.palette]
         : darkColors[particle.palette];
-      context.beginPath();
-      context.fillStyle = `rgba(${particleColor},${pulse})`;
-      context.shadowColor = `rgba(${particleColor},.55)`;
-      context.shadowBlur = particle.r * 7;
-      context.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
-      context.fill();
-      context.shadowBlur = 0;
+      const sprite = getParticleSprite(particleColor, particle.r);
+      context.globalAlpha = pulse;
+      context.drawImage(sprite, particle.x - sprite.width / 2, particle.y - viewportStart - sprite.height / 2);
+      context.globalAlpha = 1;
       for (let next = index + 1; next < Math.min(particles.length, index + 18); next += 1) {
         const other = particles[next];
+        if (other.y < viewportStart - 125 || other.y > viewportEnd + 125 ||
+            (other.y >= particleFreeStart && other.y <= particleFreeEnd)) continue;
         const dx = particle.x - other.x;
         const dy = particle.y - other.y;
         const distanceSquared = dx * dx + dy * dy;
@@ -233,17 +321,22 @@ function createStudioUniverse() {
           context.beginPath();
           context.strokeStyle = `rgba(${lineColor},${(1 - distance / 125) * .1})`;
           context.lineWidth = .7;
-          context.moveTo(particle.x, particle.y);
-          context.lineTo(other.x, other.y);
+          context.moveTo(particle.x, particle.y - viewportStart);
+          context.lineTo(other.x, other.y - viewportStart);
           context.stroke();
         }
       }
     });
-    frame = window.requestAnimationFrame(draw);
   };
 
   const resumeDrawing = () => {
-    if (visible && !document.hidden && !frame) frame = window.requestAnimationFrame(draw);
+    if (visible && !document.hidden) {
+      animationScheduler.add(draw);
+      frame = 1;
+    } else {
+      animationScheduler.delete(draw);
+      frame = 0;
+    }
   };
   const observer = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting;
@@ -251,11 +344,22 @@ function createStudioUniverse() {
   }, { rootMargin: '250px' });
   observer.observe(canvas);
   rebuild();
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) frame = window.requestAnimationFrame(draw);
-  window.addEventListener('resize', rebuild, { passive: true });
+  updateProcessLine();
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) resumeDrawing();
+  let resizeFrame = 0;
+  window.addEventListener('resize', () => {
+    if (resizeFrame) return;
+    resizeFrame = window.requestAnimationFrame(() => {
+      resizeFrame = 0;
+      const widthChanged = Math.abs(window.innerWidth - width) > 1;
+      const heightChanged = Math.abs(window.innerHeight - viewportHeight) > 120;
+      if (widthChanged || heightChanged) rebuild();
+      updateProcessLine();
+    });
+  }, { passive: true });
   window.addEventListener('pointermove', (event) => {
     pointerX = event.clientX;
-    pointerY = event.clientY;
+    pointerY = event.clientY + window.scrollY - mainTop;
   }, { passive: true });
   document.addEventListener('visibilitychange', resumeDrawing);
 
@@ -269,8 +373,10 @@ function createStudioUniverse() {
       const y = (event.clientY - bounds.top) / bounds.height - .5;
       card.style.setProperty('--tilt-x', `${y * -4}deg`);
       card.style.setProperty('--tilt-y', `${x * 5}deg`);
-      card.style.setProperty('--glow-x', `${(x + .5) * 100}%`);
-      card.style.setProperty('--glow-y', `${(y + .5) * 100}%`);
+      if (!card.matches('.choice-card')) {
+        card.style.setProperty('--glow-x', `${(x + .5) * 100}%`);
+        card.style.setProperty('--glow-y', `${(y + .5) * 100}%`);
+      }
     });
     card.addEventListener('pointerleave', () => {
       card.style.setProperty('--tilt-x', '0deg');
@@ -305,19 +411,39 @@ function createFeatureGalaxy() {
   let previousY = 0;
   let visible = true;
   let lastTime = performance.now();
-  let points = [];
+  const points = new Float32Array(tags.length * 2);
+  let sphereGeometry = [];
   let dust = [];
   let lineRatio = 1;
   let animationFrame = 0;
+  let stageWidth = 0;
+  let stageHeight = 0;
+  let radiusX = 350;
+  let radiusY = 190;
+  const linkOffsets = [1, 3];
 
   const resizeLines = () => {
+    stageWidth = stage.clientWidth;
+    stageHeight = stage.clientHeight;
+    const compact = stageWidth < 620;
+    radiusX = compact ? 118 : 350;
+    radiusY = compact ? 150 : 190;
     lineRatio = Math.min(window.devicePixelRatio || 1, 1.5);
-    lines.width = Math.round(stage.clientWidth * lineRatio);
-    lines.height = Math.round(stage.clientHeight * lineRatio);
+    lines.width = Math.round(stageWidth * lineRatio);
+    lines.height = Math.round(stageHeight * lineRatio);
     lineContext?.setTransform(lineRatio, 0, 0, lineRatio, 0, 0);
-    dust = Array.from({ length: stage.clientWidth < 620 ? 42 : 70 }, () => ({
-      x: Math.random() * stage.clientWidth,
-      y: Math.random() * stage.clientHeight,
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+    sphereGeometry = tags.map((_, index) => {
+      const sphereY = 1 - 2 * ((index + .5) / tags.length);
+      return {
+        sphereY,
+        latitudeRadius: Math.sqrt(1 - sphereY * sphereY),
+        longitude: index * goldenAngle
+      };
+    });
+    dust = Array.from({ length: compact ? 42 : 70 }, () => ({
+      x: Math.random() * stageWidth,
+      y: Math.random() * stageHeight,
       size: .45 + Math.random() * 1.25,
       phase: Math.random() * Math.PI * 2,
       tone: Math.random() > .55 ? 'purple' : 'white'
@@ -325,18 +451,13 @@ function createFeatureGalaxy() {
   };
 
   const placeTags = (time = performance.now()) => {
-    const compact = stage.clientWidth < 620;
-    const radiusX = compact ? 118 : 350;
-    const radiusY = compact ? 150 : 190;
-    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
     const tilt = sphereTilt;
-    points = [];
     tags.forEach((tag, index) => {
-      const sphereY = 1 - 2 * ((index + .5) / tags.length);
-      const latitudeRadius = Math.sqrt(1 - sphereY * sphereY);
-      const longitude = index * goldenAngle + offset;
-      const sphereX = Math.cos(longitude) * latitudeRadius;
-      const sphereZ = Math.sin(longitude) * latitudeRadius;
+      const geometry = sphereGeometry[index];
+      const longitude = geometry.longitude + offset;
+      const sphereX = Math.cos(longitude) * geometry.latitudeRadius;
+      const sphereZ = Math.sin(longitude) * geometry.latitudeRadius;
+      const sphereY = geometry.sphereY;
       const rotatedY = sphereY * Math.cos(tilt) - sphereZ * Math.sin(tilt);
       const rotatedZ = sphereY * Math.sin(tilt) + sphereZ * Math.cos(tilt);
       const x = sphereX * radiusX;
@@ -344,20 +465,16 @@ function createFeatureGalaxy() {
       const depth = (rotatedZ + 1) / 2;
       const scale = .72 + depth * .38;
       const z = -110 + depth * 220;
-      tag.style.setProperty('--orbit-x', `${x}px`);
-      tag.style.setProperty('--orbit-y', `${y}px`);
-      tag.style.setProperty('--orbit-z', `${z}px`);
-      tag.style.setProperty('--orbit-scale', scale.toFixed(3));
-      tag.style.setProperty('--orbit-opacity', (.5 + depth * .5).toFixed(3));
-      tag.style.setProperty('--orbit-blur', `${((1 - depth) * 1.15).toFixed(2)}px`);
-      tag.style.setProperty('--orbit-brightness', (.8 + depth * .3).toFixed(3));
-      tag.style.setProperty('--orbit-tilt', `${(sphereX * -7).toFixed(2)}deg`);
+      tag.style.transform = `translate(-50%,-50%) translate3d(${x}px,${y}px,${z}px) rotateY(${sphereX * -7}deg) scale(${scale})`;
+      tag.style.opacity = .5 + depth * .5;
+      tag.style.filter = `blur(${(1 - depth) * 1.15}px) brightness(${.8 + depth * .3})`;
       tag.style.zIndex = String(10 + Math.round(depth * 20));
-      points.push({ x: stage.clientWidth / 2 + x, y: stage.clientHeight / 2 + y });
+      points[index * 2] = stageWidth / 2 + x;
+      points[index * 2 + 1] = stageHeight / 2 + y;
     });
 
     if (!lineContext) return;
-    lineContext.clearRect(0, 0, stage.clientWidth, stage.clientHeight);
+    lineContext.clearRect(0, 0, stageWidth, stageHeight);
     const light = document.documentElement.dataset.theme === 'light';
     dust.forEach((particle) => {
       const opacity = .18 + (Math.sin(time * .002 + particle.phase) + 1) * .22;
@@ -369,34 +486,40 @@ function createFeatureGalaxy() {
       lineContext.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       lineContext.fill();
     });
-    points.forEach((point, index) => {
-      const links = [index + 1, index + 3];
-      links.forEach((linkIndex) => {
-        const target = points[linkIndex];
-        if (!target) return;
-        const gradient = lineContext.createLinearGradient(point.x, point.y, target.x, target.y);
+    for (let index = 0; index < tags.length; index += 1) {
+      for (let link = 0; link < linkOffsets.length; link += 1) {
+        const linkIndex = index + linkOffsets[link];
+        if (linkIndex >= tags.length) continue;
+        const pointX = points[index * 2];
+        const pointY = points[index * 2 + 1];
+        const targetX = points[linkIndex * 2];
+        const targetY = points[linkIndex * 2 + 1];
+        const gradient = lineContext.createLinearGradient(pointX, pointY, targetX, targetY);
         gradient.addColorStop(0, light ? 'rgba(15,10,24,.2)' : 'rgba(157,123,255,.2)');
         gradient.addColorStop(.5, light ? 'rgba(110,71,189,.48)' : 'rgba(184,255,74,.35)');
         gradient.addColorStop(1, light ? 'rgba(15,10,24,.2)' : 'rgba(157,123,255,.2)');
         lineContext.beginPath();
         lineContext.strokeStyle = gradient;
         lineContext.lineWidth = 1;
-        lineContext.moveTo(point.x, point.y);
-        lineContext.lineTo(target.x, target.y);
+        lineContext.moveTo(pointX, pointY);
+        lineContext.lineTo(targetX, targetY);
         lineContext.stroke();
-      });
-    });
+      }
+    }
   };
 
   const animate = (time) => {
-    if (!visible || document.hidden) { animationFrame = 0; return; }
+    if (!visible || document.hidden) {
+      animationScheduler.delete(animate);
+      animationFrame = 0;
+      return;
+    }
     const elapsed = Math.min(40, time - lastTime);
     lastTime = time;
     if (visible && !document.hidden && !dragging) targetOffset += elapsed * .00014;
     offset += (targetOffset - offset) * .075;
     sphereTilt += (targetSphereTilt - sphereTilt) * .075;
     if (visible && !document.hidden) placeTags(time);
-    animationFrame = window.requestAnimationFrame(animate);
   };
 
   const startDrag = (event) => {
@@ -436,9 +559,13 @@ function createFeatureGalaxy() {
   stage.addEventListener('pointerup', endDrag);
   stage.addEventListener('pointercancel', endDrag);
   const resumeOrbit = () => {
-    if (!prefersLessMotion && visible && !document.hidden && !animationFrame) {
+    if (!prefersLessMotion && visible && !document.hidden) {
       lastTime = performance.now();
-      animationFrame = window.requestAnimationFrame(animate);
+      animationScheduler.add(animate);
+      animationFrame = 1;
+    } else {
+      animationScheduler.delete(animate);
+      animationFrame = 0;
     }
   };
   new IntersectionObserver(([entry]) => {
@@ -730,6 +857,8 @@ if (!reducedMotion) {
       if (destination.origin !== window.location.origin) return;
       event.preventDefault();
       if (document.body.classList.contains('page-leaving')) return;
+      document.documentElement.style.setProperty('--cursor-x', `${lastPointerX}px`);
+      document.documentElement.style.setProperty('--cursor-y', `${lastPointerY}px`);
       card.classList.add('card-selected');
       document.body.classList.add('page-leaving');
       transitionLayer.classList.add('active');
@@ -740,7 +869,9 @@ if (!reducedMotion) {
 
 let ticking = false;
 let lastScrollY = window.scrollY;
+let lastScrollDirection = 0;
 let navigationFadeTimer;
+const pendingRevealItems = new Set();
 
 function wakeFloatingNavigation() {
   document.body.classList.add('nav-controls-active');
@@ -754,16 +885,20 @@ function updateScrollEffects() {
   const top = window.scrollY;
   const available = document.documentElement.scrollHeight - window.innerHeight;
   const ratio = available > 0 ? Math.min(top / available, 1) : 0;
-  document.documentElement.style.setProperty('--scroll-progress', `${ratio * 100}%`);
+  document.documentElement.style.setProperty('--scroll-progress-scale', ratio);
   document.body.classList.toggle('has-scrolled', top > 90);
   if (Math.abs(top - lastScrollY) > 3) {
     const goingDown = top > lastScrollY;
+    const direction = goingDown ? 1 : -1;
     document.body.classList.toggle('scrolling-down', goingDown);
     document.body.classList.toggle('scrolling-up', !goingDown);
-    document.querySelectorAll('.scroll-reveal:not(.visible)').forEach((item) => {
-      item.classList.toggle('reveal-from-up', !goingDown);
-      item.classList.toggle('reveal-from-down', goingDown);
-    });
+    if (direction !== lastScrollDirection) {
+      pendingRevealItems.forEach((item) => {
+        item.classList.toggle('reveal-from-up', !goingDown);
+        item.classList.toggle('reveal-from-down', goingDown);
+      });
+      lastScrollDirection = direction;
+    }
     lastScrollY = top;
   }
   document.documentElement.style.setProperty('--hero-shift', `${Math.min(top * .08, 42)}px`);
@@ -786,9 +921,12 @@ if (!reducedMotion) {
   items.forEach((item, index) => {
     item.classList.add('scroll-reveal');
     item.style.setProperty('--reveal-delay', `${(index % 6) * 65}ms`);
+    pendingRevealItems.add(item);
   });
   const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
     entry.target.classList.toggle('visible', entry.isIntersecting);
+    if (entry.isIntersecting) pendingRevealItems.delete(entry.target);
+    else pendingRevealItems.add(entry.target);
   }), { threshold: .08, rootMargin: '96px 0px 96px 0px' });
   items.forEach((item) => observer.observe(item));
 }
