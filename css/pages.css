@@ -155,3 +155,9 @@ svg.icon-arrow-up,svg.icon-arrow-right{display:block;overflow:visible}svg.icon-a
 
 /* Controles flotantes discretos cuando la página está quieta */
 .studio-shell .menu-toggle,.studio-shell .theme-toggle{transition:opacity .45s ease,filter .45s ease,background .3s,box-shadow .3s,transform .3s,border-color .3s}.studio-shell.has-scrolled:not(.nav-controls-active) .menu-toggle,.studio-shell.has-scrolled:not(.nav-controls-active) .theme-toggle{opacity:.28;filter:saturate(.45) brightness(.82)}.studio-shell.nav-controls-active .menu-toggle,.studio-shell.nav-controls-active .theme-toggle,.studio-shell .menu-toggle:hover,.studio-shell .menu-toggle:focus-visible,.studio-shell .theme-toggle:hover,.studio-shell .theme-toggle:focus-visible{opacity:1;filter:none}
+
+/* El universo conserva su apariencia con un lienzo limitado al área visible. */
+.studio-universe-canvas{position:fixed!important;inset:0 auto auto 0!important;width:100%!important;height:100vh!important;height:100svh!important;contain:strict}
+
+/* Evita el pico inicial de GPU: cada sección reanuda sus animaciones al acercarse. */
+.motion-paused,.motion-paused *,.motion-paused:before,.motion-paused:after,.motion-paused *:before,.motion-paused *:after{animation-play-state:paused!important}

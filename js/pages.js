@@ -41,13 +41,13 @@ document.head.appendChild(cardEffects);
 
 const favicon = document.createElement('link');
 favicon.rel = 'icon';
-favicon.type = 'image/png';
-favicon.href = 'img/logo.png?v=1';
+favicon.type = 'image/webp';
+favicon.href = 'img/logo-mobile.webp?v=1';
 document.head.appendChild(favicon);
 
 const touchIcon = document.createElement('link');
 touchIcon.rel = 'apple-touch-icon';
-touchIcon.href = 'img/logo.png?v=1';
+touchIcon.href = 'img/logo-mobile.webp?v=1';
 document.head.appendChild(touchIcon);
 
 const progress = document.createElement('div');
@@ -80,6 +80,24 @@ document.querySelectorAll('footer .code-brand').forEach((brand) => {
   brand.setAttribute('aria-label', 'ROTF, inicio');
   brand.innerHTML = '<img src="img/logo-mobile.webp" alt="Logotipo de ROTF" width="512" height="512">';
 });
+
+// Las animaciones fuera de pantalla no deben competir con el primer render.
+const deferredMotionSections = [...document.querySelectorAll('main > section:not(:first-child), footer')];
+const motionViewport = window.innerHeight;
+deferredMotionSections.forEach((section) => {
+  const bounds = section.getBoundingClientRect();
+  section.classList.toggle('motion-paused', bounds.top > motionViewport + 180 || bounds.bottom < -180);
+});
+const motionObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => entry.target.classList.toggle('motion-paused', !entry.isIntersecting));
+}, { rootMargin: '180px 0px' });
+deferredMotionSections.forEach((section) => motionObserver.observe(section));
+
+const afterFirstPaint = (callback) => {
+  const run = () => window.requestAnimationFrame(() => window.requestAnimationFrame(callback));
+  if (document.readyState === 'complete') run();
+  else window.addEventListener('load', run, { once: true });
+};
 
 function setMenu(open) {
   if (!drawer || !scrim || !toggle) return;
@@ -145,23 +163,25 @@ function createStudioUniverse() {
   let visible = true;
   let pointerX = -10000;
   let pointerY = -10000;
+  let lastDraw = 0;
+  const compactMotion = window.matchMedia('(max-width: 760px), (pointer: coarse)').matches;
+  const frameInterval = compactMotion ? 1000 / 30 : 1000 / 60;
 
   const darkColors = ['157,123,255', '184,255,74', '255,255,255'];
   const lightColors = ['5,5,5', '76,45,132', '5,5,5'];
   const rebuild = () => {
     width = window.innerWidth;
-    const top = start.offsetTop;
-    height = Math.max(700, end.offsetTop + end.offsetHeight - top);
-    ratio = Math.min(window.devicePixelRatio || 1, 1.5);
-    canvas.style.top = `${top}px`;
-    canvas.style.height = `${height}px`;
+    height = window.innerHeight;
+    ratio = Math.min(window.devicePixelRatio || 1, compactMotion ? 1 : 1.25);
+    canvas.style.top = '0';
+    canvas.style.height = '100vh';
     canvas.width = Math.round(width * ratio);
     canvas.height = Math.round(height * ratio);
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
     const isHome = document.body.classList.contains('studio-home');
     const count = isHome
-      ? Math.min(150, Math.max(90, Math.round((width * height) / 42000)))
-      : Math.min(110, Math.max(65, Math.round((width * height) / 48000)));
+      ? Math.min(compactMotion ? 82 : 120, Math.max(62, Math.round((width * height) / 11500)))
+      : Math.min(compactMotion ? 72 : 100, Math.max(55, Math.round((width * height) / 13500)));
     particles = Array.from({ length: count }, (_, index) => ({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -174,13 +194,18 @@ function createStudioUniverse() {
   };
 
   const draw = (time) => {
-    if (!visible || document.hidden) { frame = window.requestAnimationFrame(draw); return; }
+    if (!visible || document.hidden) { frame = 0; return; }
+    if (time - lastDraw < frameInterval) { frame = window.requestAnimationFrame(draw); return; }
+    lastDraw = time;
     context.clearRect(0, 0, width, height);
+    const lightTheme = document.documentElement.dataset.theme === 'light';
+    const lineColor = lightTheme ? '52,31,86' : '157,123,255';
     particles.forEach((particle, index) => {
       particle.x += particle.vx;
       particle.y += particle.vy;
-      const pointerDistance = Math.hypot(particle.x - pointerX, particle.y - pointerY);
-      if (pointerDistance < 180) {
+      const pointerDx = particle.x - pointerX;
+      const pointerDy = particle.y - pointerY;
+      if (pointerDx * pointerDx + pointerDy * pointerDy < 32400) {
         particle.x += (particle.x - pointerX) * .0007;
         particle.y += (particle.y - pointerY) * .0007;
       }
@@ -188,7 +213,7 @@ function createStudioUniverse() {
       if (particle.x < -8) particle.x = width + 8;
       if (particle.x > width + 8) particle.x = -8;
       const pulse = .35 + (Math.sin(time * .0018 + particle.phase) + 1) * .28;
-      const particleColor = document.documentElement.dataset.theme === 'light'
+      const particleColor = lightTheme
         ? lightColors[particle.palette]
         : darkColors[particle.palette];
       context.beginPath();
@@ -202,10 +227,10 @@ function createStudioUniverse() {
         const other = particles[next];
         const dx = particle.x - other.x;
         const dy = particle.y - other.y;
-        const distance = Math.hypot(dx, dy);
-        if (distance < 125) {
+        const distanceSquared = dx * dx + dy * dy;
+        if (distanceSquared < 15625) {
+          const distance = Math.sqrt(distanceSquared);
           context.beginPath();
-          const lineColor = document.documentElement.dataset.theme === 'light' ? '52,31,86' : '157,123,255';
           context.strokeStyle = `rgba(${lineColor},${(1 - distance / 125) * .1})`;
           context.lineWidth = .7;
           context.moveTo(particle.x, particle.y);
@@ -217,15 +242,22 @@ function createStudioUniverse() {
     frame = window.requestAnimationFrame(draw);
   };
 
-  const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { rootMargin: '250px' });
+  const resumeDrawing = () => {
+    if (visible && !document.hidden && !frame) frame = window.requestAnimationFrame(draw);
+  };
+  const observer = new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    resumeDrawing();
+  }, { rootMargin: '250px' });
   observer.observe(canvas);
   rebuild();
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) frame = window.requestAnimationFrame(draw);
   window.addEventListener('resize', rebuild, { passive: true });
   window.addEventListener('pointermove', (event) => {
     pointerX = event.clientX;
-    pointerY = event.clientY + window.scrollY - start.offsetTop;
+    pointerY = event.clientY;
   }, { passive: true });
+  document.addEventListener('visibilitychange', resumeDrawing);
 
   const finePointerOnly = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   document.querySelectorAll('.studio-project, .studio-home .choice-card, .project-card, .contact-card, .type-grid article').forEach((card) => {
@@ -247,7 +279,7 @@ function createStudioUniverse() {
   });
 }
 
-createStudioUniverse();
+afterFirstPaint(createStudioUniverse);
 
 function createFeatureGalaxy() {
   const stage = document.querySelector('.feature-orbit');
@@ -276,6 +308,7 @@ function createFeatureGalaxy() {
   let points = [];
   let dust = [];
   let lineRatio = 1;
+  let animationFrame = 0;
 
   const resizeLines = () => {
     lineRatio = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -356,13 +389,14 @@ function createFeatureGalaxy() {
   };
 
   const animate = (time) => {
+    if (!visible || document.hidden) { animationFrame = 0; return; }
     const elapsed = Math.min(40, time - lastTime);
     lastTime = time;
     if (visible && !document.hidden && !dragging) targetOffset += elapsed * .00014;
     offset += (targetOffset - offset) * .075;
     sphereTilt += (targetSphereTilt - sphereTilt) * .075;
     if (visible && !document.hidden) placeTags(time);
-    window.requestAnimationFrame(animate);
+    animationFrame = window.requestAnimationFrame(animate);
   };
 
   const startDrag = (event) => {
@@ -401,14 +435,24 @@ function createFeatureGalaxy() {
   stage.addEventListener('pointermove', moveDrag);
   stage.addEventListener('pointerup', endDrag);
   stage.addEventListener('pointercancel', endDrag);
-  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { rootMargin: '180px' }).observe(stage);
+  const resumeOrbit = () => {
+    if (!prefersLessMotion && visible && !document.hidden && !animationFrame) {
+      lastTime = performance.now();
+      animationFrame = window.requestAnimationFrame(animate);
+    }
+  };
+  new IntersectionObserver(([entry]) => {
+    visible = entry.isIntersecting;
+    resumeOrbit();
+  }, { rootMargin: '180px' }).observe(stage);
   new ResizeObserver(() => { resizeLines(); placeTags(); }).observe(stage);
   resizeLines();
   placeTags();
-  if (!prefersLessMotion) window.requestAnimationFrame(animate);
+  document.addEventListener('visibilitychange', resumeOrbit);
+  resumeOrbit();
 }
 
-createFeatureGalaxy();
+afterFirstPaint(createFeatureGalaxy);
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
