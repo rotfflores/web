@@ -229,7 +229,7 @@ themeToggle?.addEventListener('click', () => {
 
 function createStudioUniverse() {
   // Safari iOS puede cerrar la pestaña al componer el canvas con el hero de contacto.
-  if (document.body.dataset.page === 'contacto') return;
+  if (diagnosticMode || document.body.dataset.page === 'contacto') return;
   const main = document.querySelector('main');
   const start = document.querySelector('.studio-intro') || main?.firstElementChild;
   const end = document.querySelector('.bottom-cta') || main?.lastElementChild;
@@ -444,6 +444,7 @@ afterFirstPaint(() => {
 });
 
 function createFeatureGalaxy() {
+  if (diagnosticMode) return;
   const stage = document.querySelector('.feature-orbit');
   const track = stage?.querySelector('.orbit-tags');
   const tags = track ? [...track.children] : [];
@@ -890,8 +891,10 @@ function configureProjectCarousels(activeGallery = document.querySelector('.samp
   if (activeGallery) configureProjectCarousel(activeGallery);
 }
 
-configureProjectCarousels();
-mobileCarouselQuery.addEventListener?.('change', () => configureProjectCarousels());
+if (!diagnosticMode) {
+  configureProjectCarousels();
+  mobileCarouselQuery.addEventListener?.('change', () => configureProjectCarousels());
+}
 
 if (!reducedMotion) {
   const transitionLayer = document.createElement('div');
