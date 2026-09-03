@@ -166,11 +166,23 @@ svg.icon-arrow-up,svg.icon-arrow-right{display:block;overflow:visible}svg.icon-a
 .studio-shell .menu-toggle,.studio-shell .theme-toggle{transition:opacity .45s ease,filter .45s ease,background .3s,box-shadow .3s,transform .3s,border-color .3s}.studio-shell.has-scrolled:not(.nav-controls-active) .menu-toggle,.studio-shell.has-scrolled:not(.nav-controls-active) .theme-toggle{opacity:.28;filter:saturate(.45) brightness(.82)}.studio-shell.nav-controls-active .menu-toggle,.studio-shell.nav-controls-active .theme-toggle,.studio-shell .menu-toggle:hover,.studio-shell .menu-toggle:focus-visible,.studio-shell .theme-toggle:hover,.studio-shell .theme-toggle:focus-visible{opacity:1;filter:none}
 
 /* El universo conserva su apariencia con un lienzo limitado al área visible. */
-.studio-universe-canvas{position:fixed!important;inset:0 auto auto 0!important;width:100%!important;height:100vh!important;height:100svh!important;contain:strict}
+.studio-universe-canvas{position:absolute!important;inset:0 auto auto 0!important;width:100%!important;height:100%!important;min-height:100%;contain:strict}
 
 /* Evita el pico inicial de GPU: cada sección reanuda sus animaciones al acercarse. */
 .motion-paused,.motion-paused *,.motion-paused:before,.motion-paused:after,.motion-paused *:before,.motion-paused *:after{animation-play-state:paused!important}
 
 /* El cambio entre secciones ocurre dentro del fondo, no sobre el contenido. */
-.studio-home .studio-process{background-image:linear-gradient(180deg,rgba(6,5,13,0) 0%,rgba(6,5,13,.16) 18%,rgba(6,5,13,.58) 42%,rgba(6,5,13,.58) 100%),radial-gradient(circle at 50% 48%,rgba(157,123,255,.19),transparent 30%),radial-gradient(circle at 50% 105%,rgba(184,255,74,.08),transparent 38%),linear-gradient(rgba(157,123,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(157,123,255,.055) 1px,transparent 1px),linear-gradient(180deg,rgba(6,5,13,.04),rgba(6,6,14,.58) 22%,rgba(6,6,14,.58) 78%,rgba(5,4,11,.05))}
-@media(max-width:760px){.studio-home .studio-process{background-image:linear-gradient(180deg,rgba(6,5,13,0) 0%,rgba(6,5,13,.18) 24%,rgba(6,5,13,.58) 48%,rgba(6,5,13,.58) 100%),radial-gradient(circle at 50% 48%,rgba(157,123,255,.19),transparent 30%),radial-gradient(circle at 50% 105%,rgba(184,255,74,.08),transparent 38%),linear-gradient(rgba(157,123,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(157,123,255,.055) 1px,transparent 1px),linear-gradient(180deg,rgba(6,5,13,.04),rgba(6,6,14,.58) 22%,rgba(6,6,14,.58) 78%,rgba(5,4,11,.05))}}
+.studio-home .studio-process{background-image:linear-gradient(180deg,rgba(6,5,13,0) 0%,rgba(6,5,13,.16) 18%,rgba(6,5,13,.58) 42%,rgba(6,5,13,.58) 100%),radial-gradient(circle at 50% 48%,rgba(157,123,255,.19),transparent 30%),radial-gradient(circle at 50% 105%,rgba(184,255,74,.08),transparent 38%),linear-gradient(180deg,rgba(6,5,13,.04),rgba(6,6,14,.58) 22%,rgba(6,6,14,.58) 78%,rgba(5,4,11,.05))}
+@media(max-width:760px){.studio-home .studio-process{background-image:radial-gradient(circle at 50% 48%,rgba(157,123,255,.19),transparent 30%),radial-gradient(circle at 50% 105%,rgba(184,255,74,.08),transparent 38%);background-size:auto,auto}}
+.studio-home .studio-process{background-image:radial-gradient(circle at 50% 48%,rgba(157,123,255,.19),transparent 30%),radial-gradient(circle at 50% 105%,rgba(184,255,74,.08),transparent 38%);background-size:auto,auto}
+.studio-home .home-choice,.studio-home .studio-process{background-color:transparent;background-image:radial-gradient(circle at 50% 48%,rgba(157,123,255,.19),transparent 30%),radial-gradient(circle at 50% 105%,rgba(184,255,74,.08),transparent 38%);background-size:auto,auto}
+.studio-home .home-choice:before,.studio-home .studio-process:after{display:none}
+.studio-home .studio-process{background-image:none;background-color:transparent;box-shadow:none}
+.studio-home .home-choice{background-image:radial-gradient(circle at 50% 48%,rgba(157,123,255,.19),transparent 30%);background-size:auto}
+.studio-universe-canvas,.studio-process:before,.cosmos-stars,.studio-hero:before{filter:blur(1px)}
+.studio-universe-canvas{animation:universe-drift 24s ease-in-out infinite alternate}
+@keyframes universe-drift{from{transform:translate3d(-5px,-3px,0) scale(1.02)}to{transform:translate3d(5px,3px,0) scale(1.02)}}
+@media(prefers-reduced-motion:reduce){.studio-universe-canvas{animation:none}}
+.studio-home:before{background:radial-gradient(circle at 18% 18%,rgba(157,123,255,.14),transparent 30%),radial-gradient(circle at 82% 82%,rgba(184,255,74,.07),transparent 28%);background-size:130% 130%,120% 120%;animation:site-atmosphere 14s ease-in-out infinite alternate}
+@keyframes site-atmosphere{from{background-position:0% 0%,100% 100%}to{background-position:100% 24%,0% 76%}}
+@media(prefers-reduced-motion:reduce){.studio-home:before{animation:none}}

@@ -171,10 +171,10 @@ function createStudioUniverse() {
   const lightColors = ['5,5,5', '76,45,132', '5,5,5'];
   const rebuild = () => {
     width = window.innerWidth;
-    height = window.innerHeight;
+    height = Math.max(window.innerHeight, main.scrollHeight);
     ratio = Math.min(window.devicePixelRatio || 1, compactMotion ? 1 : 1.25);
     canvas.style.top = '0';
-    canvas.style.height = '100vh';
+    canvas.style.height = `${height}px`;
     canvas.width = Math.round(width * ratio);
     canvas.height = Math.round(height * ratio);
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
