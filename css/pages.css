@@ -202,6 +202,9 @@ svg.icon-arrow-up,svg.icon-arrow-right{display:block;overflow:visible}svg.icon-a
 
 /* "Así trabajamos" conserva su ambientación y recorrido, sin capas de estrellas. */
 .studio-home .studio-process:before,.studio-home .studio-process .cosmos-stars{display:none!important}
+
+/* Contacto: misma superficie visual sin una capa de blur adicional en móviles. */
+@media(max-width:760px){body[data-page="contacto"] .contact-card{background:#121022;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}:root[data-theme="light"] body[data-page="contacto"] .contact-card{background:#fff}}
 .studio-home .studio-process .cosmos-stars{display:block!important;background:radial-gradient(circle at 14% 28%,rgba(184,255,74,.75) 0 1.5px,transparent 3px),radial-gradient(circle at 82% 22%,rgba(255,255,255,.72) 0 1px,transparent 2.5px),radial-gradient(circle at 74% 72%,rgba(157,123,255,.7) 0 1.5px,transparent 3px),radial-gradient(circle at 28% 84%,rgba(255,255,255,.55) 0 1px,transparent 2.5px);background-size:100% 100%;animation:process-particles 12s ease-in-out infinite alternate;opacity:.7}
 @keyframes process-particles{from{transform:translate3d(-4px,2px,0)}to{transform:translate3d(5px,-4px,0)}}
 @media(prefers-reduced-motion:reduce){.studio-home .studio-process .cosmos-stars{animation:none}}

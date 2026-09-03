@@ -1,3 +1,52 @@
+const diagnosticMode = new URLSearchParams(window.location.search).get('diagnostico') === '1';
+const diagnosticStorageKey = 'rotf-diagnostic-last';
+let diagnosticPrevious = null;
+let diagnosticPanel = null;
+
+if (diagnosticMode) {
+  try { diagnosticPrevious = JSON.parse(localStorage.getItem(diagnosticStorageKey) || 'null'); } catch (error) { diagnosticPrevious = null; }
+}
+
+function diagnosticCheckpoint(stage, detail = '') {
+  if (!diagnosticMode) return;
+  const record = {
+    page: window.location.pathname.split('/').pop() || 'index.html',
+    stage,
+    detail: String(detail || ''),
+    time: new Date().toISOString(),
+    userAgent: navigator.userAgent
+  };
+  try { localStorage.setItem(diagnosticStorageKey, JSON.stringify(record)); } catch (error) { /* El panel sigue funcionando sin almacenamiento. */ }
+  if (diagnosticPanel) {
+    const current = diagnosticPanel.querySelector('[data-diagnostic-current]');
+    if (current) current.textContent = `${record.page} · ${stage}${record.detail ? ` · ${record.detail}` : ''}`;
+  }
+}
+
+if (diagnosticMode) {
+  diagnosticPanel = document.createElement('aside');
+  diagnosticPanel.setAttribute('aria-live', 'polite');
+  diagnosticPanel.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;z-index:2147483647;padding:10px 12px;border:1px solid #b8ff4a;border-radius:8px;background:rgba(4,4,10,.96);color:#fff;font:12px/1.35 monospace;box-shadow:0 8px 30px rgba(0,0,0,.45);pointer-events:none';
+  const previousText = diagnosticPrevious
+    ? `${diagnosticPrevious.page} · ${diagnosticPrevious.stage}${diagnosticPrevious.detail ? ` · ${diagnosticPrevious.detail}` : ''}`
+    : 'sin registro anterior';
+  diagnosticPanel.innerHTML = `<b style="color:#b8ff4a">DIAGNÓSTICO ROTF</b><br>Anterior: <span>${previousText}</span><br>Actual: <span data-diagnostic-current>iniciando…</span>`;
+  document.body.appendChild(diagnosticPanel);
+  document.querySelectorAll('a[href]').forEach((link) => {
+    try {
+      const target = new URL(link.href, window.location.href);
+      if (target.origin === window.location.origin && /^https?:$/.test(target.protocol)) {
+        target.searchParams.set('diagnostico', '1');
+        link.href = target.href;
+      }
+    } catch (error) { /* Ignora enlaces especiales. */ }
+  });
+  window.addEventListener('error', (event) => diagnosticCheckpoint('javascript-error', `${event.message} @ ${event.filename}:${event.lineno}`));
+  window.addEventListener('unhandledrejection', (event) => diagnosticCheckpoint('promise-error', event.reason?.message || event.reason || 'sin detalle'));
+}
+
+diagnosticCheckpoint('script-start');
+
 document.body.classList.add('studio-shell');
 document.querySelector('.topbar')?.classList.add('studio-topbar');
 document.querySelectorAll('.code-brand').forEach((brand) => {
@@ -38,6 +87,7 @@ const cardEffects = document.createElement('link');
 cardEffects.rel = 'stylesheet';
 cardEffects.href = 'css/card-effects.css?v=3';
 document.head.appendChild(cardEffects);
+diagnosticCheckpoint('styles-requested');
 
 const favicon = document.createElement('link');
 favicon.rel = 'icon';
@@ -178,6 +228,8 @@ themeToggle?.addEventListener('click', () => {
 });
 
 function createStudioUniverse() {
+  // Safari iOS puede cerrar la pestaña al componer el canvas con el hero de contacto.
+  if (document.body.dataset.page === 'contacto') return;
   const main = document.querySelector('main');
   const start = document.querySelector('.studio-intro') || main?.firstElementChild;
   const end = document.querySelector('.bottom-cta') || main?.lastElementChild;
@@ -385,7 +437,11 @@ function createStudioUniverse() {
   });
 }
 
-afterFirstPaint(createStudioUniverse);
+afterFirstPaint(() => {
+  diagnosticCheckpoint('universe-start');
+  createStudioUniverse();
+  diagnosticCheckpoint(document.body.dataset.page === 'contacto' ? 'universe-skipped' : 'universe-ready');
+});
 
 function createFeatureGalaxy() {
   const stage = document.querySelector('.feature-orbit');
@@ -579,7 +635,11 @@ function createFeatureGalaxy() {
   resumeOrbit();
 }
 
-afterFirstPaint(createFeatureGalaxy);
+afterFirstPaint(() => {
+  diagnosticCheckpoint('feature-galaxy-start');
+  createFeatureGalaxy();
+  diagnosticCheckpoint('feature-galaxy-ready');
+});
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -929,4 +989,21 @@ if (!reducedMotion) {
     else pendingRevealItems.add(entry.target);
   }), { threshold: .08, rootMargin: '96px 0px 96px 0px' });
   items.forEach((item) => observer.observe(item));
+}
+
+diagnosticCheckpoint('script-ready');
+if (diagnosticMode) {
+  window.addEventListener('load', () => {
+    diagnosticCheckpoint('window-loaded');
+    window.setTimeout(() => diagnosticCheckpoint('stable-2-seconds'), 2000);
+  }, { once: true });
+  const diagnosticSections = [...document.querySelectorAll('main > section')];
+  const diagnosticObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const name = entry.target.id || [...entry.target.classList].find((value) => value !== 'reveal' && value !== 'scroll-reveal' && value !== 'visible') || 'section';
+      diagnosticCheckpoint('section-visible', name);
+    });
+  }, { threshold: .35 });
+  diagnosticSections.forEach((section) => diagnosticObserver.observe(section));
 }
