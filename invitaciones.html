@@ -6,7 +6,7 @@
     <meta name="description" content="Invitaciones digitales personalizadas para cualquier celebración.">
     <meta name="theme-color" content="#000000">
     <title>Invitaciones digitales — ROTF</title>
-    <script>if(new URLSearchParams(location.search).get('diagnostico')==='1')document.documentElement.classList.add('diagnostic-safe')</script>
+    <script>{const p=new URLSearchParams(location.search);if(p.get('diagnostico')==='1'&&!p.get('prueba'))document.documentElement.classList.add('diagnostic-safe')}</script>
     <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="css/fonts.css?v=1">
@@ -351,6 +351,6 @@
       <p>© <span data-year></span> ROTF</p>
     </footer>
 
-    <script src="js/pages.js?v=56"></script>
+    <script src="js/pages.js?v=57"></script>
   </body>
 </html>

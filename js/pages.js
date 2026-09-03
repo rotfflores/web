@@ -1,4 +1,6 @@
-const diagnosticMode = new URLSearchParams(window.location.search).get('diagnostico') === '1';
+const diagnosticParams = new URLSearchParams(window.location.search);
+const diagnosticMode = diagnosticParams.get('diagnostico') === '1';
+const diagnosticTest = diagnosticMode ? (diagnosticParams.get('prueba') || 'seguro') : '';
 const diagnosticStorageKey = 'rotf-diagnostic-last';
 let diagnosticPrevious = null;
 let diagnosticPanel = null;
@@ -37,6 +39,7 @@ if (diagnosticMode) {
       const target = new URL(link.href, window.location.href);
       if (target.origin === window.location.origin && /^https?:$/.test(target.protocol)) {
         target.searchParams.set('diagnostico', '1');
+        if (diagnosticTest && diagnosticTest !== 'seguro') target.searchParams.set('prueba', diagnosticTest);
         link.href = target.href;
       }
     } catch (error) { /* Ignora enlaces especiales. */ }
@@ -45,7 +48,7 @@ if (diagnosticMode) {
   window.addEventListener('unhandledrejection', (event) => diagnosticCheckpoint('promise-error', event.reason?.message || event.reason || 'sin detalle'));
 }
 
-diagnosticCheckpoint('script-start');
+diagnosticCheckpoint('script-start', diagnosticTest);
 
 document.body.classList.add('studio-shell');
 document.querySelector('.topbar')?.classList.add('studio-topbar');
@@ -229,7 +232,7 @@ themeToggle?.addEventListener('click', () => {
 
 function createStudioUniverse() {
   // Safari iOS puede cerrar la pestaña al componer el canvas con el hero de contacto.
-  if (diagnosticMode || document.body.dataset.page === 'contacto') return;
+  if ((diagnosticMode && diagnosticTest !== 'universo') || document.body.dataset.page === 'contacto') return;
   const main = document.querySelector('main');
   const start = document.querySelector('.studio-intro') || main?.firstElementChild;
   const end = document.querySelector('.bottom-cta') || main?.lastElementChild;
@@ -444,7 +447,7 @@ afterFirstPaint(() => {
 });
 
 function createFeatureGalaxy() {
-  if (diagnosticMode) return;
+  if (diagnosticMode && diagnosticTest !== 'orbita') return;
   const stage = document.querySelector('.feature-orbit');
   const track = stage?.querySelector('.orbit-tags');
   const tags = track ? [...track.children] : [];
@@ -891,7 +894,7 @@ function configureProjectCarousels(activeGallery = document.querySelector('.samp
   if (activeGallery) configureProjectCarousel(activeGallery);
 }
 
-if (!diagnosticMode) {
+if (!diagnosticMode || diagnosticTest === 'carrusel') {
   configureProjectCarousels();
   mobileCarouselQuery.addEventListener?.('change', () => configureProjectCarousels());
 }
