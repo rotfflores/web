@@ -9,7 +9,7 @@
             <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
             <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
             <link rel="stylesheet" href="css/fonts.css?v=1">
-            <link rel="stylesheet" href="css/pages.css?v=61">
+            <link rel="stylesheet" href="css/pages.css?v=63">
             <link rel="stylesheet" href="css/scroll-effects.css?v=23">
             <link rel="stylesheet" href="css/card-effects.css?v=4">
             <meta property="og:type" content="website">
@@ -30,6 +30,7 @@
             <meta name="twitter:image" content="https://rotfflores.github.io/web/img/rotf-social.png">
         <style>
             .inquiry-card{position:relative;overflow:hidden}
+            .inquiry-card{padding:clamp(1.6rem,3vw,2.7rem);border-radius:18px;background:linear-gradient(155deg,rgba(25,21,47,.94),rgba(9,8,20,.96));box-shadow:0 28px 80px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.05)}
             .inquiry-card:before{content:"";position:absolute;top:0;left:10%;width:42%;height:1px;background:linear-gradient(90deg,transparent,var(--lime),transparent);box-shadow:0 0 18px var(--lime)}
             .form-kicker{margin:0!important;color:var(--lime)!important;font-size:.68rem!important;font-weight:700;letter-spacing:.2em}
             .inquiry-card h2{max-width:430px;margin:.8rem 0 1.8rem;font:400 clamp(2rem,3vw,2.8rem)/.98 "DM Serif Display",serif}
@@ -37,23 +38,40 @@
             .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
             .form-grid label{display:flex;flex-direction:column;gap:.42rem;min-width:0}
             .form-grid label span{color:var(--muted);font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-            .form-grid input,.form-grid select,.form-grid textarea{width:100%;border:1px solid rgba(255,255,255,.15);border-radius:3px;background:rgba(5,4,14,.55);color:var(--text);font:inherit;font-size:.86rem;padding:.82rem .85rem;outline:none;transition:border-color .25s,box-shadow .25s,background .25s}
+            .form-grid input,.form-grid select,.form-grid textarea{width:100%;min-height:48px;border:1px solid rgba(255,255,255,.15);border-radius:8px;background:rgba(5,4,14,.55);color:var(--text);font:inherit;font-size:.9rem;padding:.86rem .9rem;outline:none;color-scheme:dark;transition:border-color .25s,box-shadow .25s,background .25s}
             .form-grid input::placeholder,.form-grid textarea::placeholder{color:#777187}
             .form-grid select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--lime) 50%),linear-gradient(135deg,var(--lime) 50%,transparent 50%);background-position:calc(100% - 16px) 50%,calc(100% - 11px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:2rem}
+            :root:not([data-theme="light"]) .form-grid select{background-color:#121022;color:#f6f3ff;color-scheme:dark}
+            :root:not([data-theme="light"]) .form-grid select option,:root:not([data-theme="light"]) .form-grid select optgroup{background-color:#121022;color:#f6f3ff}
+            .form-grid select option:disabled{color:#777187}
             .form-grid textarea{min-height:116px;resize:vertical}
             .form-grid input:focus,.form-grid select:focus,.form-grid textarea:focus{border-color:var(--lime);background:rgba(157,123,255,.08);box-shadow:0 0 0 3px rgba(184,255,74,.08)}
             .form-full{grid-column:1/-1}
-            .form-submit{display:inline-flex;align-items:center;justify-content:center;gap:.8rem;margin-top:1.35rem;border:0;border-radius:5px;background:var(--lime);color:#10120c;font:700 .82rem "DM Sans";padding:.9rem 1.15rem;cursor:pointer;transition:transform .25s,box-shadow .25s}
+            .form-submit{display:inline-flex;align-items:center;justify-content:center;gap:.8rem;width:100%;margin-top:1.35rem;border:0;border-radius:8px;background:var(--lime);color:#10120c;font:700 .86rem "DM Sans";padding:1.05rem 1.15rem;cursor:pointer;transition:transform .25s,box-shadow .25s}
             .form-submit span{font-size:1.15rem;line-height:1}
             .form-submit:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(184,255,74,.16)}
             .inquiry-card>small{display:block;margin-top:1.25rem;color:var(--muted)}
-            @media(max-width:760px){.form-grid{grid-template-columns:1fr}.form-full{grid-column:auto}.inquiry-card h2{font-size:2.35rem}.form-submit{width:100%}}
+            .contact-brand>p:not(.section-label){line-height:1.75}
+            .contact-assurances{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:2rem 0 0;padding:0;list-style:none}
+            .contact-assurances li{display:flex;align-items:center;gap:.65rem;padding:.75rem 0;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
+            .contact-assurances li:before{content:"";width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime)}
+            :root[data-theme="light"] .inquiry-card{background:linear-gradient(155deg,#fff,#f3f0e9);border-color:rgba(78,48,127,.25);box-shadow:0 28px 80px rgba(47,31,70,.12),inset 0 1px 0 #fff}
+            :root[data-theme="light"] .form-grid input,:root[data-theme="light"] .form-grid select,:root[data-theme="light"] .form-grid textarea{background:rgba(255,255,255,.82);border-color:rgba(21,20,25,.18);color:#151419;color-scheme:light}
+            :root[data-theme="light"] .form-grid select{background-color:#fff}
+            :root[data-theme="light"] .form-grid select option,:root[data-theme="light"] .form-grid select optgroup{background-color:#fff;color:#151419}
+            :root[data-theme="light"] .form-grid select option:disabled{color:#65616b}
+            :root[data-theme="light"] .form-grid input:focus,:root[data-theme="light"] .form-grid select:focus,:root[data-theme="light"] .form-grid textarea:focus{background:#fff;border-color:#6e47bd;box-shadow:0 0 0 3px rgba(110,71,189,.1)}
+            :root[data-theme="light"] .form-submit{background:#17131d;color:#fff}
+            @media(max-width:760px){.form-grid{grid-template-columns:1fr}.form-full{grid-column:auto}.inquiry-card h2{font-size:2.35rem}.form-submit{width:100%}.contact-assurances{grid-template-columns:1fr;margin-top:1.5rem}}
             @media(prefers-reduced-motion:reduce){.form-grid input,.form-grid select,.form-grid textarea,.form-submit{transition:none}}
-            .contact-hero{isolation:isolate;overflow:hidden}
+            .contact-hero{isolation:isolate;overflow:hidden;grid-template-columns:.9fr 1.1fr;gap:clamp(3rem,7vw,6.5rem)}
+            @media(max-width:760px){.contact-hero{grid-template-columns:1fr;gap:2.5rem;padding-top:48px}.contact-card{padding:1.4rem}.contact-brand .page-brand-visual{margin-bottom:-1.8rem}}
             .contact-hero:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 12% 24%,rgba(184,255,74,.75) 0 1.5px,transparent 3px),radial-gradient(circle at 78% 18%,rgba(255,255,255,.72) 0 1px,transparent 3px),radial-gradient(circle at 88% 78%,rgba(157,123,255,.75) 0 1.5px,transparent 3px),radial-gradient(circle at 24% 84%,rgba(255,255,255,.58) 0 1px,transparent 3px),radial-gradient(circle at 58% 55%,rgba(184,255,74,.55) 0 1px,transparent 2.5px);background-size:100% 100%;filter:blur(1px);opacity:.65;animation:contact-particles 16s ease-in-out infinite alternate}
+            .contact-hero:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.72) 0 1px,transparent 1.8px),radial-gradient(circle,rgba(184,255,74,.68) 0 1.2px,transparent 2.2px),radial-gradient(circle,rgba(157,123,255,.72) 0 1.4px,transparent 2.5px);background-position:17px 31px,68px 19px,39px 82px;background-size:109px 109px,157px 157px,211px 211px;opacity:.28;animation:contact-particle-field 26s linear infinite}
             .contact-hero>*{position:relative;z-index:1}
             @keyframes contact-particles{from{transform:translate3d(-4px,3px,0)}to{transform:translate3d(5px,-4px,0)}}
-            @media(prefers-reduced-motion:reduce){.contact-hero:before{animation:none}}
+            @keyframes contact-particle-field{to{background-position:126px 140px,-89px 176px,250px -129px}}
+            @media(prefers-reduced-motion:reduce){.contact-hero:before,.contact-hero:after{animation:none}}
             .process{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 50% 0,rgba(157,123,255,.14),transparent 42%),linear-gradient(180deg,rgba(8,7,18,.25),rgba(8,7,18,.7));border-top:1px solid rgba(255,255,255,.12);border-bottom:0}
             .process:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.7) 0 1px,transparent 1.7px),radial-gradient(circle,rgba(184,255,74,.65) 0 1px,transparent 1.8px);background-position:18px 28px,72px 96px;background-size:118px 118px,173px 173px;opacity:.2;animation:process-stars 24s linear infinite}
             .process:after{content:"";position:absolute;left:10%;right:10%;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(157,123,255,.65) 20%,var(--lime) 50%,rgba(157,123,255,.65) 80%,transparent);box-shadow:0 0 18px rgba(184,255,74,.18)}
@@ -87,6 +105,28 @@
             .process article:hover{transform:none;border-color:transparent;background:transparent;box-shadow:none}
             .process article:not(:last-child):after{right:-1rem;width:1rem;box-shadow:0 0 8px var(--lime)}
             @media(max-width:760px){.process>div{grid-template-columns:1fr;gap:0;margin-top:1.5rem;padding-left:1rem}.process>div:before{top:1rem;bottom:1rem;left:1.65rem;right:auto;width:1px;height:auto}.process article,.process article:nth-child(2),.process article:nth-child(3),.process article:first-child{padding:1.3rem 0 1.5rem 3.2rem;border:0}.process article:before{position:absolute;left:-.65rem;top:1.25rem;margin:0}.process article:not(:last-child):after{left:1.65rem;right:auto;bottom:-1.2rem;width:1px;height:1.2rem}}
+
+            /* Proceso editorial */
+            body[data-page="contacto"] .process{max-width:1180px;margin:20px auto 100px;padding:clamp(3rem,7vw,6rem);border:1px solid var(--line);background:linear-gradient(145deg,rgba(22,18,42,.76),rgba(8,7,18,.5));overflow:hidden}
+            body[data-page="contacto"] .process>.section-label{margin:0 0 .7rem;text-align:left}
+            body[data-page="contacto"] .process>.section-label:after{content:"Una ruta clara, de la idea a la pantalla.";display:block;max-width:650px;margin-top:.8rem;color:var(--text);font:400 clamp(2.2rem,5vw,4.4rem)/.94 "DM Serif Display",serif;letter-spacing:-.035em;text-transform:none}
+            body[data-page="contacto"] .process>div{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3.5rem;padding:0}
+            body[data-page="contacto"] .process>div:before{display:none}
+            body[data-page="contacto"] .process article,body[data-page="contacto"] .process article:nth-child(2),body[data-page="contacto"] .process article:nth-child(3),body[data-page="contacto"] .process article:first-child{min-height:270px;margin:0;padding:1.5rem;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:32px 8px 32px 8px;background:radial-gradient(circle at 85% 12%,rgba(157,123,255,.16),transparent 34%),rgba(10,8,22,.58);transition:transform .35s,border-color .35s,background .35s}
+            body[data-page="contacto"] .process article:nth-child(2){transform:translateY(18px)}
+            body[data-page="contacto"] .process article:nth-child(3){transform:translateY(36px)}
+            body[data-page="contacto"] .process article:hover{transform:translateY(-6px);border-color:rgba(184,255,74,.48);background:rgba(20,16,38,.82)}
+            body[data-page="contacto"] .process article:after{display:none}
+            body[data-page="contacto"] .process article:before{content:"✦";position:static;display:grid;width:48px;height:48px;margin:0;place-items:center;border:1px solid rgba(184,255,74,.42);border-radius:50%;background:rgba(184,255,74,.07);color:var(--lime);font:400 1.05rem "Space Grotesk";box-shadow:0 0 0 7px rgba(184,255,74,.025),0 0 25px rgba(184,255,74,.12);animation:process-symbol-float 4s ease-in-out infinite}
+            body[data-page="contacto"] .process article:nth-child(2):before{content:"◇";border-color:rgba(157,123,255,.5);background:rgba(157,123,255,.08);color:var(--purple);box-shadow:0 0 0 7px rgba(157,123,255,.025),0 0 25px rgba(157,123,255,.16);animation-delay:-1.3s}
+            body[data-page="contacto"] .process article:nth-child(3):before{content:"↗";animation-delay:-2.6s}
+            @keyframes process-symbol-float{50%{transform:translateY(-6px) rotate(8deg)}}
+            body[data-page="contacto"] .process article h3{margin:auto 0 .8rem;font-size:clamp(2rem,3vw,2.8rem)}
+            body[data-page="contacto"] .process article p{max-width:260px;font-size:.9rem}
+            :root[data-theme="light"] body[data-page="contacto"] .process{background:linear-gradient(145deg,rgba(255,255,255,.92),rgba(239,235,245,.72));border-color:rgba(78,48,127,.22)}
+            :root[data-theme="light"] body[data-page="contacto"] .process article{background:radial-gradient(circle at 85% 12%,rgba(110,71,189,.09),transparent 34%),rgba(255,255,255,.82);border-color:rgba(0,0,0,.15)}
+            :root[data-theme="light"] body[data-page="contacto"] .process article:hover{background:#fff;border-color:rgba(78,48,127,.4)}
+            @media(max-width:760px){body[data-page="contacto"] .process{width:calc(100% - 32px);margin:10px auto 70px;padding:2.2rem 1.2rem 2.8rem}body[data-page="contacto"] .process>.section-label{text-align:center}body[data-page="contacto"] .process>.section-label:after{font-size:2.65rem}body[data-page="contacto"] .process>div{grid-template-columns:1fr;gap:.8rem;margin-top:2.2rem}body[data-page="contacto"] .process article,body[data-page="contacto"] .process article:nth-child(2),body[data-page="contacto"] .process article:nth-child(3),body[data-page="contacto"] .process article:first-child{min-height:210px;padding:1.3rem;transform:none}body[data-page="contacto"] .process article h3{margin:auto 0 .65rem}}
         </style>
         </head>
         <body data-page="contacto">
@@ -130,10 +170,16 @@
                                                                                     </div>
                                                                                     <img class="hero-logo" src="img/logo-mobile.webp" width="512" height="512" alt="">
                                                                                 </div>
-                                                                                <p class="section-label">03 / CONTACTO</p>
+                                                                                <p class="section-label">CONTACTO</p>
                                                                                     <h1>Cu&eacute;ntanos tu <em>idea.</em>
                                                                                     </h1>
                                                                                     <p>No importa si a&uacute;n no tienes todos los detalles. Escr&iacute;benos qu&eacute; necesitas y prepararemos una propuesta clara, personalizada y accesible.</p>
+                                                                                    <ul class="contact-assurances" aria-label="Ventajas del contacto">
+                                                                                        <li>Atenci&oacute;n personal</li>
+                                                                                        <li>Propuesta a tu medida</li>
+                                                                                        <li>Proceso claro</li>
+                                                                                        <li>Sin compromiso</li>
+                                                                                    </ul>
                                                                                     </div>
                                                                                     <div class="contact-card inquiry-card">
                                                                                         <p class="form-kicker">EMPECEMOS</p>

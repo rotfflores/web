@@ -213,6 +213,21 @@ html.webkit-touch .studio-hero:after{inset:-8% -18% 4%;border-radius:0;filter:no
 html.webkit-touch .hero-logo{filter:saturate(1.08) contrast(1.04)!important}
 html.webkit-touch .scrim{background:rgba(5,4,12,.82);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
 
+/* Categorias abiertas: superficies coherentes con el tema claro. */
+:root[data-theme="light"] .invitation-types button.active{background:linear-gradient(145deg,#fff,rgba(110,71,189,.055));border-color:rgba(78,48,127,.3)}
+:root[data-theme="light"] .sample-panels,:root[data-theme="light"] .invitation-types>.sample-panels{background:linear-gradient(180deg,#fff,#f3f0e9);color:#151419}
+:root[data-theme="light"] .project-contents,:root[data-theme="light"] .showcase-project{background:#fff}
+:root[data-theme="light"] .swipe-guide{background:rgba(244,242,236,.76)}
+:root[data-theme="light"] .swipe-guide>div{background:rgba(255,255,255,.97);border-color:rgba(78,48,127,.28);box-shadow:0 20px 70px rgba(47,31,70,.16)}
+:root[data-theme="light"] .swipe-guide strong{color:#151419}
+:root[data-theme="light"] .sample-panel .button.primary{background:#17131d;color:#fff}
+:root[data-theme="light"] .sample-panel .project-text-link,:root[data-theme="light"] .sample-panel .project-link{color:#17131d}
+:root[data-theme="light"] .sample-panel .project-page-preview>span{background:rgba(255,255,255,.95);border-color:rgba(0,0,0,.24);color:#17131d;box-shadow:0 8px 24px rgba(0,0,0,.14)}
+:root[data-theme="light"] .sample-panel .project-page-preview>span b,:root[data-theme="light"] .invitation-types button.active:after{color:#17131d}
+:root[data-theme="light"] .sample-panels.open{background-image:radial-gradient(circle,rgba(0,0,0,.48) 0 1px,transparent 1.8px),radial-gradient(circle,rgba(0,0,0,.3) 0 1.2px,transparent 2px),linear-gradient(180deg,#fff,#f3f0e9);background-size:89px 89px,137px 137px,auto;background-position:8px 14px,61px 39px,0 0;animation:catalog-unfold .68s cubic-bezier(.22,.61,.36,1) both,light-category-dots 20s linear infinite}
+@keyframes light-category-dots{to{background-position:97px 103px,-76px 176px,0 0}}
+@media(prefers-reduced-motion:reduce){:root[data-theme="light"] .sample-panels.open{animation:none}}
+
 /* Arranque seguro para diagnosticar cierres completos del motor del navegador. */
 html.diagnostic-safe{scroll-behavior:auto!important}
 html.diagnostic-safe *,html.diagnostic-safe *:before,html.diagnostic-safe *:after{animation:none!important;transition:none!important}
