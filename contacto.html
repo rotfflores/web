@@ -51,6 +51,9 @@
             .form-submit span{font-size:1.15rem;line-height:1}
             .form-submit:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(184,255,74,.16)}
             .inquiry-card>small{display:block;margin-top:1.25rem;color:var(--muted)}
+            .form-status{min-height:1.35rem;margin:.85rem 0 0;color:var(--muted);font-size:.78rem}
+            .form-status.success{color:var(--lime)}.form-status.error{color:#ff8e9e}
+            .form-trap{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
             .contact-brand>p:not(.section-label){line-height:1.75}
             .contact-assurances{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:2rem 0 0;padding:0;list-style:none}
             .contact-assurances li{display:flex;align-items:center;gap:.65rem;padding:.75rem 0;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
@@ -184,8 +187,9 @@
                                                                                     <div class="contact-card inquiry-card">
                                                                                         <p class="form-kicker">EMPECEMOS</p>
                                                                                         <h2>Cu&eacute;ntanos qu&eacute; quieres crear.</h2>
-                                                                                        <form action="mailto:cli0001091@alumnos.ujed.mx" method="post" enctype="text/plain">
+                                                                                        <form id="contact-form">
                                                                                             <div class="form-grid">
+                                                                                                <label class="form-trap" aria-hidden="true"><span>Sitio web</span><input type="text" name="website" tabindex="-1" autocomplete="off"></label>
                                                                                                 <label>
                                                                                                     <span>Tu nombre</span>
                                                                                                     <input type="text" name="Nombre" autocomplete="name" placeholder="¿C&oacute;mo te llamas?" required>
@@ -217,6 +221,7 @@
                                                                                                 </label>
                                                                                             </div>
                                                                                             <button class="form-submit" type="submit">Enviar mi idea <span aria-hidden="true">&#8599;</span></button>
+                                                                                            <p class="form-status" role="status" aria-live="polite"></p>
                                                                                         </form>
                                                                                         <small>Te responderemos para conocer tu idea y preparar una propuesta clara.</small>
                                                                                     </div>
@@ -247,7 +252,8 @@
                                                                                                                                     <p>&copy; <span data-year>
                                                                                                                                     </span> ROTF</p>
                                                                                                                                 </footer>
-                                                                                                                                <script src="js/pages.js?v=58">
-                                                                                                                                </script>
+                                                                <script src="js/pages.js?v=58">
+                                                                </script>
+                                                                <script src="js/contact-form.js?v=1"></script>
                                                                                                                             </body>
                                                                                                                         </html>
