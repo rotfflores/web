@@ -206,6 +206,13 @@ svg.icon-arrow-up,svg.icon-arrow-right{display:block;overflow:visible}svg.icon-a
 /* Contacto: misma superficie visual sin una capa de blur adicional en móviles. */
 @media(max-width:760px){body[data-page="contacto"] .contact-card{background:#121022;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}:root[data-theme="light"] body[data-page="contacto"] .contact-card{background:#fff}}
 
+/* WebKit tactil: conserva el movimiento, pero evita superficies intermedias de
+   blur sobre capas grandes. Los degradados ya producen el mismo halo suave. */
+html.webkit-touch .studio-hero:after{inset:-8% -18% 4%;border-radius:0;filter:none!important;background:radial-gradient(ellipse 72% 48% at 50% 20%,rgba(157,123,255,.14) 0,rgba(157,123,255,.075) 27%,rgba(184,255,74,.026) 48%,rgba(157,123,255,.009) 68%,transparent 88%)}
+:root[data-theme="light"].webkit-touch .studio-hero:after{background:radial-gradient(ellipse 72% 48% at 50% 20%,rgba(110,71,189,.16) 0,rgba(110,71,189,.08) 28%,rgba(0,0,0,.025) 49%,rgba(110,71,189,.007) 69%,transparent 89%)}
+html.webkit-touch .hero-logo{filter:saturate(1.08) contrast(1.04)!important}
+html.webkit-touch .scrim{background:rgba(5,4,12,.82);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+
 /* Arranque seguro para diagnosticar cierres completos del motor del navegador. */
 html.diagnostic-safe{scroll-behavior:auto!important}
 html.diagnostic-safe *,html.diagnostic-safe *:before,html.diagnostic-safe *:after{animation:none!important;transition:none!important}

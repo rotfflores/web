@@ -5,6 +5,16 @@ const diagnosticStorageKey = 'rotf-diagnostic-last';
 let diagnosticPrevious = null;
 let diagnosticPanel = null;
 
+// El iPhone 13 combina un viewport estrecho con DPR 3. En versiones recientes
+// de WebKit, un lienzo animado denso puede elevar la memoria. El render sigue
+// siendo identico en estructura, con una densidad adaptada a ese presupuesto.
+const isAppleTouchDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+if (isAppleTouchDevice) document.documentElement.classList.add('webkit-touch');
+const constrainedCanvasProfile = isAppleTouchDevice &&
+  window.devicePixelRatio >= 3 &&
+  window.matchMedia('(max-width: 400px) and (pointer: coarse)').matches;
+
 if (diagnosticMode) {
   try { diagnosticPrevious = JSON.parse(localStorage.getItem(diagnosticStorageKey) || 'null'); } catch (error) { diagnosticPrevious = null; }
 }
@@ -81,15 +91,6 @@ const toggle = document.querySelector('.menu-toggle');
 const closeButton = document.querySelector('.close-menu');
 let previousFocus;
 
-const enhancementStyles = document.createElement('link');
-enhancementStyles.rel = 'stylesheet';
-enhancementStyles.href = 'css/scroll-effects.css?v=20';
-document.head.appendChild(enhancementStyles);
-
-const cardEffects = document.createElement('link');
-cardEffects.rel = 'stylesheet';
-cardEffects.href = 'css/card-effects.css?v=3';
-document.head.appendChild(cardEffects);
 diagnosticCheckpoint('styles-requested');
 
 const favicon = document.createElement('link');
@@ -144,7 +145,7 @@ if (finePointer) {
 document.querySelectorAll('footer .code-brand').forEach((brand) => {
   brand.className = 'footer-logo';
   brand.setAttribute('aria-label', 'ROTF, inicio');
-  brand.innerHTML = '<img src="img/logo-mobile.webp" alt="Logotipo de ROTF" width="512" height="512">';
+  brand.innerHTML = '<img src="img/logo-mobile.webp" alt="Logotipo de ROTF" width="512" height="512" loading="lazy" decoding="async">';
 });
 
 // Las animaciones fuera de pantalla no deben competir con el primer render.
@@ -245,15 +246,23 @@ function createStudioUniverse() {
   const context = canvas.getContext('2d');
   if (!context) return;
 
+  // Libera expresamente el buffer al navegar; WebKit puede conservar memoria
+  // de canvas entre cargas aun cuando el documento anterior ya no sea visible.
+  window.addEventListener('pagehide', () => {
+    animationScheduler.delete(draw);
+    canvas.width = 1;
+    canvas.height = 1;
+  });
+
   let width = 0;
   let height = 0;
   let viewportHeight = 0;
   let mainTop = 0;
   let particleFreeStart = -1;
   let particleFreeEnd = -1;
+  let logoExclusion = null;
   let ratio = 1;
   let particles = [];
-  const particleSprites = new Map();
   let frame = 0;
   let visible = true;
   let pointerX = -10000;
@@ -277,26 +286,24 @@ function createStudioUniverse() {
   const darkColors = ['157,123,255', '184,255,74', '255,255,255'];
   const lightColors = ['5,5,5', '76,45,132', '5,5,5'];
 
-  const getParticleSprite = (color, radius) => {
-    const roundedRadius = Math.round(radius * 4) / 4;
-    const key = `${color}-${roundedRadius}`;
-    if (particleSprites.has(key)) return particleSprites.get(key);
-    const glow = roundedRadius * 7;
-    const size = Math.ceil((roundedRadius + glow) * 2 + 4);
-    const sprite = document.createElement('canvas');
-    sprite.width = size;
-    sprite.height = size;
-    const spriteContext = sprite.getContext('2d');
-    const center = size / 2;
-    spriteContext.shadowColor = `rgba(${color},.55)`;
-    spriteContext.shadowBlur = glow;
-    spriteContext.fillStyle = `rgb(${color})`;
-    spriteContext.beginPath();
-    spriteContext.arc(center, center, roundedRadius, 0, Math.PI * 2);
-    spriteContext.fill();
-    particleSprites.set(key, sprite);
-    return sprite;
+  const updateLogoExclusion = () => {
+    const logo = main.querySelector('.studio-hero-logo');
+    if (!logo) {
+      logoExclusion = null;
+      return;
+    }
+    const bounds = logo.getBoundingClientRect();
+    logoExclusion = {
+      left: bounds.left + window.scrollX - mainTop - bounds.width * .14,
+      right: bounds.right + window.scrollX - mainTop + bounds.width * .14,
+      top: bounds.top + window.scrollY - mainTop - bounds.height * .14,
+      bottom: bounds.bottom + window.scrollY - mainTop + bounds.height * .14
+    };
   };
+
+  const particleHitsLogo = (particle) => logoExclusion &&
+    particle.x >= logoExclusion.left && particle.x <= logoExclusion.right &&
+    particle.y >= logoExclusion.top && particle.y <= logoExclusion.bottom;
 
   const rebuild = () => {
     width = window.innerWidth;
@@ -306,18 +313,19 @@ function createStudioUniverse() {
     const particleFreeSection = main.querySelector('.studio-process');
     particleFreeStart = particleFreeSection ? particleFreeSection.offsetTop : -1;
     particleFreeEnd = particleFreeSection ? particleFreeStart + particleFreeSection.offsetHeight : -1;
-    ratio = Math.min(window.devicePixelRatio || 1, compactMotion ? 1 : 1.25);
+    ratio = constrainedCanvasProfile ? .85 : Math.min(window.devicePixelRatio || 1, compactMotion ? 1 : 1.25);
     canvas.style.top = '0';
     canvas.style.height = `${viewportHeight}px`;
     canvas.width = Math.round(width * ratio);
     canvas.height = Math.round(viewportHeight * ratio);
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
     const isHome = document.body.classList.contains('studio-home');
-    const count = isHome
+    const count = constrainedCanvasProfile ? 46 : isHome
       ? Math.min(compactMotion ? 82 : 120, Math.max(62, Math.round((width * height) / 11500)))
       : Math.min(compactMotion ? 72 : 100, Math.max(55, Math.round((width * height) / 13500)));
     const hero = main.querySelector(':scope > section:first-child');
     const heroEnd = hero ? hero.offsetTop + hero.offsetHeight : window.innerHeight;
+    updateLogoExclusion();
     particles = Array.from({ length: count }, (_, index) => ({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -342,6 +350,7 @@ function createStudioUniverse() {
     const lineColor = lightTheme ? '52,31,86' : '157,123,255';
     const viewportStart = window.scrollY - mainTop;
     const viewportEnd = viewportStart + viewportHeight;
+    updateLogoExclusion();
     particles.forEach((particle, index) => {
       particle.x += particle.vx;
       particle.y += particle.vy;
@@ -355,19 +364,28 @@ function createStudioUniverse() {
       if (particle.x < -8) particle.x = width + 8;
       if (particle.x > width + 8) particle.x = -8;
       if (particle.y < viewportStart - 140 || particle.y > viewportEnd + 140 ||
-          (particle.y >= particleFreeStart && particle.y <= particleFreeEnd)) return;
+          (particle.y >= particleFreeStart && particle.y <= particleFreeEnd) ||
+          particleHitsLogo(particle)) return;
       const pulse = .35 + (Math.sin(time * .0018 + particle.phase) + 1) * .28;
       const particleColor = lightTheme
         ? lightColors[particle.palette]
         : darkColors[particle.palette];
-      const sprite = getParticleSprite(particleColor, particle.r);
       context.globalAlpha = pulse;
-      context.drawImage(sprite, particle.x - sprite.width / 2, particle.y - viewportStart - sprite.height / 2);
+      const particleY = particle.y - viewportStart;
+      context.fillStyle = `rgba(${particleColor},.18)`;
+      context.beginPath();
+      context.arc(particle.x, particleY, particle.r * 4.4, 0, Math.PI * 2);
+      context.fill();
+      context.fillStyle = `rgb(${particleColor})`;
+      context.beginPath();
+      context.arc(particle.x, particleY, particle.r, 0, Math.PI * 2);
+      context.fill();
       context.globalAlpha = 1;
       for (let next = index + 1; next < Math.min(particles.length, index + 18); next += 1) {
         const other = particles[next];
         if (other.y < viewportStart - 125 || other.y > viewportEnd + 125 ||
-            (other.y >= particleFreeStart && other.y <= particleFreeEnd)) continue;
+          (other.y >= particleFreeStart && other.y <= particleFreeEnd) ||
+          particleHitsLogo(other)) continue;
         const dx = particle.x - other.x;
         const dy = particle.y - other.y;
         const distanceSquared = dx * dx + dy * dy;
@@ -412,11 +430,17 @@ function createStudioUniverse() {
       updateProcessLine();
     });
   }, { passive: true });
-  window.addEventListener('pointermove', (event) => {
-    pointerX = event.clientX;
-    pointerY = event.clientY + window.scrollY - mainTop;
-  }, { passive: true });
+  if (finePointer) {
+    window.addEventListener('pointermove', (event) => {
+      pointerX = event.clientX;
+      pointerY = event.clientY + window.scrollY - mainTop;
+    }, { passive: true });
+  }
   document.addEventListener('visibilitychange', resumeDrawing);
+  window.addEventListener('pageshow', () => {
+    if (canvas.width <= 1 || canvas.height <= 1) rebuild();
+    resumeDrawing();
+  });
 
   const finePointerOnly = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   document.querySelectorAll('.studio-project, .studio-home .choice-card, .project-card, .contact-card, .type-grid article').forEach((card) => {
@@ -480,6 +504,11 @@ function createFeatureGalaxy() {
   let stageHeight = 0;
   let radiusX = 350;
   let radiusY = 190;
+  let darkLineGradient = null;
+  let lightLineGradient = null;
+  let lastOrbitDraw = 0;
+  const compactOrbit = window.matchMedia('(max-width: 760px), (pointer: coarse)').matches;
+  const orbitFrameInterval = compactOrbit ? 1000 / 30 : 1000 / 60;
   const linkOffsets = [1, 3];
 
   const resizeLines = () => {
@@ -488,10 +517,20 @@ function createFeatureGalaxy() {
     const compact = stageWidth < 620;
     radiusX = compact ? 118 : 350;
     radiusY = compact ? 150 : 190;
-    lineRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+    lineRatio = Math.min(window.devicePixelRatio || 1, compact ? 1 : 1.5);
     lines.width = Math.round(stageWidth * lineRatio);
     lines.height = Math.round(stageHeight * lineRatio);
     lineContext?.setTransform(lineRatio, 0, 0, lineRatio, 0, 0);
+    if (lineContext) {
+      darkLineGradient = lineContext.createLinearGradient(0, 0, stageWidth, stageHeight);
+      darkLineGradient.addColorStop(0, 'rgba(157,123,255,.2)');
+      darkLineGradient.addColorStop(.5, 'rgba(184,255,74,.35)');
+      darkLineGradient.addColorStop(1, 'rgba(157,123,255,.2)');
+      lightLineGradient = lineContext.createLinearGradient(0, 0, stageWidth, stageHeight);
+      lightLineGradient.addColorStop(0, 'rgba(15,10,24,.2)');
+      lightLineGradient.addColorStop(.5, 'rgba(110,71,189,.48)');
+      lightLineGradient.addColorStop(1, 'rgba(15,10,24,.2)');
+    }
     const goldenAngle = Math.PI * (3 - Math.sqrt(5));
     sphereGeometry = tags.map((_, index) => {
       const sphereY = 1 - 2 * ((index + .5) / tags.length);
@@ -554,12 +593,8 @@ function createFeatureGalaxy() {
         const pointY = points[index * 2 + 1];
         const targetX = points[linkIndex * 2];
         const targetY = points[linkIndex * 2 + 1];
-        const gradient = lineContext.createLinearGradient(pointX, pointY, targetX, targetY);
-        gradient.addColorStop(0, light ? 'rgba(15,10,24,.2)' : 'rgba(157,123,255,.2)');
-        gradient.addColorStop(.5, light ? 'rgba(110,71,189,.48)' : 'rgba(184,255,74,.35)');
-        gradient.addColorStop(1, light ? 'rgba(15,10,24,.2)' : 'rgba(157,123,255,.2)');
         lineContext.beginPath();
-        lineContext.strokeStyle = gradient;
+        lineContext.strokeStyle = light ? lightLineGradient : darkLineGradient;
         lineContext.lineWidth = 1;
         lineContext.moveTo(pointX, pointY);
         lineContext.lineTo(targetX, targetY);
@@ -574,6 +609,8 @@ function createFeatureGalaxy() {
       animationFrame = 0;
       return;
     }
+    if (time - lastOrbitDraw < orbitFrameInterval) return;
+    lastOrbitDraw = time;
     const elapsed = Math.min(40, time - lastTime);
     lastTime = time;
     if (visible && !document.hidden && !dragging) targetOffset += elapsed * .00014;
@@ -636,6 +673,16 @@ function createFeatureGalaxy() {
   resizeLines();
   placeTags();
   document.addEventListener('visibilitychange', resumeOrbit);
+  window.addEventListener('pagehide', () => {
+    animationScheduler.delete(animate);
+    lines.width = 1;
+    lines.height = 1;
+  });
+  window.addEventListener('pageshow', () => {
+    if (lines.width <= 1 || lines.height <= 1) resizeLines();
+    placeTags();
+    resumeOrbit();
+  });
   resumeOrbit();
 }
 
@@ -913,8 +960,10 @@ if (!reducedMotion) {
     window.requestAnimationFrame(() => document.body.classList.add('page-entering'));
     window.setTimeout(() => document.body.classList.remove('page-entering'), 560);
   };
-  if (cardEffects.sheet) playEntrance(); else cardEffects.addEventListener('load', playEntrance, { once: true });
-  window.addEventListener('pageshow', playEntrance);
+  playEntrance();
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) playEntrance();
+  });
 
   document.querySelectorAll('a.choice-card[href]').forEach((card) => {
     card.addEventListener('click', (event) => {
@@ -990,9 +1039,11 @@ if (!reducedMotion) {
     pendingRevealItems.add(item);
   });
   const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-    entry.target.classList.toggle('visible', entry.isIntersecting);
-    if (entry.isIntersecting) pendingRevealItems.delete(entry.target);
-    else pendingRevealItems.add(entry.target);
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    pendingRevealItems.delete(entry.target);
+    window.setTimeout(() => entry.target.classList.add('reveal-complete'), 750);
+    observer.unobserve(entry.target);
   }), { threshold: .08, rootMargin: '96px 0px 96px 0px' });
   items.forEach((item) => observer.observe(item));
 }
