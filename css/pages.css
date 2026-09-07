@@ -186,7 +186,7 @@ body[data-page="paginas"] .cinematic-hero-copy .button:hover{border-color:#c4a6f
 @media(max-width:900px){
   body[data-page="paginas"] .cinematic-pages-hero{min-height:calc(100svh - 70px);padding:90px max(22px,env(safe-area-inset-right)) max(76px,calc(env(safe-area-inset-bottom) + 62px)) max(22px,env(safe-area-inset-left));justify-content:flex-end}
   .cinematic-hero-media{inset:0}
-  .cinematic-hero-video{object-position:center 50%;filter:saturate(1.18) contrast(1.06) brightness(1.04);transform:scale(.92)}
+  .cinematic-hero-video{object-position:center 48%;filter:saturate(1.18) contrast(1.06) brightness(1.04);transform:scale(.82)}
   .cinematic-hero-shade{background:linear-gradient(180deg,rgba(2,2,10,.18) 0%,rgba(2,2,10,.05) 31%,rgba(2,2,10,.58) 55%,rgba(2,2,10,.97) 100%),linear-gradient(90deg,rgba(2,2,10,.34),transparent 45%,rgba(2,2,10,.18))}
   .cinematic-hero-copy{width:100%;margin:0}
   body[data-page="paginas"] .cinematic-pages-hero>.page-brand-visual{position:absolute;z-index:3;top:24px;left:max(22px,env(safe-area-inset-left));display:grid;width:54px;height:54px;margin:0}
@@ -197,10 +197,10 @@ body[data-page="paginas"] .cinematic-hero-copy .button:hover{border-color:#c4a6f
 
 @media(max-width:520px){
   body[data-page="paginas"] .cinematic-pages-hero{padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
-  body[data-page="paginas"] .cinematic-hero-copy .section-label{margin-bottom:.7rem;font-size:.5rem;letter-spacing:.3em}
-  body[data-page="paginas"] .cinematic-hero-copy h1{font-size:clamp(2.3rem,10.5vw,3.1rem);line-height:.94}
-  body[data-page="paginas"] .cinematic-hero-copy>p:not(.section-label){margin:1rem 0 1.25rem;font-size:.84rem;line-height:1.48}
-  body[data-page="paginas"] .cinematic-hero-copy .button{font-size:.88rem}
+  body[data-page="paginas"] .cinematic-hero-copy .section-label{margin-bottom:.6rem;font-size:.46rem;letter-spacing:.28em}
+  body[data-page="paginas"] .cinematic-hero-copy h1{font-size:clamp(2.05rem,9.5vw,2.75rem);line-height:.96}
+  body[data-page="paginas"] .cinematic-hero-copy>p:not(.section-label){max-width:340px;margin:.85rem 0 1.1rem;font-size:.78rem;line-height:1.46}
+  body[data-page="paginas"] .cinematic-hero-copy .button{font-size:.82rem}
   body[data-page="paginas"] .cinematic-hero-copy .button{width:min(100%,330px);min-height:58px}
 }
 
