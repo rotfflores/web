@@ -24,6 +24,7 @@
       .rotf-demo-contact__brand { margin: 0 0 12px; color: #d6b66f; font-size: 12px; font-weight: 800; letter-spacing: .25em; text-transform: uppercase; }
       .rotf-demo-contact h2 { max-width: 620px; margin: 0; color: #fff; font: 500 clamp(32px, 7vw, 58px)/1.05 Georgia, 'Times New Roman', serif; letter-spacing: -.025em; }
       .rotf-demo-contact__description { max-width: 590px; margin: 18px 0 0; color: #e7e5dc; font-size: clamp(16px, 2vw, 18px); }
+      .rotf-demo-contact__design { margin: 12px 0 0; color: #d6b66f; font-size: 14px; letter-spacing: .03em; }
       .rotf-demo-contact__note { margin: 28px 0; padding: 15px 18px; border: 1px solid rgba(214,182,111,.45); border-radius: 12px; color: #f2ead7; background: rgba(255,255,255,.055); font-size: 14px; }
       .rotf-demo-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 28px; }
       .rotf-demo-field { display: grid; gap: 7px; min-width: 0; color: #fff; font-size: 14px; font-weight: 700; }
@@ -58,6 +59,7 @@
         <p class="rotf-demo-contact__brand">ROTF STUDIO</p>
         <h2 id="rotf-demo-title">¿Te gustó esta invitación?</h2>
         <p class="rotf-demo-contact__description">Personaliza este diseño con tus nombres, fotografías y datos.</p>
+        <p class="rotf-demo-contact__design">Diseño: <strong>${escapeHtml(invitationName)}</strong></p>
         <p class="rotf-demo-contact__note">Esta es una demostración. Los nombres, fotografías, colores y datos pueden personalizarse.</p>
         <form class="rotf-demo-form" novalidate>
           <label class="rotf-demo-field">Nombre del cliente<input name="clientName" type="text" autocomplete="name" minlength="2" maxlength="120" required></label>
@@ -74,6 +76,7 @@
         </a>
       </div>`;
     document.body.appendChild(section);
+    document.title = invitationName + ' | Invitación demo de ROTF STUDIO';
 
     var demoUrl = window.location.href;
     var directText = encodeURIComponent('Hola, me interesó el diseño de la invitación "' + invitationName + '". La vi aquí: ' + demoUrl);
