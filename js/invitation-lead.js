@@ -100,19 +100,6 @@
         demoUrl: demoUrl
       };
 
-      var whatsappMessage = [
-        'Hola, quiero solicitar esta invitación.',
-        'Nombre: ' + payload.clientName,
-        'WhatsApp: ' + payload.clientWhatsapp,
-        'Evento: ' + payload.eventType,
-        'Fecha: ' + payload.eventDate,
-        'Comentarios: ' + (payload.comments || 'Sin comentarios.'),
-        'Invitación: ' + invitationName,
-        'Demo: ' + demoUrl
-      ].join('\n');
-      var whatsappUrl = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(whatsappMessage);
-      var whatsappWindow = window.open('about:blank', '_blank');
-
       submit.disabled = true;
       submit.textContent = 'Guardando solicitud…';
       try {
@@ -123,12 +110,9 @@
         });
         if (!response.ok) throw new Error('request_failed');
         status.dataset.state = 'success';
-        status.textContent = 'Solicitud guardada. Abriremos WhatsApp para completar tu mensaje.';
+        status.textContent = 'Solicitud guardada correctamente. Nos pondremos en contacto contigo.';
         form.reset();
-        if (whatsappWindow) whatsappWindow.location.href = whatsappUrl;
-        else window.location.href = whatsappUrl;
       } catch (error) {
-        if (whatsappWindow) whatsappWindow.close();
         status.dataset.state = 'error';
         status.textContent = 'No pudimos guardar tu solicitud. Inténtalo nuevamente en un momento.';
       } finally {
