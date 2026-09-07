@@ -157,6 +157,72 @@ svg.icon-arrow-up,svg.icon-arrow-right{display:block;overflow:visible}svg.icon-a
 @media(max-width:900px){.feature-galaxy{min-height:640px;padding-top:60px;padding-bottom:45px}.feature-orbit{height:440px}.orbit-tags span{max-width:210px;min-width:140px;font-size:.88rem!important}}
 @media(max-width:600px){.feature-galaxy{min-height:600px;padding-top:52px;padding-bottom:32px}.feature-orbit{height:405px}.orbit-tags span{min-width:125px;max-width:158px;padding:.72rem .75rem!important;font-size:.8rem!important;line-height:1.2}.feature-orbit:before{inset:2% 0}.feature-orbit:after{inset:8% 2%}.orbit-help{bottom:-2px}}
 @media(prefers-reduced-motion:reduce){.orbit-tags span{filter:none;transform:none!important}}
+
+/* Páginas — portada cinematográfica inspirada en la referencia de medusas. */
+body[data-page="paginas"] .topbar{position:absolute;top:0;left:50%;width:min(100%,1440px);height:96px;transform:translateX(-50%);padding:0 clamp(24px,5vw,74px);border-bottom:0;color:#fff;background:linear-gradient(180deg,rgba(2,2,10,.82),transparent);z-index:35}
+body[data-page="paginas"] .topbar .code-brand{font-size:.84rem;letter-spacing:.18em;color:#fff;white-space:nowrap}
+body[data-page="paginas"] .topbar .code-brand span{color:#a67bff}
+.pages-cinematic-nav{display:flex;align-items:center;gap:clamp(1.5rem,3.5vw,3.75rem);margin-left:auto;margin-right:clamp(92px,9vw,138px)}
+.pages-cinematic-nav a{position:relative;color:rgba(255,255,255,.67);font-size:.76rem;text-decoration:none;transition:color .25s}
+.pages-cinematic-nav a:after{content:"";position:absolute;left:0;right:100%;bottom:-10px;height:1px;background:#a67bff;box-shadow:0 0 10px rgba(166,123,255,.7);transition:right .25s}
+.pages-cinematic-nav a:hover,.pages-cinematic-nav a:focus-visible,.pages-cinematic-nav a.active{color:#fff}
+.pages-cinematic-nav a:hover:after,.pages-cinematic-nav a:focus-visible:after,.pages-cinematic-nav a.active:after{right:0}
+body[data-page="paginas"].studio-shell .topbar .theme-toggle{position:absolute!important;top:29px!important;right:clamp(24px,5vw,74px)!important;color:#fff;border-color:rgba(180,144,255,.48);background:rgba(8,6,20,.28);backdrop-filter:blur(12px)}
+body[data-page="paginas"] .studio-topbar .menu-toggle{display:none}
+
+body[data-page="paginas"] .cinematic-pages-hero{position:relative;isolation:isolate;width:100%;max-width:none;min-height:100svh;margin:0;padding:clamp(132px,18vh,190px) clamp(24px,6vw,100px) clamp(90px,12vh,126px);align-items:flex-start;justify-content:center;text-align:left;overflow:hidden;color:#fff;background:#02020a!important}
+.cinematic-hero-media{position:absolute;z-index:-4;inset:0 0 0 34%;overflow:hidden;background:#02020a}
+.cinematic-hero-video{width:100%;height:100%;object-fit:cover;object-position:50% 58%;filter:saturate(1.16) contrast(1.07);transform:scale(1.025)}
+.cinematic-hero-shade{position:absolute;z-index:-3;inset:0;background:linear-gradient(90deg,#02020a 0%,rgba(2,2,10,.98) 25%,rgba(2,2,10,.75) 48%,rgba(2,2,10,.12) 78%,rgba(2,2,10,.2) 100%),linear-gradient(180deg,rgba(2,2,10,.35),transparent 38%,rgba(2,2,10,.5));pointer-events:none}
+.cinematic-pages-hero:after{content:"";position:absolute;z-index:-2;inset:0;background:radial-gradient(circle at 72% 55%,rgba(137,83,255,.14),transparent 32%);pointer-events:none}
+.cinematic-hero-copy{position:relative;z-index:2;width:min(680px,48vw);margin-left:max(0px,calc((100vw - 1440px)/2));display:flex;flex-direction:column;align-items:flex-start}
+body[data-page="paginas"] .cinematic-hero-copy .page-brand-visual{width:72px;height:72px;margin:0 0 1.5rem;filter:drop-shadow(0 0 22px rgba(157,123,255,.22))}
+body[data-page="paginas"] .cinematic-hero-copy .page-brand-visual .halo{inset:-30%;width:160%;background:radial-gradient(circle,rgba(157,123,255,.2),transparent 67%)}
+body[data-page="paginas"] .cinematic-hero-copy .hero-logo{width:100%;height:100%;border:1px solid rgba(181,148,255,.45);box-shadow:0 0 26px rgba(157,123,255,.25);animation:none}
+body[data-page="paginas"] .cinematic-hero-copy .section-label{margin:0 0 1.2rem;color:#b493ff;font-size:.68rem;letter-spacing:.42em}
+body[data-page="paginas"] .cinematic-hero-copy h1{max-width:680px;color:#fff;font-size:clamp(3.7rem,6.2vw,6.7rem);font-weight:400;line-height:.88;letter-spacing:-.06em;text-wrap:balance}
+body[data-page="paginas"] .cinematic-hero-copy h1 em{display:block;color:#aa7cff;font-weight:400}
+body[data-page="paginas"] .cinematic-hero-copy>p:not(.section-label){max-width:570px;margin:1.7rem 0 2rem;color:rgba(241,237,255,.72);font-size:clamp(.95rem,1.2vw,1.08rem);line-height:1.65}
+body[data-page="paginas"] .cinematic-hero-copy .button{align-self:flex-start;min-height:56px;padding:.9rem 1.55rem;border:1px solid #a67bff;border-radius:999px;background:linear-gradient(110deg,rgba(110,61,210,.88),rgba(142,91,255,.66));color:#fff;box-shadow:0 12px 38px rgba(100,54,194,.28),inset 0 1px 0 rgba(255,255,255,.22);letter-spacing:.04em}
+body[data-page="paginas"] .cinematic-hero-copy .button:hover{border-color:#c4a6ff;box-shadow:0 16px 50px rgba(122,70,226,.42),0 0 26px rgba(166,123,255,.2)}
+.cinematic-scroll-cue{position:absolute;left:clamp(24px,6vw,100px);bottom:34px;display:flex;align-items:center;gap:.8rem;color:rgba(255,255,255,.52);font-size:.58rem;letter-spacing:.24em;text-decoration:none;text-transform:uppercase}
+.cinematic-scroll-cue span{display:block;width:38px;height:1px;background:#a67bff;box-shadow:0 0 10px rgba(166,123,255,.68)}
+
+:root[data-theme="light"] body[data-page="paginas"] .cinematic-pages-hero{color:#fff;background:#02020a!important}
+:root[data-theme="light"] body[data-page="paginas"] .cinematic-hero-copy h1{color:#fff}
+:root[data-theme="light"] body[data-page="paginas"] .cinematic-hero-copy h1 em{color:#aa7cff}
+:root[data-theme="light"] body[data-page="paginas"] .cinematic-hero-copy>p:not(.section-label){color:rgba(241,237,255,.72)}
+:root[data-theme="light"] body[data-page="paginas"] .cinematic-hero-copy .section-label{color:#b493ff}
+
+@media(max-width:900px){
+  body[data-page="paginas"] .topbar{position:absolute;height:82px;padding:env(safe-area-inset-top) max(20px,env(safe-area-inset-right)) 0 max(20px,env(safe-area-inset-left));align-items:center}
+  .pages-cinematic-nav{display:none}
+  body[data-page="paginas"].studio-shell .topbar .theme-toggle{display:none}
+  body[data-page="paginas"] .studio-topbar .menu-toggle{display:flex;position:absolute;top:max(16px,env(safe-area-inset-top));right:max(20px,env(safe-area-inset-right));min-width:48px;min-height:48px;padding:.7rem .8rem;color:#fff;border-color:rgba(255,255,255,.34);background:rgba(4,3,13,.24);backdrop-filter:blur(12px)}
+  body[data-page="paginas"] .studio-topbar .menu-toggle{flex-direction:column;justify-content:center;gap:6px}
+  body[data-page="paginas"] .studio-topbar .menu-toggle i{width:19px;height:1px;border-radius:0;background:#fff}
+  body[data-page="paginas"] .cinematic-pages-hero{min-height:100svh;padding:max(110px,calc(env(safe-area-inset-top) + 96px)) max(22px,env(safe-area-inset-right)) max(88px,calc(env(safe-area-inset-bottom) + 72px)) max(22px,env(safe-area-inset-left));justify-content:flex-end}
+  .cinematic-hero-media{inset:0}
+  .cinematic-hero-video{object-position:center 50%;filter:saturate(1.13) contrast(1.05)}
+  .cinematic-hero-shade{background:linear-gradient(180deg,rgba(2,2,10,.18) 0%,rgba(2,2,10,.05) 31%,rgba(2,2,10,.58) 55%,rgba(2,2,10,.97) 100%),linear-gradient(90deg,rgba(2,2,10,.34),transparent 45%,rgba(2,2,10,.18))}
+  .cinematic-hero-copy{width:100%;margin:0}
+  body[data-page="paginas"] .cinematic-hero-copy .page-brand-visual{display:none}
+  body[data-page="paginas"] .cinematic-hero-copy h1{max-width:670px;font-size:clamp(3.15rem,11vw,5.5rem);line-height:.9}
+  body[data-page="paginas"] .cinematic-hero-copy>p:not(.section-label){max-width:560px;margin:1.35rem 0 1.6rem;font-size:.96rem;line-height:1.55}
+  .cinematic-scroll-cue{left:auto;right:max(22px,env(safe-area-inset-right));bottom:max(26px,env(safe-area-inset-bottom));font-size:0;gap:.55rem}
+  .cinematic-scroll-cue:after{content:"01";font-size:.58rem;letter-spacing:.12em;color:#b493ff}
+}
+
+@media(max-width:520px){
+  body[data-page="paginas"] .topbar .code-brand{font-size:.76rem;letter-spacing:.12em}
+  body[data-page="paginas"] .studio-topbar .menu-toggle span{display:none}
+  body[data-page="paginas"] .cinematic-pages-hero{padding-left:max(20px,env(safe-area-inset-left));padding-right:max(20px,env(safe-area-inset-right))}
+  body[data-page="paginas"] .cinematic-hero-copy .section-label{margin-bottom:.85rem;font-size:.58rem;letter-spacing:.34em}
+  body[data-page="paginas"] .cinematic-hero-copy h1{font-size:clamp(3rem,14.3vw,4.25rem)}
+  body[data-page="paginas"] .cinematic-hero-copy .button{width:min(100%,330px);min-height:58px}
+}
+
+@media(prefers-reduced-motion:reduce){.cinematic-hero-video{display:none}}
 .orbit-tags span{filter:blur(var(--orbit-blur,0)) brightness(var(--orbit-brightness,1));box-shadow:0 16px 36px rgba(0,0,0,.34),0 0 24px rgba(157,123,255,.13)}
 .feature-orbit{cursor:default;touch-action:pan-y;user-select:auto}.feature-orbit.is-dragging{cursor:default}.orbit-tags span{pointer-events:none}.orbit-help span{animation:star-flash 2.4s ease-in-out infinite}
 .feature-orbit{cursor:grab;touch-action:pan-y;user-select:none}.feature-orbit.is-dragging{cursor:grabbing}.orbit-tags span{pointer-events:none;outline:none}.orbit-tags span:hover{border-color:rgba(157,123,255,.34)!important;box-shadow:0 16px 36px rgba(0,0,0,.34),0 0 24px rgba(157,123,255,.13)}

@@ -1064,3 +1064,13 @@ if (diagnosticMode) {
   }, { threshold: .35 });
   diagnosticSections.forEach((section) => diagnosticObserver.observe(section));
 }
+
+const cinematicHeroVideo = document.querySelector('.cinematic-hero-video');
+if (cinematicHeroVideo) {
+  const syncCinematicVideo = () => {
+    if (document.hidden || reducedMotion) cinematicHeroVideo.pause();
+    else cinematicHeroVideo.play().catch(() => { /* El póster mantiene la portada si el navegador bloquea la reproducción. */ });
+  };
+  document.addEventListener('visibilitychange', syncCinematicVideo);
+  syncCinematicVideo();
+}
