@@ -8,6 +8,7 @@
         <title>Contacto &mdash; ROTF</title>
             <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
             <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
             <link rel="stylesheet" href="css/fonts.css?v=1">
             <link rel="stylesheet" href="css/pages.css?v=63">
             <link rel="stylesheet" href="css/scroll-effects.css?v=23">
@@ -58,6 +59,35 @@
             .contact-assurances{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin:2rem 0 0;padding:0;list-style:none}
             .contact-assurances li{display:flex;align-items:center;gap:.65rem;padding:.75rem 0;border-top:1px solid var(--line);color:var(--muted);font-size:.78rem}
             .contact-assurances li:before{content:"";width:6px;height:6px;flex:0 0 6px;border-radius:50%;background:var(--lime);box-shadow:0 0 10px var(--lime)}
+            .social-section{max-width:1180px;margin:0 auto 60px;padding:0 20px}
+            .social-header{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.35rem}
+            .social-header .section-label{margin:0;color:var(--lime);font-size:.72rem;font-weight:700;letter-spacing:.22em}
+            .social-header-note{display:flex;align-items:center;gap:.75rem;color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:none;white-space:nowrap}
+            .social-header-note:before{content:"";display:block;width:48px;height:1px;background:linear-gradient(90deg,transparent,rgba(184,255,74,.9),rgba(157,123,255,.9));box-shadow:0 0 14px rgba(184,255,74,.2)}
+            .social-wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem;margin-top:1.25rem}
+            .social-card{--card-accent:#8ca4ff;--card-glow:rgba(140,164,255,.18);display:flex;align-items:center;gap:1rem;min-height:118px;padding:1rem 1.1rem;border:1px solid rgba(199,192,216,.18);border-radius:20px;background:linear-gradient(180deg,rgba(18,15,29,.78),rgba(9,8,17,.72));text-decoration:none;color:inherit;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease,background .25s ease}
+            .social-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.38);box-shadow:0 18px 28px rgba(0,0,0,.22),0 0 22px var(--card-glow)}
+            .social-card.facebook{--card-accent:#8ea8ff;--card-glow:rgba(142,168,255,.2)}
+            .social-card.instagram{--card-accent:#ff7ad9;--card-glow:rgba(255,122,217,.2)}
+            .social-card.mail{--card-accent:#f5c76e;--card-glow:rgba(245,199,110,.18)}
+            .social-card.whatsapp{--card-accent:#66e09c;--card-glow:rgba(102,224,156,.2)}
+            .social-tag{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:1px solid var(--card-accent);background:rgba(9,9,16,.72);box-shadow:0 0 0 1px rgba(255,255,255,.04),0 0 18px var(--card-glow);color:var(--card-accent);flex-shrink:0}
+            .social-tag i{font-size:1.15rem;line-height:1}
+            .social-card-content{display:flex;flex:1;flex-direction:column;justify-content:center;min-width:0;gap:.18rem}
+            .social-card h3{margin:0;color:var(--text);font:700 .72rem "DM Sans",sans-serif;letter-spacing:.16em;text-transform:uppercase}
+            .social-card p{margin:0;color:var(--muted);font-size:.87rem;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+            @media(max-width:760px){.social-header{flex-direction:column;align-items:flex-start;gap:.7rem}. .social-header-note{font-size:.68rem;letter-spacing:.1em}. .social-wrap{grid-template-columns:1fr 1fr}. .social-section{padding:0 16px}. .social-card p{white-space:normal}} 
+            @media(max-width:480px){.social-wrap{grid-template-columns:1fr}. .social-card{min-height:94px;padding:.9rem .9rem}. .social-tag{width:42px;height:42px}. .social-card h3{font-size:.68rem;letter-spacing:.12em}. .social-card p{font-size:.8rem}. .social-header-note:before{width:32px}}
+            :root[data-theme="light"] .social-card{background:linear-gradient(180deg,rgba(255,255,255,.9),rgba(244,240,247,.8));border-color:rgba(78,48,127,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.65)}
+            :root[data-theme="light"] .social-card:hover{border-color:rgba(78,48,127,.34)}
+            :root[data-theme="light"] .social-tag{background:rgba(255,255,255,.82)}
+            :root[data-theme="light"] .social-card h3,:root[data-theme="light"] .social-card p{color:#1e1a2a}
+            :root[data-theme="light"] .social-card p{color:#5a5367}
+            :root[data-theme="light"] .social-card{background:linear-gradient(145deg,#fff,#f4f1ee);border-color:rgba(78,48,127,.18)}
+            :root[data-theme="light"] .social-card:hover{border-color:rgba(78,48,127,.35)}
+            :root[data-theme="light"] .social-tag{background:#17131d;color:#fff}
+            :root[data-theme="light"] .social-card a{color:#4a405d}
+            :root[data-theme="light"] .social-card a:hover{color:#17131d}
             :root[data-theme="light"] .inquiry-card{background:linear-gradient(155deg,#fff,#f3f0e9);border-color:rgba(78,48,127,.25);box-shadow:0 28px 80px rgba(47,31,70,.12),inset 0 1px 0 #fff}
             :root[data-theme="light"] .form-grid input,:root[data-theme="light"] .form-grid select,:root[data-theme="light"] .form-grid textarea{background:rgba(255,255,255,.82);border-color:rgba(21,20,25,.18);color:#151419;color-scheme:light}
             :root[data-theme="light"] .form-grid select{background-color:#fff}
@@ -226,23 +256,42 @@
                                                                                         <small>Te responderemos para conocer tu idea y preparar una propuesta clara.</small>
                                                                                     </div>
                                                                                     </section>
-                                                                                    <section class="process reveal">
-                                                                                        <p class="section-label">AS&Iacute; DE SENCILLO</p>
-                                                                                            <div>
-                                                                                                <article>
-                                                                                                        <h3>Nos cuentas</h3>
-                                                                                                            <p>Comparte tu idea, estilo, fecha y presupuesto.</p>
-                                                                                                            </article>
-                                                                                                            <article>
-                                                                                                                    <h3>Proponemos</h3>
-                                                                                                                        <p>Recibes una soluci&oacute;n clara y hecha para ti.</p>
-                                                                                                                        </article>
-                                                                                                                        <article>
-                                                                                                                                <h3>Creamos</h3>
-                                                                                                                                    <p>Dise&ntilde;amos, ajustamos y publicamos tu proyecto.</p>
-                                                                                                                                    </article>
-                                                                                                                                </div>
-                                                                                                                            </section>
+                                                                                    <section class="social-section reveal" aria-labelledby="social-title">
+                                                                                        <div class="social-header">
+                                                                                            <p class="section-label">REDES SOCIALES</p>
+                                                                                            <span class="social-header-note">También puedes contactarnos por aquí</span>
+                                                                                        </div>
+                                                                                        <div class="social-wrap">
+                                                                                            <a class="social-card facebook" href="https://www.facebook.com/rotfflores/" target="_blank" rel="noreferrer noopener" aria-label="Abrir Facebook de ROTF">
+                                                                                                <span class="social-tag" aria-hidden="true"><i class="fa-brands fa-facebook-f"></i></span>
+                                                                                                <span class="social-card-content">
+                                                                                                    <h3>Facebook</h3>
+                                                                                                    <p>@rotfflores</p>
+                                                                                                </span>
+                                                                                            </a>
+                                                                                            <a class="social-card instagram" href="https://www.instagram.com/rotf.flores/" target="_blank" rel="noreferrer noopener" aria-label="Abrir Instagram de ROTF">
+                                                                                                <span class="social-tag" aria-hidden="true"><i class="fa-brands fa-instagram"></i></span>
+                                                                                                <span class="social-card-content">
+                                                                                                    <h3>Instagram</h3>
+                                                                                                    <p>@rotf.flores</p>
+                                                                                                </span>
+                                                                                            </a>
+                                                                                            <a class="social-card mail" href="mailto:rotflores@gmail.com" aria-label="Enviar correo a ROTF">
+                                                                                                <span class="social-tag" aria-hidden="true"><i class="fa-solid fa-envelope"></i></span>
+                                                                                                <span class="social-card-content">
+                                                                                                    <h3>Correo</h3>
+                                                                                                    <p>rotflores@gmail.com</p>
+                                                                                                </span>
+                                                                                            </a>
+                                                                                            <a class="social-card whatsapp" href="https://wa.me/526182051723" target="_blank" rel="noreferrer noopener" aria-label="Abrir WhatsApp de ROTF">
+                                                                                                <span class="social-tag" aria-hidden="true"><i class="fa-brands fa-whatsapp"></i></span>
+                                                                                                <span class="social-card-content">
+                                                                                                    <h3>WhatsApp</h3>
+                                                                                                    <p>+52 618 205 1723</p>
+                                                                                                </span>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </section>
                                                                                                                         </main>
                                                                                                                         <footer>
                                                                                                                             <a class="code-brand" href="index.html">
