@@ -1,0 +1,17 @@
+.contact-footer .contact-socials { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem 1.8rem; width: 100%; }
+.contact-socials a { display: inline-flex; align-items: center; gap: .6rem; min-height: 44px; color: var(--muted); font-size: .85rem; text-decoration: none; overflow-wrap: anywhere; }
+.contact-socials a span { color: var(--purple); }
+.contact-socials a:hover { color: var(--text); }
+.contact-socials a:focus-visible { outline: 2px solid var(--purple); outline-offset: 4px; }
+.contact-attachments { min-width: 0; }
+.contact-attachments label { margin-bottom: .6rem; }
+.contact-attachments label small { font-weight: 400; color: var(--muted); }
+.contact-attachments #contact-files { padding: .7rem; max-width: 100%; }
+#contact-files::file-selector-button { margin-right: .65rem; padding: .5rem .7rem; border: 0; border-radius: 4px; background: var(--purple); color: #fff; font: inherit; cursor: pointer; }
+#contact-files:disabled { opacity: .55; }
+.contact-attachments p, .contact-local-note { color: var(--muted); font-size: .76rem; line-height: 1.5; }
+.contact-file-list { list-style: none; margin: .7rem 0 0; padding: 0; }
+.contact-file-list li { display: flex; align-items: center; gap: .7rem; padding: .6rem 0; border-bottom: 1px solid var(--line); }
+.contact-file-list li span { flex: 1; min-width: 0; overflow-wrap: anywhere; color: var(--text); font-size: .8rem; }
+.contact-file-list button { flex-shrink: 0; min-height: 44px; background: transparent; border: 0; color: var(--purple); font: inherit; cursor: pointer; }
+.contact-local-note { padding: .8rem; border: 1px dashed var(--line); }

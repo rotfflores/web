@@ -13,6 +13,7 @@
             <link rel="stylesheet" href="css/pages.css?v=63">
             <link rel="stylesheet" href="css/scroll-effects.css?v=23">
             <link rel="stylesheet" href="css/card-effects.css?v=4">
+            <link rel="stylesheet" href="css/contact-extras.css?v=1">
             <meta property="og:type" content="website">
             <meta property="og:locale" content="es_MX">
             <meta property="og:site_name" content="ROTF">
@@ -218,6 +219,7 @@
                                                                                         <p class="form-kicker">EMPECEMOS</p>
                                                                                         <h2>Cu&eacute;ntanos qu&eacute; quieres crear.</h2>
                                                                                         <form id="contact-form">
+ <p class="contact-local-note" data-local-note hidden>Vista local: tu solicitud y los archivos se guardarán en este equipo.</p>
                                                                                             <div class="form-grid">
                                                                                                 <label class="form-trap" aria-hidden="true"><span>Sitio web</span><input type="text" name="website" tabindex="-1" autocomplete="off"></label>
                                                                                                 <label>
@@ -249,6 +251,13 @@
                                                                                                     <span>Cu&eacute;ntanos un poco m&aacute;s</span>
                                                                                                     <textarea name="Mensaje" rows="4" placeholder="Describe tu idea, estilo o lo que necesitas..." required></textarea>
                                                                                                 </label>
+ <div class="form-full contact-attachments">
+   <label for="contact-files"><span>Imagen o video de referencia <small>(opcional)</small></span></label>
+   <input id="contact-files" type="file" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime" multiple aria-describedby="contact-files-help" disabled>
+   <p id="contact-files-help">Hasta 3 archivos. Máximo 20 MB por archivo y 30 MB en total. JPG, PNG, WebP, GIF, MP4, WebM o MOV.</p>
+   <p data-files-availability>Los adjuntos están disponibles en la vista local con servidor.</p>
+   <ul class="contact-file-list" aria-label="Archivos seleccionados"></ul>
+ </div>
                                                                                             </div>
                                                                                             <button class="form-submit" type="submit">Enviar mi idea <span aria-hidden="true">&#8599;</span></button>
                                                                                             <p class="form-status" role="status" aria-live="polite"></p>
@@ -293,16 +302,22 @@
                                                                                         </div>
                                                                                     </section>
                                                                                                                         </main>
-                                                                                                                        <footer>
+                                                                                                                        <footer class="contact-footer">
                                                                                                                             <a class="code-brand" href="index.html">
                                                                                                                                 <span>&lt;/</span>ROTF<span>&gt;</span>
                                                                                                                                 </a>
                                                                                                                                 <p>Hablemos de tu pr&oacute;ximo proyecto.</p>
+ <nav class="contact-socials" aria-label="Redes sociales y contacto">
+   <a href="https://www.facebook.com/rotfflores/" target="_blank" rel="noopener noreferrer">Facebook <span aria-hidden="true">↗</span></a>
+   <a href="https://www.instagram.com/rotf.flores/" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span></a>
+   <a href="mailto:rotflores@gmail.com">rotflores@gmail.com <span aria-hidden="true">↗</span></a>
+   <a href="https://wa.me/526182051723" target="_blank" rel="noopener noreferrer">WhatsApp <span aria-hidden="true">↗</span></a>
+ </nav>
                                                                                                                                     <p>&copy; <span data-year>
                                                                                                                                     </span> ROTF</p>
                                                                                                                                 </footer>
                                                                 <script src="js/pages.js?v=58">
                                                                 </script>
-                                                                <script src="js/contact-form.js?v=2"></script>
+                                                                <script src="js/contact-form.js?v=3"></script>
                                                                                                                             </body>
                                                                                                                         </html>
