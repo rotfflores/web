@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Un pequeño jardín hecho para mi hermanita.">
+  <title>flores para ti — un regalo para mi hermanita</title>
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:title" content="flores para ti">
+  <meta property="og:description" content="Un pequeño jardín de cartas y flores amarillas hecho para mi hermanita.">
+  <meta property="og:url" content="https://rotfstudio.com/flores-para-ti/">
+  <meta property="og:image" content="https://rotfstudio.com/flores-para-ti/assets/images/flores-para-ti-whatsapp-v2.jpg">
+  <meta property="og:image:url" content="https://rotfstudio.com/flores-para-ti/assets/images/flores-para-ti-whatsapp-v2.jpg">
+  <meta property="og:image:secure_url" content="https://rotfstudio.com/flores-para-ti/assets/images/flores-para-ti-whatsapp-v2.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Flores amarillas y un sobre crema con el texto flores para ti">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="flores para ti">
+  <meta name="twitter:description" content="Un pequeño jardín de cartas y flores amarillas hecho para mi hermanita.">
+  <meta name="twitter:image" content="https://rotfstudio.com/flores-para-ti/assets/images/flores-para-ti-whatsapp-v2.jpg">
+  <link rel="canonical" href="https://rotfstudio.com/flores-para-ti/">
+  <link rel="image_src" href="https://rotfstudio.com/flores-para-ti/assets/images/flores-para-ti-whatsapp-v2.jpg">
+  <link rel="icon" href="assets/images/icon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="noise" aria-hidden="true"></canvas>
+  <main id="orbit-view" aria-label="Un jardín de cartas para mi hermanita">
+    <button id="infoButton" class="corner-action" type="button">[ sobre este regalo ]</button>
+
+    <section class="masthead" aria-label="Título del sitio">
+      <h1><span id="typedTitle"></span><i></i></h1>
+      <p>un pequeño jardín hecho para mi hermanita</p>
+    </section>
+
+    <section id="world" class="world" aria-label="Colección interactiva de cartas">
+      <div id="orbit" class="orbit"></div>
+    </section>
+
+    <footer class="footer">
+      <div class="sound">
+        <audio id="ambientTrack" src="assets/supabase/storage/v1/object/sign/love-songs/ambient.mp3" preload="metadata" loop></audio>
+        <audio id="ambientNoise" src="assets/supabase/storage/v1/object/sign/love-songs/ambient-noise.mp3" preload="metadata" loop></audio>
+        <button id="soundButton" class="play" type="button" aria-label="Reproducir ambiente">
+          <svg class="play-icon" viewBox="0 0 8 10" aria-hidden="true"><polygon points="0,0 8,5 0,10"/></svg>
+          <svg class="pause-icon" viewBox="0 0 8 10" aria-hidden="true"><rect width="2.5" height="10"/><rect x="5.5" width="2.5" height="10"/></svg>
+        </button>
+        <span class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>Música para este pequeño jardín</span>
+      </div>
+      <p class="instructions">arrastra para explorar&nbsp; · &nbsp;espacio + arrastra para mover&nbsp; · &nbsp;desplázate para acercar</p>
+      <span class="closed">[ un jardín que siempre será tuyo ]</span>
+    </footer>
+  </main>
+
+  <div id="tooltip" class="tooltip" aria-hidden="true"></div>
+  <section id="letterView" class="letter-view" aria-label="Carta" hidden>
+    <img id="letterBackground" class="letter-background" alt="">
+    <div class="letter-fade" aria-hidden="true"></div>
+    <button id="previousLetter" class="letter-nav previous" type="button"><span class="desktop-label">← carta anterior</span><span class="mobile-label">← anterior</span></button>
+    <button id="closeLetter" class="letter-home" type="button" aria-label="Todas las cartas">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M1.5 7 8 1.5 14.5 7" stroke-linecap="round"/><path d="M3 6.5V14h10V6.5"/></svg>
+    </button>
+    <button id="nextLetter" class="letter-nav next" type="button"><span class="desktop-label">siguiente carta →</span><span class="mobile-label">siguiente →</span></button>
+    <div class="letter-sheet"><article id="letterContent" class="letter-content"></article></div>
+    <div id="letterMeta" class="letter-meta"></div>
+    <div class="letter-audio">
+      <audio id="letterAudio" preload="metadata" loop></audio>
+      <button id="letterAudioButton" class="letter-audio-button" type="button" aria-label="Reproducir">
+        <svg class="audio-play-icon" viewBox="0 0 10 12" aria-hidden="true"><polygon points="0,0 10,6 0,12"/></svg>
+        <svg class="audio-pause-icon" viewBox="0 0 10 12" aria-hidden="true"><rect width="3" height="12"/><rect x="7" width="3" height="12"/></svg>
+      </button>
+      <div class="letter-audio-details">
+        <span id="letterAudioTitle"></span>
+        <button id="letterAudioProgress" class="letter-audio-progress" type="button" aria-label="Avanzar audio"><i></i></button>
+        <div class="letter-audio-time"><span id="letterAudioCurrent">00:00</span><span id="letterAudioDuration">00:00</span></div>
+      </div>
+    </div>
+    <div class="letter-keepsake">
+      <img id="letterPreview" class="letter-preview" alt="">
+      <img id="letterEnvelopeThumb" class="letter-envelope-thumb" alt="">
+    </div>
+  </section>
+  <div id="infoModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
+    <article class="scroll-paper">
+      <h2 id="aboutTitle" class="sr-only">Sobre este regalo</h2>
+      <div id="aboutText" class="about-text"></div>
+    </article>
+    <button id="closeInfo" class="discover" type="button">descubrir las cartas</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

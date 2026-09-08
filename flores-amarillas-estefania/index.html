@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f8f1df">
+  <meta name="description" content="Un regalo de flores amarillas que nunca se marchitará.">
+  <link rel="canonical" href="https://rotfstudio.com/flores-amarillas-estefania/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:url" content="https://rotfstudio.com/flores-amarillas-estefania/">
+  <meta property="og:title" content="Tienes flores amarillas">
+  <meta property="og:description" content="Un regalo especial de flores amarillas para Estefanía.">
+  <meta property="og:image" content="https://rotfstudio.com/flores-amarillas-estefania/assets/images/vista-whatsapp.png">
+  <meta property="og:image:secure_url" content="https://rotfstudio.com/flores-amarillas-estefania/assets/images/vista-whatsapp.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1707">
+  <meta property="og:image:height" content="907">
+  <meta property="og:image:alt" content="Ramo de girasoles con el mensaje Tienes flores amarillas para Estefanía">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tienes flores amarillas">
+  <meta name="twitter:description" content="Un regalo especial de flores amarillas para Estefanía.">
+  <meta name="twitter:image" content="https://rotfstudio.com/flores-amarillas-estefania/assets/images/vista-whatsapp.png">
+  <title>Flores amarillas para ti</title>
+  <link rel="icon" href="assets/images/icono-flores.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Italiana&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=42">
+</head>
+<body class="is-locked">
+  <div class="grain" aria-hidden="true"></div>
+  <div id="petals" class="petals" aria-hidden="true"></div>
+
+  <main>
+    <section id="welcome" class="welcome" aria-labelledby="welcome-title">
+      <div class="welcome__glow" aria-hidden="true"></div>
+      <div class="envelope envelope--intro" aria-hidden="true">
+        <span class="envelope__paper"><span class="mini-flower">✦</span></span>
+        <span class="envelope__flap"></span>
+        <span class="envelope__front"></span>
+        <span class="envelope__seal">21</span>
+      </div>
+      <p class="eyebrow">Un detalle para ti</p>
+      <h1 id="welcome-title">Tienes flores amarillas</h1>
+      <p class="welcome__hint">Hay regalos que duran más que un instante.</p>
+      <button id="open-experience" class="button button--primary" type="button">Ábrelas <span aria-hidden="true">🌻</span></button>
+    </section>
+
+    <div id="experience" class="experience" aria-hidden="true">
+      <section class="hero section" aria-labelledby="hero-title">
+        <h2 id="hero-title" class="display reveal">Para <span data-config="recipient">Estefanía</span></h2>
+        <button id="hero-bouquet" class="bouquet-wrap reveal" type="button" aria-label="Tocar el ramo de flores amarillas">
+          <span class="sun-glow" aria-hidden="true"></span>
+          <img class="bouquet" src="assets/images/ramo-estefania.png" alt="Ramo de girasoles amarillos con una tarjeta para Estefanía" width="1024" height="1536">
+          <span class="bouquet-click-hint" aria-hidden="true">Click me</span>
+          <span id="bouquet-message" class="bouquet-message" aria-live="polite">Estas son para ti 🌻</span>
+        </button>
+        <p class="dedication reveal" data-config="dedication"></p>
+        <p class="hero-advance-hint reveal" aria-hidden="true">Continúa <span>→</span></p>
+      </section>
+
+      <section class="yellow-universe is-universe-waiting" aria-labelledby="universe-title">
+        <div class="universe-intro" aria-hidden="true">
+          <span class="universe-intro__light"></span>
+          <p>Un jardín hecho de luz</p>
+          <h2>Todo un universo<br>florece para ti</h2>
+          <small>Mueve el jardín con tu dedo</small>
+        </div>
+        <div class="yellow-universe__heading">
+          <p class="eyebrow reveal">Un jardín hecho de luz</p>
+          <h2 id="universe-title" class="section-title reveal">Todo un universo<br>florece para ti</h2>
+          <p class="universe-hint reveal">Mueve el jardín con tu dedo</p>
+        </div>
+        <canvas id="yellow-universe-canvas" aria-label="Jardín interactivo de flores amarillas y mensajes románticos"></canvas>
+        <div class="universe-center" aria-hidden="true">
+          <span class="flower-petals flower-petals--back">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </span>
+          <span class="flower-petals flower-petals--front">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </span>
+          <span class="universe-center__disk"><b></b></span>
+        </div>
+        <canvas id="yellow-universe-front" aria-hidden="true"></canvas>
+      </section>
+
+      <section id="gallery-section" class="section gallery-section memory-card" aria-labelledby="gallery-title">
+        <p class="eyebrow reveal">Nuestros recuerdos</p>
+        <h2 id="gallery-title" class="section-title reveal">Una máquina de recuerdos</h2>
+        <p class="memory-card__intro reveal">Guardaría cada momento contigo si pudiera.</p>
+
+        <div id="memory-stage" class="memory-stage reveal">
+          <div class="photo-strip-sleeve" aria-live="polite">
+            <article id="photo-strip" class="photo-strip" aria-label="Tira de nuestros recuerdos">
+              <div class="photo-strip__front">
+                <p class="photo-strip__title">Nuestros recuerdos</p>
+                <div id="photo-strip-frames" class="photo-strip__frames"></div>
+                <p class="photo-strip__names"><span data-config="recipient"></span> + <span data-config="sender"></span></p>
+                <p class="photo-strip__date" data-config="memoryDate"></p>
+                <button id="flip-photo-strip" class="photo-strip__flip" type="button">Voltear la tira ↻</button>
+              </div>
+              <div class="photo-strip__back">
+                <p data-config="photoStripBack"></p>
+                <button class="photo-strip__flip" type="button">Volver a las fotos ↻</button>
+              </div>
+            </article>
+          </div>
+
+          <div id="memory-machine" class="memory-machine">
+            <div class="memory-machine__screen"><span id="camera-countdown">RECUERDOS</span></div>
+            <div id="camera-lens" class="memory-machine__lens"><i></i><b></b></div>
+            <button id="reveal-memories" class="memory-machine__button" type="button" aria-label="Revelar nuestros recuerdos"><span></span></button>
+            <span class="memory-machine__label">MEMORY · 21</span>
+            <div class="memory-machine__slot"><span></span></div>
+          </div>
+          <div id="camera-flash" class="camera-flash" aria-hidden="true"></div>
+          <p id="strip-pull-hint" class="strip-pull-hint">Jala la tira hacia abajo ↓</p>
+          <p id="strip-complete-hint" class="strip-complete-hint">Toca una fotografía para recordarla</p>
+        </div>
+
+        <button id="reveal-memories-main" class="button memory-reveal-button reveal" type="button">Revelar recuerdos 📸</button>
+        <p class="memory-card__final">Y lo mejor es que todavía nos faltan muchas fotos por tomar.</p>
+      </section>
+
+      <section id="scratch-reasons" class="section reasons scratch-reasons" aria-labelledby="reasons-title">
+        <p class="eyebrow reveal">Una pequeña lotería para ti</p>
+        <h2 id="reasons-title" class="section-title reveal">Cinco razones para regalarte estas flores</h2>
+        <p class="section-intro reveal">Rasca cada tarjeta para descubrirlas.</p>
+
+        <div class="scratch-stack reveal">
+          <div id="scratch-reward-petals" class="scratch-reward-petals" aria-hidden="true"></div>
+          <article id="scratch-ticket" class="scratch-ticket">
+            <span class="scratch-ticket__flower scratch-ticket__flower--one" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2.5c.7 5.4 1.1 5.8 6.5 6.5-5.4.7-5.8 1.1-6.5 6.5-.7-5.4-1.1-5.8-6.5-6.5 5.4-.7 5.8-1.1 6.5-6.5Z" fill="currentColor"/><path d="M19 15.5c.3 2.3.7 2.7 3 3-2.3.3-2.7.7-3 3-.3-2.3-.7-2.7-3-3 2.3-.3 2.7-.7 3-3Z" fill="currentColor" opacity=".65"/></svg>
+            </span>
+            <span class="scratch-ticket__flower scratch-ticket__flower--two" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="5" fill="currentColor"/><ellipse cx="24" cy="9" rx="4" ry="8"/><ellipse cx="24" cy="39" rx="4" ry="8"/><ellipse cx="9" cy="24" rx="8" ry="4"/><ellipse cx="39" cy="24" rx="8" ry="4"/><ellipse cx="13.4" cy="13.4" rx="4" ry="8" transform="rotate(-45 13.4 13.4)"/><ellipse cx="34.6" cy="34.6" rx="4" ry="8" transform="rotate(-45 34.6 34.6)"/><ellipse cx="34.6" cy="13.4" rx="8" ry="4" transform="rotate(-45 34.6 13.4)"/><ellipse cx="13.4" cy="34.6" rx="8" ry="4" transform="rotate(-45 13.4 34.6)"/></g></svg>
+            </span>
+            <p id="scratch-ticket-label" class="scratch-ticket__label">Razón Nº 1</p>
+            <div class="scratch-ticket__message">
+              <p id="scratch-reason-text"></p>
+              <span id="scratch-prize-seal" class="scratch-prize-seal">Premio descubierto</span>
+            </div>
+            <canvas id="scratch-canvas" aria-label="Rasca esta zona para descubrir la razón"></canvas>
+            <p class="scratch-instruction">Desliza tu dedo para rascar</p>
+            <div id="scratch-sparkles" class="scratch-sparkles" aria-hidden="true"></div>
+          </article>
+        </div>
+
+        <div class="scratch-progress reveal">
+          <div id="scratch-dots" class="scratch-dots" aria-hidden="true"></div>
+          <p id="scratch-count">1 de 5 razones</p>
+        </div>
+        <div class="scratch-actions reveal">
+          <button id="scratch-skip" class="scratch-skip" type="button">Revelar sin rascar</button>
+          <button id="scratch-next" class="button scratch-next" type="button" hidden>Siguiente razón →</button>
+        </div>
+      </section>
+
+      <section class="growing-garden-section section" aria-labelledby="garden-title">
+        <div class="growing-garden-copy">
+          <p class="eyebrow reveal">Para ti, una y otra vez</p>
+          <h2 id="garden-title" class="section-title reveal">Mira cómo florece<br>este detalle</h2>
+        </div>
+        <div class="garden-frame reveal">
+          <iframe id="growing-garden" title="Animación de un jardín de flores amarillas creciendo" data-src="assets/garden/index.html" loading="lazy"></iframe>
+        </div>
+      </section>
+
+      <section id="gift-game" class="section gift-game" aria-labelledby="gift-title">
+        <div class="gift-game__heading">
+          <p class="eyebrow reveal">Un detalle antes de continuar</p>
+          <h2 id="gift-title" class="section-title reveal">Antes de abrir la carta…</h2>
+          <p class="gift-game__intro reveal">Hay un regalo esperándote.<br>Elige solamente una de las tres cajas.</p>
+          <p id="gift-instruction" class="gift-game__instruction">Observa bien…</p>
+        </div>
+        <div id="gift-boxes" class="gift-boxes" aria-label="Elige uno de los tres regalos">
+          <button class="gift-box gift-box--one" type="button" data-gift="0" aria-label="Elegir regalo 1" disabled><span class="gift-box__lid"></span><span class="gift-box__body"></span><span class="gift-box__ribbon"></span><b>Regalo 1</b></button>
+          <button class="gift-box gift-box--two" type="button" data-gift="1" aria-label="Elegir regalo 2" disabled><span class="gift-box__lid"></span><span class="gift-box__body"></span><span class="gift-box__ribbon"></span><b>Regalo 2</b></button>
+          <button class="gift-box gift-box--three" type="button" data-gift="2" aria-label="Elegir regalo 3" disabled><span class="gift-box__lid"></span><span class="gift-box__body"></span><span class="gift-box__ribbon"></span><b>Regalo 3</b></button>
+        </div>
+        <div id="gift-confetti" class="gift-confetti" aria-hidden="true"></div>
+        <article id="love-coupon" class="love-coupon" aria-live="polite" hidden>
+          <span class="love-coupon__flower" aria-hidden="true">✦</span>
+          <p class="love-coupon__eyebrow">Cupón especial</p>
+          <p class="love-coupon__number">LOVE-2109</p>
+          <small>Vale por:</small>
+          <h3 id="coupon-prize"></h3>
+          <p id="coupon-description" class="love-coupon__description"></p>
+          <dl><div><dt>Para</dt><dd data-config="recipient"></dd></div><div><dt>De</dt><dd data-config="sender"></dd></div></dl>
+          <p class="love-coupon__validity">Válido cuando tú quieras<br>Uso único · No caduca</p>
+          <div class="love-coupon__barcode" aria-hidden="true"><i></i><i></i><i></i><i></i><span>♥</span><i></i><i></i><i></i><i></i></div>
+          <span class="love-coupon__seal">Para ti</span>
+        </article>
+        <div id="coupon-actions" class="coupon-actions" hidden>
+          <p>¡Este regalo es para ti!</p>
+          <button id="save-coupon" type="button">Guardar mi cupón</button>
+          <button id="redeem-coupon" type="button">Canjear por WhatsApp</button>
+          <button id="continue-to-letter" class="button" type="button">Abrir mi carta →</button>
+          <small>Ya encontraste tu regalo, pero todavía queda algo que no cabe dentro de una caja…</small>
+        </div>
+      </section>
+
+      <section class="section letter-section" aria-labelledby="letter-heading">
+        <div class="letter-prompt reveal">
+          <p class="eyebrow">Una última sorpresa</p>
+          <h2 id="letter-heading" class="section-title">Hay cosas que no caben dentro de una caja…</h2>
+          <p class="letter-section__intro">Por eso escribí algo para ti.</p>
+          <button id="open-letter" class="letter-envelope" type="button" aria-haspopup="dialog">
+            <span class="letter-envelope__flap" aria-hidden="true"></span>
+            <span class="letter-envelope__paper" aria-hidden="true"></span>
+            <span class="letter-envelope__body">
+              <span class="letter-envelope__action">Toca para abrir</span>
+            </span>
+            <span class="letter-envelope__seal" aria-hidden="true"><img src="assets/images/sello-girasol.webp" alt=""></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="section finale" aria-labelledby="final-title">
+        <div class="final-light" aria-hidden="true"></div>
+        <p class="eyebrow final-kicker">Para ti, siempre</p>
+        <h2 id="final-title" class="display final-title">Estas flores nunca se marchitarán.</h2>
+        <button id="final-bouquet" class="final-bouquet" type="button" aria-label="Tocar el ramo final">
+          <img class="bouquet bouquet--final" src="assets/images/ramo-estefania.png" alt="El mismo ramo de girasoles de la primera historia" width="1024" height="1536" loading="lazy">
+          <span>Siempre habrá flores para ti.</span>
+        </button>
+        <div id="final-petals" class="final-petals" aria-hidden="true"></div>
+        <p class="final-message">Porque fueron elegidas especialmente para ti y estarán aquí cada vez que quieras volver a verlas.<br><em>Gracias por hacer mis días más bonitos.</em></p>
+        <p class="signature final-signature">Con cariño,<br><strong data-config="sender"></strong></p>
+        <div class="final-song">
+          <span data-config="songTitle">Nuestra canción</span>
+          <button id="replay" type="button">Escuchar de nuevo</button>
+        </div>
+        <div class="final-actions">
+          <button id="restart-experience" class="button" type="button">Volver a vivirlo</button>
+          <button id="save-memory" class="button button--secondary" type="button">Guardar este recuerdo</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <nav id="story-progress" class="story-progress" aria-label="Progreso de la historia" hidden>
+    <div id="story-segments" class="story-progress__segments"></div>
+    <span id="story-count" class="story-progress__count">01 / 07</span>
+  </nav>
+  <button id="story-next" class="story-next" type="button" aria-label="Siguiente historia" hidden>
+    <span aria-hidden="true">→</span>
+  </button>
+
+  <button id="music-control" class="music-control" type="button" aria-label="Reproducir música" hidden>
+    <span class="music-control__icon" aria-hidden="true">▶</span>
+    <span class="music-control__label">Nuestra canción</span>
+    <span class="music-control__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  </button>
+  <audio id="music" preload="metadata" loop></audio>
+
+  <div id="letter-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal__backdrop" data-close-modal></div>
+    <article class="letter-card" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Cerrar carta" data-close-modal>×</button>
+      <p class="eyebrow">Para <span data-config="recipient"></span></p>
+      <h2 id="modal-title">Una carta para ti</h2>
+      <div class="letter-card__rule" aria-hidden="true"></div>
+      <p id="letter-text" class="letter-card__text"></p>
+      <p class="letter-card__finish-hint">Cuando termines de leer, toca mi firma.</p>
+      <button id="letter-signature" class="letter-card__sign" type="button">Con todo mi cariño,<br><strong data-config="sender"></strong></button>
+      <div id="letter-signature-effect" class="letter-signature-effect" aria-hidden="true"></div>
+      <button id="letter-final-next" class="button letter-final-next" type="button" hidden>Ver mis flores →</button>
+    </article>
+  </div>
+
+  <div id="photo-modal" class="photo-modal" role="dialog" aria-modal="true" aria-label="Fotografía ampliada" aria-hidden="true">
+    <button class="photo-modal__close" type="button" aria-label="Cerrar fotografía">×</button>
+    <img id="photo-modal-image" src="" alt="">
+    <p id="photo-modal-caption"></p>
+  </div>
+
+  <script src="js/vendor/three.min.js"></script>
+  <script src="js/universe-three.js?v=42"></script>
+  <script src="js/config.js?v=42"></script>
+  <script src="js/script.js?v=42"></script>
+</body>
+</html>
