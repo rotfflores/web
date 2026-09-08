@@ -1,11 +1,40 @@
 /* Scoped portfolio cards; shared ROTF typography and theme colors are preserved. */
-.web-projects { scroll-margin-top: 100px; }
+body[data-page="paginas"] .cinematic-pages-hero {
+  border-bottom: 0;
+  box-shadow: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 80px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 80px), transparent);
+}
+.web-project-slideshow { position: relative; display: grid; }
+.web-project-slideshow > img { grid-area: 1 / 1; opacity: 0; transition: opacity .9s ease; }
+.web-project-slideshow > img.is-current { opacity: 1; }
+/* Fade the CTA background and grid without fading its text or controls. */
+body[data-page="paginas"] .web-launch-cta {
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: linear-gradient(180deg, transparent, rgba(21,18,39,.46) 22%, rgba(8,8,18,.3) 78%, transparent);
+}
+body[data-page="paginas"] .web-launch-cta::before {
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent);
+}
+:root[data-theme="light"] body[data-page="paginas"] .web-launch-cta {
+  border: 0;
+  box-shadow: none;
+  background: linear-gradient(180deg, transparent, rgba(244,240,250,.5) 22%, rgba(244,240,250,.3) 78%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .web-project-slideshow > img { transition: none; }
+}
+body[data-page="paginas"] .web-projects { scroll-margin-top: 100px; border-top: 0; }
 .web-projects-heading { max-width: 760px; margin-bottom: 44px; }
 .web-projects-heading .section-label { margin: 0 0 18px; }
 .web-projects-heading h2 { font-size: clamp(2.7rem, 5vw, 4.6rem); letter-spacing: -.055em; }
 .web-projects-heading > p:last-child { max-width: 680px; margin: 22px 0 0; color: var(--muted); }
 .web-projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-.web-project-card { min-width: 0; display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--line); border-radius: 6px; background: color-mix(in srgb, var(--surface) 65%, var(--bg)); transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+.web-project-card { min-width: 0; display: flex; flex-direction: column; overflow: hidden; border: 1px solid transparent; border-radius: 6px; background: color-mix(in srgb, var(--surface) 65%, var(--bg)); transition: transform .3s ease, box-shadow .3s ease; }
 .web-project-preview { padding: 22px 18px; border-bottom: 1px solid var(--line); background: linear-gradient(145deg, rgba(157,123,255,.06), transparent); }
 .web-project-window { overflow: hidden; border: 1px solid rgba(255,255,255,.14); border-radius: 4px; box-shadow: 0 8px 22px rgba(0,0,0,.16); transition: transform .4s ease; }
 .web-project-window-bar { height: 17px; display: flex; align-items: center; gap: 4px; padding: 0 8px; background: #25232c; }
@@ -26,9 +55,9 @@
 .web-project-edition strong { display: block; font-size: .8rem; font-weight: 500; }
 .web-project-edition small { display: block; margin-top: 2px; font-size: .66rem; color: var(--muted); }
 .web-project-link:focus-visible, .web-project-edition:focus-visible { outline: 2px solid var(--purple); outline-offset: 4px; border-radius: 2px; }
-.web-project-card:focus-within { border-color: var(--purple); }
+
 @media (hover: hover) and (pointer: fine) {
-  .web-project-card:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--purple) 45%, var(--line)); box-shadow: 0 16px 36px rgba(0,0,0,.12); }
+  .web-project-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,0,0,.12); }
   .web-project-card:hover .web-project-window { transform: translateY(-2px); }
   .web-project-link:hover .web-project-arrow, .web-project-edition:hover .web-project-arrow { border-color: var(--purple); background: rgba(157,123,255,.1); }
 }
