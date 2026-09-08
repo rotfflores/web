@@ -1,0 +1,17 @@
+{
+  "$schema": "../../.local/cloudflare-tools/node_modules/wrangler/config-schema.json",
+  "name": "rotf-contact-api",
+  "account_id": "9c5b54ad7ce5df6f5fa424a2eb419677",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-08",
+  "workers_dev": true,
+  "keep_vars": true,
+  "rules": [{ "type": "Text", "globs": ["**/*.html"], "fallthrough": true }],
+  "vars": {
+    "ACCESS_TEAM_DOMAIN": "jolly-mud-acf4.cloudflareaccess.com",
+    "ACCESS_AUD": "02fef04cfea7a2c22f30d5f176976baf077ce9022384d557a87464ab8bb5bef4"
+  },
+  "d1_databases": [{ "binding": "DB", "database_name": "rotf-contactos", "database_id": "32aadcd0-5da0-47ac-9dfe-bef52e9499a2" }],
+  "r2_buckets": [{ "binding": "ATTACHMENTS", "bucket_name": "rotf-contact-attachments" }],
+  "observability": { "enabled": true }
+}
