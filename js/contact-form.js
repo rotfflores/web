@@ -2,6 +2,10 @@
   const form = document.querySelector('#contact-form');
   if (!form) return;
 
+  if (new URLSearchParams(window.location.search).get('proyecto') === 'invitacion') {
+    form.querySelector('select[name="Proyecto"]').value = 'Una invitación digital';
+  }
+
   const button = form.querySelector('.form-submit');
   const status = form.querySelector('.form-status');
   const originalLabel = button.innerHTML;

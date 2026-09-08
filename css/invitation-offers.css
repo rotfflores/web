@@ -1,0 +1,28 @@
+/* Additive styles only: leave the category panels and carousel layout intact. */
+body[data-page="invitaciones"] .invitation-custom-card { border-style: dashed; border-color: color-mix(in srgb, var(--purple) 45%, transparent); background: linear-gradient(145deg, rgba(157,123,255,.07), transparent), var(--surface); }
+body[data-page="invitaciones"] .invitation-custom-icon { display: grid; place-items: center; width: 84px; height: 84px; margin: 1rem 0 2rem; border: 1px dashed var(--line); border-radius: 50%; color: var(--purple); }
+body[data-page="invitaciones"] .invitation-custom-card .invitation-custom-highlight { margin: 2rem 0 1.25rem; color: var(--purple); font-weight: 700; }
+body[data-page="invitaciones"] .invitation-custom-card .button { min-height: 48px; max-width: 100%; text-align: center; }
+body[data-page="invitaciones"] .invitation-custom-card .button:focus-visible { outline: 2px solid var(--purple); outline-offset: 4px; }
+body[data-page="invitaciones"] .invitation-offer { margin: 1.1rem 0 1.5rem; }
+body[data-page="invitaciones"] .invitation-price { margin: 0; color: var(--lime); font: 600 1.65rem/1.2 "Space Grotesk", sans-serif; letter-spacing: -.03em; }
+body[data-page="invitaciones"] .invitation-price-note { margin: .5rem 0 0; color: var(--muted); font-size: .78rem; line-height: 1.5; }
+body[data-page="invitaciones"] .invitation-selection { margin-top: 1.25rem; }
+body[data-page="invitaciones"] .invitation-selection .button { max-width: 100%; min-height: 48px; text-align: center; }
+body[data-page="invitaciones"] .invitation-info .intro { margin-bottom: 2rem; }
+body[data-page="invitaciones"] .invitation-info .intro h2 { font-size: clamp(2.4rem, 4vw, 3.7rem); }
+body[data-page="invitaciones"] .invitation-includes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem 2rem; margin: 0; padding: 0; list-style: none; }
+body[data-page="invitaciones"] .invitation-includes li { position: relative; padding: 1rem 0 1rem 1.1rem; border-bottom: 1px solid var(--line); color: var(--muted); }
+body[data-page="invitaciones"] .invitation-includes li::before { content: ""; position: absolute; left: 0; top: 1.7rem; width: 4px; height: 4px; border-radius: 50%; background: var(--purple); }
+body[data-page="invitaciones"] .invitation-selection a:focus-visible,
+body[data-page="invitaciones"] .invitation-info a:focus-visible { outline: 2px solid var(--purple); outline-offset: 4px; }
+@media (max-width: 900px) {
+  body[data-page="invitaciones"] .invitation-includes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) {
+  body[data-page="invitaciones"] .invitation-includes { grid-template-columns: minmax(0, 1fr); gap: .25rem; }
+}
+
+body[data-page="invitaciones"] #funciones,
+body[data-page="invitaciones"] .invitation-catalog,
+body[data-page="invitaciones"] .invitation-info[aria-labelledby="invitation-includes-title"] { border-color: transparent; }

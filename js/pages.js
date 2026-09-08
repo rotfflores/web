@@ -818,7 +818,22 @@ function configureProjectCarousel(gallery) {
     originals.forEach((card) => track.appendChild(card));
     gallery.appendChild(track);
 
-    let index = 0;
+    const loop = document.body.dataset.page === 'invitaciones';
+    if (loop) {
+      // Boundary copies let the last and first designs meet without a rewind.
+      const boundaryCopy = (card) => {
+        const copy = card.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        copy.inert = true;
+        copy.removeAttribute('id');
+        copy.querySelectorAll('[id]').forEach((item) => item.removeAttribute('id'));
+        return copy;
+      };
+      track.prepend(boundaryCopy(originals[originals.length - 1]));
+      track.append(boundaryCopy(originals[0]));
+    }
+    let index = loop ? 1 : 0;
+    let settleTimer;
     let startX = 0;
     let startY = 0;
     let deltaX = 0;
@@ -831,13 +846,33 @@ function configureProjectCarousel(gallery) {
       track.style.transition = animate ? 'transform .28s cubic-bezier(.22,.61,.36,1)' : 'none';
       track.style.transform = `translate3d(${(-index * slideWidth()) + offset}px,0,0)`;
     };
-    const reset = () => { index = 0; place(false); };
+    const settle = () => {
+      window.clearTimeout(settleTimer);
+      if (!loop) return;
+      if (index === 0) index = originals.length;
+      else if (index === originals.length + 1) index = 1;
+      else return;
+      place(false);
+      // Commit the invisible reset before another gesture starts a transition.
+      void track.offsetWidth;
+    };
+    const onTransitionEnd = (event) => {
+      if (event.target === track && event.propertyName === 'transform') settle();
+    };
+    const reset = () => {
+      window.clearTimeout(settleTimer);
+      index = loop ? 1 : 0;
+      place(false);
+    };
     const move = (direction) => {
-      index = Math.max(0, Math.min(originals.length - 1, index + direction));
+      settle();
+      index = loop ? index + direction : Math.max(0, Math.min(originals.length - 1, index + direction));
       place(true);
+      if (loop) settleTimer = window.setTimeout(settle, 320);
     };
     const onTouchStart = (event) => {
       if (event.touches.length !== 1) return;
+      settle();
       startX = event.touches[0].clientX;
       startY = event.touches[0].clientY;
       deltaX = 0;
@@ -868,6 +903,7 @@ function configureProjectCarousel(gallery) {
     };
     const onPointerDown = (event) => {
       if (event.pointerType !== 'mouse' || event.button !== 0) return;
+      settle();
       startX = event.clientX;
       deltaX = 0;
       mouseDragging = true;
@@ -903,7 +939,8 @@ function configureProjectCarousel(gallery) {
       event.preventDefault();
       move(event.key === 'ArrowRight' ? 1 : -1);
     };
-    const onResize = () => place(false);
+    const onResize = () => { settle(); place(false); };
+    track.addEventListener('transitionend', onTransitionEnd);
     gallery.addEventListener('touchstart', onTouchStart, { passive: true });
     gallery.addEventListener('touchmove', onTouchMove, { passive: false });
     gallery.addEventListener('touchend', onTouchEnd, { passive: true });
@@ -917,6 +954,8 @@ function configureProjectCarousel(gallery) {
     window.addEventListener('resize', onResize);
     gallery.resetCarousel = reset;
     gallery.destroyCarousel = () => {
+      window.clearTimeout(settleTimer);
+      track.removeEventListener('transitionend', onTransitionEnd);
       gallery.removeEventListener('touchstart', onTouchStart);
       gallery.removeEventListener('touchmove', onTouchMove);
       gallery.removeEventListener('touchend', onTouchEnd);
@@ -928,7 +967,7 @@ function configureProjectCarousel(gallery) {
       gallery.removeEventListener('click', onClickCapture, true);
       gallery.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('resize', onResize);
-      [...track.children].forEach((card) => gallery.appendChild(card));
+      originals.forEach((card) => gallery.appendChild(card));
       track.remove();
       delete gallery.resetCarousel;
       delete gallery.destroyCarousel;
