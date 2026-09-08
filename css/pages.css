@@ -161,7 +161,7 @@ svg.icon-arrow-up,svg.icon-arrow-right{display:block;overflow:visible}svg.icon-a
 /* Páginas — portada cinematográfica inspirada en la referencia de medusas. */
 body[data-page="paginas"] .cinematic-pages-hero{position:relative;isolation:isolate;width:100%;max-width:none;min-height:calc(100svh - 82px);margin:0;padding:clamp(110px,15vh,168px) clamp(24px,6vw,100px) clamp(90px,12vh,126px);align-items:flex-start;justify-content:center;text-align:left;overflow:hidden;color:#fff;background:#02020a!important}
 .cinematic-hero-media{position:absolute;z-index:-4;inset:0 0 0 34%;overflow:hidden;background:#02020a}
-.cinematic-hero-video{width:100%;height:100%;object-fit:cover;object-position:50% 58%;filter:saturate(1.16) contrast(1.07);transform:scale(1.025)}
+.cinematic-hero-video{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 58%;filter:saturate(1.16) contrast(1.07);transform:scale(1.025)}
 .cinematic-hero-shade{position:absolute;z-index:-3;inset:0;background:linear-gradient(90deg,#02020a 0%,rgba(2,2,10,.98) 25%,rgba(2,2,10,.75) 48%,rgba(2,2,10,.12) 78%,rgba(2,2,10,.2) 100%),linear-gradient(180deg,rgba(2,2,10,.35),transparent 38%,rgba(2,2,10,.5));pointer-events:none}
 .cinematic-pages-hero:after{content:"";position:absolute;z-index:-2;inset:0;background:radial-gradient(circle at 72% 55%,rgba(137,83,255,.14),transparent 32%);pointer-events:none}
 .cinematic-hero-copy{position:relative;z-index:2;width:min(680px,48vw);margin-left:max(0px,calc((100vw - 1440px)/2));display:flex;flex-direction:column;align-items:flex-start}
@@ -186,8 +186,8 @@ body[data-page="paginas"] .cinematic-hero-copy .button:hover{border-color:#c4a6f
 @media(max-width:900px){
   body[data-page="paginas"] .cinematic-pages-hero{min-height:calc(100svh - 70px);padding:90px max(22px,env(safe-area-inset-right)) max(76px,calc(env(safe-area-inset-bottom) + 62px)) max(22px,env(safe-area-inset-left));justify-content:flex-end}
   .cinematic-hero-media{inset:0}
-  .cinematic-hero-video{object-position:center 48%;filter:saturate(1.18) contrast(1.06) brightness(1.04);transform:scale(.82)}
-  .cinematic-hero-shade{background:linear-gradient(180deg,rgba(2,2,10,.18) 0%,rgba(2,2,10,.05) 31%,rgba(2,2,10,.58) 55%,rgba(2,2,10,.97) 100%),linear-gradient(90deg,rgba(2,2,10,.34),transparent 45%,rgba(2,2,10,.18))}
+  .cinematic-hero-video{object-position:center 48%;filter:saturate(1.18) contrast(1.06) brightness(1.04);transform:scale(1.025)}
+  .cinematic-hero-shade{background:linear-gradient(180deg,#02020a 0%,rgba(2,2,10,.05) 24%,rgba(2,2,10,.58) 55%,#02020a 100%),linear-gradient(90deg,rgba(2,2,10,.34),transparent 45%,rgba(2,2,10,.18))}
   .cinematic-hero-copy{width:100%;margin:0}
   body[data-page="paginas"] .cinematic-pages-hero>.page-brand-visual{position:absolute;z-index:3;top:24px;left:max(22px,env(safe-area-inset-left));display:grid;width:54px;height:54px;margin:0}
   body[data-page="paginas"] .cinematic-hero-copy h1{max-width:670px;font-size:clamp(3.15rem,11vw,5.5rem);line-height:.9}
