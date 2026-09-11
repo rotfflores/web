@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f8f1df">
   <meta name="description" content="Un regalo de flores amarillas que nunca se marchitará.">
-  <link rel="canonical" href="https://rotfstudio.com/flores-amarillas-estefania/">
+  <link rel="canonical" href="https://rotfflores.github.io/web/flores-amarillas-estefania/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_MX">
-  <meta property="og:url" content="https://rotfstudio.com/flores-amarillas-estefania/">
+  <meta property="og:url" content="https://rotfflores.github.io/web/flores-amarillas-estefania/">
   <meta property="og:title" content="Tienes flores amarillas">
   <meta property="og:description" content="Un regalo especial de flores amarillas para Estefanía.">
-  <meta property="og:image" content="https://rotfstudio.com/flores-amarillas-estefania/assets/images/vista-whatsapp.png">
-  <meta property="og:image:secure_url" content="https://rotfstudio.com/flores-amarillas-estefania/assets/images/vista-whatsapp.png">
+  <meta property="og:image" content="https://rotfflores.github.io/web/flores-amarillas-estefania/assets/images/vista-whatsapp.png">
+  <meta property="og:image:secure_url" content="https://rotfflores.github.io/web/flores-amarillas-estefania/assets/images/vista-whatsapp.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1707">
   <meta property="og:image:height" content="907">
@@ -20,13 +20,13 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Tienes flores amarillas">
   <meta name="twitter:description" content="Un regalo especial de flores amarillas para Estefanía.">
-  <meta name="twitter:image" content="https://rotfstudio.com/flores-amarillas-estefania/assets/images/vista-whatsapp.png">
+  <meta name="twitter:image" content="https://rotfflores.github.io/web/flores-amarillas-estefania/assets/images/vista-whatsapp.png">
   <title>Flores amarillas para ti</title>
   <link rel="icon" href="assets/images/icono-flores.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Italiana&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=42">
+  <link rel="stylesheet" href="css/styles.css?v=54">
 </head>
 <body class="is-locked">
   <div class="grain" aria-hidden="true"></div>
@@ -39,7 +39,9 @@
         <span class="envelope__paper"><span class="mini-flower">✦</span></span>
         <span class="envelope__flap"></span>
         <span class="envelope__front"></span>
-        <span class="envelope__seal">21</span>
+        <span class="envelope__address">Para Estefanía</span>
+        <span class="envelope__date" data-config="memoryDate"></span>
+        <span class="envelope__seal"><i>✦</i></span>
       </div>
       <p class="eyebrow">Un detalle para ti</p>
       <h1 id="welcome-title">Tienes flores amarillas</h1>
@@ -62,10 +64,12 @@
 
       <section class="yellow-universe is-universe-waiting" aria-labelledby="universe-title">
         <div class="universe-intro" aria-hidden="true">
+          <span class="universe-intro__stars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
           <span class="universe-intro__light"></span>
           <p>Un jardín hecho de luz</p>
           <h2>Todo un universo<br>florece para ti</h2>
-          <small>Mueve el jardín con tu dedo</small>
+          <span class="universe-intro__divider" aria-hidden="true"><i></i></span>
+          <small>El universo está por florecer</small>
         </div>
         <div class="yellow-universe__heading">
           <p class="eyebrow reveal">Un jardín hecho de luz</p>
@@ -211,11 +215,33 @@
             <span class="letter-envelope__flap" aria-hidden="true"></span>
             <span class="letter-envelope__paper" aria-hidden="true"></span>
             <span class="letter-envelope__body">
+              <span class="letter-envelope__date" data-config="memoryDate"></span>
               <span class="letter-envelope__action">Toca para abrir</span>
             </span>
             <span class="letter-envelope__seal" aria-hidden="true"><img src="assets/images/sello-girasol.webp" alt=""></span>
           </button>
         </div>
+      </section>
+
+      <section class="section days-together" aria-labelledby="days-title">
+        <div class="days-together__halo" aria-hidden="true"></div>
+        <div class="days-together__orb" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+        <p class="days-together__eyebrow">Nuestro tiempo juntos</p>
+        <h2 id="days-title" class="days-together__title">Nuestra historia<br>en números</h2>
+        <div class="days-together__record">
+          <span class="days-together__record-label">Desde que dijimos “sí”</span>
+          <div class="days-together__number-wrap">
+            <strong id="days-together-count" class="days-together__number">0</strong>
+            <span class="days-together__unit">días</span>
+          </div>
+          <div class="days-together__timeline" aria-hidden="true"><span></span><i></i></div>
+          <div class="days-together__meta"><span>21 JUN 2025</span><span>HOY</span></div>
+        </div>
+        <p class="days-together__copy">eligiéndonos, riéndonos<br>y creando recuerdos.</p>
+        <p class="days-together__since">Y este número apenas está comenzando.</p>
+        <div class="days-together__equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       </section>
 
       <section class="section finale" aria-labelledby="final-title">
@@ -278,8 +304,8 @@
   </div>
 
   <script src="js/vendor/three.min.js"></script>
-  <script src="js/universe-three.js?v=42"></script>
-  <script src="js/config.js?v=42"></script>
-  <script src="js/script.js?v=42"></script>
+  <script src="js/universe-three.js?v=54"></script>
+  <script src="js/config.js?v=54"></script>
+  <script src="js/script.js?v=54"></script>
 </body>
 </html>

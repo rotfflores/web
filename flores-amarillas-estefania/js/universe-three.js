@@ -252,13 +252,13 @@
       introTimer = setTimeout(() => {
         section.classList.add("is-intro-revealing");
         intro.classList.add("is-intro-revealing");
-      }, 3200);
+      }, 3900);
       introEndTimer = setTimeout(() => {
         section.classList.remove("is-intro-playing", "is-intro-revealing");
         section.classList.remove("is-universe-waiting");
         section.classList.add("is-universe-visible");
         intro.classList.remove("is-intro-playing", "is-intro-revealing");
-      }, 4750);
+      }, 5450);
     };
     return () => {
       active = true;

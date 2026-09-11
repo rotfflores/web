@@ -2,7 +2,8 @@
 const FLOWERS_CONFIG = {
   recipient: "Estefanía",
   sender: "Obed",
-  memoryDate: "21 · 09 · 2026",
+  memoryDate: "21 · 06 · 2025",
+  relationshipStart: "2025-06-21",
   photoStripBack: "No importa cuántas fotos tengamos; siempre voy a querer guardar un momento más contigo.",
   dedication: "Hoy quiero regalarte flores amarillas porque haces que mis días sean más bonitos.",
   gardenMessage: "Estas flores son apenas un reflejo de toda la alegría que traes a mi vida. Gracias por hacer florecer mis días con tu presencia.",
@@ -29,10 +30,10 @@ const FLOWERS_CONFIG = {
     "Mi pensamiento bonito", "Tu corazón", "Mi motivo para sonreír", "Juntos", "Eres especial"
   ],
   photos: [
-    { src: "assets/photos/pareja-1.jpg", text: "Donde la risa se vuelve nuestro lugar favorito.", alt: "Pareja riendo junta en un parque" },
-    { src: "assets/photos/pareja-2.jpg", text: "Uno de esos instantes que quisiera guardar para siempre.", alt: "Pareja compartiendo un momento al atardecer" },
-    { src: "assets/photos/pareja-3.jpg", text: "Contigo, hasta el mundo parece detenerse.", alt: "Pareja bailando bajo el cielo del atardecer" },
-    { src: "assets/photos/pareja-4.jpg", text: "Y todavía nos quedan muchos caminos por recorrer.", alt: "Manos de una pareja entrelazadas al aire libre" }
+    { src: "assets/photos/pareja-1.jpg", text: "Donde la risa se vuelve nuestro lugar favorito.", alt: "Pareja disfrutando un momento especial al aire libre" },
+    { src: "assets/photos/pareja-2.jpg", text: "Uno de esos instantes que quisiera guardar para siempre.", alt: "Pareja abrazándose durante una salida" },
+    { src: "assets/photos/pareja-3.jpg", text: "Contigo, hasta el mundo parece detenerse.", alt: "Pareja compartiendo una tarde luminosa" },
+    { src: "assets/photos/pareja-4.jpg", text: "Y todavía nos quedan muchos caminos por recorrer.", alt: "Pareja caminando junta en un entorno natural" }
     // Sustituye estas rutas por las fotografías del pedido cuando las recibas.
   ],
   song: "assets/music/flores.mp3?v=2",
