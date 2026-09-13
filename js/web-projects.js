@@ -28,3 +28,12 @@ document.querySelectorAll('[data-project-slideshow]').forEach((slideshow) => {
   document.addEventListener('visibilitychange', sync);
   sync();
 });
+
+// Let the non-interactive area of a contact card open its quote form too.
+document.querySelectorAll('[data-contact-card]').forEach((card) => {
+  card.addEventListener('click', (event) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (event.target.closest('a, button, input, select, textarea')) return;
+    window.location.assign(card.dataset.contactHref);
+  });
+});
