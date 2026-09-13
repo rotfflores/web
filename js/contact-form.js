@@ -2,9 +2,13 @@
   const form = document.querySelector('#contact-form');
   if (!form) return;
 
-  if (new URLSearchParams(window.location.search).get('proyecto') === 'invitacion') {
-    form.querySelector('select[name="Proyecto"]').value = 'Una invitación digital';
-  }
+  const projectSelect = form.querySelector('select[name="Proyecto"]');
+  const requestedProject = new URLSearchParams(window.location.search).get('proyecto');
+  const projectOptions = {
+    invitacion: 'Una invitación digital',
+    'flores-amarillas': 'Flores amarillas'
+  };
+  if (projectOptions[requestedProject]) projectSelect.value = projectOptions[requestedProject];
 
   const button = form.querySelector('.form-submit');
   const status = form.querySelector('.form-status');
