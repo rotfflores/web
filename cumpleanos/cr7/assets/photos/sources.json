@@ -1,0 +1,13 @@
+{
+  "credits": "../../creditos.html",
+  "source": "Wikimedia Commons",
+  "processing": "Redimensionado, compresión WebP y encuadre visual mediante CSS.",
+  "files": [
+    "cr7-perfil.webp",
+    "cr7-comienzo.webp",
+    "cr7-victorias.webp",
+    "cr7-recuerdos.webp",
+    "cr7-temporada.webp",
+    "cr7-futuro.webp"
+  ]
+}

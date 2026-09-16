@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d0c">
+  <meta name="description" content="Estás invitado a una fiesta sorpresa de cumpleaños con temática CR7. Tu misión: guardar el secreto.">
+  <link rel="canonical" href="https://rotfstudio.com/cumpleanos/cr7/">
+  <meta property="og:url" content="https://rotfstudio.com/cumpleanos/cr7/">
+  <title>CR7 · Fiesta sorpresa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&amp;family=Barlow:wght@400;500;600;700&amp;family=Monsieur+La+Doulaise&amp;family=PT+Serif+Caption:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260916-local9">
+  <script src="config.js?v=20260916-local9" defer></script>
+  <script src="script.js?v=20260916-local9" defer></script>
+</head>
+<body>
+  <!-- La canción pertenece a la portada y se solicita desde que carga el primer video. -->
+  <audio id="background-music" src="assets/audio/el-fin-del-mundo.mp3" autoplay loop preload="auto" hidden></audio>
+  <!-- SVG locales: no dependen de emojis, icon fonts ni librerías externas. -->
+  <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-location" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-profile" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2M3 3h3M18 3h3"/></symbol>
+    <symbol id="i-stats" viewBox="0 0 24 24"><path d="M4 20V12h4v8m3 0V4h4v16m3 0V8h4v12M2 21h21"/></symbol>
+    <symbol id="i-story" viewBox="0 0 24 24"><path d="M12 5v16M12 5C8 2 4 3 2 4v15c4-2 7-1 10 2 3-3 6-4 10-2V4c-4-2-7-1-10 1Z"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 3h10v6a5 5 0 0 1-10 0V3Zm0 2H3v3a4 4 0 0 0 5 4m9-7h4v3a4 4 0 0 1-5 4m-4 2v6m-5 1h10"/></symbol>
+    <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m12 7 5 4-2 6H9l-2-6 5-4Zm0 0V2m5 9 5-2m-7 8 3 3m-9-3-3 3m1-9L2 9"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M3 5h18v14H3V5Zm0 1 9 7 9-7"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="m4 9 4 0 5-5v16l-5-5H4V9Zm12-1a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24"><path d="m4 9 4 0 5-5v16l-5-5H4V9Zm12 0 6 6m0-6-6 6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1 3-7Z"/></symbol>
+  </defs></svg>
+  <div id="intro" class="intro" role="button" tabindex="0" aria-label="Presiona en cualquier parte para iniciar la invitación">
+    <video id="intro-video" class="intro-video" autoplay loop playsinline muted preload="auto" poster="assets/intro-poster.jpg" aria-hidden="true"><source src="assets/intro-cr7-loop.mp4" type="video/mp4"></video>
+    <div class="intro-shade"></div><div class="grain"></div>
+    <div class="start" id="start" aria-hidden="true">Presiona start<small>TOCA EN CUALQUIER PARTE</small></div>
+  </div>
+  <div id="app" class="app" hidden>
+    <video id="background-video" class="background-video" loop playsinline muted preload="none" poster="assets/invitacion-poster.jpg" aria-hidden="true" data-src="assets/invitacion-loop.mp4"></video>
+    <div class="app-shade"></div><div class="grain"></div>
+    <header class="topbar"><button class="brand" data-home aria-label="CR7, menú principal">CR<span>7</span></button><span class="edition">EDICIÓN 23 · SORPRESA <svg><use href="#i-star"/></svg></span><button class="exit" id="exit-intro">VOLVER A INTRO</button></header>
+    <div class="system-bar"><span id="breadcrumb">MENÚ PRINCIPAL</span><span class="ready"><i></i> MISIÓN SECRETA</span></div>
+    <main id="screens">
+      <section class="screen" id="menu" aria-labelledby="menu-title">
+        <div class="menu-hero"><div><p class="eyebrow"><span class="number-tag" data-config="age">23</span> AÑOS · UNA LEYENDA</p><p class="pretitle">ESTÁS INVITADO A UNA</p><h1 id="menu-title" tabindex="-1">FIESTA<br><em>SORPRESA.</em></h1><p class="description">Celebramos los <span data-config="age">23</span> de <span data-config="name">Alex</span>.<br>La mejor jugada es sorprender a nuestra leyenda.</p></div><div class="legacy" aria-hidden="true"><span>THE LEGACY</span><b>7</b><span>CRISTIANO RONALDO</span></div></div>
+        <aside class="surprise-brief" aria-label="Instrucciones de la fiesta sorpresa"><svg aria-hidden="true"><use href="#i-lock"/></svg><div><span class="eyebrow">JUGADA SECRETA</span><h2 data-config="surpriseTitle">Él cree que es un plan cualquiera.</h2><p data-config="surpriseMessage">Llega antes de las 7:30, entra sin hacer ruido y no subas historias. Cuando llegue Alex, que nos encuentre a todos listos.</p><div class="secret-rules"><span>LLEGA 7:30</span><span>CELULAR EN SILENCIO</span><span>CERO HISTORIAS</span></div></div></aside>
+        <section class="party-details" aria-labelledby="party-details-title">
+          <div class="party-details-heading"><p class="eyebrow">LA CITA DEL EQUIPO</p><h2 id="party-details-title">NOS VEMOS EN <em>DURANGO</em></h2></div>
+          <article class="party-detail"><svg aria-hidden="true"><use href="#i-location"/></svg><div><span>EL LUGAR</span><h3 data-config="venue">Casa La Cancha</h3><p data-config="address">Calle Gol de Oro 23 · Durango, Dgo.</p><small data-config="venueNote">Casa y dirección de ejemplo para esta invitación.</small></div></article>
+          <article class="party-detail"><svg aria-hidden="true"><use href="#i-clock"/></svg><div><span>LA FIESTA COMIENZA</span><h3 data-config="partyTime">8:00 p. m.</h3><p>Llega a las <strong data-config="arrivalTime">7:30 p. m.</strong> para preparar la sorpresa.</p><small>Horario provisional · ¡Que no te gane el festejado!</small></div></article>
+        </section>
+        <section class="rsvp-panel" aria-labelledby="rsvp-title"><div><span class="eyebrow">LISTA DEL EQUIPO</span><h2 id="rsvp-title">¿CONTAMOS <em>CONTIGO?</em></h2><p>Escribe tu nombre y queda oficialmente convocado para la sorpresa.</p></div><div class="rsvp-action"><label for="rsvp-name">NOMBRE DEL INVITADO</label><input id="rsvp-name" name="guest-name" type="text" maxlength="40" autocomplete="name" placeholder="Escribe tu nombre"><button class="rsvp-button" id="rsvp-button" type="button" aria-pressed="false"><svg aria-hidden="true"><use href="#i-star"/></svg><span>CONFIRMAR ASISTENCIA</span></button></div><p class="rsvp-status" id="rsvp-status" aria-live="polite" hidden></p></section>
+        <nav class="menu-grid" aria-label="Secciones de la invitación">
+          <button class="menu-card" data-section="profile"><svg><use href="#i-profile"/></svg><span><strong>PERFIL DEL JUGADOR</strong><small>Conoce a la leyenda de esta temporada.</small></span><svg class="arrow"><use href="#i-arrow"/></svg></button>
+          <button class="menu-card" data-section="stats"><svg><use href="#i-stats"/></svg><span><strong>ESTADÍSTICAS</strong><small>Talento que va más allá de la cancha.</small></span><svg class="arrow"><use href="#i-arrow"/></svg></button>
+          <button class="menu-card" data-section="story"><svg><use href="#i-story"/></svg><span><strong>MODO HISTORIA</strong><small>Cinco niveles. Una historia irrepetible.</small></span><svg class="arrow"><use href="#i-arrow"/></svg></button>
+          <button class="menu-card" data-section="trophies"><svg><use href="#i-trophy"/></svg><span><strong>SALA DE TROFEOS</strong><small>Los logros que de verdad importan.</small></span><svg class="arrow"><use href="#i-arrow"/></svg></button>
+          <button class="menu-card" data-section="penalties"><svg><use href="#i-ball"/></svg><span><strong>DESAFÍO DE PENALES</strong><small>Marca un gol. Desbloquea tu recompensa.</small></span><svg class="arrow"><use href="#i-arrow"/></svg></button>
+          <button class="menu-card" data-section="final"><svg><use href="#i-message"/></svg><span><strong>MENSAJE FINAL</strong><small>La próxima misión comienza contigo.</small></span><svg class="arrow"><use href="#i-arrow"/></svg></button>
+        </nav>
+      </section>
+      <section class="screen" id="profile" hidden aria-labelledby="profile-title">
+        <button class="back" data-home><svg><use href="#i-arrow"/></svg> MENÚ PRINCIPAL</button><p class="eyebrow">EL PROTAGONISTA</p><h2 id="profile-title" tabindex="-1">PERFIL DEL <em>JUGADOR</em></h2>
+        <div class="profile-layout"><div class="player-card" id="player-card" tabindex="0" aria-label="Tarjeta del jugador, toca o mueve el cursor para inclinarla"><div class="card-shine"></div><div class="rating"><strong data-config="overall">99</strong><span data-config="position">LEYENDA</span></div><img id="player-photo" src="assets/photos/cr7-perfil.webp" width="400" height="480" alt="Cristiano Ronaldo con Portugal, imagen temática de la tarjeta" loading="lazy"><div class="player-info"><span class="player-nickname" data-config="nickname">El Comandante</span><h3 data-config="name">Alex</h3><div class="player-meta"><span id="player-city">Durango, Dgo.</span><strong>#<span data-config="number">7</span></strong></div><div class="card-attributes" aria-label="Estadísticas del jugador"><div><strong>98</strong><span>PAC</span></div><div><strong>99</strong><span>SHO</span></div><div><strong>94</strong><span>PAS</span></div><div><strong>96</strong><span>DRI</span></div><div><strong>91</strong><span>DEF</span></div><div><strong>97</strong><span>PHY</span></div></div><span class="card-label">EDICIÓN ÚNICA · NIVEL LEYENDA</span></div></div><div class="profile-copy"><span class="eyebrow">UNA CARTA. MIL RECUERDOS.</span><h3>El fichaje<br>de nuestras vidas.</h3><p>Alex cumple 23. Desde Durango, con mentalidad de leyenda y un equipo que quiere celebrar a su lado. Hoy la mejor jugada la hacemos nosotros: ¡una fiesta sorpresa!</p><p class="gold-text">Mueve o toca la tarjeta y descubre su brillo.</p></div></div>
+      </section>
+      <section class="screen" id="stats" hidden aria-labelledby="stats-title"><button class="back" data-home><svg><use href="#i-arrow"/></svg> MENÚ PRINCIPAL</button><p class="eyebrow">FUERA DE SERIE</p><h2 id="stats-title" tabindex="-1">ESTADÍSTICAS <em>DE LEYENDA</em></h2><div class="stats-panel" id="stats-bars"></div><p class="quote" id="stats-message"></p></section>
+      <section class="screen" id="story" hidden aria-labelledby="story-title"><button class="back" data-home><svg><use href="#i-arrow"/></svg> MENÚ PRINCIPAL</button><p class="eyebrow">CADA RECUERDO CUENTA</p><h2 id="story-title" tabindex="-1">MODO <em>HISTORIA</em></h2><p class="section-description">Toca cada nivel para descubrir la galería secreta. Fotografías temáticas de Cristiano Ronaldo para acompañar la historia de nuestra leyenda. <span id="story-progress">0 / 5 desbloqueados</span></p>
+        <!-- Edita src, alt, h3 y p de cada tarjeta para personalizar los recuerdos. -->
+        <div class="story-grid">
+          <article class="memory"><button class="memory-lock" aria-expanded="false"><svg><use href="#i-lock"/></svg><span>RECUERDO POR DESCUBRIR</span><strong>El comienzo</strong><small>TOCA PARA DESBLOQUEAR</small></button><div class="memory-content" hidden><img src="assets/photos/cr7-comienzo.webp" alt="Cristiano Ronaldo en Manchester United" loading="lazy" width="640" height="400"><div><span>RECUERDO POR DESCUBRIR</span><h3>El comienzo</h3><p>Toda gran historia empieza con un primer paso. Aquí comenzó la tuya.</p></div></div></article>
+          <article class="memory"><button class="memory-lock" aria-expanded="false"><svg><use href="#i-lock"/></svg><span>RECUERDO POR DESCUBRIR</span><strong>Primeras victorias</strong><small>TOCA PARA DESBLOQUEAR</small></button><div class="memory-content" hidden><img src="assets/photos/cr7-victorias.webp" alt="Cristiano Ronaldo con Real Madrid en 2011" loading="lazy" width="640" height="400"><div><span>RECUERDO POR DESCUBRIR</span><h3>Primeras victorias</h3><p>Los pequeños triunfos que nos enseñaron a soñar en grande.</p></div></div></article>
+          <article class="memory"><button class="memory-lock" aria-expanded="false"><svg><use href="#i-lock"/></svg><span>RECUERDO POR DESCUBRIR</span><strong>Momentos inolvidables</strong><small>TOCA PARA DESBLOQUEAR</small></button><div class="memory-content" hidden><img src="assets/photos/cr7-recuerdos.webp" alt="Cristiano Ronaldo en la celebración de la Champions 2018" loading="lazy" width="640" height="400"><div><span>RECUERDO POR DESCUBRIR</span><h3>Momentos inolvidables</h3><p>Hay recuerdos que siempre merecen una repetición.</p></div></div></article>
+          <article class="memory"><button class="memory-lock" aria-expanded="false"><svg><use href="#i-lock"/></svg><span>RECUERDO POR DESCUBRIR</span><strong>La temporada actual</strong><small>TOCA PARA DESBLOQUEAR</small></button><div class="memory-content" hidden><img src="assets/photos/cr7-temporada.webp" alt="Cristiano Ronaldo con Real Madrid" loading="lazy" width="640" height="400"><div><span>RECUERDO POR DESCUBRIR</span><h3>La temporada actual</h3><p>23 años de historias, risas y grandes jugadas. Esta temporada merece una fiesta inolvidable.</p></div></div></article>
+          <article class="memory"><button class="memory-lock" aria-expanded="false"><svg><use href="#i-lock"/></svg><span>NIVEL FINAL</span><strong>El futuro de una leyenda</strong><small>TOCA PARA DESBLOQUEAR</small></button><div class="memory-content" hidden><img src="assets/photos/cr7-futuro.webp" alt="Cristiano Ronaldo frente al Ajax" loading="lazy" width="640" height="400"><div><span>NIVEL FINAL</span><h3>El futuro de una leyenda</h3><p>Lo mejor todavía está por escribirse. La siguiente jugada es tuya.</p></div></div></article>
+        </div>
+      </section>
+      <section class="screen" id="trophies" hidden aria-labelledby="trophies-title"><button class="back" data-home><svg><use href="#i-arrow"/></svg> MENÚ PRINCIPAL</button><p class="eyebrow">PALMARÉS PERSONAL</p><h2 id="trophies-title" tabindex="-1">SALA DE <em>TROFEOS</em></h2><p class="section-description">Hay premios que no caben en una vitrina. Toca uno y descubre por qué es tuyo.</p><div class="trophy-grid" id="trophy-grid"></div></section>
+      <section class="screen" id="penalties" hidden aria-labelledby="penalties-title"><button class="back" data-home><svg><use href="#i-arrow"/></svg> MENÚ PRINCIPAL</button><p class="eyebrow">EL MOMENTO DECISIVO</p><h2 id="penalties-title" tabindex="-1">DESAFÍO DE <em>PENALES</em></h2><p class="section-description">Elige tu dirección. Si el portero va a otro lado, la recompensa es tuya.</p><div class="game-panel"><div class="scoreboard"><span>GOLES <b id="goals">0</b></span><span>INTENTOS <b id="attempts">0</b></span></div><div class="pitch" id="pitch"><div class="goal-net"></div><div class="keeper" id="keeper" aria-label="Portero"><svg viewBox="0 0 70 95" aria-hidden="true"><circle cx="35" cy="13" r="10"/><path d="M24 29h22l7 29-10 3-3-17v19l13 26-10 4-8-20-8 20-10-4 13-26V44l-3 17-10-3z"/></svg></div><div class="football" id="football"><svg><use href="#i-ball"/></svg></div><div class="penalty-spot"></div></div><div class="shot-controls"><button class="gold-button" data-shot="left">IZQUIERDA</button><button class="gold-button" data-shot="center">CENTRO</button><button class="gold-button" data-shot="right">DERECHA</button></div><p id="game-result" class="game-result" role="status">Tu equipo confía en ti.</p><button class="gold-button reward-button" id="open-reward" hidden>ABRIR RECOMPENSA</button></div></section>
+      <section class="screen" id="final" hidden aria-labelledby="final-title"><button class="back" data-home><svg><use href="#i-arrow"/></svg> MENÚ PRINCIPAL</button><div id="completion" class="completion"><svg><use href="#i-trophy"/></svg><p class="eyebrow">LA LEYENDA CONTINÚA</p><h2 id="final-title" tabindex="-1">MODO HISTORIA<br><em>COMPLETADO</em></h2><button class="gold-button" id="read-letter">ABRIR MENSAJE FINAL <svg><use href="#i-arrow"/></svg></button></div><article class="letter" id="letter" hidden><span class="eyebrow">PARA UNA PERSONA IRREPETIBLE</span><h3 tabindex="-1">Para ti, leyenda</h3><p id="final-message"></p><p class="secret-reminder">Y recuerda: hasta el gran momento, esta misión sigue siendo secreta. ¡No arruines la sorpresa!</p><strong id="final-mission"></strong><button class="gold-button" id="celebrate">CELEBRAR <svg><use href="#i-star"/></svg></button></article></section>
+    </main>
+    <footer class="footer"><span><b>CR7</b> LEGACY IN THE MAKING</span><button id="video-toggle" aria-pressed="false">Pausar fondo</button><a class="photo-credits" href="creditos.html" target="_blank" rel="noopener">Fotos y créditos</a><span class="mode">MODO SORPRESA <i>ON</i></span></footer>
+    <button id="music-toggle" class="music-toggle" aria-label="Activar música y efectos" aria-pressed="false"><svg><use href="#i-mute"/></svg><span>SONIDO</span></button>
+  </div>
+  <dialog id="reward-dialog" aria-labelledby="dialog-title"><button id="close-dialog" class="close-dialog" aria-label="Cerrar ventana">×</button><svg class="dialog-icon"><use href="#i-trophy"/></svg><p class="eyebrow">RECONOCIMIENTO DESBLOQUEADO</p><h2 id="dialog-title"></h2><div id="dialog-content"></div><button class="gold-button" id="dialog-home">VOLVER AL MENÚ PRINCIPAL</button></dialog>
+  <div class="celebration-overlay" id="celebration-overlay" hidden role="status"><strong>SIUUUUU</strong></div>
+  <div id="confetti" aria-hidden="true"></div>
+  <noscript><p>Activa JavaScript para entrar a la invitación y jugar.</p></noscript>
+</body>
+</html>

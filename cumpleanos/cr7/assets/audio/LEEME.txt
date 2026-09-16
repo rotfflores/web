@@ -1,0 +1,2 @@
+Coloca aquí tus audios MP3 y configura sus rutas en config.js.
+No se requieren archivos: la aplicación incluye música y efectos sintetizados de respaldo.
