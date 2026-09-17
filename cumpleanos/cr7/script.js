@@ -6,7 +6,7 @@
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const intro = $('#intro'), app = $('#app'), introVideo = $('#intro-video'), background = $('#background-video');
-  let active = 'menu', switching = false, started = false, videoPaused = false;
+  let active = 'menu', switching = false, started = false, videoPaused = false, menuScrollY = 0;
   let introMusicStarted = false;
   let gameTimer, celebrationTimer, gameBusy = false, goals = 0, attempts = 0;
   const memoriesUnlocked = new Set();
@@ -220,10 +220,11 @@
     if (switching || !started || !document.getElementById(id)?.classList.contains('screen')) return;
     if (id === active) { window.scrollTo(0, 0); return; }
     switching = true; cancelShot(); const previous = document.getElementById(active);
+    if (active === 'menu') menuScrollY = window.scrollY;
     previous.classList.add('leaving'); await wait(190); previous.hidden = true; previous.classList.remove('leaving');
     active = id; const section = document.getElementById(id); section.hidden = false;
     $('#breadcrumb').textContent = id === 'menu' ? 'MENÚ PRINCIPAL' : $('[data-section="' + id + '"] strong').textContent;
-    window.scrollTo(0, 0);
+    window.scrollTo(0, id === 'menu' ? menuScrollY : 0);
     $('h1,h2', section)?.focus({ preventScroll: true });
     if (id === 'menu') {
       $$('.menu-card').forEach((card, index) => {
@@ -268,6 +269,7 @@
     const guestName = cleanGuestName().toUpperCase();
     rsvpButton.classList.toggle('confirmed', confirmed);
     rsvpButton.setAttribute('aria-pressed', String(confirmed));
+    rsvpButton.hidden = confirmed;
     rsvpName.disabled = confirmed;
     $('span', rsvpButton).textContent = confirmed
       ? `${guestName} · ASISTENCIA CONFIRMADA`
@@ -292,17 +294,11 @@
       rsvpName.focus();
       return;
     }
-    rsvpConfirmed = !rsvpConfirmed;
+    rsvpConfirmed = true;
     try {
-      if (rsvpConfirmed) {
-        rsvpName.value = cleanGuestName();
-        localStorage.setItem('cr7-rsvp-name', rsvpName.value);
-        localStorage.setItem('cr7-rsvp-confirmed', 'true');
-      } else {
-        localStorage.removeItem('cr7-rsvp-confirmed');
-        localStorage.removeItem('cr7-rsvp-name');
-        rsvpName.value = '';
-      }
+      rsvpName.value = cleanGuestName();
+      localStorage.setItem('cr7-rsvp-name', rsvpName.value);
+      localStorage.setItem('cr7-rsvp-confirmed', 'true');
     } catch {}
     renderRsvp(rsvpConfirmed);
     if (rsvpConfirmed) { audio.effect('unlock'); confetti(); }
