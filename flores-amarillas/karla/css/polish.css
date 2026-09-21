@@ -1,0 +1,706 @@
+/* Capa final de pulido: conserva el diseño original y mejora interacción, compatibilidad y accesibilidad. */
+:root {
+  --tap-size: 44px;
+  --focus-ring: #fff3a6;
+  --focus-shadow: rgba(121, 76, 8, .7);
+}
+
+.sr-only {
+  position: fixed !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+button,
+[role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+[role="button"]:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px var(--focus-shadow);
+}
+
+.section,
+.welcome,
+.experience,
+.wrapped-card,
+.stories-active main {
+  min-height: 100vh;
+}
+
+@supports (height: 100svh) {
+  .section,
+  .welcome,
+  .experience,
+  .wrapped-card,
+  .stories-active main {
+    min-height: 100svh;
+  }
+}
+
+.story-progress,
+.story-next,
+.music-control,
+.button--secondary,
+.days-together__love-meter,
+.days-together__song,
+.photo-modal.is-open {
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* La pista sigue siendo fina, pero todo el alto es una zona táctil cómoda. */
+.story-progress__segments {
+  align-items: center;
+}
+
+.story-progress__count {
+  white-space: nowrap;
+}
+
+.story-progress__segments button {
+  position: relative;
+  min-width: 18px;
+  height: 32px;
+  border-radius: 12px;
+  overflow: visible;
+  background: transparent;
+}
+
+.story-progress__segments button::before,
+.story-progress__segments button::after {
+  content: "";
+  position: absolute;
+  inset: 14px 0 auto;
+  height: 3px;
+  border-radius: 99px;
+}
+
+.story-progress__segments button::before {
+  background: rgba(255, 255, 255, .22);
+}
+
+.story-progress__segments button::after {
+  transform: scaleX(0);
+  transform-origin: left;
+  background: #ffda48;
+  transition: transform .35s ease;
+}
+
+.story-progress__segments button.is-complete::after,
+.story-progress__segments button.is-active::after {
+  transform: scaleX(1);
+}
+
+.stories-active .story-progress.is-idle,
+.stories-active .story-next.is-idle {
+  opacity: .34;
+  filter: blur(.55px) saturate(.72);
+}
+
+.story-next,
+.music-control,
+.modal__close,
+.photo-modal__close,
+.photo-strip__flip,
+.scratch-skip,
+.scratch-next,
+.coupon-actions button,
+.final-actions .button {
+  min-width: var(--tap-size);
+  min-height: var(--tap-size);
+}
+
+.wrapped-card.is-active {
+  isolation: isolate;
+}
+
+.wrapped-card.is-active::selection,
+.letter-card::selection {
+  color: #2f250d;
+  background: #ffe16c;
+}
+
+@media (max-width: 360px), (max-height: 620px) {
+  .story-progress {
+    top: max(7px, env(safe-area-inset-top));
+  }
+
+  .story-progress__count {
+    font-size: .66rem;
+  }
+
+  .story-next {
+    bottom: max(11px, env(safe-area-inset-bottom));
+  }
+
+  .music-control {
+    bottom: max(11px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (forced-colors: active) {
+  button,
+  .story-progress,
+  .music-control {
+    border: 1px solid ButtonText;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Rediseño visual 2026: más profundidad sin alterar las dinámicas de las cards. */
+.welcome {
+  color: #fff8d9;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 210, 61, .24), transparent 24%),
+    radial-gradient(circle at 8% 82%, rgba(223, 164, 27, .22), transparent 32%),
+    radial-gradient(circle at 92% 74%, rgba(128, 132, 54, .27), transparent 34%),
+    linear-gradient(155deg, #171b10 0%, #2d3219 52%, #65501b 100%);
+}
+
+.welcome::before {
+  z-index: 0;
+  inset: 14px;
+  border-color: rgba(255, 229, 139, .24);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .035),
+    inset 0 0 80px rgba(236, 188, 43, .055);
+}
+
+.welcome::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: -31vmin;
+  left: 50%;
+  width: min(112vmin, 760px);
+  aspect-ratio: 1;
+  display: block;
+  border: 1px solid rgba(255, 226, 123, .14);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, transparent 0 24%, rgba(255, 211, 63, .11) 24.3% 24.7%, transparent 25%),
+    repeating-conic-gradient(from 7deg, rgba(255, 222, 107, .13) 0 1.1deg, transparent 1.1deg 15deg);
+  box-shadow:
+    0 0 0 48px rgba(255, 222, 111, .025),
+    0 0 0 96px rgba(255, 222, 111, .018);
+  opacity: .88;
+  transform: translateX(-50%);
+  animation: welcome-orbit-drift 24s linear infinite;
+  pointer-events: none;
+}
+
+.welcome__glow {
+  z-index: 0;
+  top: 5%;
+  width: min(96vw, 580px);
+  height: min(72vw, 430px);
+  background: radial-gradient(ellipse, rgba(255, 213, 72, .42), rgba(224, 167, 28, .12) 46%, transparent 72%);
+  filter: blur(24px);
+}
+
+.welcome .envelope--intro {
+  z-index: 2;
+  filter:
+    drop-shadow(0 32px 42px rgba(0, 0, 0, .34))
+    drop-shadow(0 7px 8px rgba(54, 34, 3, .24));
+}
+
+.welcome .envelope--intro::before {
+  inset: -30px -48px -42px;
+  border: 1px solid rgba(255, 226, 125, .11);
+  background:
+    radial-gradient(ellipse, rgba(255, 207, 46, .34), rgba(212, 152, 17, .08) 46%, transparent 70%);
+  box-shadow: 0 0 50px rgba(235, 179, 25, .11);
+}
+
+.welcome .eyebrow {
+  z-index: 2;
+  color: #e7c86b;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .28);
+}
+
+.welcome h1 {
+  z-index: 2;
+  max-width: 580px;
+  margin-block: 8px 10px;
+  color: #fff8dc;
+  font-size: clamp(2.8rem, 11.5vw, 5.35rem);
+  line-height: .97;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+  text-shadow: 0 6px 30px rgba(0, 0, 0, .3);
+}
+
+.welcome__hint {
+  z-index: 2;
+  max-width: 310px;
+  margin-bottom: 25px;
+  color: rgba(255, 248, 219, .7);
+}
+
+.welcome .button--primary {
+  position: relative;
+  z-index: 2;
+  min-width: 162px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 242, 186, .55);
+  color: #402a08;
+  background: linear-gradient(145deg, #ffe37c, #e5a91a);
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, .28),
+    0 0 30px rgba(239, 181, 27, .18),
+    inset 0 1px rgba(255, 255, 255, .72);
+}
+
+.welcome .button--primary::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(255, 250, 216, .32);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+@keyframes welcome-orbit-drift {
+  to { transform: translateX(-50%) rotate(360deg); }
+}
+
+/* Primera historia: ramo sobre una escena luminosa, con la dedicatoria en primer plano. */
+.stories-active .wrapped-card.hero {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 15% 13%, rgba(255, 253, 213, .82), transparent 22%),
+    radial-gradient(circle at 87% 72%, rgba(255, 238, 140, .48), transparent 28%),
+    linear-gradient(150deg, #ffe66d 0%, #f7ca2c 48%, #e99c0d 100%);
+}
+
+.stories-active .wrapped-card.hero::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 18%;
+  left: 50%;
+  width: min(77vw, 500px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(105, 69, 7, .14);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 252, 210, .37), rgba(255, 222, 91, .08) 48%, transparent 70%);
+  box-shadow:
+    0 0 0 24px rgba(255, 249, 196, .075),
+    0 0 0 68px rgba(115, 75, 8, .035),
+    0 28px 80px rgba(120, 69, 0, .12);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.stories-active .wrapped-card.hero::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  display: block;
+  opacity: .38;
+  background-image:
+    radial-gradient(circle, rgba(112, 70, 5, .46) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(255, 252, 213, .72) 0 1px, transparent 1.5px);
+  background-position: 0 0, 19px 23px;
+  background-size: 47px 47px, 61px 61px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 4%, #000 28%, #000 82%, transparent);
+  mask-image: linear-gradient(to bottom, transparent 4%, #000 28%, #000 82%, transparent);
+  pointer-events: none;
+}
+
+.stories-active .hero #hero-title {
+  z-index: 3;
+  width: fit-content;
+  max-width: 94%;
+  padding: 2px 18px 7px;
+  border: 1px solid rgba(255, 252, 216, .45);
+  border-radius: 999px;
+  color: #3b2909;
+  background: rgba(255, 248, 196, .32);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .45);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.stories-active #hero-title:focus {
+  outline: none;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .45);
+}
+
+.stories-active .hero .bouquet-wrap {
+  z-index: 2;
+  filter: drop-shadow(0 24px 32px rgba(92, 54, 2, .18));
+}
+
+.stories-active .hero .sun-glow {
+  inset: 9% -16% 16%;
+  border: 1px solid rgba(255, 249, 201, .34);
+  background:
+    radial-gradient(circle, rgba(255, 249, 196, .65), rgba(255, 209, 47, .22) 47%, transparent 69%);
+  box-shadow: 0 0 0 14px rgba(255, 248, 188, .06);
+  filter: blur(12px);
+}
+
+.stories-active .hero .bouquet {
+  filter:
+    drop-shadow(0 21px 20px rgba(91, 53, 3, .22))
+    drop-shadow(0 2px 2px rgba(255, 250, 214, .45));
+}
+
+.stories-active .hero .dedication {
+  z-index: 3;
+  width: min(94%, 540px);
+  margin-top: -2px;
+  padding: 11px 18px 13px;
+  border: 1px solid rgba(255, 252, 221, .45);
+  border-radius: 18px;
+  color: #4a3309;
+  background: linear-gradient(135deg, rgba(255, 251, 218, .62), rgba(255, 238, 161, .34));
+  box-shadow: 0 13px 34px rgba(97, 58, 4, .11), inset 0 1px rgba(255, 255, 255, .5);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.stories-active .hero .hero-advance-hint {
+  z-index: 3;
+  color: rgba(65, 43, 6, .78);
+}
+
+/* Cada interacción clara obtiene una atmósfera propia. */
+.stories-active .wrapped-card.memory-card {
+  background:
+    radial-gradient(circle at 16% 14%, rgba(255, 252, 218, .9), transparent 24%),
+    radial-gradient(circle at 86% 76%, rgba(188, 113, 32, .16), transparent 30%),
+    linear-gradient(155deg, #fff5db 0%, #efd9aa 58%, #dcae61 100%);
+}
+
+.memory-card .memory-stage::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 12px;
+  left: 50%;
+  width: min(94vw, 355px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(105, 57, 22, .12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 18px rgba(255, 250, 220, .18), 0 0 0 52px rgba(115, 63, 19, .035);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.stories-active .wrapped-card.scratch-reasons {
+  background:
+    radial-gradient(circle at 15% 14%, rgba(255, 254, 218, .75), transparent 25%),
+    radial-gradient(circle at 88% 70%, rgba(255, 236, 139, .42), transparent 30%),
+    linear-gradient(150deg, #fadd4f 0%, #efb718 58%, #d88c06 100%);
+}
+
+.stories-active .wrapped-card.gift-game {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255, 255, 255, .66), transparent 24%),
+    radial-gradient(circle at 88% 73%, rgba(216, 151, 31, .19), transparent 30%),
+    linear-gradient(150deg, #fff2ce 0%, #e9ce8d 58%, #ce9841 100%);
+}
+
+.stories-active .wrapped-card.gift-game::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 22%;
+  left: 50%;
+  width: min(92vw, 560px);
+  height: min(54svh, 480px);
+  border: 1px solid rgba(112, 69, 18, .12);
+  border-radius: 48% 48% 24% 24%;
+  background: linear-gradient(180deg, rgba(255, 250, 218, .31), rgba(255, 235, 162, .08));
+  box-shadow: inset 0 1px rgba(255, 255, 255, .36), 0 28px 80px rgba(99, 57, 12, .08);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.gift-box__body {
+  box-shadow:
+    0 15px 28px rgba(83, 48, 9, .25),
+    inset 8px 0 14px rgba(255, 255, 255, .13),
+    inset -8px -8px 14px rgba(76, 40, 5, .08);
+}
+
+.gift-box__lid {
+  box-shadow: 0 7px 12px rgba(72, 41, 8, .2), inset 0 2px rgba(255, 255, 255, .42);
+}
+
+.stories-active .wrapped-card.letter-section::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 59%, rgba(255, 214, 80, .13), transparent 28%),
+    radial-gradient(circle, rgba(255, 233, 149, .18) 0 1px, transparent 1.5px);
+  background-size: auto, 53px 53px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 3%, #000 24%, #000 88%, transparent);
+  mask-image: linear-gradient(to bottom, transparent 3%, #000 24%, #000 88%, transparent);
+  pointer-events: none;
+}
+
+/* Barra de progreso más nítida y consistente sobre fondos claros u oscuros. */
+.story-progress {
+  top: max(12px, env(safe-area-inset-top));
+  width: min(calc(100% - 28px), 650px);
+  padding: 7px 10px;
+  border-color: rgba(255, 242, 190, .2);
+  color: rgba(255, 249, 224, .9);
+  background: linear-gradient(135deg, rgba(45, 35, 17, .84), rgba(22, 19, 12, .76));
+  box-shadow: 0 10px 36px rgba(17, 12, 5, .23), inset 0 1px rgba(255, 255, 255, .09);
+  -webkit-backdrop-filter: blur(18px) saturate(1.18);
+  backdrop-filter: blur(18px) saturate(1.18);
+}
+
+.story-progress__segments {
+  gap: 4px;
+}
+
+.story-progress__segments button::before {
+  background: rgba(255, 255, 255, .2);
+}
+
+.story-progress__segments button::after {
+  background: linear-gradient(90deg, #eda915, #ffe77f);
+  box-shadow: 0 0 9px rgba(255, 211, 64, .45);
+}
+
+.story-progress__count {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .13em;
+}
+
+.music-control {
+  border-color: rgba(116, 82, 24, .16);
+  background: rgba(255, 251, 236, .9);
+  box-shadow: 0 11px 31px rgba(48, 34, 12, .18), inset 0 1px rgba(255, 255, 255, .62);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
+  backdrop-filter: blur(18px) saturate(1.15);
+}
+
+.stories-active .wrapped-card .display,
+.stories-active .wrapped-card .section-title {
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+.dedication,
+.section-intro,
+.memory-card__intro,
+.gift-game__intro,
+.letter-section__intro,
+.final-message {
+  text-wrap: pretty;
+}
+
+/* Barrido dorado y profundidad al pasar de una historia a otra. */
+.stories-active .experience {
+  perspective: 1200px;
+  isolation: isolate;
+}
+
+.stories-active .experience::after {
+  content: "";
+  position: fixed;
+  z-index: 11;
+  inset: -10% -35%;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(103deg, transparent 35%, rgba(255, 221, 110, .12) 45%, rgba(255, 250, 220, .56) 50%, rgba(239, 178, 35, .16) 55%, transparent 65%);
+  transform: translate3d(-68%, 0, 0) skewX(-9deg);
+}
+
+.stories-active .experience.is-card-transitioning::after {
+  animation: story-golden-wipe .82s cubic-bezier(.22, .76, .2, 1) both;
+}
+
+.stories-active .experience.is-going-back::after {
+  animation-direction: reverse;
+}
+
+.stories-active .experience.is-card-transitioning .wrapped-card {
+  pointer-events: none;
+}
+
+.scratch-card-active .story-next.is-locked {
+  visibility: hidden;
+  opacity: 0 !important;
+}
+
+.final-card-active .story-next {
+  visibility: hidden;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.stories-active .wrapped-card.is-card-entering {
+  animation: story-card-enter-forward .82s cubic-bezier(.22, .78, .18, 1) both;
+}
+
+.stories-active .wrapped-card.is-card-leaving {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  animation: story-card-leave-forward .82s cubic-bezier(.22, .78, .18, 1) both;
+}
+
+.stories-active .experience.is-going-back .wrapped-card.is-card-entering {
+  animation-name: story-card-enter-back;
+}
+
+.stories-active .experience.is-going-back .wrapped-card.is-card-leaving {
+  animation-name: story-card-leave-back;
+}
+
+@keyframes story-golden-wipe {
+  0% { opacity: 0; transform: translate3d(-68%, 0, 0) skewX(-9deg); }
+  34% { opacity: .82; }
+  100% { opacity: 0; transform: translate3d(68%, 0, 0) skewX(-9deg); }
+}
+
+@keyframes story-card-enter-forward {
+  from { opacity: 0; filter: blur(6px) brightness(.86); transform: translate3d(13vw, 0, 0) scale(1.025); }
+  to { opacity: 1; filter: none; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes story-card-leave-forward {
+  from { opacity: 1; filter: none; transform: translate3d(0, 0, 0) scale(1); }
+  to { opacity: 0; filter: blur(4px) brightness(.72); transform: translate3d(-9vw, 0, 0) scale(.96); }
+}
+
+@keyframes story-card-enter-back {
+  from { opacity: 0; filter: blur(6px) brightness(.86); transform: translate3d(-13vw, 0, 0) scale(1.025); }
+  to { opacity: 1; filter: none; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes story-card-leave-back {
+  from { opacity: 1; filter: none; transform: translate3d(0, 0, 0) scale(1); }
+  to { opacity: 0; filter: blur(4px) brightness(.72); transform: translate3d(9vw, 0, 0) scale(.96); }
+}
+
+@media (max-width: 430px) {
+  .welcome h1 {
+    font-size: clamp(2.65rem, 13vw, 4rem);
+  }
+
+  .stories-active .hero #hero-title {
+    padding-inline: 14px;
+  }
+
+  .stories-active .hero .dedication {
+    padding: 10px 14px 12px;
+  }
+
+  .final-card-active .final-actions {
+    width: 100%;
+    padding-right: 58px;
+  }
+}
+
+@media (max-height: 650px) {
+  .welcome .envelope--intro {
+    margin-bottom: 24px;
+    transform: scale(.88) rotate(-1.5deg);
+  }
+
+  .welcome h1 {
+    margin-top: 4px;
+  }
+
+  .welcome__hint {
+    margin-bottom: 18px;
+  }
+
+  .stories-active .hero .dedication {
+    padding-block: 8px 9px;
+  }
+}
+
+@media (max-height: 620px) {
+  .stories-active .wrapped-card.memory-card,
+  .stories-active .wrapped-card.scratch-reasons,
+  .stories-active .wrapped-card.gift-game {
+    padding-top: max(68px, calc(env(safe-area-inset-top) + 58px));
+  }
+
+  .memory-card .section-title,
+  .scratch-reasons .section-title,
+  .gift-game .section-title {
+    font-size: 1.7rem;
+  }
+
+  .memory-card__intro,
+  .scratch-reasons .section-intro,
+  .gift-game__intro {
+    margin-block: 6px 8px;
+  }
+
+  .memory-machine {
+    transform: translateX(-50%) scale(.84);
+    transform-origin: top center;
+  }
+
+  .photo-strip-sleeve {
+    top: 251px;
+  }
+
+  .memory-stage {
+    height: 330px;
+  }
+
+  .scratch-stack {
+    padding-top: 7px;
+  }
+
+  .scratch-ticket {
+    min-height: 250px;
+  }
+
+  .gift-box {
+    width: min(26vw, 92px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome::after,
+  .stories-active .wrapped-card.is-card-entering,
+  .stories-active .wrapped-card.is-card-leaving,
+  .stories-active .experience.is-card-transitioning::after {
+    animation: none !important;
+    filter: none !important;
+  }
+}
