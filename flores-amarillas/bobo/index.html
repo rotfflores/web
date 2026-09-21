@@ -10,19 +10,19 @@
   <meta property="og:locale" content="es_MX">
   <meta property="og:url" content="https://rotfflores.github.io/flores-amarillas-estefania-obed/">
   <meta property="og:title" content="Tienes flores amarillas">
-  <meta property="og:description" content="Un regalo especial de flores amarillas para Yesenia.">
-  <meta property="og:image" content="/assets/images/vista-whatsapp.png">
-  <meta property="og:image:secure_url" content="/assets/images/vista-whatsapp.png">
+  <meta property="og:description" content="Un regalo especial de flores amarillas para Estefanía.">
+  <meta property="og:image" content="https://rotfflores.github.io/flores-amarillas-estefania-obed/assets/images/vista-whatsapp.png">
+  <meta property="og:image:secure_url" content="https://rotfflores.github.io/flores-amarillas-estefania-obed/assets/images/vista-whatsapp.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1707">
   <meta property="og:image:height" content="907">
-  <meta property="og:image:alt" content="Ramo de girasoles con el mensaje Tienes flores amarillas para Yesenia">
+  <meta property="og:image:alt" content="Ramo de girasoles con el mensaje Tienes flores amarillas para Estefanía">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Tienes flores amarillas">
-  <meta name="twitter:description" content="Un regalo especial de flores amarillas para Yesenia.">
-  <meta name="twitter:image" content="/assets/images/vista-whatsapp.png">
+  <meta name="twitter:description" content="Un regalo especial de flores amarillas para Estefanía.">
+  <meta name="twitter:image" content="https://rotfflores.github.io/flores-amarillas-estefania-obed/assets/images/vista-whatsapp.png">
   <title>Flores amarillas para ti</title>
-  <link rel="icon" href="/flores-amarillas/yesenia/assets/images/vista-whatsapp.png" type="image/png">
+  <link rel="icon" href="assets/images/icono-flores.png" type="image/png">
   <link rel="preload" as="image" href="assets/images/ramo-estefania.png" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,13 +69,13 @@
           <span class="universe-intro__stars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
           <span class="universe-intro__light"></span>
           <p>Un jardín hecho de luz</p>
-          <h2>Hay encuentros que hacen<br>florecer algo bonito 🌻</h2>
+          <h2>Todo un universo<br>florece para ti</h2>
           <span class="universe-intro__divider" aria-hidden="true"><i></i></span>
           <small>El universo está por florecer</small>
         </div>
         <div class="yellow-universe__heading">
           <p class="eyebrow reveal">Un jardín hecho de luz</p>
-          <h2 id="universe-title" class="section-title reveal">Hay encuentros que hacen <br>florecer algo bonito 🌻</h2>
+          <h2 id="universe-title" class="section-title reveal">Todo un universo<br>florece para ti</h2>
           <p class="universe-hint reveal">Mueve el jardín con tu dedo</p>
         </div>
         <canvas id="yellow-universe-canvas" aria-label="Jardín interactivo de flores amarillas y mensajes románticos"></canvas>
@@ -131,7 +131,7 @@
 
       <section id="scratch-reasons" class="section reasons scratch-reasons" aria-labelledby="reasons-title">
         <p class="eyebrow reveal">Una pequeña lotería para ti</p>
-        <h2 id="reasons-title" class="section-title reveal">Tres razones para regalarte estas flores</h2>
+        <h2 id="reasons-title" class="section-title reveal">Cinco razones para regalarte estas flores</h2>
         <p class="section-intro reveal">Rasca cada tarjeta para descubrirlas.</p>
 
         <div class="scratch-stack reveal">
@@ -156,10 +156,10 @@
 
         <div class="scratch-progress reveal">
           <div id="scratch-dots" class="scratch-dots" aria-hidden="true"></div>
-          <p id="scratch-count">1 de 3 razones</p>
+          <p id="scratch-count">1 de 5 razones</p>
         </div>
         <div class="scratch-actions reveal">
-          <button id  ="scratch-skip" class="scratch-skip" type="button">Revelar sin rascar</button>
+          <button id="scratch-skip" class="scratch-skip" type="button">Revelar sin rascar</button>
           <button id="scratch-next" class="button scratch-next" type="button" hidden>Siguiente razón →</button>
         </div>
       </section>
@@ -203,7 +203,25 @@
           <p>¡Este regalo es para ti!</p>
           <button id="save-coupon" type="button">Guardar mi cupón</button>
           <button id="redeem-coupon" type="button">Canjear por WhatsApp</button>
-          <small>Ya encontraste tu regalo y este detalle es solo para ti.</small>
+          <button id="continue-to-letter" class="button" type="button">Abrir mi carta →</button>
+          <small>Ya encontraste tu regalo, pero todavía queda algo que no cabe dentro de una caja…</small>
+        </div>
+      </section>
+
+      <section class="section letter-section" aria-labelledby="letter-heading">
+        <div class="letter-prompt reveal">
+          <p class="eyebrow">Una última sorpresa</p>
+          <h2 id="letter-heading" class="section-title">Hay cosas que no caben dentro de una caja…</h2>
+          <p class="letter-section__intro">Por eso escribí algo para ti.</p>
+          <button id="open-letter" class="letter-envelope" type="button" aria-haspopup="dialog">
+            <span class="letter-envelope__flap" aria-hidden="true"></span>
+            <span class="letter-envelope__paper" aria-hidden="true"></span>
+            <span class="letter-envelope__body">
+              <span class="letter-envelope__date" data-config="memoryDate"></span>
+              <span class="letter-envelope__action">Toca para abrir</span>
+            </span>
+            <span class="letter-envelope__seal" aria-hidden="true"><img src="assets/images/sello-girasol.webp" alt=""></span>
+          </button>
         </div>
       </section>
 
@@ -214,17 +232,17 @@
           <strong id="days-together-count" class="days-together__number">0</strong>
           <span class="days-together__unit">días</span>
         </div>
-        <p class="days-together__copy">De coincidir, conocernos, elegirnos en pequeños momentos<br>y dejar que el cariño vaya encontrando su propio lugar.</p>
+        <p class="days-together__copy">Y lo mejor<br>aún está por venir</p>
         <div class="days-together__love-meter" aria-label="Una historia llena de amor"><span></span><b aria-hidden="true">♥</b></div>
         <dl class="days-together__stats">
-          <div><dt>Café</dt><dd>20</dd></div>
-          <div><dt>Comida</dt><dd>32</dd></div>
-          <div><dt>Platica</dt><dd>187</dd></div>
-          <div><dt>Risas</dt><dd id="days-together-stat">0</dd></div>
+          <div><dt>Aventuras</dt><dd>120</dd></div>
+          <div><dt>Risas</dt><dd>312</dd></div>
+          <div><dt>Canciones</dt><dd>87</dd></div>
+          <div><dt>Momentos</dt><dd id="days-together-stat">0</dd></div>
         </dl>
         <button id="days-song-toggle" class="days-together__song" type="button" aria-label="Reproducir Nuestra canción">
-          <img src="assets/images/floricienta-portada.jpg" alt="Portada del álbum" width="640" height="640">
-          <span><small>Esta canción me hace pensar en ti</small><strong data-config="songTitle">Mon Amour Remix — Zzoilo & Aitana</strong></span>
+          <img src="assets/images/floricienta-portada.jpg" alt="Portada del álbum de Floricienta" width="640" height="640">
+          <span><small>Nuestra canción</small><strong data-config="songTitle">Flores Amarillas — Floricienta</strong></span>
           <i aria-hidden="true">▶</i>
         </button>
       </section>
@@ -267,6 +285,21 @@
     <span class="music-control__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
   </button>
   <audio id="music" preload="metadata" loop></audio>
+
+  <div id="letter-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal__backdrop" data-close-modal></div>
+    <article class="letter-card" tabindex="-1">
+      <button class="modal__close" type="button" aria-label="Cerrar carta" data-close-modal>×</button>
+      <p class="eyebrow">Para <span data-config="recipient"></span></p>
+      <h2 id="modal-title">Una carta para ti</h2>
+      <div class="letter-card__rule" aria-hidden="true"></div>
+      <p id="letter-text" class="letter-card__text"></p>
+      <p class="letter-card__finish-hint">Cuando termines de leer, toca mi firma.</p>
+      <button id="letter-signature" class="letter-card__sign" type="button">Con todo mi cariño,<br><strong data-config="sender"></strong></button>
+      <div id="letter-signature-effect" class="letter-signature-effect" aria-hidden="true"></div>
+      <button id="letter-final-next" class="button letter-final-next" type="button" hidden>Ver mis flores →</button>
+    </article>
+  </div>
 
   <div id="photo-modal" class="photo-modal" role="dialog" aria-modal="true" aria-label="Fotografía ampliada" aria-hidden="true">
     <button class="photo-modal__close" type="button" aria-label="Cerrar fotografía">×</button>
