@@ -27,6 +27,32 @@ const server = http.createServer(async (req, res) => {
     const host = `127.0.0.1:${port}`;
     if (![host, `localhost:${port}`].includes(req.headers.host)) return json(res, 403, { error: 'Host no permitido.' });
     const url = new URL(req.url, `http://${host}`);
+    // The featured free-trial form uses the same live service as the private
+    // panel. This local proxy keeps the production API's CORS policy intact.
+    if (url.pathname === '/api/trial' && req.method === 'POST') {
+      if (req.headers.origin && ![`http://${host}`, `http://localhost:${port}`].includes(req.headers.origin)) return json(res, 403, { error: 'Origen no permitido.' });
+      if (!(req.headers['content-type'] || '').startsWith('application/json')) return json(res, 415, { error: 'Formato de solicitud no compatible.' });
+      const chunks = [];
+      let size = 0;
+      for await (const chunk of req) {
+        size += chunk.length;
+        if (size > 20000) return json(res, 413, { error: 'La solicitud supera el tamaño permitido.' });
+        chunks.push(chunk);
+      }
+      const payload = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+      if (!payload || typeof payload !== 'object' || Array.isArray(payload) || payload.project !== 'Día del Novio — Prueba gratis') return json(res, 400, { error: 'Solicitud de prueba inválida.' });
+      try {
+        const response = await fetch('https://api.rotfstudio.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Origin: 'https://rotfstudio.com' },
+          body: JSON.stringify(payload),
+          signal: AbortSignal.timeout(15000)
+        });
+        return json(res, response.status, await response.json());
+      } catch {
+        return json(res, 502, { ok: false, error: 'No pudimos conectar con el servicio de solicitudes. Intenta nuevamente.' });
+      }
+    }
     if (url.pathname === '/api/contact-capabilities' && req.method === 'GET') return json(res, 200, { localContactUploads: true });
     if (url.pathname === '/api/contact' && req.method === 'POST') {
       if (req.headers.origin && ![`http://${host}`, `http://localhost:${port}`].includes(req.headers.origin)) return json(res, 403, { error: 'Origen no permitido.' });

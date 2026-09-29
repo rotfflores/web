@@ -4,13 +4,22 @@
 
   const projectSelect = form.querySelector('select[name="Proyecto"]');
   const requestedProject = new URLSearchParams(window.location.search).get('proyecto');
+  const trialRequest = requestedProject === 'dia-del-novio';
   const projectOptions = {
     invitacion: 'Una invitación digital',
-    'flores-amarillas': 'Flores amarillas'
+    'flores-amarillas': 'Flores amarillas',
+    'dia-del-novio': 'Día del Novio — Prueba gratis'
   };
   if (projectOptions[requestedProject]) projectSelect.value = projectOptions[requestedProject];
 
   const button = form.querySelector('.form-submit');
+  if (trialRequest) {
+    document.querySelector('.inquiry-card h2').textContent = 'Solicita tu prueba gratis de Día del Novio.';
+    projectSelect.replaceChildren(new Option(projectOptions['dia-del-novio'], projectOptions['dia-del-novio'], true, true));
+    form.querySelector('[name="Mensaje"]').value = 'Quiero mi prueba gratis de Día del Novio. Página de referencia: https://dia-del-novio.rotfstudio.com/bienvenida/dist/';
+    button.textContent = 'Solicitar mi prueba gratis';
+    form.querySelector('.contact-attachments').hidden = true;
+  }
   const status = form.querySelector('.form-status');
   const originalLabel = button.innerHTML;
   const fileInput = form.querySelector('#contact-files');
@@ -53,7 +62,7 @@
     renderFiles();
   });
 
-  if (local) {
+  if (local && !trialRequest) {
     fetch('/api/contact-capabilities').then(response => response.ok ? response.json() : null).then(result => {
       if (result?.localContactUploads !== true) return;
       uploadsReady = true;
@@ -87,14 +96,19 @@
       const multipart = new FormData();
       multipart.append('payload', JSON.stringify(payload));
       selectedFiles.forEach(file => multipart.append('attachments', file, file.name));
-      const response = await fetch(uploadsReady ? '/api/contact' : 'https://api.rotfstudio.com/submit', {
+      const endpoint = trialRequest && local ? '/api/trial' : uploadsReady ? '/api/contact' : 'https://api.rotfstudio.com/submit';
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: uploadsReady ? {} : { 'Content-Type': 'application/json' },
         body: uploadsReady ? multipart : JSON.stringify(payload)
       });
       const result = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(result.error || 'No pudimos enviar tu solicitud.');
+      if (!response.ok || (trialRequest && result.ok !== true)) throw new Error(result.error || 'No pudimos enviar tu solicitud.');
       form.reset();
+      if (trialRequest) {
+        projectSelect.value = projectOptions['dia-del-novio'];
+        form.querySelector('[name="Mensaje"]').value = 'Quiero mi prueba gratis de Día del Novio. Página de referencia: https://dia-del-novio.rotfstudio.com/bienvenida/dist/';
+      }
       selectedFiles = [];
       renderFiles();
       status.className = 'form-status success';
