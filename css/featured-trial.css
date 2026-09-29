@@ -17,7 +17,7 @@
 .featured-boyfriend:hover { border-color: #b02b50; box-shadow: 0 24px 70px #b02b5026; }
 .featured-boyfriend:focus-visible { outline: 3px solid var(--lime); outline-offset: 6px; }
 .featured-boyfriend__eyebrow { display: flex; justify-content: space-between; align-items: center; color: #8d3450; font-size: .65rem; font-weight: 700; letter-spacing: .15em; }
-.featured-boyfriend__eyebrow > span { font-size: 1.5rem; }
+.featured-boyfriend__badge { flex: 0 0 auto; padding: 8px 11px; border-radius: 999px; background: #aa2b50; color: #fff; font-size: .65rem; font-weight: 800; letter-spacing: .09em; white-space: nowrap; box-shadow: 0 5px 14px #aa2b502b; }
 .featured-boyfriend__photo { display: block; margin: 4px 8px 8px; padding: 10px 10px 14px; background: #fff; box-shadow: 0 6px 22px #38252a14; transform: rotate(-4deg); }
 .studio-project .featured-boyfriend__photo img { position: static; display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: center; }
 .featured-boyfriend__photo > span { display: block; margin-top: 12px; color: #786269; text-align: center; font: italic .85rem/1.5 "DM Serif Display", serif; }
