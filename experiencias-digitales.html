@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://rotfstudio.com/experiencias-digitales.html">
   <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/fonts.css?v=1"><link rel="stylesheet" href="css/pages.css?v=69"><link rel="stylesheet" href="css/scroll-effects.css?v=23"><link rel="stylesheet" href="css/card-effects.css?v=4"><link rel="stylesheet" href="css/web-projects.css?v=7"><link rel="stylesheet" href="css/experiencias.css?v=6">
+  <link rel="stylesheet" href="css/fonts.css?v=1"><link rel="stylesheet" href="css/pages.css?v=69"><link rel="stylesheet" href="css/scroll-effects.css?v=23"><link rel="stylesheet" href="css/card-effects.css?v=4"><link rel="stylesheet" href="css/web-projects.css?v=7"><link rel="stylesheet" href="css/experiencias.css?v=7">
   <meta property="og:type" content="website"><meta property="og:locale" content="es_MX"><meta property="og:site_name" content="ROTF Studio">
   <meta property="og:title" content="Experiencias digitales — ROTF Studio"><meta property="og:description" content="Flores, recuerdos, juegos y sorpresas para regalar algo que se siente."><meta property="og:url" content="https://rotfstudio.com/experiencias-digitales.html"><meta property="og:image" content="https://rotfstudio.com/img/rotf-social.png"><meta property="og:image:alt" content="ROTF Studio — Experiencias digitales a tu medida">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Experiencias digitales — ROTF Studio"><meta name="twitter:description" content="Flores, recuerdos, juegos y sorpresas para regalar algo que se siente."><meta name="twitter:image" content="https://rotfstudio.com/img/rotf-social.png">
@@ -20,6 +20,12 @@
   <aside class="drawer" id="drawer" aria-hidden="true"><div class="drawer-top"><span>NAVEGACIÓN</span><button class="close-menu" type="button" aria-label="Cerrar menú">×</button></div><nav><a href="index.html"><small>01</small>Inicio</a><a href="invitaciones.html"><small>02</small>Invitaciones</a><a href="paginas.html"><small>03</small>Páginas</a><a class="active" aria-current="page" href="experiencias-digitales.html"><small>04</small><span>Experiencias digitales</span></a><a href="contacto.html"><small>05</small>Contacto</a></nav><p>Experiencias digitales<br>hechas a tu medida.</p></aside>
   <main id="contenido">
     <section class="page-hero experience-hero" aria-labelledby="experience-title">
+      <div class="experience-hero-media" aria-hidden="true">
+        <video class="experience-hero-video" autoplay muted loop playsinline preload="metadata" poster="img/experiencias-hero-poster.jpg" tabindex="-1">
+          <source src="media/experiencias-hero.mp4" type="video/mp4">
+        </video>
+      </div>
+      <img class="experience-hero-logo" src="img/logo-mobile.webp" alt="ROTF Studio" width="512" height="512">
       <p class="section-label">PARA ALGUIEN ESPECIAL</p>
       <h1 id="experience-title">Experiencias<br><em>digitales.</em></h1>
       <p class="experience-intro">Hay regalos que se abren con un enlace y se quedan en la memoria. Flores, juegos, música y recuerdos para sorprender a tu manera.</p>
@@ -32,7 +38,6 @@
         <li>Pensada para celular</li>
         <li>Con sus fotos, música y mensajes</li>
       </ul>
-      <img class="experience-hero-art" src="img/experiencias-hero.webp?v=1" alt="Cuatro celulares con las experiencias Flores para ti, Flores Amarillas, Día del Novio y Hot Wheels" width="1200" height="1000" fetchpriority="high" decoding="async">
     </section>
     <section class="card-section web-projects experience-projects reveal" id="experiencias" aria-labelledby="experience-projects-title">
       <div class="web-projects-heading">
@@ -121,5 +126,6 @@
   </main>
   <footer><a class="code-brand" href="index.html"><span>&lt;/</span>ROTF<span>&gt;</span></a><p>Experiencias digitales para regalar y recordar.</p><p>© <span data-year></span> ROTF</p></footer>
   <script src="js/pages.js?v=59"></script>
+  <script>if(matchMedia('(prefers-reduced-motion: reduce)').matches){var v=document.querySelector('.experience-hero-video');if(v){v.removeAttribute('autoplay');v.pause();}}</script>
 </body>
 </html>
