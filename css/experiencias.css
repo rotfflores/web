@@ -72,15 +72,15 @@ body[data-page="experiencias"] .experience-projects { border-top: 0; padding-top
 :root:not([data-theme="light"]) body[data-page="experiencias"]:before { background: linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px); background-size: 48px 48px, 48px 48px; }
 body[data-page="experiencias"] .experience-hero, body[data-page="experiencias"].studio-shell .experience-hero { overflow: hidden; background: none; }
 body[data-page="experiencias"] .cursor-ambient { display: none; }
-.experience-hero-media { position: absolute; z-index: -1; top: 50%; right: 7%; width: min(320px, 27vw); aspect-ratio: 62 / 58; display: block; transform: translateY(-50%); }
-.experience-hero-video { display: block; width: 100%; height: 100%; object-fit: contain; object-position: 50% 50%; }
+.experience-hero-media { position: absolute; z-index: -1; top: 50%; right: 9%; width: min(200px, 17vw); aspect-ratio: 46 / 98; display: block; transform: translateY(-50%); }
+.experience-hero-video { display: block; width: 100%; height: 100%; object-fit: contain; object-position: 50% 50%; image-rendering: pixelated; }
 .experience-hero-logo { width: 76px; height: 76px; margin: 0 0 22px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(255,255,255,.14); }
 .experience-hero h1 em { color: #f07aa4; }
 @media (max-width: 999px) {
-  .experience-hero-media { top: 80px; right: 28px; width: clamp(130px, 28vw, 240px); transform: none; }
+  .experience-hero-media { top: 80px; right: 28px; width: clamp(96px, 20vw, 170px); transform: none; }
 }
 @media (max-width: 639px) {
-  .experience-hero-media { top: 40px; right: 8px; width: 140px; }
+  .experience-hero-media { top: 8px; right: 14px; width: 90px; }
   .experience-hero-logo { width: 64px; height: 64px; }
 }
 
@@ -92,19 +92,3 @@ body[data-page="experiencias"] .cursor-ambient { display: none; }
 :root[data-theme="light"] .experience-feature[id="exp-flores-para-ti"] .web-project-quote { background: #d9b98a; }
 :root[data-theme="light"] .experience-steps-list li { background: #fff; box-shadow: 0 12px 30px rgba(20,14,30,.06); }
 :root[data-theme="light"] .experience-perks li:before { background: #c8336a; box-shadow: none; }
-
-/* Hand-drawn pixel couple (inline SVG, transparent). */
-.px-couple .px-heart > g { opacity: 0; animation: px-heart 4.4s steps(24) infinite; }
-.px-couple .px-boy { animation: px-bob 1.2s steps(1) infinite; }
-.px-couple .px-girl { animation: px-bob 1.2s steps(1) .6s infinite; }
-.px-couple .px-phone { animation: px-bob 1.2s steps(1) infinite; }
-@keyframes px-heart { 0% { opacity: 0; transform: translateY(0); } 12% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; transform: translateY(-12px); } }
-@keyframes px-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1px); } }
-@media (prefers-reduced-motion: reduce) {
-  .px-couple .px-heart > g, .px-couple .px-boy, .px-couple .px-girl, .px-couple .px-phone { animation: none; }
-  .px-couple .px-heart > g { opacity: 1; }
-  .px-couple .px-heart:nth-child(1) > g { transform: translateY(-3px); }
-  .px-couple .px-heart:nth-child(2) > g { transform: translateY(-6px); }
-  .px-couple .px-heart:nth-child(3) > g { transform: translateY(-9px); }
-  .px-couple .px-heart:nth-child(4) > g { transform: translateY(-12px); }
-}
