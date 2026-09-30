@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://rotfstudio.com/experiencias-digitales.html">
   <link rel="preload" href="assets/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/fonts.css?v=1"><link rel="stylesheet" href="css/pages.css?v=69"><link rel="stylesheet" href="css/scroll-effects.css?v=23"><link rel="stylesheet" href="css/card-effects.css?v=4"><link rel="stylesheet" href="css/web-projects.css?v=7"><link rel="stylesheet" href="css/experiencias.css?v=3">
+  <link rel="stylesheet" href="css/fonts.css?v=1"><link rel="stylesheet" href="css/pages.css?v=69"><link rel="stylesheet" href="css/scroll-effects.css?v=23"><link rel="stylesheet" href="css/card-effects.css?v=4"><link rel="stylesheet" href="css/web-projects.css?v=7"><link rel="stylesheet" href="css/experiencias.css?v=5">
   <meta property="og:type" content="website"><meta property="og:locale" content="es_MX"><meta property="og:site_name" content="ROTF Studio">
   <meta property="og:title" content="Experiencias digitales — ROTF Studio"><meta property="og:description" content="Flores, recuerdos, juegos y sorpresas para regalar algo que se siente."><meta property="og:url" content="https://rotfstudio.com/experiencias-digitales.html"><meta property="og:image" content="https://rotfstudio.com/img/rotf-social.png"><meta property="og:image:alt" content="ROTF Studio — Experiencias digitales a tu medida">
   <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Experiencias digitales — ROTF Studio"><meta name="twitter:description" content="Flores, recuerdos, juegos y sorpresas para regalar algo que se siente."><meta name="twitter:image" content="https://rotfstudio.com/img/rotf-social.png">
@@ -23,7 +23,16 @@
       <p class="section-label">PARA ALGUIEN ESPECIAL</p>
       <h1 id="experience-title">Experiencias<br><em>digitales.</em></h1>
       <p class="experience-intro">Hay regalos que se abren con un enlace y se quedan en la memoria. Flores, juegos, música y recuerdos para sorprender a tu manera.</p>
-      <a class="button primary" href="#experiencias">Explorar experiencias <span aria-hidden="true">↓</span></a>
+      <div class="experience-hero-actions">
+        <a class="button primary" href="#experiencias">Explorar experiencias <span aria-hidden="true">↓</span></a>
+        <a class="button ghost" href="contacto.html?proyecto=dia-del-novio#contact-form">Pedir una prueba gratis</a>
+      </div>
+      <ul class="experience-perks" aria-label="Qué incluye cada experiencia">
+        <li>Se abre con un enlace</li>
+        <li>Pensada para celular</li>
+        <li>Con sus fotos, música y mensajes</li>
+      </ul>
+      <img class="experience-hero-art" src="img/experiencias-hero.webp?v=1" alt="Cuatro celulares con las experiencias Flores para ti, Flores Amarillas, Día del Novio y Hot Wheels" width="1200" height="1000" fetchpriority="high" decoding="async">
     </section>
     <section class="card-section web-projects experience-projects reveal" id="experiencias" aria-labelledby="experience-projects-title">
       <div class="web-projects-heading">
@@ -31,8 +40,14 @@
         <h2 id="experience-projects-title">Cuatro formas de <em>sorprender.</em></h2>
         <p>Elige una experiencia, descubre sus detalles e imagina cómo se vería con su historia.</p>
       </div>
+      <nav class="experience-jump" aria-label="Ir a una experiencia">
+        <a href="#exp-flores-amarillas"><i style="--dot:#f2c94c"></i>Flores Amarillas</a>
+        <a href="#exp-flores-para-ti"><i style="--dot:#e7c9a0"></i>Flores para ti</a>
+        <a href="#exp-hot-wheels"><i style="--dot:#ff7a1a"></i>Hot Wheels</a>
+        <a href="#exp-dia-del-novio"><i style="--dot:#e0457b"></i>Día del Novio <b>Gratis</b></a>
+      </nav>
       <div class="experience-features">
-        <article class="experience-feature" aria-labelledby="project-flores-amarillas">
+        <article class="experience-feature" id="exp-flores-amarillas" aria-labelledby="project-flores-amarillas">
           <h3 class="experience-feature-title" id="project-flores-amarillas">Flores Amarillas</h3>
           <a class="experience-feature-shot" href="flores-amarillas-estefania/" target="_blank" rel="noopener noreferrer" aria-label="Ver experiencia Flores Amarillas (abre en una pestaña nueva)">
             <picture>
@@ -45,7 +60,7 @@
             <a class="web-project-link" href="flores-amarillas-estefania/" target="_blank" rel="noopener noreferrer" aria-label="Ver experiencia Flores Amarillas (abre en una pestaña nueva)">Ver experiencia <span class="web-project-arrow" aria-hidden="true">↗</span></a>
           </div>
         </article>
-        <article class="experience-feature experience-feature--reverse" aria-labelledby="project-flores-para-ti">
+        <article class="experience-feature experience-feature--reverse" id="exp-flores-para-ti" aria-labelledby="project-flores-para-ti">
           <h3 class="experience-feature-title" id="project-flores-para-ti">Flores para ti</h3>
           <a class="experience-feature-shot" href="flores-para-ti/" target="_blank" rel="noopener noreferrer" aria-label="Ver experiencia Flores para ti (abre en una pestaña nueva)">
             <picture>
@@ -58,7 +73,7 @@
             <a class="web-project-link" href="flores-para-ti/" target="_blank" rel="noopener noreferrer" aria-label="Ver experiencia Flores para ti (abre en una pestaña nueva)">Ver experiencia <span class="web-project-arrow" aria-hidden="true">↗</span></a>
           </div>
         </article>
-        <article class="experience-feature" aria-labelledby="project-hot-wheels">
+        <article class="experience-feature" id="exp-hot-wheels" aria-labelledby="project-hot-wheels">
           <h3 class="experience-feature-title" id="project-hot-wheels">Hot Wheels</h3>
           <a class="experience-feature-shot" href="hot-wheels/" target="_blank" rel="noopener noreferrer" aria-label="Ver experiencia Hot Wheels (abre en una pestaña nueva)">
             <picture>
@@ -71,7 +86,7 @@
             <a class="web-project-link" href="hot-wheels/" target="_blank" rel="noopener noreferrer" aria-label="Ver experiencia Hot Wheels (abre en una pestaña nueva)">Ver experiencia <span class="web-project-arrow" aria-hidden="true">↗</span></a>
           </div>
         </article>
-        <article class="experience-feature experience-feature--reverse" aria-labelledby="project-dia-del-novio">
+        <article class="experience-feature experience-feature--reverse" id="exp-dia-del-novio" aria-labelledby="project-dia-del-novio">
           <h3 class="experience-feature-title" id="project-dia-del-novio">Día del Novio</h3>
           <a class="experience-feature-shot" href="https://dia-del-novio.rotfstudio.com/bienvenida/dist/" target="_blank" rel="noopener noreferrer" aria-label="Ver experiencia Día del Novio (abre en una pestaña nueva)">
             <picture>
@@ -80,11 +95,22 @@
             </picture>
           </a>
           <div class="experience-feature-actions">
-            <a class="web-project-quote" href="contacto.html?proyecto=dia-del-novio#contact-form">Solicitar mi prueba gratis <span aria-hidden="true">→</span></a>
+            <a class="web-project-quote experience-trial" href="contacto.html?proyecto=dia-del-novio#contact-form">Solicitar mi prueba gratis <span aria-hidden="true">→</span></a>
             <a class="web-project-link" href="https://dia-del-novio.rotfstudio.com/bienvenida/dist/" target="_blank" rel="noopener noreferrer" aria-label="Ver experiencia Día del Novio (abre en una pestaña nueva)">Ver experiencia <span class="web-project-arrow" aria-hidden="true">↗</span></a>
           </div>
         </article>
       </div>
+    </section>
+    <section class="card-section experience-steps reveal" aria-labelledby="experience-steps-title">
+      <div class="web-projects-heading">
+        <p class="section-label">ASÍ DE FÁCIL</p>
+        <h2 id="experience-steps-title">De tu idea a <em>su celular.</em></h2>
+      </div>
+      <ol class="experience-steps-list">
+        <li><b>01</b><h3>Elige</h3><p>Escoge la experiencia que más se parezca a su historia.</p></li>
+        <li><b>02</b><h3>Compártenos</h3><p>Envíanos fotos, canciones, fechas y los mensajes que quieres que lea.</p></li>
+        <li><b>03</b><h3>Sorprende</h3><p>Recibes un enlace listo para enviárselo cuando tú quieras.</p></li>
+      </ol>
     </section>
     <section class="bottom-cta experience-cta reveal">
       <p class="section-label">HECHA A TU MEDIDA</p>

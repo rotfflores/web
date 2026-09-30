@@ -1,7 +1,7 @@
 /* Shared ROTF shell and portfolio cards, with a dedicated experience introduction. */
 body[data-page="experiencias"] .experience-hero {
   position: relative;
-  min-height: 620px;
+  min-height: 560px;
   padding-top: 110px;
   padding-bottom: 90px;
   background: radial-gradient(ellipse at 86% 50%, rgba(157,123,255,.1), transparent 56%);
@@ -10,7 +10,7 @@ body[data-page="experiencias"] .experience-hero {
 .experience-hero h1 { font-size: clamp(3rem, 8vw, 7rem); line-height: 1.03; }
 .experience-intro { max-width: 590px; margin: 30px 0; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.2rem); line-height: 1.8; }
 .experience-hero .button { align-self: flex-start; }
-body[data-page="experiencias"] .experience-projects { border-top: 0; scroll-margin-top: 100px; }
+body[data-page="experiencias"] .experience-projects { border-top: 0; padding-top: 60px; scroll-margin-top: 100px; }
 .experience-features { display: grid; gap: 72px; }
 .experience-feature { position: relative; display: flex; flex-direction: column; gap: 18px; }
 .experience-feature-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -32,4 +32,35 @@ body[data-page="experiencias"] .experience-projects { border-top: 0; scroll-marg
   .experience-projects .web-projects-heading h2 { font-size: 2.6rem; }
   .experience-features { gap: 48px; }
   .experience-feature-actions { width: 100%; grid-template-columns: 1fr; gap: 10px; }
+}
+
+/* Hero actions, perks, quick jump, trial badge and steps. */
+.experience-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.experience-hero-actions .button { align-self: auto; }
+.experience-perks { display: flex; flex-wrap: wrap; gap: 10px; margin: 34px 0 0; padding: 0; list-style: none; }
+.experience-perks li { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: .82rem; }
+.experience-perks li:before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 10px var(--lime); }
+.experience-jump { display: flex; flex-wrap: wrap; gap: 10px; margin: -12px 0 44px; }
+.experience-jump a { display: inline-flex; align-items: center; gap: 9px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 99px; color: var(--text); text-decoration: none; font-size: .85rem; transition: border-color .25s ease, background .25s ease; }
+.experience-jump a:hover, .experience-jump a:focus-visible { border-color: var(--purple); background: rgba(157,123,255,.08); }
+.experience-jump i { width: 10px; height: 10px; border-radius: 50%; background: var(--dot); }
+.experience-jump b { padding: 2px 8px; border-radius: 99px; background: var(--lime); color: #0b0d06; font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; }
+.experience-feature { scroll-margin-top: 30px; }
+.experience-trial { background: linear-gradient(90deg, #e0457b, var(--purple)); }
+.experience-steps { border-top: 0; padding-top: 40px; }
+.experience-steps-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; }
+.experience-steps-list li { padding: 28px 26px; border: 1px solid var(--line); border-radius: 10px; background: color-mix(in srgb, var(--surface) 65%, var(--bg)); }
+.experience-steps-list b { color: var(--lime); font-size: .75rem; letter-spacing: .12em; }
+.experience-steps-list h3 { margin: 26px 0 10px; font-size: 1.5rem; }
+.experience-steps-list p { margin: 0; color: var(--muted); font-size: .92rem; }
+@media (max-width: 639px) {
+  .experience-hero-actions .button { flex: 1 1 100%; }
+  .experience-perks { margin-top: 26px; }
+  .experience-jump { margin: -6px 0 32px; }
+  .experience-steps-list { grid-template-columns: 1fr; }
+}
+.experience-hero-art { width: 100%; max-width: 560px; height: auto; margin: 36px auto 0; }
+@media (min-width: 1000px) {
+  body[data-page="experiencias"] .experience-hero > :not(.experience-hero-art) { max-width: 600px; }
+  .experience-hero-art { position: absolute; top: 50%; right: 0; width: 48%; max-width: 600px; margin: 0; transform: translateY(-50%); }
 }
