@@ -70,15 +70,14 @@ body[data-page="experiencias"] .experience-projects { border-top: 0; padding-top
 /* Warm night palette matched to the hero video, plus video background and logo. */
 body[data-page="experiencias"] { --bg: #110a0c; --surface: #1c1216; --surface2: #26181e; background: var(--bg); }
 body[data-page="experiencias"]:before { background: radial-gradient(circle at 50% 10%, rgba(224,69,123,.12), transparent 32%), linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px); background-size: auto, 48px 48px, 48px 48px; }
-body[data-page="experiencias"] .experience-hero { isolation: isolate; overflow: hidden; background: none; }
-.experience-hero-media { position: absolute; z-index: -1; inset: 0 0 0 44%; }
-.experience-hero-video { display: block; width: 100%; height: 100%; object-fit: contain; object-position: 50% 50%; image-rendering: pixelated; -webkit-mask-image: radial-gradient(closest-side, #000 72%, transparent); mask-image: radial-gradient(closest-side, #000 72%, transparent); }
+body[data-page="experiencias"] .experience-hero { overflow: hidden; background: none; }
+.experience-hero-media { position: absolute; z-index: -1; inset: 40px 0 40px 44%; display: block; }
+.experience-hero-video { display: block; width: 100%; height: 100%; object-fit: contain; object-position: 50% 50%; image-rendering: pixelated; }
 .experience-hero-logo { width: 76px; height: 76px; margin: 0 0 22px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(255,255,255,.14), 0 0 40px rgba(224,69,123,.35); }
 .experience-hero h1 em { color: #f07aa4; }
 @media (max-width: 999px) {
   body[data-page="experiencias"] .experience-hero { padding-bottom: 400px; }
   .experience-hero-media { inset: auto 0 0 0; height: 440px; }
-  .experience-hero-video { object-fit: cover; object-position: 50% 66%; -webkit-mask-image: linear-gradient(180deg, transparent, #000 25%, #000 80%, transparent); mask-image: linear-gradient(180deg, transparent, #000 25%, #000 80%, transparent); }
 }
 @media (max-width: 639px) {
   body[data-page="experiencias"] .experience-hero { padding-bottom: 360px; }
