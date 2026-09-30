@@ -77,11 +77,9 @@ body[data-page="experiencias"] .cursor-ambient { display: none; }
 .experience-hero-logo { width: 76px; height: 76px; margin: 0 0 22px; border-radius: 50%; box-shadow: 0 0 0 1px rgba(255,255,255,.14); }
 .experience-hero h1 em { color: #f07aa4; }
 @media (max-width: 999px) {
-  body[data-page="experiencias"] .experience-hero { padding-bottom: 380px; }
-  .experience-hero-media { top: auto; bottom: 30px; left: 50%; right: auto; width: 240px; transform: translateX(-50%); }
+  .experience-hero-media { top: 96px; right: 28px; width: clamp(104px, 24vw, 220px); transform: none; }
 }
 @media (max-width: 639px) {
-  body[data-page="experiencias"] .experience-hero { padding-bottom: 330px; }
-  .experience-hero-media { width: 210px; }
+  .experience-hero-media { top: 40px; right: 4px; width: 150px; }
   .experience-hero-logo { width: 64px; height: 64px; }
 }
