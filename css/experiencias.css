@@ -81,13 +81,11 @@ body[data-page="experiencias"] .cursor-ambient { display: none; }
 }
 @media (max-width: 639px) {
   .experience-hero-media { top: 24px; right: 16px; width: 80px; }
-  :root[data-theme="light"] body .experience-hero-media { padding: 8px; border-radius: 16px; }
   .experience-hero-logo { width: 64px; height: 64px; }
 }
 
 /* Light theme. */
 :root[data-theme="light"] .experience-hero h1 em { color: #c8336a; }
-:root[data-theme="light"] .experience-hero-media { box-sizing: content-box; padding: 14px 12px; border-radius: 22px; background: #110a0c; box-shadow: 0 24px 60px rgba(17,10,12,.22); }
 :root[data-theme="light"] .experience-feature { background: color-mix(in srgb, var(--accent) 10%, #fff); box-shadow: 0 20px 50px rgba(20,14,30,.12); }
 :root[data-theme="light"] .experience-feature-actions .web-project-link { color: #17131d; background: #fff; }
 :root[data-theme="light"] .experience-feature-actions .web-project-arrow { color: color-mix(in srgb, var(--accent) 70%, #000); }
