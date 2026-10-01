@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#090d14" />
+    <meta name="description" content="Una entrega especial, una pequeña aventura y una sorpresa preparada solo para ti este 30 de septiembre." />
+    <title>Chris Evans, tienes una entrega especial</title>
+    <link rel="preload" href="assets/BarlowCondensed-ExtraBold.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main id="experience">
+      <section class="cover" id="section-1" aria-labelledby="cover-title">
+        <div class="ambient ambient--blue" aria-hidden="true"></div>
+        <div class="ambient ambient--orange" aria-hidden="true"></div>
+        <div class="grid" aria-hidden="true"></div>
+
+        <header class="masthead">
+          <a class="brand" href="#section-1" aria-label="Entrega especial, inicio">
+            <img class="brand__logo" src="assets/hot-wheels-logo.png" alt="Hot Wheels" width="102" height="38" />
+            <span>ENTREGA<br /><strong>ESPECIAL</strong></span>
+          </a>
+          <div class="date-tag" aria-label="30 de septiembre"><span class="date-tag__dot" aria-hidden="true"></span>30 <span class="date-tag__slash">/</span> SEPTIEMBRE</div>
+        </header>
+
+        <div class="hero">
+          <div class="hero__content">
+            <div class="eyebrow"><span aria-hidden="true"></span> UNA SORPRESA. SEIS PARADAS.</div>
+            <h1 id="cover-title">
+              <span class="recipient"><span data-recipient>Chris Evans</span>,</span>
+              <span class="headline">tienes una<br />entrega <em>especial</em></span>
+            </h1>
+            <p class="intro">Preparé algo para ti este 30 de septiembre.<br class="desktop-break" /> ¿Listo para descubrirlo?</p>
+            <div class="start-area">
+              <button class="start-button" id="start-button" type="button" aria-controls="launch-panel" disabled>
+                <span class="start-button__icon" aria-hidden="true"><svg width="12" height="14" viewBox="0 0 12 14"><path d="m2 1 9 6-9 6V1Z" fill="currentColor"/></svg></span>
+                <span id="start-label">PRESIONA START</span>
+                <svg class="start-button__arrow" width="21" height="16" viewBox="0 0 21 16" fill="none" aria-hidden="true"><path d="M1 8h18m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8"/></svg>
+              </button>
+              <p class="sender" id="sender-line"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" stroke="currentColor" stroke-width="1.5"/></svg> Una sorpresa de <span data-sender>Yazmin</span></p>
+            </div>
+            <noscript><p class="no-script">Activa JavaScript para poner en marcha tu sorpresa.</p></noscript>
+          </div>
+
+          <div class="track-scene" aria-hidden="true">
+            <svg class="track" viewBox="0 0 1000 1000" fill="none" preserveAspectRatio="xMidYMax slice">
+              <defs>
+                <linearGradient id="asphalt" x1="835" y1="70" x2="422" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#121b26"/><stop offset=".5" stop-color="#121d2b"/><stop offset="1" stop-color="#1b2630"/></linearGradient>
+                <linearGradient id="orange-edge" x1="734" y1="99" x2="277" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#ff6b28" stop-opacity="0"/><stop offset=".37" stop-color="#ff6927" stop-opacity=".6"/><stop offset="1" stop-color="#ff833d"/></linearGradient>
+                <linearGradient id="blue-edge" x1="771" y1="136" x2="746" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#48b9e7" stop-opacity="0"/><stop offset=".4" stop-color="#48b9e7" stop-opacity=".6"/><stop offset="1" stop-color="#77d5f6"/></linearGradient>
+                <linearGradient id="lane-fade" x1="800" y1="200" x2="520" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#8295a7" stop-opacity="0"/><stop offset="1" stop-color="#b3c2cd" stop-opacity=".45"/></linearGradient>
+                <linearGradient id="finish-fade" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b8c9d3" stop-opacity=".1"/><stop offset="1" stop-color="#b8c9d3" stop-opacity=".02"/></linearGradient>
+                <pattern id="finish" width="54" height="54" patternUnits="userSpaceOnUse" patternTransform="rotate(-19)"><path d="M0 0h27v27H0zm27 27h27v27H27z" fill="url(#finish-fade)"/></pattern>
+                <filter id="edge-glow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter>
+              </defs>
+              <!-- La pista se ensancha hacia el borde inferior para crear profundidad. -->
+              <path d="M806 75C661 175 626 251 734 332C853 422 1106 473 936 661C812 799 607 831 398 1060H-95C123 752 463 737 648 580C828 427 636 415 599 307C564 207 682 125 806 75Z" fill="url(#asphalt)"/>
+              <path d="M806 75C682 125 564 207 599 307C636 415 828 427 648 580C463 737 123 752-95 1060" stroke="url(#orange-edge)" stroke-width="15" filter="url(#edge-glow)" opacity=".5"/>
+              <path d="M806 75C661 175 626 251 734 332C853 422 1106 473 936 661C812 799 607 831 398 1060" stroke="url(#blue-edge)" stroke-width="15" filter="url(#edge-glow)" opacity=".5"/>
+              <path d="M806 75C682 125 564 207 599 307C636 415 828 427 648 580C463 737 123 752-95 1060" stroke="url(#orange-edge)" stroke-width="3"/>
+              <path d="M806 75C661 175 626 251 734 332C853 422 1106 473 936 661C812 799 607 831 398 1060" stroke="url(#blue-edge)" stroke-width="3"/>
+              <path d="M806 75C636 180 591 246 666 319C744 409 969 455 802 621C661 770 343 842 156 1080" stroke="url(#lane-fade)" stroke-width="3" stroke-dasharray="27 32"/>
+              <path d="m136 850 405 126-54 68L68 927l68-77Z" fill="url(#finish)"/>
+            </svg>
+
+            <div class="route-marker"><span class="route-marker__cross">+</span><span>DESTINO: <strong>TU SONRISA</strong></span><span class="route-marker__line"></span></div>
+            <div class="parked-car">
+              <svg viewBox="0 0 100 190" fill="none">
+                <defs><linearGradient id="car-paint" x1="17" y1="95" x2="84" y2="95" gradientUnits="userSpaceOnUse"><stop stop-color="#ac3914"/><stop offset=".25" stop-color="#ff6b25"/><stop offset=".5" stop-color="#ff9350"/><stop offset=".75" stop-color="#f56721"/><stop offset="1" stop-color="#9d3215"/></linearGradient><linearGradient id="car-glass" x1="34" y1="48" x2="66" y2="100" gradientUnits="userSpaceOnUse"><stop stop-color="#80adbd"/><stop offset=".4" stop-color="#233e50"/><stop offset="1" stop-color="#102331"/></linearGradient></defs>
+                <ellipse cx="50" cy="103" rx="43" ry="78" fill="#000" opacity=".4"/>
+                <rect x="12" y="38" width="13" height="31" rx="5" fill="#05080c"/><rect x="75" y="38" width="13" height="31" rx="5" fill="#05080c"/><rect x="12" y="123" width="13" height="31" rx="5" fill="#05080c"/><rect x="75" y="123" width="13" height="31" rx="5" fill="#05080c"/>
+                <path d="M24 25Q50 10 76 25L83 52l-4 105q-2 16-29 18-27-2-29-18L17 52l7-27Z" fill="url(#car-paint)" stroke="#ff9c59" stroke-width="1"/>
+                <path d="m33 23-5 30m39-30 5 30" stroke="#c64b19" stroke-width="2"/><path d="m33 24 5 25m29-25-5 25" stroke="#ffb077" opacity=".7"/>
+                <path d="M29 60q21-13 42 0l-6 26H35l-6-26Z" fill="url(#car-glass)" stroke="#fa985d"/><path d="m35 88-3 39q18 7 36 0l-3-39H35Z" fill="#f87831"/><path d="m31 134 38 0 4 21q-23 10-46 0l4-21Z" fill="url(#car-glass)"/>
+                <path d="m27 73-2 48 6-6 2-23-6-19Zm46 0 2 48-6-6-2-23 6-19Z" fill="#101d29"/><path d="m37 91-2 30m28-30 2 30" stroke="#ffab63" opacity=".65"/>
+                <path d="M22 36h15m26 0h15" stroke="#e1f7fc" stroke-width="4"/><path d="M24 162h13m26 0h13" stroke="#ff3525" stroke-width="4"/><path d="M24 166h52" stroke="#111923" stroke-width="5"/>
+                <path d="m19 83-8 3v7l10-1m60-9 8 3v7l-10-1" fill="#f77832"/><path d="M40 20h20" stroke="#ffc591" stroke-width="2"/>
+              </svg>
+            </div>
+            <span class="track-coordinate">30.09 <span>—</span> UN DÍA PARA RECORDAR</span>
+          </div>
+        </div>
+
+        <footer class="cover-footer">
+          <div class="journey" aria-label="Recorrido: el comienzo">
+            <div class="journey__steps" aria-hidden="true"><i class="is-current"></i><i></i><i></i><i></i><i></i><i></i></div>
+            <span class="journey__label">EL COMIENZO</span>
+          </div>
+          <span class="footer-note"><span aria-hidden="true">↗</span> Las mejores sorpresas empiezan con un sí.</span>
+        </footer>
+
+        <!-- Capa de la secuencia: siempre dentro de la sección 1. -->
+        <div class="launch-panel" id="launch-panel" hidden>
+          <div class="launch-panel__content">
+            <span class="eyebrow">TU SORPRESA ESTÁ EN CAMINO</span>
+            <div class="traffic-light" aria-hidden="true"><span data-light="red"></span><span data-light="yellow"></span><span data-light="green"></span></div>
+            <p class="launch-message" id="launch-message" aria-hidden="true">En tus marcas…</p>
+            <p class="launch-caption">Esto apenas comienza.</p>
+          </div>
+          <div class="race-lane" aria-hidden="true">
+            <div class="racer" id="racer">
+              <div class="racer__trail"></div>
+              <svg viewBox="0 0 180 72" fill="none"><defs><linearGradient id="race-paint" x1="90" y1="15" x2="90" y2="59" gradientUnits="userSpaceOnUse"><stop stop-color="#ffae66"/><stop offset=".4" stop-color="#ff7a32"/><stop offset="1" stop-color="#ce451c"/></linearGradient></defs><ellipse cx="90" cy="63" rx="84" ry="6" fill="#000" opacity=".4"/><path d="m11 38 35-9 19-17h48l27 20 26 6 8 13-4 9H9L5 48l6-10Z" fill="url(#race-paint)"/><path d="m52 29 17-13h20v15H52Zm43-13h15l20 16H95V16Z" fill="#152e40"/><path d="M20 40h120m-83 9h54" stroke="#ffb777" stroke-width="2"/><path d="m156 39 12 4" stroke="#e8faff" stroke-width="4"/><path d="M10 41h9" stroke="#ff362f" stroke-width="4"/><path d="M11 55h157" stroke="#9b2d13" stroke-width="4"/><circle cx="41" cy="56" r="14" fill="#0a1019"/><circle cx="141" cy="56" r="14" fill="#0a1019"/><circle cx="41" cy="56" r="7" fill="#8599a8"/><circle cx="141" cy="56" r="7" fill="#8599a8"/><circle cx="41" cy="56" r="3" fill="#253445"/><circle cx="141" cy="56" r="3" fill="#253445"/></svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 2 · ELIGE TU RUTA. START activa esta sección. -->
+      <section id="section-2" class="route-section" aria-labelledby="section-2-title" hidden>
+        <header class="masthead">
+          <div class="brand"><img class="brand__logo" src="assets/hot-wheels-logo.png" alt="Hot Wheels" width="102" height="38" /><span>ENTREGA<br /><strong>ESPECIAL</strong></span></div>
+          <span class="date-tag"><span class="date-tag__dot" aria-hidden="true"></span> NUESTRA RUTA</span>
+        </header>
+
+        <div class="route-layout">
+          <div class="route-intro">
+            <p class="eyebrow"><span aria-hidden="true"></span> CADA PARADA, ALGO NUESTRO</p>
+            <h2 id="section-2-title" tabindex="-1">Elige tu <em>ruta</em></h2>
+            <p class="route-description">Hay caminos que se disfrutan más contigo, <span data-recipient>Chris Evans</span>.</p>
+            <p class="route-instructions" id="route-instructions">Toca una parada: el carrito te lleva y allí te espera un juego.<br />El orden lo eliges tú.</p>
+            <div class="route-ticket" aria-hidden="true">
+              <span class="route-ticket__star">✦</span>
+              <div><span>PASE PARA DOS</span><strong>TÚ, YO Y EL CAMINO.</strong></div>
+              <span class="route-ticket__date">30<br />09</span>
+            </div>
+          </div>
+
+          <div class="route-playground">
+            <div class="route-board" id="route-board" role="group" aria-label="Mapa de tres paradas" aria-describedby="route-instructions">
+              <span class="board-edition" aria-hidden="true">EDICIÓN ESPECIAL · 30.09</span>
+              <span class="board-scale" aria-hidden="true">HECHO DE<br /><strong>BUENOS MOMENTOS</strong></span>
+              <svg class="route-map" viewBox="0 0 360 430" fill="none" aria-hidden="true">
+                <defs>
+                  <path id="route-path" d="M62 405C62 360 98 350 98 310C98 252 272 290 272 212C272 145 104 185 104 112C104 77 153 51 193 32"/>
+                  <pattern id="route-dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#9dc5d9" opacity=".1"/></pattern>
+                  <pattern id="route-checker" width="12" height="12" patternUnits="userSpaceOnUse"><path d="M0 0h6v6H0zm6 6h6v6H6z" fill="#edeee4"/></pattern>
+                  <linearGradient id="route-car-paint" x1="-12" y1="0" x2="12" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#ce4b20"/><stop offset=".45" stop-color="#ffae5f"/><stop offset="1" stop-color="#f06a28"/></linearGradient>
+                </defs>
+                <path fill="url(#route-dots)" d="M0 0h360v430H0z"/>
+                <path d="M248 57q64-18 75 36t-33 31q-23-12-55-9t-26-24q8-25 39-34ZM36 176q28-19 63 14t-1 43q-51 15-62-6t0-51ZM223 331q55-33 88-2t-3 62q-52 11-83-10t-2-50Z" fill="#132735" stroke="#203746"/>
+                <use href="#route-path" stroke="#050b13" stroke-width="66" stroke-linecap="round" transform="translate(0 5)" opacity=".6"/>
+                <use href="#route-path" stroke="#477387" stroke-width="61" stroke-linecap="round"/>
+                <use href="#route-path" stroke="#283849" stroke-width="55" stroke-linecap="round"/>
+                <use href="#route-path" stroke="#9fb4c2" stroke-width="1.5" stroke-dasharray="7 10" opacity=".55"/>
+                <!-- Tramos recorridos: script.js dibuja uno por parada y otro hasta la meta. -->
+                <g id="route-trails" stroke-linecap="round"></g>
+                <path d="M37 402q1-39 22-68" stroke="#ff8a49" stroke-width="3" stroke-linecap="round"/>
+                <path d="M244 209q0-27-47-33" stroke="#ff8a49" stroke-width="3" stroke-linecap="round"/>
+                <path d="M80 110q0-23 22-44" stroke="#ff8a49" stroke-width="3" stroke-linecap="round"/>
+                <g transform="translate(191 33) rotate(60)"><rect x="-26" y="-7" width="52" height="14" rx="1" fill="#14212d"/><rect x="-24" y="-6" width="48" height="12" fill="url(#route-checker)"/></g>
+                <g stroke="#5d8a96" stroke-width="1.5" opacity=".7"><path d="m48 204 7-15 7 15H48Zm14 8 6-13 6 13H62Zm226 134 7-15 7 15h-14Zm14 11 6-13 6 13h-12ZM46 105v8m-4-4h8m265 147v8m-4-4h8"/></g>
+                <g fill="#fa8847"><path d="m318 157 4-10 4 10h-8Zm-1 2h10v3h-10Z"/><path d="m158 358 4-10 4 10h-8Zm-1 2h10v3h-10Z"/></g>
+                <symbol id="route-car-model" viewBox="-17 -28 34 56">
+                  <ellipse cx="1" cy="3" rx="15" ry="25" fill="#02070c" opacity=".6"/>
+                  <rect x="-14" y="-15" width="5" height="10" rx="2" fill="#050a10"/><rect x="9" y="-15" width="5" height="10" rx="2" fill="#050a10"/><rect x="-14" y="11" width="5" height="10" rx="2" fill="#050a10"/><rect x="9" y="11" width="5" height="10" rx="2" fill="#050a10"/>
+                  <path d="M-10-21q10-6 20 0l2 11-1 31q-11 5-22 0l-1-31 2-11Z" fill="url(#route-car-paint)" stroke="#ffc084" stroke-width=".6"/>
+                  <path d="M-8-9q8-4 16 0L6 0H-6l-2-9ZM-6 10H6l2 8q-8 3-16 0l2-8Z" fill="#19394b"/><path d="M-3-21v10m6-10v10" stroke="#fff0c4" stroke-width="2"/><path d="M-10-17h4m12 0h4" stroke="#e1f8ff" stroke-width="2"/><path d="M-10 21h5m10 0h5" stroke="#bb3023" stroke-width="2"/>
+                </symbol>
+              </svg>
+              <span class="board-start" aria-hidden="true">SALIDA <span>↗</span></span>
+              <button type="button" class="board-finish" id="board-finish" aria-haspopup="dialog" aria-controls="summary-dialog" aria-label="¡Meta! Ver el resumen del recorrido" hidden>¡META!<small>VER RESUMEN</small></button>
+
+              <button type="button" class="route-stop route-stop--adventures" data-stop="aventuras" aria-label="Aventuras" aria-haspopup="dialog" aria-controls="stop-dialog" style="--stop-x:27.222%;--stop-y:72.093%">
+                <span class="route-stop__disc" aria-hidden="true"><span class="route-stop__number"><svg class="route-stop__icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1l2.5 6.5L19 10l-6.5 2.5L10 19l-2.5-6.5L1 10l6.5-2.5z" fill="currentColor"/></svg></span><span class="route-stop__check">✓</span></span>
+                <span class="route-stop__label"><strong>Aventuras</strong><small data-stop-caption>UN DESVÍO CONTIGO</small></span>
+              </button>
+              <button type="button" class="route-stop route-stop--memories" data-stop="recuerdos" aria-label="Recuerdos" aria-haspopup="dialog" aria-controls="stop-dialog" style="--stop-x:75.556%;--stop-y:49.302%">
+                <span class="route-stop__disc" aria-hidden="true"><span class="route-stop__number"><svg class="route-stop__icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M8 15.5a2.5 2.5 0 1 1-2-2.45V3.4l11-2.2v11.3a2.5 2.5 0 1 1-2-2.45V4.2L8 5.6v9.9z" fill="currentColor"/></svg></span><span class="route-stop__check">✓</span></span>
+                <span class="route-stop__label"><strong>Recuerdos</strong><small data-stop-caption>UNA CANCIÓN PARA TI</small></span>
+              </button>
+              <button type="button" class="route-stop route-stop--future" data-stop="lo-que-viene" aria-label="Lo que viene" aria-haspopup="dialog" aria-controls="stop-dialog" style="--stop-x:28.889%;--stop-y:26.047%">
+                <span class="route-stop__disc" aria-hidden="true"><span class="route-stop__number"><svg class="route-stop__icon" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 17.5s-7.5-4.5-7.5-9.6A4.1 4.1 0 0 1 10 5.3a4.1 4.1 0 0 1 7.5 2.6c0 5.1-7.5 9.6-7.5 9.6z" fill="currentColor"/></svg></span><span class="route-stop__check">✓</span></span>
+                <span class="route-stop__label"><strong>Lo que viene</strong><small data-stop-caption>NUESTRO PRÓXIMO CAPÍTULO</small></span>
+              </button>
+              <svg class="route-car-layer" viewBox="0 0 360 430" fill="none" aria-hidden="true"><g id="route-car" transform="translate(62 405)"><use href="#route-car-model" x="-17" y="-28" width="34" height="56"/></g></svg>
+            </div>
+
+            <div class="route-progress">
+              <div><span class="route-progress__label">PARADAS COMPLETADAS</span><p><strong id="visited-count">0</strong><span> / 3</span><span class="route-progress__stamps" aria-hidden="true"><i data-stamp="aventuras"></i><i data-stamp="recuerdos"></i><i data-stamp="lo-que-viene"></i></span></p></div>
+              <span class="route-progress__note" id="route-progress-note">Tres pequeñas razones<br />para seguir juntos.</span>
+            </div>
+            <div class="route-next" id="route-next" hidden>
+              <p>Todos los caminos nos trajeron hasta aquí.</p>
+              <button class="route-next__summary" id="open-summary" type="button" aria-haspopup="dialog" aria-controls="summary-dialog"><span aria-hidden="true">🏁</span> Ver resumen y compartir</button>
+              <button class="start-button" id="continue-route" type="button" aria-controls="section-3">Continuar la ruta <span aria-hidden="true">→</span></button>
+              <span class="route-next__destination">SIGUIENTE PARADA: TU COLECCIÓN</span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="cover-footer">
+          <div class="journey" aria-label="Recorrido: nuestro recorrido"><div class="journey__steps" aria-hidden="true"><i class="is-done"></i><i class="is-current"></i><i></i><i></i><i></i><i></i></div><span class="journey__label">NUESTRO RECORRIDO</span></div>
+          <span class="footer-note">Para <span data-recipient>Chris Evans</span>, con cariño de <span data-sender>Yazmin</span>.</span>
+        </footer>
+      </section>
+
+      <!-- Tarjeta compartida. ROUTE_STOPS en script.js define cada juego, foto y mensaje.
+           data-mode="play" muestra el juego de la parada; data-mode="reveal", la foto y el mensaje. -->
+      <dialog class="stop-dialog" id="stop-dialog" aria-labelledby="stop-title" aria-describedby="stop-hint">
+        <div class="stop-card" id="stop-card" data-mode="play">
+          <button class="stop-card__close" id="close-stop" type="button" aria-label="Cerrar tarjeta" autofocus><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.8"/></svg></button>
+          <div class="stop-card__media">
+            <!-- Aventuras: una curva ampliada para arrastrar el carrito. -->
+            <div class="play play--adventures" data-play="aventuras" hidden>
+              <svg class="play__scene" id="adventure-scene" viewBox="0 0 320 240" fill="none" aria-hidden="true">
+                <path fill="url(#route-dots)" d="M0 0h320v240H0z"/>
+                <path d="M258 14q32-8 50 12t-8 36q-30 8-44-12t2-36Z" fill="#132735" stroke="#203746"/>
+                <path id="adventure-path" d="M36 252C36 214 40 200 72 196C118 190 128 222 176 214C236 204 290 196 288 150C286 110 228 124 176 124C120 124 64 118 70 78C76 44 150 50 220 58"/>
+                <use href="#adventure-path" stroke="#050b13" stroke-width="48" stroke-linecap="round" transform="translate(0 5)" opacity=".6"/>
+                <use href="#adventure-path" stroke="#477387" stroke-width="44" stroke-linecap="round"/>
+                <use href="#adventure-path" stroke="#283849" stroke-width="38" stroke-linecap="round"/>
+                <use href="#adventure-path" stroke="#9fb4c2" stroke-width="1.5" stroke-dasharray="7 10" opacity=".55"/>
+                <use href="#adventure-path" id="adventure-trail" stroke="#ff8a49" stroke-width="5" stroke-linecap="round"/>
+                <g id="adventure-checkpoints"></g>
+                <g transform="translate(230 58) rotate(94)"><rect x="-22" y="-7" width="44" height="14" rx="1" fill="#14212d"/><rect x="-20" y="-6" width="40" height="12" fill="url(#route-checker)"/></g>
+                <g fill="#fa8847"><path d="m118 156 4-10 4 10h-8Zm-1 2h10v3h-10Z"/><path d="m232 160 4-10 4 10h-8Zm-1 2h10v3h-10Z"/><path d="m128 92 4-10 4 10h-8Zm-1 2h10v3h-10Z"/></g>
+                <g id="adventure-car" transform="translate(36 214)">
+                  <circle class="play__halo" r="28"/>
+                  <use href="#route-car-model" x="-18" y="-30" width="36" height="60"/>
+                </g>
+              </svg>
+              <p class="play__toast" id="adventure-toast" hidden>¡Te saliste de la carretera!<br />Vuelves al último punto.</p>
+              <div class="play__bar">
+                <span class="play__meter" aria-hidden="true"><i id="adventure-meter"></i></span>
+                <button class="play__step" id="adventure-step" type="button">Avanzar <span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+
+            <!-- Recuerdos: tres tarjetas de colección; cada una esconde una canción. -->
+            <div class="play play--memories" data-play="recuerdos" hidden>
+              <div class="memory-cards" id="memory-cards"></div>
+            </div>
+
+            <!-- Lo que viene: una bifurcación con dos caminos. -->
+            <div class="play play--future" data-play="lo-que-viene" hidden>
+              <svg class="play__scene" id="fork-scene" viewBox="0 0 320 240" fill="none" aria-hidden="true">
+                <path fill="url(#route-dots)" d="M0 0h320v240H0z"/>
+                <path d="M128 96q32-12 64 0t18 34q-26 14-50 14t-46-14q-18-24 14-34Z" fill="#132735" stroke="#203746"/>
+                <path id="fork-path-0" d="M160 262C160 220 160 200 160 184C160 140 70 140 70 76"/>
+                <path id="fork-path-1" d="M160 262C160 220 160 200 160 184C160 140 250 140 250 76"/>
+                <g stroke-linecap="round">
+                  <use href="#fork-path-0" stroke="#050b13" stroke-width="54" transform="translate(0 5)" opacity=".6"/>
+                  <use href="#fork-path-1" stroke="#050b13" stroke-width="54" transform="translate(0 5)" opacity=".6"/>
+                  <use href="#fork-path-0" stroke="#477387" stroke-width="50"/>
+                  <use href="#fork-path-1" stroke="#477387" stroke-width="50"/>
+                  <use href="#fork-path-0" stroke="#283849" stroke-width="44"/>
+                  <use href="#fork-path-1" stroke="#283849" stroke-width="44"/>
+                  <use href="#fork-path-0" stroke="#9fb4c2" stroke-width="1.5" stroke-dasharray="7 10" opacity=".55"/>
+                  <use href="#fork-path-1" stroke="#9fb4c2" stroke-width="1.5" stroke-dasharray="7 10" opacity=".55"/>
+                  <use href="#fork-path-0" class="fork-trail" data-fork-trail="0" stroke="#ff8a49" stroke-width="5"/>
+                  <use href="#fork-path-1" class="fork-trail" data-fork-trail="1" stroke="#66c9ed" stroke-width="5"/>
+                </g>
+                <g stroke-width="2"><circle cx="70" cy="62" r="9" fill="#111e2b" stroke="#ff8a49"/><circle cx="250" cy="62" r="9" fill="#111e2b" stroke="#66c9ed"/></g>
+                <g id="fork-car" transform="translate(160 214)">
+                  <use href="#route-car-model" x="-19" y="-32" width="38" height="64"/>
+                </g>
+              </svg>
+              <div class="fork-choices" id="fork-choices"></div>
+            </div>
+
+            <div class="stop-card__photo" id="stop-photo-frame" hidden><img id="stop-photo" alt="" width="768" height="1024" decoding="async" /><p class="stop-card__photo-fallback" id="photo-fallback" hidden><span>Este lugar es para<br />una foto de <span data-recipient>Chris Evans</span>.</span></p></div>
+            <div class="stop-intro" id="stop-intro" aria-hidden="true"><span class="stop-intro__icon"></span><strong class="stop-intro__title"></strong><span class="stop-intro__tag"></span></div>
+            <span class="stop-card__serial" id="stop-serial">UN DESVÍO CONTIGO</span>
+          </div>
+          <div class="stop-card__body">
+            <span class="stop-card__eyebrow" id="stop-eyebrow">TU MISIÓN</span>
+            <h3 id="stop-title">Aventuras</h3>
+            <p class="stop-card__hint" id="stop-hint"></p>
+            <div class="stop-card__reveal" id="stop-reveal" hidden>
+              <div class="stop-card__song" id="stop-song" hidden>
+                <span class="stop-card__song-label"><span aria-hidden="true">♪</span> TE DEDICO ESTA CANCIÓN</span>
+                <strong id="song-title"></strong>
+                <span id="song-artist" class="stop-card__song-artist"></span>
+                <blockquote class="stop-card__lyric"><span id="song-lyric-line"></span><small id="song-lyric-translation"></small></blockquote>
+                <span id="song-verse"></span>
+                <div class="stop-card__player" id="song-player"></div>
+              </div>
+              <p id="stop-message"></p>
+              <p class="stop-card__signature">Con cariño, <span data-sender>Yazmin</span> <span aria-hidden="true">♡</span></p>
+              <button class="stop-card__replay" id="replay-stop" type="button"><span aria-hidden="true">↺</span> Volver a jugar</button>
+              <details class="photo-credit" id="photo-credit"><summary>Créditos de la foto</summary><p><a id="photo-source" target="_blank" rel="noopener noreferrer"></a> · <a id="photo-license" target="_blank" rel="noopener noreferrer"></a>. Encuadre adaptado a la tarjeta.</p></details>
+            </div>
+          </div>
+          <p class="sr-only" id="stop-live" aria-live="polite" aria-atomic="true"></p>
+        </div>
+      </dialog>
+
+      <!-- Resumen de la meta: se arma con lo que se descubrió en cada parada. -->
+      <dialog class="stop-dialog summary-dialog" id="summary-dialog" aria-labelledby="summary-title">
+        <div class="summary">
+          <button class="stop-card__close summary__close" id="close-summary" type="button" aria-label="Cerrar resumen" autofocus><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.8"/></svg></button>
+          <div class="summary__head">
+            <span class="summary__flag" aria-hidden="true"></span>
+            <span class="stop-card__eyebrow">¡LLEGASTE A LA META!</span>
+            <h3 id="summary-title">Nuestro recorrido</h3>
+          </div>
+          <ul class="summary__list" id="summary-list"></ul>
+          <div class="summary__actions">
+            <a class="summary__whatsapp" id="share-whatsapp" target="_blank" rel="noopener noreferrer"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg> Compartir por WhatsApp</a>
+            <button class="stop-card__replay summary__copy" id="copy-summary" type="button">Copiar resumen</button>
+            <p class="summary__note" id="share-note" aria-hidden="true"></p>
+          </div>
+          <p class="sr-only" id="summary-live" aria-live="polite"></p>
+        </div>
+      </dialog>
+
+      <!-- SECCIÓN 3: Tu colección. El controlador existente de la sección 2 activa su entrada. -->
+      <section id="section-3" class="collection-section" lang="es" aria-labelledby="section-3-title" hidden>
+        <svg class="collection-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+          <symbol id="collection-driver" viewBox="0 0 60 110"><ellipse cx="31" cy="57" rx="26" ry="50" fill="#020812" opacity=".6"/><g fill="#060b13"><rect x="5" y="21" width="12" height="20" rx="4"/><rect x="43" y="21" width="12" height="20" rx="4"/><rect x="5" y="76" width="12" height="20" rx="4"/><rect x="43" y="76" width="12" height="20" rx="4"/></g><path d="M14 13Q30 4 46 13l4 22-3 64q-17 8-34 0L10 35l4-22Z" fill="var(--car-color,#ff823e)" stroke="#ffbd7b"/><path d="M24 10h4v23h-4zm8 0h4v23h-4z" fill="#fff0d1"/><path d="M17 37q13-7 26 0l-4 17H21l-4-17Zm4 40h18l5 16q-14 6-28 0l5-16Z" fill="#173c50"/><path d="m14 44 2 29 4-5V53l-6-9Zm32 0-2 29-4-5V53l6-9Z" fill="#102130"/><path d="M14 22h10m12 0h10" stroke="#e2f8ff" stroke-width="3"/><path d="M15 99h9m12 0h9" stroke="#b0321c" stroke-width="3"/></symbol>
+          <symbol id="collection-box" viewBox="0 0 64 68"><path d="m5 15 27-12 27 12v39L32 66 5 54V15Z" fill="var(--car-color,#ff823e)" stroke="#fff1d0" stroke-opacity=".6"/><path d="m5 15 27 13 27-13M32 28v38" fill="none" stroke="#0a172e" stroke-opacity=".45" stroke-width="2"/><path d="m19 9 28 13v13l-9 4V26L11 13Z" fill="#fff0ca" opacity=".9"/><path d="m14 35 11 5v13l-11-5V35Z" fill="#13293a"/><path d="m18 39 3 1v7l-3-1v-7Z" fill="#fff2d9"/></symbol>
+          <symbol id="collection-sport" viewBox="0 0 280 120"><ellipse cx="142" cy="101" rx="122" ry="9" fill="#02070f" opacity=".55"/><path d="m17 62 53-15 34-29h64l37 30 50 10 16 21-6 16H15L9 77l8-15Z" fill="var(--car-color,#ff823e)"/><path d="m78 47 29-23h26v27H78Zm64-23h23l31 28h-54V24Z" fill="#183344"/><path d="M24 66h202M83 78h95" stroke="#fff2cf" stroke-width="3" opacity=".65"/><path d="m236 61 22 6" stroke="#e2faff" stroke-width="5"/><path d="M14 88h250" stroke="#0d2334" stroke-width="6"/><g fill="#090f1a" stroke="#233848" stroke-width="3"><circle cx="63" cy="90" r="23"/><circle cx="220" cy="90" r="23"/></g><g fill="#a6c8d8"><circle cx="63" cy="90" r="12"/><circle cx="220" cy="90" r="12"/></g><g fill="#253c4c"><circle cx="63" cy="90" r="5"/><circle cx="220" cy="90" r="5"/></g><path d="m94 70 21-1-8 10H87l7-9Z" fill="#14314b"/><path d="M22 56v-8h40v7" fill="#122636"/></symbol>
+          <symbol id="collection-rally" viewBox="0 0 280 120"><ellipse cx="142" cy="103" rx="118" ry="8" fill="#02070f" opacity=".55"/><path d="M28 38 57 13h104l28 32 51 8 23 23-4 21H24L18 67l10-29Z" fill="var(--car-color,#66c9ed)"/><path d="m40 40 24-20h43v25H40Zm76-20h40l22 26h-62V20Z" fill="#152f44"/><path d="M29 58h181v22H29z" fill="#e5f3ed"/><path d="m95 48-12 44h26l13-44H95Z" fill="#182a42"/><path d="M29 31V20h29" stroke="#162c3b" stroke-width="8"/><path d="M224 58h23v10h-23z" fill="#fff7d4"/><path d="M24 94h234" stroke="#152839" stroke-width="7"/><g fill="#09121e" stroke="#2d4352" stroke-width="3"><circle cx="66" cy="94" r="22"/><circle cx="213" cy="94" r="22"/></g><g fill="#ece9d2"><circle cx="66" cy="94" r="11"/><circle cx="213" cy="94" r="11"/></g><g fill="#314957"><circle cx="66" cy="94" r="5"/><circle cx="213" cy="94" r="5"/></g><path d="M211 50h9v6h-9zM224 50h9v6h-9z" fill="#d7edf2"/></symbol>
+          <symbol id="collection-classic" viewBox="0 0 280 120"><ellipse cx="142" cy="103" rx="122" ry="8" fill="#02070f" opacity=".55"/><path d="m15 57 51-8 29-30h60l41 29 53 5q20 2 21 25l-7 19H17L9 78l6-21Z" fill="var(--car-color,#e8d394)"/><path d="m76 47 25-22h25v24H76Zm58-22h18l32 25h-50V25Z" fill="#25394a"/><path d="M20 65h237" stroke="#fff5db" stroke-width="3"/><path d="M16 89h246" stroke="#d3e1e3" stroke-width="5"/><path d="m211 53 22 4v22h-22V53Z" fill="#133146"/><path d="m217 55 7 1v21h-7V55Z" fill="#e5eff0"/><path d="M246 57h16v11h-16zM11 61h13v7H11z" fill="#fff6db"/><g fill="#0d1420" stroke="#303c48" stroke-width="3"><circle cx="60" cy="94" r="23"/><circle cx="211" cy="94" r="23"/></g><g fill="#d5e0e4"><circle cx="60" cy="94" r="13"/><circle cx="211" cy="94" r="13"/></g><g fill="#495d6e"><circle cx="60" cy="94" r="6"/><circle cx="211" cy="94" r="6"/></g></symbol>
+          <symbol id="collection-cone" viewBox="0 0 40 44"><ellipse cx="20" cy="40" rx="17" ry="4" fill="#02070f" opacity=".55"/><path d="M4 36h32l-2 5H6l-2-5Z" fill="#c9481a"/><path d="M16.5 4h7l9 32h-25l9-32Z" fill="#ff7a2e" stroke="#ffb07a" stroke-width="1"/><path d="M13.6 15h12.8l1.7 6H11.9l1.7-6Zm-3 11h18.8l1.6 5.5H9l1.6-5.5Z" fill="#f3f3ed"/></symbol>
+          <symbol id="collection-heart" viewBox="0 0 32 30"><path d="M16 28S2 19.6 2 10.2A7.3 7.3 0 0 1 16 6.6a7.3 7.3 0 0 1 14 3.6C30 19.6 16 28 16 28Z" fill="#ff6f8f" stroke="#ffd2dc" stroke-width="1.5"/><path d="M8 8.5q2.5-2 5 0" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none" opacity=".75"/></symbol>
+        </defs></svg>
+
+        <header class="masthead"><div class="brand"><img class="brand__logo" src="assets/hot-wheels-logo.png" alt="Hot Wheels" width="102" height="38"/><span>ENTREGA<br/><strong>ESPECIAL</strong></span></div><span class="date-tag"><span class="date-tag__dot" aria-hidden="true"></span> EDICIÓN PARA DOS</span></header>
+        <div class="collection-layout">
+          <div class="collection-intro">
+            <p class="eyebrow"><span aria-hidden="true"></span> CADA PIEZA TIENE UNA HISTORIA</p>
+            <h2 id="section-3-title" tabindex="-1">Tu <em>colección</em></h2>
+            <p class="collection-description" id="collection-description">Tres cajas te esperan en la pista, entre conos. Recógelas y descubre qué guarda cada una.</p>
+            <div class="collection-spec" aria-hidden="true"><span>03 <small>PIEZAS ÚNICAS</small></span><i></i><span><span data-race-seconds>16</span> <small>SEGUNDOS CONTIGO</small></span><i></i><span>♡ <small>SIN CHOCAR</small></span></div>
+          </div>
+
+          <div class="collection-race-panel" id="collection-race-panel">
+            <div class="collection-hud">
+              <span class="race-count" id="race-counter"><small>COLECCIÓN</small> <strong>0/3</strong></span>
+              <span class="race-hearts" id="race-hearts"><small>CORAZONES</small> <span aria-hidden="true">♡</span> <strong>0</strong></span>
+              <span class="race-clock"><span aria-hidden="true">◷</span> <span id="race-time">00:16</span></span>
+              <span class="race-progress" aria-hidden="true"><i id="race-progress"></i></span>
+            </div>
+            <div class="collection-track" id="collection-track" tabindex="0" role="group" aria-roledescription="pista de carreras" aria-label="Pista de tres carriles" aria-describedby="race-help">
+              <svg class="collection-road" viewBox="0 0 360 520" preserveAspectRatio="none" aria-hidden="true"><defs><pattern id="collection-lanes" width="120" height="64" patternUnits="userSpaceOnUse"><path d="M0 0v30" stroke="#b1c7d3" stroke-width="3" stroke-opacity=".36"/></pattern><pattern id="collection-kerb-l" width="12" height="64" patternUnits="userSpaceOnUse"><path d="M0 0h12v32H0z" fill="#ff823e"/><path d="M0 32h12v32H0z" fill="#f3f3ed" fill-opacity=".85"/></pattern><pattern id="collection-kerb-r" width="12" height="64" patternUnits="userSpaceOnUse"><path d="M0 0h12v32H0z" fill="#66c9ed"/><path d="M0 32h12v32H0z" fill="#f3f3ed" fill-opacity=".85"/></pattern><pattern id="collection-finish" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M0 0h16v16H0zm16 16h16v16H16z" fill="#edf0e5"/></pattern><linearGradient id="collection-asphalt" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#101c29"/><stop offset=".55" stop-color="#182a3a"/><stop offset="1" stop-color="#1b2f40"/></linearGradient></defs><rect width="360" height="520" fill="url(#collection-asphalt)"/><g id="race-world"><rect x="119" y="-64" width="124" height="648" fill="url(#collection-lanes)"/><rect x="0" y="-64" width="12" height="648" fill="url(#collection-kerb-l)"/><rect x="348" y="-64" width="12" height="648" fill="url(#collection-kerb-r)"/></g><g id="race-finish" transform="translate(0 -120)"><text x="180" y="-12" text-anchor="middle" fill="#edf0e5" font-size="17" font-family="Consolas,monospace" letter-spacing="5">META</text><rect y="0" width="360" height="48" fill="#0a1320"/><rect y="8" width="360" height="32" fill="url(#collection-finish)"/></g></svg>
+              <span class="race-lane-glow" id="race-lane-glow" aria-hidden="true"></span>
+              <div class="race-boxes" id="race-boxes" aria-hidden="true"></div>
+              <div class="collection-player" id="collection-player" aria-hidden="true"><span class="collection-player__glow"></span><svg viewBox="0 0 60 110"><use href="#collection-driver"/></svg></div>
+              <p class="race-pickup" id="race-pickup" aria-hidden="true"></p>
+              <p class="race-countdown" id="race-countdown" aria-hidden="true" hidden></p>
+              <div class="race-curtain" id="race-curtain"><span class="race-curtain__flag" aria-hidden="true"></span><p class="race-curtain__eyebrow">PON EN MARCHA LO NUESTRO</p><h3>Tres sorpresas.<br/><em>Cero choques.</em></h3><p id="race-intro-note">Recoge las cajas y los corazones, y esquiva los conos: cada choque te quita un corazón. Va rápido: toca el carril al que quieres ir.</p><button class="start-button" id="race-start" type="button"><span data-start-label>INICIAR CARRERA</span> <span aria-hidden="true">→</span></button><button class="collection-text-button" id="race-anyway" type="button" hidden>Prefiero correr la carrera</button></div>
+              <div class="race-pause" id="race-pause" hidden><span class="race-pause__icon" aria-hidden="true">Ⅱ</span><h3>Te esperamos en la pista</h3><p>Tu carrera está en pausa.</p><button class="start-button" id="race-resume" type="button">REANUDAR CARRERA <span aria-hidden="true">→</span></button></div>
+            </div>
+            <div class="race-controls"><button id="race-left" type="button" aria-label="Cambiar al carril izquierdo" disabled><span aria-hidden="true">←</span></button><p id="race-help">Toca un carril, desliza<br/>o usa las flechas</p><button id="race-right" type="button" aria-label="Cambiar al carril derecho" disabled><span aria-hidden="true">→</span></button></div>
+            <div class="race-bottom"><button class="collection-text-button" id="race-skip" type="button">Saltar carrera <span aria-hidden="true">↗</span></button><button class="collection-text-button" id="race-pause-button" type="button" hidden>Pausar</button></div>
+            <p class="race-assist" id="race-assist" hidden>✦ Imán de colección activado. ¡Las sorpresas van contigo!</p>
+          </div>
+
+          <div class="collection-showcase" id="collection-showcase" hidden>
+            <div class="collection-complete"><span class="collection-complete__badge" id="collection-badge" aria-hidden="true">✓ 3 / 3</span><h3 id="collection-complete-title" tabindex="-1">¡Tu colección está completa!</h3><p id="collection-complete-note">Toca cada empaque. Hay algo más que un carrito dentro.</p></div>
+            <div class="collection-shelf" id="collection-shelf"></div>
+            <div class="collection-actions"><button class="collection-replay" id="race-replay" type="button"><span aria-hidden="true">↺</span> VOLVER A CORRER</button><button class="start-button" id="collection-continue" type="button" aria-controls="section-4">CONTINUAR EL VIAJE <span aria-hidden="true">→</span></button></div>
+            <p class="collection-signature">Tres formas de decirte que eres especial. <span data-sender>Yazmin</span> ♡</p>
+          </div>
+        </div>
+        <footer class="cover-footer"><div class="journey" aria-label="Sección 3 de 6"><span class="journey__count"><strong>03</strong><span> / 06</span></span><div class="journey__steps" aria-hidden="true"><i class="is-done"></i><i class="is-done"></i><i class="is-current"></i><i></i><i></i><i></i></div><span class="journey__label">TU COLECCIÓN</span></div><span class="footer-note">Pequeños carritos. Grandes motivos.</span></footer>
+        <p class="sr-only" id="collection-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </section>
+
+      <!-- SECCIÓN 4 · PIT STOP DE RECUERDOS. La sección 3 activa este contenedor.
+           PIT_STOP_MEMORIES y PIT_STOP_SONG, en script.js, definen las fotos, videos, textos y la canción. -->
+      <section id="section-4" class="pit-section" aria-labelledby="section-4-title" hidden>
+        <header class="masthead"><div class="brand"><img class="brand__logo" src="assets/hot-wheels-logo.png" alt="Hot Wheels" width="102" height="38"/><span>ENTREGA<br/><strong>ESPECIAL</strong></span></div><span class="date-tag"><span class="date-tag__dot" aria-hidden="true"></span> PARADA TÉCNICA</span></header>
+        <div class="pit-layout">
+          <div class="pit-intro">
+            <p class="eyebrow"><span aria-hidden="true"></span> CARGANDO COMBUSTIBLE DEL BUENO</p>
+            <h2 id="section-4-title" tabindex="-1">Pit stop de <em>recuerdos</em></h2>
+            <p class="pit-description" id="pit-description">Una parada rápida para mirar atrás. Desliza cada tarjeta para pasar a la siguiente y tócala para leer lo que hay detrás.</p>
+            <div class="pit-radio" id="pit-radio">
+              <span class="pit-radio__icon" aria-hidden="true">♪</span>
+              <span class="pit-radio__text"><small>RADIO DEL PIT</small><strong id="pit-song-title">Perfect</strong><span id="pit-song-artist">Ed Sheeran</span></span>
+              <button class="pit-radio__button" id="pit-song-button" type="button" aria-pressed="false">Poner nuestra canción</button>
+            </div>
+          </div>
+
+          <div class="pit-deck-area">
+            <div class="pit-deck" id="pit-deck" role="group" aria-roledescription="colección de tarjetas" aria-label="Galería de recuerdos" aria-describedby="pit-help"></div>
+            <div class="pit-controls">
+              <button class="pit-controls__arrow" id="pit-prev" type="button" aria-label="Recuerdo anterior"><span aria-hidden="true">←</span></button>
+              <div class="pit-controls__status"><span class="pit-counter" aria-hidden="true"><strong id="pit-index">01</strong> / <span id="pit-total">05</span></span><span class="pit-dots" id="pit-dots" aria-hidden="true"></span></div>
+              <button class="pit-controls__arrow" id="pit-next" type="button" aria-label="Siguiente recuerdo"><span aria-hidden="true">→</span></button>
+            </div>
+            <p class="pit-help" id="pit-help">Desliza o usa las flechas · Toca la tarjeta para girarla</p>
+            <div class="pit-next">
+              <button class="start-button" id="pit-continue" type="button" aria-controls="section-5">SEGUIR LA RUTA <span aria-hidden="true">→</span></button>
+              <span class="pit-next__note" id="pit-next-note">Mira todas las tarjetas antes de volver a la pista.</span>
+            </div>
+          </div>
+        </div>
+        <footer class="cover-footer"><div class="journey" aria-label="Sección 4 de 6"><span class="journey__count"><strong>04</strong><span> / 06</span></span><div class="journey__steps" aria-hidden="true"><i class="is-done"></i><i class="is-done"></i><i class="is-done"></i><i class="is-current"></i><i></i><i></i></div><span class="journey__label">PIT STOP</span></div><span class="footer-note">Cada foto, una vuelta que volvería a dar.</span></footer>
+        <p class="sr-only" id="pit-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </section>
+
+      <!-- SECCIÓN 5 · MENSAJE EN LA GUANTERA. La sección 4 activa este contenedor.
+           GLOVEBOX_LETTER, en script.js, define la frase del sobre y el texto de la carta. -->
+      <section id="section-5" class="glove-section" aria-labelledby="section-5-title" hidden>
+        <header class="masthead"><div class="brand"><img class="brand__logo" src="assets/hot-wheels-logo.png" alt="Hot Wheels" width="102" height="38"/><span>ENTREGA<br/><strong>ESPECIAL</strong></span></div><span class="date-tag"><span class="date-tag__dot" aria-hidden="true"></span> ÚLTIMA CURVA</span></header>
+        <div class="glove-layout">
+          <div class="glove-intro">
+            <p class="eyebrow"><span aria-hidden="true"></span> ALGO GUARDADO PARA TI</p>
+            <h2 id="section-5-title" tabindex="-1">Mensaje en la <em>guantera</em></h2>
+            <p class="glove-description">Antes de la última recta, abre la guantera: ahí dejé algo solo para ti.</p>
+          </div>
+
+          <div class="glove-stage">
+            <div class="glove-dash" id="glove-dash">
+              <span class="glove-dash__vents" aria-hidden="true"><i></i><i></i><i></i></span>
+              <div class="glove-box">
+                <span class="glove-box__light" aria-hidden="true"></span>
+                <button class="glove-envelope" id="glove-envelope" type="button" aria-expanded="false" aria-controls="glove-letter">
+                  <span class="glove-envelope__flap" aria-hidden="true"></span>
+                  <span class="glove-envelope__paper" aria-hidden="true"></span>
+                  <span class="glove-envelope__to" id="glove-to">PARA: Chris Evans</span>
+                  <strong class="glove-envelope__phrase" id="glove-phrase">Antes de llegar a la meta, quiero decirte algo</strong>
+                  <span class="glove-envelope__seal" aria-hidden="true">♥</span>
+                  <span class="glove-envelope__action" id="glove-action">TOCA PARA ABRIR</span>
+                </button>
+              </div>
+              <span class="glove-door" aria-hidden="true"><img src="assets/hot-wheels-logo.png" alt="" width="102" height="38"/></span>
+            </div>
+
+            <article class="glove-letter" id="glove-letter" aria-labelledby="glove-letter-title" hidden>
+              <span class="glove-letter__stamp" aria-hidden="true">30 · 09</span>
+              <h3 class="glove-letter__greeting" id="glove-letter-title" tabindex="-1"></h3>
+              <div class="glove-letter__body" id="glove-letter-body"></div>
+              <p class="glove-letter__closing" id="glove-letter-closing"></p>
+              <p class="glove-letter__signature" id="glove-letter-signature"></p>
+              <button class="glove-letter__fold" id="glove-fold" type="button"><span aria-hidden="true">↺</span> Guardar la carta</button>
+            </article>
+
+            <div class="glove-next">
+              <button class="start-button" id="glove-continue" type="button" aria-controls="section-6">RUMBO A LA META <span aria-hidden="true">→</span></button>
+              <span class="glove-next__note" id="glove-next-note">Primero abre la carta: la meta puede esperar un poquito.</span>
+            </div>
+          </div>
+        </div>
+        <footer class="cover-footer"><div class="journey" aria-label="Sección 5 de 6"><span class="journey__count"><strong>05</strong><span> / 06</span></span><div class="journey__steps" aria-hidden="true"><i class="is-done"></i><i class="is-done"></i><i class="is-done"></i><i class="is-done"></i><i class="is-current"></i><i></i></div><span class="journey__label">LA GUANTERA</span></div><span class="footer-note">Lo importante siempre va a la mano.</span></footer>
+        <p class="sr-only" id="glove-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </section>
+
+      <!-- SECCIÓN 6 · LA META: TU RAMO. La sección 5 activa este contenedor.
+           FINALE, en script.js, define el mensaje final y la llegada de cada carrito. -->
+      <section id="section-6" class="finale-section" aria-labelledby="section-6-title" hidden>
+        <header class="masthead"><div class="brand"><img class="brand__logo" src="assets/hot-wheels-logo.png" alt="Hot Wheels" width="102" height="38"/><span>ENTREGA<br/><strong>ESPECIAL</strong></span></div><span class="date-tag"><span class="date-tag__dot" aria-hidden="true"></span> 30 / SEPTIEMBRE</span></header>
+        <div class="finale-layout">
+          <div class="finale-intro">
+            <p class="eyebrow"><span aria-hidden="true"></span> LA ÚLTIMA PARADA</p>
+            <h2 id="section-6-title" tabindex="-1">La meta: <em>tu ramo</em></h2>
+            <p class="finale-description" id="finale-description">Tus carritos vienen en camino, uno por uno.</p>
+          </div>
+
+          <div class="finale-stage" id="finale-stage">
+            <div class="finale-bouquet" id="finale-bouquet">
+              <span class="finale-bouquet__glow" aria-hidden="true"></span>
+              <img class="finale-bouquet__image" id="finale-image" src="assets/ramo-hot-wheels.png" width="408" height="612" alt="Ramo de girasoles y flores azules envuelto en papel naranja, azul y negro con llamas, con carritos Hot Wheels entre las flores, banderas a cuadros y el logo de Hot Wheels." decoding="async" />
+              <div class="finale-cars" id="finale-cars" aria-hidden="true"></div>
+              <div class="finale-confetti" id="finale-confetti" aria-hidden="true"></div>
+            </div>
+            <span class="finale-finish" aria-hidden="true"></span>
+            <button class="collection-text-button finale-skip" id="finale-skip" type="button" hidden>Ver el ramo completo <span aria-hidden="true">↗</span></button>
+          </div>
+
+          <div class="finale-message" id="finale-message" hidden>
+            <span class="finale-message__badge" aria-hidden="true">🏁 ¡LLEGASTE A LA META!</span>
+            <h3 class="finale-message__text" id="finale-text" tabindex="-1"></h3>
+            <p class="finale-message__signature" id="finale-signature"></p>
+            <button class="collection-replay finale-replay" id="finale-replay" type="button"><span aria-hidden="true">↺</span> VOLVER A VERLO</button>
+          </div>
+        </div>
+        <footer class="cover-footer"><div class="journey" aria-label="Sección 6 de 6"><span class="journey__count"><strong>06</strong><span> / 06</span></span><div class="journey__steps" aria-hidden="true"><i class="is-done"></i><i class="is-done"></i><i class="is-done"></i><i class="is-done"></i><i class="is-done"></i><i class="is-current"></i></div><span class="journey__label">LA META</span></div><span class="footer-note">Fin del recorrido. El comienzo de muchos más.</span></footer>
+        <p class="sr-only" id="finale-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </section>
+      <!-- Música: la canción elegida en Recuerdos sigue sonando en toda la página. -->
+      <audio id="page-music" preload="auto" loop></audio>
+      <div class="now-playing" id="now-playing" hidden>
+        <button class="now-playing__button" id="music-toggle" type="button" aria-label="Pausar la canción">
+          <svg class="now-playing__pause" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2h3v12H4zM9 2h3v12H9z" fill="currentColor"/></svg>
+          <svg class="now-playing__play" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 2 10 6-10 6z" fill="currentColor"/></svg>
+        </button>
+        <span class="now-playing__eq" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="now-playing__text"><strong id="now-title"></strong><span id="now-artist"></span></span>
+      </div>
+      <!-- Efectos de sonido: encender o apagar. -->
+      <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true" aria-label="Silenciar efectos de sonido">
+        <svg class="sound-toggle__on" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4V9Z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <svg class="sound-toggle__off" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4V9Z" fill="currentColor"/><path d="m16 9 5 6m0-6-5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <p class="sr-only" id="experience-status" role="status" aria-live="polite" aria-atomic="true"></p>
+    </main>
+  </body>
+</html>
