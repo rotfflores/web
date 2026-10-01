@@ -82,3 +82,6 @@ body[data-page="paginas"] .web-projects { scroll-margin-top: 100px; border-top: 
   .web-project-card, .web-project-window, .web-project-arrow { transition: none; }
   .web-project-card:hover, .web-project-card:hover .web-project-window { transform: none; }
 }
+
+.web-projects-grid--pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 639px) { .web-projects-grid--pair { grid-template-columns: minmax(0, 1fr); } }

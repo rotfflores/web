@@ -8,6 +8,8 @@
   const projectOptions = {
     invitacion: 'Una invitación digital',
     'flores-amarillas': 'Flores amarillas',
+    'hot-wheels': 'Hot Wheels — Entrega especial',
+    'experiencia-digital': 'Una experiencia digital',
     'dia-del-novio': 'Día del Novio — Prueba gratis'
   };
   if (projectOptions[requestedProject]) projectSelect.value = projectOptions[requestedProject];
