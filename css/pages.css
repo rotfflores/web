@@ -346,3 +346,8 @@ body[data-page="paginas"] .web-launch-copy .button{position:relative}
 @media(max-width:900px){.studio-process .orbit-path article:not(:first-child):before{content:"";display:block;position:absolute;z-index:0;top:0;left:50%;width:2px;height:34px;background:linear-gradient(180deg,var(--purple),var(--lime));box-shadow:0 0 12px rgba(157,123,255,.48)}}
 @media(max-width:900px){.studio-process>.orbit-path:before{content:"";display:block;position:absolute;z-index:0;top:34px;bottom:34px;left:50%;width:2px;background:linear-gradient(180deg,var(--purple),var(--lime),var(--purple));background-size:100% 200%;box-shadow:0 0 12px rgba(157,123,255,.48);animation:connector-flow-vertical 3.6s linear infinite}.studio-process .orbit-path article:not(:last-child):after,.studio-process .orbit-path article:not(:first-child):before{display:none}.studio-process .orbit-path article{z-index:1}.studio-process .orbit-path .step-node{z-index:3}}
 @media(max-width:900px){.studio-process>.orbit-path:before{top:var(--process-line-start,34px);height:var(--process-line-height,0px);bottom:auto}.studio-process .orbit-path article:not(:last-child):after,.studio-process .orbit-path article:not(:first-child):before{display:none!important}}
+
+/* Five navigation destinations, including the digital experience catalog. */
+.drawer { overflow-y: auto; }
+.drawer nav a[href="experiencias-digitales.html"] { font-size: clamp(1.5rem, 6.4vw, 2.35rem); line-height: 1.15; }
+.drawer nav a[href="experiencias-digitales.html"] > span { min-width: 0; }
