@@ -35,6 +35,7 @@ body[data-page="invitaciones"]{--rose:#ff5c8a}
 .inv-pop{animation:inv-pop .45s cubic-bezier(.2,.8,.2,1)}
 .inv-card-media{position:relative;display:block;aspect-ratio:16/10;overflow:hidden;background:var(--surface2)}
 .inv-card-media--first-birthday{aspect-ratio:1}
+.inv-card-media--revelacion{aspect-ratio:1}
 .inv-card-media img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .inv-card:hover .inv-card-media img{transform:scale(1.06)}
 .inv-card-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(5,4,11,.55));pointer-events:none}
