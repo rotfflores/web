@@ -1,4 +1,4 @@
-/* Shared ROTF shell and portfolio cards, with a dedicated experience introduction. */
+/* Experience introduction and shared invitation catalog. */
 body[data-page="experiencias"] .experience-hero {
   position: relative;
   min-height: 560px;
@@ -10,50 +10,18 @@ body[data-page="experiencias"] .experience-hero {
 .experience-hero h1 { font-size: clamp(3rem, 8vw, 7rem); line-height: 1.03; }
 .experience-intro { max-width: 590px; margin: 30px 0; color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.2rem); line-height: 1.8; }
 .experience-hero .button { align-self: flex-start; }
-body[data-page="experiencias"] .experience-projects { border-top: 0; padding-top: 60px; scroll-margin-top: 100px; }
-.experience-features { display: grid; gap: 72px; }
-.experience-feature { --accent: var(--purple); --accent-ink: #fff; position: relative; display: flex; flex-direction: column; overflow: hidden; border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent); border-radius: 14px; background: color-mix(in srgb, var(--accent) 9%, var(--bg)); box-shadow: 0 24px 60px rgba(0,0,0,.28); }
-.experience-feature-title { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.experience-feature-shot { display: block; overflow: hidden; }
-.experience-feature-shot img { width: 100%; height: auto; transition: transform .5s ease; }
-.experience-feature-shot:focus-visible { outline: 2px solid var(--accent); outline-offset: -4px; }
-.experience-feature-actions { display: flex; justify-content: flex-end; gap: 12px; padding: 18px 22px; border-top: 1px solid color-mix(in srgb, var(--accent) 28%, transparent); }
-.experience-feature--reverse .experience-feature-actions { justify-content: flex-start; }
-.experience-feature-actions .web-project-quote, .experience-feature-actions .web-project-link { width: auto; min-width: 250px; min-height: 52px; margin: 0; padding: 0 12px 0 18px; border-radius: 6px; font-size: .85rem; font-weight: 600; }
-.experience-feature-actions .web-project-quote { background: var(--accent); color: var(--accent-ink); }
-.experience-feature-actions .web-project-link { border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); color: var(--text); }
-.experience-feature-actions .web-project-arrow { border-color: color-mix(in srgb, var(--accent) 45%, transparent); color: var(--accent); }
-.ui-icon { display: block; flex-shrink: 0; }
-.button .ui-icon { width: 18px; height: 18px; }
-.web-project-arrow .ui-icon { width: 16px; height: 16px; }
-@media (hover: hover) and (pointer: fine) {
-  .experience-feature-shot:hover img { transform: scale(1.015); }
-  .experience-feature-actions .web-project-quote:hover { box-shadow: 0 10px 26px color-mix(in srgb, var(--accent) 35%, transparent); }
-  .experience-feature-actions .web-project-link:hover { border-color: var(--accent); }
-  .experience-feature-actions .web-project-link:hover .web-project-arrow { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
-}
 .experience-cta > p:not(.section-label) { max-width: 550px; margin: 24px auto; color: var(--muted); }
 @media (max-width: 639px) {
   body[data-page="experiencias"] .experience-hero { min-height: 560px; padding: 80px 20px 60px; }
   .experience-hero h1 { font-size: clamp(2.9rem, 11vw, 4rem); }
-  .experience-projects .web-projects-heading h2 { font-size: 2.6rem; }
-  .experience-features { gap: 48px; }
-  .experience-feature-actions { flex-direction: column; padding: 14px; gap: 10px; }
-  .experience-feature-actions .web-project-quote, .experience-feature-actions .web-project-link { min-width: 0; width: 100%; }
 }
 
-/* Hero actions, perks, quick jump, trial badge and steps. */
+/* Hero actions, perks and steps. */
 .experience-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .experience-hero-actions .button { align-self: auto; }
 .experience-perks { display: flex; flex-wrap: wrap; gap: 10px; margin: 34px 0 0; padding: 0; list-style: none; }
 .experience-perks li { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 99px; color: var(--muted); font-size: .82rem; }
 .experience-perks li:before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 10px var(--lime); }
-.experience-jump { display: flex; flex-wrap: wrap; gap: 10px; margin: -12px 0 44px; }
-.experience-jump a { display: inline-flex; align-items: center; gap: 9px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 99px; color: var(--text); text-decoration: none; font-size: .85rem; transition: border-color .25s ease, background .25s ease; }
-.experience-jump a:hover, .experience-jump a:focus-visible { border-color: var(--purple); background: rgba(157,123,255,.08); }
-.experience-jump i { width: 10px; height: 10px; border-radius: 50%; background: var(--dot); }
-.experience-jump b { background: #b8ff4a !important; color: #0b0d06 !important; } .experience-jump b { padding: 2px 8px; border-radius: 99px; background: var(--lime); color: #0b0d06; font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; }
-.experience-feature { scroll-margin-top: 30px; }
 .experience-steps { border-top: 0; padding-top: 40px; }
 .experience-steps-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin: 0; padding: 0; list-style: none; }
 .experience-steps-list li { padding: 28px 26px; border: 1px solid var(--line); border-radius: 10px; background: color-mix(in srgb, var(--surface) 65%, var(--bg)); }
@@ -63,7 +31,6 @@ body[data-page="experiencias"] .experience-projects { border-top: 0; padding-top
 @media (max-width: 639px) {
   .experience-hero-actions .button { flex: 1 1 100%; }
   .experience-perks { margin-top: 26px; }
-  .experience-jump { margin: -6px 0 32px; }
   .experience-steps-list { grid-template-columns: 1fr; }
 }
 
@@ -86,10 +53,6 @@ body[data-page="experiencias"] .cursor-ambient { display: none; }
 
 /* Light theme. */
 :root[data-theme="light"] .experience-hero h1 em { color: #c8336a; }
-:root[data-theme="light"] .experience-feature { background: color-mix(in srgb, var(--accent) 10%, #fff); box-shadow: 0 20px 50px rgba(20,14,30,.12); }
-:root[data-theme="light"] .experience-feature-actions .web-project-link { color: #17131d; background: #fff; }
-:root[data-theme="light"] .experience-feature-actions .web-project-arrow { color: color-mix(in srgb, var(--accent) 70%, #000); }
-:root[data-theme="light"] .experience-feature[id="exp-flores-para-ti"] .web-project-quote { background: #d9b98a; }
 :root[data-theme="light"] .experience-steps-list li { background: #fff; box-shadow: 0 12px 30px rgba(20,14,30,.06); }
 :root[data-theme="light"] .experience-perks li:before { background: #c8336a; box-shadow: none; }
 
@@ -108,3 +71,22 @@ body[data-page="experiencias"] .cursor-ambient { display: none; }
   .px-couple .px-heart:nth-child(3) > g { transform: translateY(-9px); }
   .px-couple .px-heart:nth-child(4) > g { transform: translateY(-12px); }
 }
+
+/* Use the same catalog and cards as digital invitations. */
+.experience-catalog .inv-filters { top: 12px; }
+.experience-catalog .inv-featured-media { min-height: 0; aspect-ratio: 1; }
+.experience-catalog .inv-featured-media img { object-fit: contain; }
+.experience-catalog .inv-card-top { flex-wrap: wrap; }
+@media (max-width: 680px) {
+  .experience-catalog .inv-filters { max-width: calc(100% - 56px); }
+}
+.experience-catalog .inv-features summary:focus-visible { outline: 2px solid var(--lime); outline-offset: 4px; }
+body[data-page="experiencias"] .close-menu { display: grid; place-items: center; }
+:root:not([data-theme="light"]) .experience-catalog { --bg: #090816; --surface: #121022; --surface2: #19162d; }
+@media (max-width: 560px) {
+  .experience-catalog .inv-card-actions { flex-wrap: wrap; }
+}
+@media (hover: none) {
+  .experience-catalog .inv-card-view { opacity: 1; transform: none; }
+}
+:root[data-theme="light"] body[data-page="experiencias"] { --lime: #6e47bd; }

@@ -8,7 +8,11 @@
   const projectOptions = {
     invitacion: 'Una invitación digital',
     'flores-amarillas': 'Flores amarillas',
+    'flores-para-ti': 'Flores para ti',
     'hot-wheels': 'Hot Wheels — Entrega especial',
+    'museo-nosotros': 'El Museo de Nosotros',
+    'temporadas-nosotros': 'Temporadas de Nosotros',
+    'historia-dia-del-novio': 'Día del Novio — Experiencia digital',
     'experiencia-digital': 'Una experiencia digital',
     'dia-del-novio': 'Día del Novio — Prueba gratis'
   };
