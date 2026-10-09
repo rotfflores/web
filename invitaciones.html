@@ -498,6 +498,17 @@
           card.hidden = !show;
           if (show) card.classList.add('visible', 'inv-pop');
         });
+        const firstProject = cards.find(card => !card.hidden && card.dataset.cat !== 'all');
+        if (firstProject) {
+          const filters = document.querySelector('.inv-filters');
+          const offset = parseFloat(getComputedStyle(filters).top) + filters.offsetHeight + 20;
+          // Use the card's layout position; the reveal animation temporarily moves its visual box.
+          const layoutTop = firstProject.offsetParent.getBoundingClientRect().top + firstProject.offsetTop;
+          window.scrollTo({
+            top: window.scrollY + layoutTop - offset,
+            behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+          });
+        }
         setTimeout(() => cards.forEach(c => c.classList.remove('inv-pop')), 500);
       }));
     })();
