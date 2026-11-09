@@ -12,6 +12,7 @@
     'hot-wheels': 'Hot Wheels — Entrega especial',
     'museo-nosotros': 'El Museo de Nosotros',
     'temporadas-nosotros': 'Temporadas de Nosotros',
+    'our-stars': 'Nuestras Estrellas',
     'historia-dia-del-novio': 'Día del Novio — Regalo digital',
     'experiencia-digital': 'Un regalo digital',
     'dia-del-novio': 'Día del Novio — Prueba gratis'
